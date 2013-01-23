@@ -69,7 +69,8 @@ public class LearnerAchievementMysql extends LearnerAcievementDAO {
             rs.close();
             ps.close();
             con.close();
-            
+            if(Achievements.isEmpty())
+            	return null;
             return Achievements;
 		}
         catch (Exception ex)
@@ -107,6 +108,8 @@ public class LearnerAchievementMysql extends LearnerAcievementDAO {
             ps.close();
             con.close();
             
+            if(Achievements.isEmpty())
+            	return null;
             return Achievements;
 		}
         catch (Exception ex)

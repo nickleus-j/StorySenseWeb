@@ -50,6 +50,8 @@ public class RatingMySQL extends RatingDAO {
             ps.close();
             con.close();
             
+            if(ratings.isEmpty())
+            	return null;
             return ratings;
 		}
         catch (Exception ex)
@@ -91,6 +93,8 @@ public class RatingMySQL extends RatingDAO {
             ps.close();
             con.close();
             
+            if(ratings.isEmpty())
+            	return null;
             return ratings;
 		}
         catch (Exception ex)
@@ -132,6 +136,8 @@ public class RatingMySQL extends RatingDAO {
             ps.close();
             con.close();
             
+            if(ratings.isEmpty())
+            	return null;
             return ratings;
 		}
         catch (Exception ex)

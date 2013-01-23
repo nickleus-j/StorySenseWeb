@@ -74,6 +74,8 @@ public class AchievementMysql extends AchievementDAO {
             ps.close();
             con.close();
             
+            if(Achievements.isEmpty())
+            	return null;
             return Achievements;
 		}
         catch (Exception ex)

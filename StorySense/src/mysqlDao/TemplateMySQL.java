@@ -196,6 +196,8 @@ public class TemplateMySQL extends TemplateDAO {
             ps.close();
             con.close();
             
+            if(templates.isEmpty())
+            	return null;
             return templates;
 		}
         catch (Exception ex)
@@ -239,6 +241,8 @@ public class TemplateMySQL extends TemplateDAO {
             ps.close();
             con.close();
             
+            if(templates.isEmpty())
+            	return null;
             return templates;
 		}
         catch (Exception ex)
@@ -282,6 +286,8 @@ public class TemplateMySQL extends TemplateDAO {
             ps.close();
             con.close();
             
+            if(templates.isEmpty())
+            	return null;
             return templates;
 		}
         catch (Exception ex)
@@ -324,6 +330,8 @@ public class TemplateMySQL extends TemplateDAO {
             ps.close();
             con.close();
             
+            if(templates.isEmpty())
+            	return null;
             return templates;
 		}
         catch (Exception ex)
