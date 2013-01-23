@@ -344,5 +344,48 @@ public class UserMySQL extends UserDAO {
 		return null;
 	}
 
+	/**
+	 * Gets the highest scoring learners
+	 */
+	@Override
+	public List<User> getTopLearners() {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement(" SELECT * from account WHERE role=1 ORDER BY Points LIMIT 10");
+            rs = ps.executeQuery();
+            
+            User u;
+            ArrayList<User> Users=new ArrayList<User>();
+            while(rs.next()){
+            	u=new User();
+            	u.setAccountID(rs.getInt("accountID"));
+            	u.setName(rs.getString("Name"));
+            	u.setPassword(rs.getString("Password"));
+            	u.setRole(rs.getInt("role"));
+            	u.setActiveStatus(rs.getInt("Active"));
+            	Users.add(u);
+            }
+            
+
+            rs.close();
+            ps.close();
+            con.close();
+            
+            if(!Users.isEmpty())
+            	return Users;
+            else return null;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(UserMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
 	
 }

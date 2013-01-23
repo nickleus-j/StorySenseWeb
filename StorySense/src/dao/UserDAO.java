@@ -14,6 +14,7 @@ public abstract class UserDAO {
 	public abstract User findUserWithName(String name);
 	public abstract List<User> getUsers();
 	public abstract List<User> getUsersWithRole(int role);
+	public abstract List<User> getTopLearners();
 	public abstract boolean authenticateUser(String Name,String Password);
 	
 }
