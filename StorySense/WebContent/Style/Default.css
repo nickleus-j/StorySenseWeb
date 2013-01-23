@@ -1,0 +1,154 @@
+@CHARSET "UTF-8";
+
+body {
+	font: 100%  Arial, Helvetica, sans-serif;
+	background: white /*PapayaWhip;background:Wheat ;*/
+	margin: 0;
+	padding: 0;
+	color: #000;
+}
+
+
+h1,h2{
+	text-align: center;
+}
+
+caption{
+font-size: 130%;
+}
+
+.header  {
+	background: Seagreen;
+	color:#FF0;
+	top: 0;
+}
+
+
+#LogoHere{
+	width:65%;
+	float:left;
+}
+#log{
+	float:right;
+	width: 35%;
+}
+
+div.header{
+	width:100%;
+	background: seagreen;
+	color:white;
+	float:left;
+}
+
+
+ul, ol, dl {
+	padding: 0;
+	margin: 0;
+}
+
+.container {
+	width: 70%;
+	max-width: 1260px;
+	margin: 1.2em;
+	float: right; 
+	background:#e5eecc;
+	
+}
+
+
+.sidebar1, .navbar {
+	float: left;
+	width:20%;
+	background: black;/*#300;*/
+	color:#FFF;
+	padding-bottom: 5%;
+	margin: 1.1em 1em 1.2em 1em;
+	position: relative;
+	clear: both;
+}
+
+.ErrorMessage{
+	color:red;
+}
+
+.profPic{
+  	width: 50px;
+  	height: 50px;
+  
+  }
+
+/*
+.navbar{
+	background: crimson;
+	color: yellow;
+	float: left;
+}
+*/
+.navbar li{
+	margin: 0 1em 0 0;
+  	padding: 5%;
+	float:left;
+}
+
+
+.navbar a{
+	color: tan;
+	text-decoration: none;
+	width:100%;
+	
+}
+.navbar a:VISITED{
+	color: lightgreen;
+}
+.navbar a:HOVER{
+	font-size: 110%;
+	color: yellow;
+	/*background: maroon;*/
+}
+
+
+
+th{
+	text-align: left;
+}
+
+.content { margin-right: -1px; } /* this 1px negative margin can be placed on any of the columns in this layout with the same corrective effect. */
+
+ul.nav a , ul.navbar a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it needs to correct extra whiltespace between the links */
+
+/* ~~ Footer ~~ */
+
+ul.footList, .navbar ul{
+	list-style: none;
+	float:right;
+}
+
+
+.foot {
+	margin-top: 1.2em;
+	position: relative;/* this gives IE6 hasLayout to properly clear */
+	clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
+	width:100%;
+	background: DarkseaGreen;
+}
+
+footlist{
+	float: right;	
+}
+
+
+/* ~~ miscellaneous float/clear classes ~~ */
+.fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* this class can be placed on a <br /> or empty div as the final element following the last floated div (within the #container) if the #footer is removed or taken out of the #container */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}

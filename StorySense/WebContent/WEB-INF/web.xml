@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <session-config>
+    <session-timeout>50</session-timeout>
+  </session-config>
+  <servlet>
+    <description>A trial Servlet</description>
+    <display-name>TrythisServlet</display-name>
+    <servlet-name>TrythisServlet</servlet-name>
+    <servlet-class>servlets.TrythisServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TrythisServlet</servlet-name>
+    <url-pattern>/TrythisServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>LogIn Servlet</description>
+    <display-name>LogIn</display-name>
+    <servlet-name>LogIn</servlet-name>
+    <servlet-class>servlets.LogIn</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogIn</servlet-name>
+    <url-pattern>/LogIn</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Logout Servlet</description>
+    <display-name>Logout</display-name>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>servlets.Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>Registration Servlet for user accounts</description>
+    <display-name>UserRegistration</display-name>
+    <servlet-name>user_Registration</servlet-name>
+    <servlet-class>servlets.RegistrationUpload</servlet-class>
+   	<init-param>
+   		<param-name>profilePicDirectory</param-name>
+  		<param-value>Photo</param-value>
+   </init-param>
+   	<init-param>
+   		<param-name>token</param-name>
+   		<param-value>aToken</param-value>
+   	</init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>user_Registration</servlet-name>
+    <url-pattern>/user_Registration</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+</web-app>
