@@ -1,3 +1,6 @@
+/**
+	This File is for ajax javascript events
+*/
 function ajaxRequest(){
 	try {// Non IE Browser?
 		var request = new XMLHttpRequest();
