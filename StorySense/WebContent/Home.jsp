@@ -10,14 +10,9 @@
 
 </head>
 <body>
-<div class="header">
-	<div id="LogoHere">	<h1>Story Sense</h1></div>
-	<div id="log"><h1>Welcome</h1></div>
-</div>
+
 
 	<div class="container">
-	<hr color="indigo">
-	<h1>Welcome to Story Sense!</h1>
 	<%@ include file="Insertables/LogInTable.jsp" %>
 	<hr/>
 	<h2>Don't have an account? 

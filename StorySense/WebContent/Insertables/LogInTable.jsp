@@ -9,8 +9,11 @@
 <body>
 
 <form id="logInForm" action="LogIn" method="post">
+<img src="images/storysenselogo.jpg" class="Logo"/>
 <table class="logIn" align="center">
-<caption>Log in</caption>
+
+
+
 <tr>
 	<th>User name</th><td id="nameCell"><input type="Text" name="username"/></td>
 </tr>

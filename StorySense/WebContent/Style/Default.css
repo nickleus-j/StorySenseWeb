@@ -47,11 +47,11 @@ ul, ol, dl {
 }
 
 .container {
-	width: 70%;
+	width: 50%;
 	max-width: 1260px;
-	margin: 1.2em;
-	float: right; 
-	background:#e5eecc;
+	margin: 0 25% 0 25%;
+	
+	/*background:#e5eecc;*/
 	
 }
 
