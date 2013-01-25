@@ -7,11 +7,12 @@ import dao.ProfileDAO;
 import dao.UserDAO;
 import entity.User;
 
-public class LeaderBoardGenerator {
+public class LBoardHTMLGenerator {
 
-	ArrayList<User> Users;
-	ArrayList<String> picURls;
-	public LeaderBoardGenerator(){
+	private ArrayList<User> Users;
+	private ArrayList<String> picURls;
+	
+	public LBoardHTMLGenerator(){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		UserDAO myUserDAO = myDAOFactory.createUserDAO();
 		ProfileDAO profileDAO=myDAOFactory.createProfileDAO();
@@ -29,7 +30,7 @@ public class LeaderBoardGenerator {
 				"<td>15</td>"+
 				"<td>1510</td>"+
 				"</tr>");
-		 return "lll";
+		 return "<tr><td>lddd</td></tr>";
 	}
 	/*
 	 * <%

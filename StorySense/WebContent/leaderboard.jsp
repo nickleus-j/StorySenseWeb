@@ -1,7 +1,5 @@
-<%@page import="worker.LeaderBoardGenerator"%>
 <%@page import="dao.UserDAO"%><%@page import="dao.ProfileDAO"%><%@page import="dao.DAOFactory"%>
-<%@page import="entity.*"%>
-<%@page import="java.util.*"%>
+<%@page import="java.util.*"%><%@page import="worker"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,9 +35,9 @@ img{
 	</tr>
 	
 	<%
-	LeaderBoardGenerator gene=new LeaderBoardGenerator();
-		out.write("<tr><td>lk</td></tr>");
-	%>
+			LBoardHTMLGenerator gene=new LBoardHTMLGenerator();
+				out.write("<tr><td>lk</td></tr>");
+		%>
 	
 	<tr>
 	<td><img src="images/dis.jpg" class="profPic"/> ShakeSpir</td>
