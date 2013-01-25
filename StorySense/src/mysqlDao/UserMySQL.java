@@ -356,7 +356,7 @@ public class UserMySQL extends UserDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
 
-            ps = con.prepareStatement(" SELECT * from account WHERE role=1 ORDER BY Points LIMIT 10");
+            ps = con.prepareStatement("SELECT * from account WHERE role=1 ORDER BY Points LIMIT 10");
             rs = ps.executeQuery();
             
             User u;
@@ -376,9 +376,9 @@ public class UserMySQL extends UserDAO {
             ps.close();
             con.close();
             
-            if(!Users.isEmpty())
+            //if(!Users.isEmpty())
             	return Users;
-            else return null;
+            //else return null;
 		}
         catch (Exception ex)
         {

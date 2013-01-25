@@ -1,3 +1,7 @@
+<%@page import="worker.LeaderBoardGenerator"%>
+<%@page import="dao.UserDAO"%><%@page import="dao.ProfileDAO"%><%@page import="dao.DAOFactory"%>
+<%@page import="entity.*"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,6 +18,9 @@ img{
 
 </style>
 </head>
+
+
+
 <body>
 
 
@@ -24,9 +31,15 @@ img{
 	
 
 	<table align="center" width="75%" bgcolor="white" >
+	
 	<tr>
 	<th>Learner name</th><th>Level</th><th>Points</th>
 	</tr>
+	
+	<%
+	LeaderBoardGenerator gene=new LeaderBoardGenerator();
+		out.write("<tr><td>lk</td></tr>");
+	%>
 	
 	<tr>
 	<td><img src="images/dis.jpg" class="profPic"/> ShakeSpir</td>

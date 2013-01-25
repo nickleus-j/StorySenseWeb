@@ -43,7 +43,7 @@ div.header{
 			</form>
 	<%  }
 		else {
-	%><%@ include file="LogInTable.jsp" %> <% } %>
+	%><%@ include file="LogInForm.jsp" %> <% } %>
 	</h2>
 	
 	</div>

@@ -3,6 +3,8 @@ package mysqlDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -148,6 +150,45 @@ public class ProfileMySQL extends ProfileDAO {
         {
             Logger.getLogger(ProfileMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
+		return null;
+	}
+
+	/**
+	 * Get the Profile picture Urls of the leaders
+	 */
+	@Override
+	public List<String> getLeaderPicUrl() {
+		// SELECT picUrl FROM profile,account WHERE accountID=Account
+		
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+            List<String> URLs=new ArrayList<String>();
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+            
+            ps = con.prepareStatement("SELECT picUrl FROM profile,account WHERE accountID=Account");
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+            	URLs.add(rs.getString("picUrl"));
+            }
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            if(URLs.isEmpty())
+            	return null;
+            else return URLs;
+            
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(ProfileMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		
 		return null;
 	}
 
