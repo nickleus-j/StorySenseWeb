@@ -35,7 +35,9 @@ img{
 	</tr>
 	
 	<%		WebCodeMaker encoder=new WebCodeMaker(out);
-	out.write(encoder.getleaderBoardHTMLTable());
+	out.write("<tr><td>haha");
+	out.write(encoder.doThis());
+	out.write("</tD></tr>");
 		%>
 	
 	<tr>

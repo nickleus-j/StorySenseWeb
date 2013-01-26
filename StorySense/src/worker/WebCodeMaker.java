@@ -44,4 +44,6 @@ public class WebCodeMaker {
 				*/
 		 return "<tr><td>lddd</td></tr>";
 	}
+	
+	public String doThis(){return ":D D:";}
 }
