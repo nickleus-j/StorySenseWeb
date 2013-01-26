@@ -9,7 +9,7 @@ package entity;
 public class User {
 
 	//accountID | Name  | Password                         | role | Active 
-	private int accountID,Role;//Active;
+	private int accountID,Role,Level,Points;//Active;
 	private String Name,Password;
 	private boolean isActive;
 	
@@ -57,6 +57,11 @@ public class User {
 	public String getPassword() {return Password;}
 	public void setPassword(String password) {Password = password;}
 	public void setRole(String roleText){Role=determineRole(roleText);}
+
+	public int getLevel() {return Level;}
+	public void setLevel(int level) {Level = level;}
+	public int getPoints() {return Points;}
+	public void setPoints(int points) {Points = points;}
 	
 	
 	

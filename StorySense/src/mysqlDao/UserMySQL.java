@@ -172,6 +172,8 @@ public class UserMySQL extends UserDAO {
             	u.setPassword(rs.getString("Password"));
             	u.setRole(rs.getInt("role"));
             	u.setActiveStatus(rs.getInt("Active"));
+            	u.setLevel(rs.getInt("Level"));
+            	u.setPoints(rs.getInt("Points"));
             }
             
 
@@ -212,6 +214,8 @@ public class UserMySQL extends UserDAO {
             	u.setPassword(rs.getString("Password"));
             	u.setRole(rs.getInt("role"));
             	u.setActiveStatus(rs.getInt("Active"));
+            	u.setLevel(rs.getInt("Level"));
+            	u.setPoints(rs.getInt("Points"));
             }
 
             rs.close();
@@ -251,6 +255,8 @@ public class UserMySQL extends UserDAO {
             	u.setPassword(rs.getString("Password"));
             	u.setRole(rs.getInt("role"));
             	u.setActiveStatus(rs.getInt("Active"));
+            	u.setLevel(rs.getInt("Level"));
+            	u.setPoints(rs.getInt("Points"));
             	Users.add(u);
             }
 
@@ -326,6 +332,8 @@ public class UserMySQL extends UserDAO {
             	u.setPassword(rs.getString("Password"));
             	u.setRole(rs.getInt("role"));
             	u.setActiveStatus(rs.getInt("Active"));
+            	u.setLevel(rs.getInt("Level"));
+            	u.setPoints(rs.getInt("Points"));
             	Users.add(u);
             }
 
@@ -368,6 +376,8 @@ public class UserMySQL extends UserDAO {
             	u.setPassword(rs.getString("Password"));
             	u.setRole(rs.getInt("role"));
             	u.setActiveStatus(rs.getInt("Active"));
+            	u.setLevel(rs.getInt("Level"));
+            	u.setPoints(rs.getInt("Points"));
             	Users.add(u);
             }
             
@@ -378,7 +388,7 @@ public class UserMySQL extends UserDAO {
             
             //if(!Users.isEmpty())
             	return Users;
-            //else return null;
+            // return null;
 		}
         catch (Exception ex)
         {

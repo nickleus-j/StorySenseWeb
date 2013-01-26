@@ -35,12 +35,9 @@ img{
 	</tr>
 	
 	<%		WebCodeMaker encoder=new WebCodeMaker(out);
-	out.write("<tr><td>haha");
-	out.write(encoder.doThis());
-	out.write("</tD></tr>");
 	out.write(encoder.getleaderBoardHTMLTable());
 		%>
-	
+	<!--  
 	<tr>
 	<td><img src="images/dis.jpg" class="profPic"/> ShakeSpir</td>
 	<td>15</td>
@@ -92,6 +89,7 @@ img{
 	<td>1420</td>
 	
 	</tr>
+	-->
 	
 	</table><br/>
 	</div>
