@@ -11,7 +11,6 @@
 
 </style>
 
-</head>
 <div class="foot">
 <ul class="footList">
 <li>|<a href="../StorySense/Home.jsp">Home</a>| </li>

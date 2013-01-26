@@ -32,64 +32,12 @@ img{
 	
 	<tr>
 	<th>Learner name</th><th>Level</th><th>Points</th>
-	</tr>
-	
 	<%		WebCodeMaker encoder=new WebCodeMaker(out);
-	out.write(encoder.getleaderBoardHTMLTable());
+		out.write(encoder.getleaderBoardHTMLTable());
 		%>
-	<!--  
-	<tr>
-	<td><img src="images/dis.jpg" class="profPic"/> ShakeSpir</td>
-	<td>15</td>
-	<td>1510</td>
-	
-	</tr><tr>
-	<td><img src="images/Case.jpg" /> AlPow</td>
-	<td>15</td>
-	<td>1500</td>
-	
-	</tr><tr>
-	<td><img src="images/disPic.jpg" /> MoranDoyl</td>
-	<td>14</td>
-	<td>1485</td>
-	
-	</tr><tr>
-	<td><img src="images/Untitled.jpg" /> Kublay</td>
-	<td>14</td>
-	<td>1475</td>
-	
-	</tr><tr>
-	<td><img src="images/dis.jpg" /> Hoopla</td>
-	<td>14</td>
-	<td>1450</td>
-	
-	</tr><tr>
-	<td><img src="images/Case.jpg" /> GoshoKen</td>
-	<td>14</td>
-	<td>1445</td>
-	</tr><tr>
-	
-	<td><img src="images/Untitled.jpg" /> ShohenFan</td>
-	<td>14</td>
-	<td>1440</td>
-	</tr><tr>
-	
-	<td><img src="images/dis.jpg" /> LukeWanYin</td>
-	<td>14</td>
-	<td>1440</td>
-	</tr><tr>
-	
-	<td><img src="images/disPic.jpg" /> Curage</td>
-	<td>14</td>
-	<td>1430</td>
-	</tr><tr>
-	
-	<td><img src="images/Untitled.jpg" /> StifenKing</td>
-	<td>14</td>
-	<td>1420</td>
-	
 	</tr>
-	-->
+	
+	
 	
 	</table><br/>
 	</div>

@@ -1,0 +1,3 @@
+? | DoneAt | $location
+? | Is-A | "toy"
+"messy" | LeadsTo | ?

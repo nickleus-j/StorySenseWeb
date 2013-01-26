@@ -1,0 +1,33 @@
+<$action = (?,Is-A,"action")>
+<$person = (?,Is-A,"person")>
+<$canbe = ("person",CanBe,?)>
+
+
+#if("boy",GenderOf,$person)
+{
+<$person2 = ("girl",GenderOf,?)>
+<$pronoun = "his">
+<$action_pronoun = "him">
+}
+#else
+{
+<$person2 = ("boy",GenderOf,?)>
+<$pronoun = "her">
+<$action_pronoun = "her">
+}
+
+
+%$person% is a person. %$person% is a %$canbe%. \n
+%$person2% is also a person but %$person2% is not a %$canbe%. %$person2% is a [1] \n\n
+
+%$person% and %$person2% are good friends. They both like to %$action%. \n
+
+#if(*)
+{
+Their purpose for %$action% can be for [3]. 
+}
+#else
+{
+Doing too much %$action% can cause [4]. 
+}
+Something they like to do after %$action% is [2]. 

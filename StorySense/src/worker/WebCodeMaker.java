@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.servlet.jsp.JspWriter;
 
+import model.Story;
+
 import dao.DAOFactory;
 import dao.ProfileDAO;
 import dao.UserDAO;
@@ -60,4 +62,11 @@ public class WebCodeMaker {
 	}
 	
 	public String doThis(){return ":D D:";}
+	
+	public String writeStory(){
+		StoryGenerator storyMaker=new StoryGenerator(10, 60);
+		Story myStory=storyMaker.getStory();
+		
+		return myStory.getsStory();
+	}
 }

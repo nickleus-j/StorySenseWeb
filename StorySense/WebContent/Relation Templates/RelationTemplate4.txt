@@ -1,0 +1,5 @@
+? | Is-A | "person"
+? | PropertyOf | "day"
+? | Is-A | "emotion"
+? | Is-A | "location"
+? | Is-A | "object"

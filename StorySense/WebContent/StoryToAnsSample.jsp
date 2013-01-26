@@ -1,3 +1,4 @@
+<%@page import="worker.WebCodeMaker"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,6 +30,10 @@
 		A <input type="text" name="answer1"/> is an object we can find in the park. 
 		Last week, I was <input type="text" name="answer2"/>when I was at the park. 
 		After going to the park, I went to the <input type="text" name="answer3"/>. 
+		<%		WebCodeMaker encoder=new WebCodeMaker(out);
+		out.println(":F d:");
+		out.println(encoder.writeStory());
+		%>
 	<hr>
 	</td></tr>
 	

@@ -1,0 +1,16 @@
+Hi, my name is [1]. \n
+Today is a [2] day. \n
+I am feeling [3]. \n
+#if(*)
+{
+A place I need to go to is the [4]. \n
+}
+#else
+{
+A place I need to go to is [4]. \n
+}
+Something I want to have is a [5]. 
+
+<$name = (?,Is-A,"person")>
+^question(?,GenderOf,$name,Do you think $name is a boy or girl?, boy, girl)
+

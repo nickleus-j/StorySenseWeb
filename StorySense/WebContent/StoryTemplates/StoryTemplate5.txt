@@ -1,0 +1,44 @@
+<$emotion = (?,Is-A,"emotion")>
+
+#if(*)
+{
+<$modifier = "I am">
+}
+#else
+{
+<$modifier = "my">
+}
+
+#if(*)
+{
+Today I feel %$emotion%. \n
+I am %$emotion% because %$modifier% [1]. \n
+Something I like to do when I am %$emotion% is [2,3]. \n
+}
+#else
+{
+#if($emotion,Is-A,"positive feeling")
+{
+I feel good! \n
+I feel %$emotion%. \n
+%$emotion% is a positive emotion. \n
+Something that makes me %$emotion% is [1]. \n
+When I am %$emotion%, I like to [2,3]. \n
+}
+#elseif($emotion,Is-A,"negative feeling")
+{
+I feel down. \n
+I feel %$emotion%. \n
+%$emotion% is a negative emotion. \n
+When I feel %$emotion%, I like to [2,3] in order to feel better. \n
+I am %$emotion% because %$modifier% [1].		
+}
+#else
+{
+Today I feel %$emotion%. \n
+I am %$emotion% because %$modifier% [1]. \n
+Something I like to do when I am %$emotion% is [2,3].
+
+^question($emotion,Is-A,?,Is $emotion a positive or negative feeling?, positive feeling, negative feeling) 
+}
+}
