@@ -44,7 +44,7 @@
 	</table>
 	
 	<h2>Can't Pick? Use a random template
-	<button onClick="window.location.href='StoryToAnsSample.jsp'">Go</button></h2>
+	<button onClick="window.location.href='MakingStory.jsp'">Go</button></h2>
 	</div>
 	<%@ include file="Insertables/Footer.jsp" %>
 

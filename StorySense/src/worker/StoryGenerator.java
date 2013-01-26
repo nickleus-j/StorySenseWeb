@@ -66,8 +66,8 @@ public Story getStory()
      
    //STfilename = FileSrch();
    //RTfilename = FileSrch();
-   STfilename = "StoryTemplates/StoryTemplate" + i + ".txt";
-   RTfilename = "Relation Templates/RelationTemplate" + i + ".txt";
+   STfilename = "/home/nickleus/git/StorySense/StorySense/WebContent/StoryTemplates/StoryTemplate" + i + ".txt";
+   RTfilename = "/home/nickleus/git/StorySense/StorySense/WebContent/RelationTemplates/RelationTemplate" + i + ".txt";
   
    System.out.println("opening: " + STfilename +"  ----- "+RTfilename);
    
@@ -79,22 +79,15 @@ public Story getStory()
    
    arrRTemplate = RTT.Tokenize(arrRTemplate);
    
-   /*
-   System.out.println("Relation Learning Template: ");
-   for(int n=0; n<arrRTemplate.size(); n++)
-   {
-       System.out.println(arrRTemplate.get(n));
-   }
-   */
    arrSTemplate = STT.Tokenize(arrSTemplate);
    
    
    System.out.println("\nStory Template: ");
-   for(int n=0; n<arrSTemplate.size(); n++)
+   /*for(int n=0; n<arrSTemplate.size(); n++)
    {
        System.out.println(arrSTemplate.get(n));
    }
-   
+   */
    Story = tp.parse(arrRTemplate, arrSTemplate,i);
 
    return Story;
