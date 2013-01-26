@@ -38,6 +38,7 @@ img{
 	out.write("<tr><td>haha");
 	out.write(encoder.doThis());
 	out.write("</tD></tr>");
+	out.write(encoder.getleaderBoardHTMLTable());
 		%>
 	
 	<tr>
