@@ -1,0 +1,10 @@
+? | Is-A | "color"
+? | ColorOf | $object
+? | Is-A | "shape"
+? | ShapeOf | $object
+$object | UsedFor | ?
+? | Is-A | "action"
+? | Is-A | "texture"
+? | TextureOf | $object
+? | PropertyOf | $object
+$object | MadeOf | ?

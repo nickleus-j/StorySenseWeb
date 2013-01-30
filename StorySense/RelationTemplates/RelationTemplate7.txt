@@ -1,0 +1,3 @@
+? | DoneAt | $location
+$canbe | Does | ?
+? | LocatedNear | $object

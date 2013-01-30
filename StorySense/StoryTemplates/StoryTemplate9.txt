@@ -1,0 +1,36 @@
+<$day = (?,PropertyOf,"day")>
+<$location = (?,Is-A,"location")>
+<$person = (?,Is-A,"person")>
+
+#if("boy",GenderOf,$person)
+{
+<$pronoun = "he">
+<$possessive_pronoun = "his">
+<$action_pronoun = "him">
+<$parent_name = ("girl",GenderOf,?)>
+<$parent_type = "Mommy">
+}
+#else
+{
+<$pronoun = "she">
+<$possessive_pronoun = "her">
+<$action_pronoun = "her">
+
+<$parent_name = ("boy",GenderOf,?)>
+<$parent_type = "Daddy">
+}
+
+The day is %$day%. %$person% is playing at the %$location%. \n
+%$pronoun% suddenly hit something! %$person% broke a [1,2,3]. \n\n
+
+#if(*)
+{
+%$person% felt scared. \n
+}
+#else
+{
+%$person% felt [4]. \n
+}
+
+%$parent_type% %$parent_name% saw the broken object.
+

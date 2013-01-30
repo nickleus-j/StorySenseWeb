@@ -1,0 +1,66 @@
+<$day = (?,PropertyOf,"day")>
+<$location = (?,Is-A,"location")>
+<$object = (?,Is-A,"toy") & (?,LocatedAt,$location)>
+<$person = (?,Is-A,"person")>
+
+#if("boy",GenderOf,$person)
+{
+<$pronoun = "he">
+<$possessive_pronoun = "his">
+<$action_pronoun = "him">
+<$parent_name = ("girl",GenderOf,?)>
+<$parent_type = "Mommy">
+}
+#else
+{
+<$pronoun = "she">
+<$possessive_pronoun = "her">
+<$action_pronoun = "her">
+
+<$parent_name = ("boy",GenderOf,?)>
+<$parent_type = "Daddy">
+}
+
+Today is a %$day% day. %$person% is at the %$location%.  
+
+#if(*)
+{
+%$parent_type% %$parent_name% told %$person% that %$pronoun% should not be messy. %$person% wanted to play. 
+%$pronoun% played with %$possessive_pronoun% toys. %$pronoun% did not listen to %$parent_type% %$parent_name%.\n\n
+
+#if(*)
+{
+Among %$possessive_pronoun% toys is a %$object%. \n\n
+}
+#else
+{
+Among %$possessive_pronoun% toys is a [2]. \n\n
+}
+
+%$person% created a mess. After playing, %$pronoun% wanted to find %$possessive_pronoun% favorite toy. %$person% cannot find it. It was lost. %$pronoun% felt sad. This made %$person% cry. \n\n
+
+#if(*)
+{
+%$parent_type% %$parent_name% told %$person% that %$pronoun% should have obeyed. %$person% apologized. %$parent_type% %$parent_name% forgave %$action_pronoun%. %$parent_type% %$parent_name% helped %$person% look for his favorite toy. Barney found his favorite toy. \n\n
+
+%$person% became happy. Being neat is good. %$person% became neat since then.
+}
+#else
+{
+Ever since then, %$person% learned to obey %$parent_type% %$parent_name%. \n
+}
+
+}
+#else
+{
+%$person% is obedient. %$pronoun% always listens to what %$parent_type% %$parent_name% says. \n
+%$person% was playing with %$possessive_pronoun% toys.\n
+%$parent_type% %$parent_name% told %$person% that %$pronoun% should not be messy. \n
+%$parent_type% %$parent_name% said not to be messy because messiness leads to [3].\n
+After playing, %$pronoun% cleaned up %$possessive_pronoun% toys. \n\n
+
+%$parent_type% %$parent_name% was happy that %$person% obeyed. \n
+%$parent_type% %$parent_name% gave %$person% some ice cream. \n
+%$person% became happy. \n
+Being neat is good!
+}
