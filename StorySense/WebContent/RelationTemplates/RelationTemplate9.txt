@@ -1,4 +1,0 @@
-? | Is-A | "object"
-"breakable" | PropertyOf | ?
-? | LocatedAt | $location
-? | Is-A | "feeling"

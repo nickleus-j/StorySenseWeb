@@ -31,7 +31,7 @@ public class TokenParser {
     
     int CONFIDENCE_THRESHOLD, blank_counter=1, currentTemplate;
     String sStory = "";
-    String Blank = "____("+ blank_counter +")____";
+    String Blank = "<input type='text' width='15' name='answer"+blank_counter+"' />";//"____("+ blank_counter +")____";
     int global_iterator;
     ArrayList<ArrayList<Relation>> Assertions = new ArrayList<ArrayList<Relation>>();
     ArrayList<ArrayList<Integer>> perBlankRuleArray = new ArrayList<ArrayList<Integer>>();
@@ -67,7 +67,8 @@ public class TokenParser {
             Story = new Story();
             false_if = false;
             blank_counter=1;
-            Blank = "____("+ blank_counter +")____";
+            //Blank = "____("+ blank_counter +")____";
+            Blank = "<input type='text' width='15' name='answer"+blank_counter+"' />";
             Assertions = new ArrayList<ArrayList<Relation>>();
             perBlankRuleArray = new ArrayList<ArrayList<Integer>>();
             arrQuestion = new ArrayList<Question>();
@@ -1510,7 +1511,7 @@ public class TokenParser {
     public void increment_blank()
     {
     blank_counter++;
-    Blank = "____("+ blank_counter +")____";
+    Blank = "<input type='text' width='15' name='answer"+blank_counter+"' />";
     }
     
     public int random(int Total)

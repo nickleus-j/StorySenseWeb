@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package worker;
 
 import model.Story;
@@ -65,9 +61,10 @@ public Story getStory()
    arrNumbers.remove(temp);
      
    //STfilename = FileSrch();
-   //RTfilename = FileSrch();
-   STfilename = "/home/nickleus/git/StorySense/StorySense/WebContent/StoryTemplates/StoryTemplate" + i + ".txt";
-   RTfilename = "/home/nickleus/git/StorySense/StorySense/WebContent/RelationTemplates/RelationTemplate" + i + ".txt";
+   //RTfilename = FileSrch();/home/nickleus/git/StorySense/StorySense/WebContent
+   System.out.println(this.getClass().getResource(getClass().getName()));
+   STfilename = "/home/nickleus/git/StorySense/StorySense/StoryTemplates/StoryTemplate" + i + ".txt";
+   RTfilename = "/home/nickleus/git/StorySense/StorySense/RelationTemplates/RelationTemplate" + i + ".txt";
   
    System.out.println("opening: " + STfilename +"  ----- "+RTfilename);
    
@@ -82,7 +79,6 @@ public Story getStory()
    arrSTemplate = STT.Tokenize(arrSTemplate);
    
    
-   System.out.println("\nStory Template: ");
    /*for(int n=0; n<arrSTemplate.size(); n++)
    {
        System.out.println(arrSTemplate.get(n));

@@ -15,6 +15,7 @@ import entity.User;
 /**
  * Used to return Stings or other data types in generating the
  * HTML code output to be interpreted by the web browser
+ * This is used for insertables and attributes of tags
  * @author nickleus
  *
  */
@@ -64,7 +65,7 @@ public class WebCodeMaker {
 	public String doThis(){return ":D D:";}
 	
 	public String writeStory(){
-		StoryGenerator storyMaker=new StoryGenerator(10, 60);
+		StoryGenerator storyMaker=new StoryGenerator(10, 60);//Number of templates and Confidence for now
 		Story myStory=storyMaker.getStory();
 		
 		return myStory.getsStory();

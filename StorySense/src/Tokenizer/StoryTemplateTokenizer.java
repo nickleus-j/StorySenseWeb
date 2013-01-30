@@ -7,8 +7,8 @@ package Tokenizer;
 import java.util.ArrayList;
 
 /**
- *
- * @author Lenovo
+ * Splits the lines of the story template into tokens
+ * @author Jimenez
  */
 public class StoryTemplateTokenizer {
     

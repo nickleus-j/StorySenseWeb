@@ -7,14 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <link rel="stylesheet" href="Style/Default.css"/> 
 <title>Leader board</title>
-<style>
-img{
-  	width: 50px;
-  	height: 50px;
-  
-  }
 
-</style>
 </head>
 
 

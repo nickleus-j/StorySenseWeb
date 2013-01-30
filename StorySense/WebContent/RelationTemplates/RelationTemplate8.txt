@@ -1,4 +1,0 @@
-"person" | CanBe | ?
-$action | LeadsTo | ?
-? | PurposeOf | $action
-$action | Causes | ?

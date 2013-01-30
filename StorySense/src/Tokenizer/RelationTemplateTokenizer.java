@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import entity.Relation;
 
 /**
- *
- * @author Lenovo
+ *Gets the tokens of the relation template
+ * @author Jimenez
  */
 public class RelationTemplateTokenizer {
     

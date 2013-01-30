@@ -1,3 +1,0 @@
-? | Causes | $emotion
-$emotion | Causes | ?
-? | Is-A | "action"

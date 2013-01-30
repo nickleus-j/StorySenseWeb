@@ -26,15 +26,11 @@
 		
 	<td colspan="2">
 	<hr>
-		Let's take a trip to park. 
-		A <input type="text" name="answer1"/> is an object we can find in the park. 
-		Last week, I was <input type="text" name="answer2"/>when I was at the park. 
-		After going to the park, I went to the <input type="text" name="answer3"/>. 
+		
 		<%		WebCodeMaker encoder=new WebCodeMaker(out);
-		out.println(encoder.writeStory());
+		out.write(encoder.writeStory());
 		%>
 	<hr>
-	<iframe src="StoryTemplates/StoryTemplate1.txt"></iframe>
 	</td></tr>
 	
 	<tr>

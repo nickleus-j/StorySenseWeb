@@ -1,4 +1,0 @@
-? | Is-A | "feeling"
-? | LocatedAt | $location
-"edible" | PropertyOf | ?
-$action | Causes | ?

@@ -1,4 +1,0 @@
-? | LocatedAt | $location
-? | Is-A | "object"
-? | Is-A | "action"
-? | Is-A | "location"
