@@ -16,8 +16,9 @@
 
 <div class="container">
 	<h1 class="ErrorMessage">Log In fail</h1>
-	<%@ include file="Insertables/LogInTable.jsp" %>
-	<hr/>
+	Please try again<br/>
+	<%@ include file="Insertables/LogInForm.jsp" %>
+	
 	<h2>Don't have an account? 
 	<button onClick="window.location.href='Register.jsp'">Register</button></h2> 
 </div>
