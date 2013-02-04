@@ -13,6 +13,10 @@ public class StoryFileAccess implements Serializable {
 	private Acomplishment myAccomplishment;
 	private ArrayList<String> Answers;
 	
+	public StoryFileAccess(Story story,ArrayList<String> ans){
+		myStory=story;
+		Answers=ans;
+	}
 	
 	/*Getter setter*/
 	public Story getMyStory() {return myStory;}

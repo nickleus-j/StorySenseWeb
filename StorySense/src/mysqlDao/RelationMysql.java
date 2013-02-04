@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import dao.DAOFactory;
 import dao.RelationDAO;
 import dbConnection.DBConnectionFactory;
@@ -524,6 +525,35 @@ public class RelationMysql extends RelationDAO {
             Logger.getLogger(DAOFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+	}
+
+	@Override
+	public void AddRelation(String Concept1, String Concept2,
+			String Relationship) {
+		PreparedStatement ps;
+
+        try
+        {            
+        	DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+            
+            ps = con.prepareStatement("INSERT INTO Relation (Concept1, Concept2, Relationship, confidence_percentage, total_score, times_validated, frequency_count, is_meaningless) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            ps.setString(1, Concept1);
+            ps.setString(2, Concept2);
+            ps.setString(3, Relationship);
+            ps.setInt(4, 100);
+            ps.setInt(5, 4);
+            ps.setInt(6, 1);
+            ps.setInt(7, 1);
+            ps.setInt(8, 0);
+            ps.execute();
+            
+            ps.close();
+            con.close();
+        }
+        catch (Exception ex) {
+            Logger.getLogger(RelationMysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
 	}
 
 }

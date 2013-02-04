@@ -20,4 +20,5 @@ public abstract class RelationDAO {
 	public abstract void incrementFrequencyCount(String concept1, String concept2, String relationship);
 	public abstract void updateRelationScore(String concept1, String concept2, String relationship, int added_score);
 	public abstract void deleteIfMeaningless(String concept1, String concept2, String relationship, int meaningless_count);
+	public abstract void AddRelation(String Concept1, String Concept2, String Relationship);
 }

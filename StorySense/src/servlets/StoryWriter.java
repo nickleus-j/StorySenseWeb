@@ -1,11 +1,17 @@
 package servlets;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import serializableObjects.StoryFileAccess;
 
 import dao.ConceptDAO;
 import dao.DAOFactory;
@@ -45,8 +51,28 @@ public class StoryWriter extends BaseServlet {
 		}
 	}
 	
+	/**
+	 * Saves the Story
+	 * @param Answers
+	 * @param myStory
+	 */
 	public void saveStory(ArrayList<String> Answers,Story myStory){
+		/*
+		 * Where to save the file
+		 * What path shall we take
+		 */
+		 //StoryFileAccess savedStory=new StoryFileAccess(myStory, Answers);
+		Random generator = new Random();
+		int r = Math.abs(generator.nextInt());
 		
+		 try{
+			 FileOutputStream fo = new FileOutputStream("Story.story");
+			 ObjectOutputStream oo = new ObjectOutputStream(fo);
+			 oo.writeObject(myStory);
+		 }catch(IOException ioEx){
+			 
+		 }
+		 
 	}
 	
 	
@@ -72,6 +98,11 @@ public class StoryWriter extends BaseServlet {
 			conceptDao.AddConcept(answers.get(ctr-1));
 		}
 		
+		/*
+		 * Traverse all the assertions
+		 * placed the answer to their corresponding blank concepts 
+		 * to be filled
+		 */
 		for(int i=0;i<Story.getAssertions().size(); i++){
 			for(int j=0; j<Story.getAssertions().get(i).size();j++){
 				//turn the ? into the ones inputted in the blanks
@@ -93,10 +124,26 @@ public class StoryWriter extends BaseServlet {
                 			Story.getAssertions().get(i).get(j).getConcept2(), 
                 			Story.getAssertions().get(i).get(j).getRelationship());
                 }
+              //for synonyms check the opposite order if existing
+                else if(Story.getAssertions().get(i).get(j).getRelationship().equals("Synonym") && 
+                		relationAccess.RelationIsExisting(Story.getAssertions().get(i).get(j).getConcept2(), 
+                				Story.getAssertions().get(i).get(j).getConcept1(), 
+                				Story.getAssertions().get(i).get(j).getRelationship()))
+                {
+                	relationAccess.incrementFrequencyCount(Story.getAssertions().get(i).get(j).getConcept2(), 
+                			Story.getAssertions().get(i).get(j).getConcept1(), 
+                			Story.getAssertions().get(i).get(j).getRelationship());
+                }
+             // add new assertion
+                else{
+                	relationAccess.AddRelation(Story.getAssertions().get(i).get(j).getConcept1(), 
+                			 Story.getAssertions().get(i).get(j).getConcept2(), 
+                			 Story.getAssertions().get(i).get(j).getRelationship());
+                }
 			}//End of inner loop
 		}//End of outer loop
 		
-		
+		saveStory(answers, Story);
 	}
 	
 
