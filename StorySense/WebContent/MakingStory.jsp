@@ -28,7 +28,7 @@
 	<hr>
 		
 		<%		StoryEncoder TheEncoder=new StoryEncoder(request,out);
-			out.write(TheEncoder.writeStory());
+			TheEncoder.encodeStory();
 		%>
 	<hr>
 	</td></tr>
