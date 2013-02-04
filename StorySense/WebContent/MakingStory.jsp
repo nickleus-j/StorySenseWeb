@@ -15,7 +15,7 @@
 	<div class="container">
 	<h1>Fill the blanks with your answers to complete the story</h1>
 	
-	<form name="Answers" action="LearnerStoryFininshedSample.jsp">
+	<form name="Answers" action="/StoryWriter">
 	<table align="center" width="50%" bgcolor="skyblue">
 	<tr>
 	<td>Story Name<input type="text" name="storyName"/></td>
@@ -27,8 +27,11 @@
 	<td colspan="2">
 	<hr>
 		
-		<%		StoryEncoder TheEncoder=new StoryEncoder(request,out);
+		<%		/*LearnerStoryFininshedSample.jsp*/
+		StoryEncoder TheEncoder=new StoryEncoder(request,out);
 			TheEncoder.encodeStory();
+			out.write("Write<hr>");
+			
 		%>
 	<hr>
 	</td></tr>
