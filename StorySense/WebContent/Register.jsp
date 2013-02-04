@@ -21,7 +21,8 @@
 	<div class="container">
 	<h1>Fill out the form</h1>
 	  <!-- LearnerHomeSample.jsp -->
-	<form name="Registration" id="Registration" action="UserRegistrator" method="post" ENCTYPE="multipart/form-data">
+	<form name="Registration" id=<% encoder.writeJsElementReference(RegisFormName);%> action="UserRegistrator" 
+		method="post" ENCTYPE="multipart/form-data">
 	<table align="center">
 	
 		<tr>

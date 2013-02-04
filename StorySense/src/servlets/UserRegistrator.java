@@ -58,7 +58,7 @@ public class UserRegistrator extends BaseServlet {
 				theSession.setAttribute("user", myUser);
 			
 			 
-			//redirectUser(myUser, request, response);
+			redirectUser(myUser, request, response);
 		}//catch(ServletException ServletProblem){out.print("Sevlet problem");}
 		catch(IOException IOe){
 			out.print("IO problem");
@@ -131,7 +131,7 @@ public class UserRegistrator extends BaseServlet {
 		  userProfile.setBirthDay(userBday);
 		  out.println("Bday: "+userBday);
 		  out.println("TranslatedPath: "+request.getPathTranslated());
-		  //myUserDAO.addUser(newUser, userProfile);
+		  myUserDAO.addUser(newUser, userProfile);
 		  
 		  if(newUser.getName()!=null&&!newUser.getName().isEmpty())
 			  return newUser;
@@ -149,7 +149,7 @@ public class UserRegistrator extends BaseServlet {
 		//"uploadedFiles/ || /home/nickleus/Pictures/upload/";'
 		init(getServletConfig());
 		  out.println("Token: "+getServletConfig().getInitParameter("token"));
-		String pathPrefix=getServletConfig().getInitParameter("profilePicDirectory");
+		String pathPrefix="/home/nickleus/Pictures/upload/";
 		
 				String itemName = item.getName();
 				Random generator = new Random();

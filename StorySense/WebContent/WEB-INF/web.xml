@@ -33,26 +33,22 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description>Registration Servlet for user accounts</description>
     <display-name>UserRegistration</display-name>
     <servlet-name>user_Registration</servlet-name>
     <servlet-class>servlets.RegistrationUpload</servlet-class>
-   	<init-param>
-   		<param-name>profilePicDirectory</param-name>
-  		<param-value>Photo</param-value>
-   </init-param>
-   	<init-param>
-   		<param-name>token</param-name>
-   		<param-value>aToken</param-value>
-   	</init-param>
+    <init-param>
+      <param-name>profilePicDirectory</param-name>
+      <param-value>Photo</param-value>
+    </init-param>
+    <init-param>
+      <param-name>token</param-name>
+      <param-value>aToken</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>user_Registration</servlet-name>
     <url-pattern>/user_Registration</url-pattern>
   </servlet-mapping>
-  
-  
-  
 </web-app>

@@ -28,7 +28,7 @@ public class WebCodeMaker {
 		out=writer;
 	}
 	
-	/*	Methods	<% //LBoardHTMLGenerator generator=new LBoardHTMLGenerator(); %>*/
+	/*	Methods	*/
 	public void writeJsElementReference(String elementName){
 		try {
 			out.write("\""+elementName+"\"");
@@ -41,6 +41,11 @@ public class WebCodeMaker {
 		return "\""+elementName+"\"";
 	}
 	
+	/**
+	 * This generates the HTML code for the leader board based on the contents
+	 * of the database
+	 * @return LBoardCode
+	 */
 	public String getleaderBoardHTMLTable(){
 		String tableCode="";
 		
@@ -60,9 +65,7 @@ public class WebCodeMaker {
 				
 		 //return "<tr><td>lddd</td></tr>";
 			return tableCode;
-	}
-	
-	public String doThis(){return ":D D:";}
+	}	
 	
 	public String writeStory(){
 		StoryGenerator storyMaker=new StoryGenerator(10, 60);//Number of templates and Confidence for now

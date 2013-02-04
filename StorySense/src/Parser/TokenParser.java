@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Parser;
 
 import dao.DAOFactory;
@@ -31,7 +28,8 @@ public class TokenParser {
     
     int CONFIDENCE_THRESHOLD, blank_counter=1, currentTemplate;
     String sStory = "";
-    String Blank = "<input type='text' width='15' name='answer"+blank_counter+"' />";//"____("+ blank_counter +")____";
+  //"____("+ blank_counter +")____";
+    String Blank =getBlankHtmlCode();
     int global_iterator;
     ArrayList<ArrayList<Relation>> Assertions = new ArrayList<ArrayList<Relation>>();
     ArrayList<ArrayList<Integer>> perBlankRuleArray = new ArrayList<ArrayList<Integer>>();
@@ -68,7 +66,7 @@ public class TokenParser {
             false_if = false;
             blank_counter=1;
             //Blank = "____("+ blank_counter +")____";
-            Blank = "<input type='text' width='15' name='answer"+blank_counter+"' />";
+            Blank =getBlankHtmlCode();
             Assertions = new ArrayList<ArrayList<Relation>>();
             perBlankRuleArray = new ArrayList<ArrayList<Integer>>();
             arrQuestion = new ArrayList<Question>();
@@ -1511,7 +1509,7 @@ public class TokenParser {
     public void increment_blank()
     {
     blank_counter++;
-    Blank = "<input type='text' width='15' name='answer"+blank_counter+"' />";
+    Blank =getBlankHtmlCode();
     }
     
     public int random(int Total)
@@ -1572,5 +1570,8 @@ public class TokenParser {
         
         
         return processed;
+    }
+    private String getBlankHtmlCode(){
+    	return "<input type='text' width='15' name='answer"+blank_counter+"' />";
     }
 }
