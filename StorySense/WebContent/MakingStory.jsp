@@ -27,8 +27,8 @@
 	<td colspan="2">
 	<hr>
 		
-		<%		StoryEncoder encoder=new StoryEncoder(request,response.getWriter());
-			out.write(encoder.writeStory());
+		<%		StoryEncoder TheEncoder=new StoryEncoder(request,out);
+			out.write(TheEncoder.writeStory());
 		%>
 	<hr>
 	</td></tr>

@@ -1,8 +1,9 @@
 package worker;
 
-import java.io.PrintWriter;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspWriter;
 
 import model.Story;
 
@@ -14,10 +15,10 @@ import model.Story;
  */
 public class StoryEncoder {
 
-	HttpServletRequest Request;
-	PrintWriter Out;
+	private HttpServletRequest Request;
+	private JspWriter Out;
 	
-	public StoryEncoder(HttpServletRequest request,PrintWriter out){
+	public StoryEncoder(HttpServletRequest request,JspWriter out){
 		Request=request;
 		Out=out;
 	}
@@ -34,7 +35,12 @@ public class StoryEncoder {
 		StoryGenerator storyMaker=new StoryGenerator(10, getConfidence());//Number of templates and Confidence for now
 		Story myStory=storyMaker.getStory();
 		Request.setAttribute("Story", myStory);
-		Out.write(myStory.getsStory());
+		try {
+			Out.write(myStory.getsStory());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public String getStoryAttributeName(){return "Story";}
