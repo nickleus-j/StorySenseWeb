@@ -1,6 +1,7 @@
 package serializableObjects;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import entity.Acomplishment;
 
@@ -9,8 +10,8 @@ import model.Story;
 public class StoryFileAccess implements Serializable {
 
 	private Story myStory;
-	
 	private Acomplishment myAccomplishment;
+	private ArrayList<String> Answers;
 	
 	
 	/*Getter setter*/
@@ -18,6 +19,8 @@ public class StoryFileAccess implements Serializable {
 	public void setMyStory(Story myStory) {this.myStory = myStory;}
 	public Acomplishment getMyAccomplishment() {return myAccomplishment;}
 	public void setMyAccomplishment(Acomplishment myAccomplishment) {this.myAccomplishment = myAccomplishment;}
+	public ArrayList<String> getAnswers() {return Answers;}
+	public void setAnswers(ArrayList<String> answers) {Answers = answers;}
 	
 	
 	

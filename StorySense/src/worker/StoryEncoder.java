@@ -34,7 +34,7 @@ public class StoryEncoder {
 	public void encodeStory(){
 		StoryGenerator storyMaker=new StoryGenerator(10, getConfidence());//Number of templates and Confidence for now
 		Story myStory=storyMaker.getStory();
-		Request.setAttribute("Story", myStory);
+		Request.getSession().setAttribute("Story", myStory);
 		try {
 			Out.write(myStory.getsStory());
 		} catch (IOException e) {
