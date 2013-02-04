@@ -1,4 +1,4 @@
-<%@page import="worker.WebCodeMaker"%>
+<%@page import="worker.StoryEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -27,8 +27,8 @@
 	<td colspan="2">
 	<hr>
 		
-		<%		WebCodeMaker encoder=new WebCodeMaker(out);
-		out.write(encoder.writeStory());
+		<%		StoryEncoder encoder=new StoryEncoder(request,response.getWriter());
+			out.write(encoder.writeStory());
 		%>
 	<hr>
 	</td></tr>

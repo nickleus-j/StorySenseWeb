@@ -23,19 +23,21 @@ public class StoryEncoder {
 	}
 	
 	public String writeStory(){
-		StoryGenerator storyMaker=new StoryGenerator(10, 60);//Number of templates and Confidence for now
+		
+		StoryGenerator storyMaker=new StoryGenerator(10, getConfidence());//Number of templates and Confidence for now
 		Story myStory=storyMaker.getStory();
 		
 		return myStory.getsStory();
 	}
 	
 	public void encodeStory(){
-		StoryGenerator storyMaker=new StoryGenerator(10, 60);//Number of templates and Confidence for now
+		StoryGenerator storyMaker=new StoryGenerator(10, getConfidence());//Number of templates and Confidence for now
 		Story myStory=storyMaker.getStory();
 		Request.setAttribute("Story", myStory);
 		Out.write(myStory.getsStory());
 	}
 	
 	public String getStoryAttributeName(){return "Story";}
+	public int getConfidence(){ return 60;}
 	
 }
