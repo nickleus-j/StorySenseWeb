@@ -149,7 +149,7 @@ public class UserRegistrator extends BaseServlet {
 		//"uploadedFiles/ || /home/nickleus/Pictures/upload/";'
 		init(getServletConfig());
 		  out.println("Token: "+getServletConfig().getInitParameter("token"));
-		String pathPrefix="/home/nickleus/Pictures/upload/";
+		String pathPrefix="upPics/";
 		
 				String itemName = item.getName();
 				Random generator = new Random();

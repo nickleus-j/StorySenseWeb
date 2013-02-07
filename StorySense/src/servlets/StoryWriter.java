@@ -1,5 +1,6 @@
 package servlets;
-
+/*import serializableObjects.StoryFileAccess;
+*/
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -10,12 +11,13 @@ import java.util.Random;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import serializableObjects.StoryFileAccess;
 
 import dao.ConceptDAO;
 import dao.DAOFactory;
 import dao.RelationDAO;
+import entity.User;
 
 import model.Story;
 
@@ -36,14 +38,16 @@ public class StoryWriter extends BaseServlet {
 	public void executeCustomCode(HttpServletRequest request,
 			HttpServletResponse response) {
 		PrintWriter out=null;
+		HttpSession session=request.getSession();
 		try{
 			out = response.getWriter();
-			Story myStory=(Story)request.getSession().getAttribute("Story");
+			Story myStory=(Story)session.getAttribute("Story");
 			out.println("The story");
 			
 			if(myStory!=null){
 				out.println(myStory.getsStory());
 				submitStory(myStory, out,request);
+				response.sendRedirect("../StorySense/LearnerHomeSample.jsp");
 			}
 			else out.println("Not forwarded");
 		}catch(Exception ex){
@@ -56,7 +60,7 @@ public class StoryWriter extends BaseServlet {
 	 * @param Answers
 	 * @param myStory
 	 */
-	public void saveStory(ArrayList<String> Answers,Story myStory){
+	public void saveStory(ArrayList<String> Answers,Story myStory,String storyName){
 		/*
 		 * Where to save the file
 		 * What path shall we take
@@ -66,7 +70,7 @@ public class StoryWriter extends BaseServlet {
 		int r = Math.abs(generator.nextInt());
 		
 		 try{
-			 FileOutputStream fo = new FileOutputStream("Story.story");
+			 FileOutputStream fo = new FileOutputStream("uploadedFiles/"+storyName+r+"Story.story");
 			 ObjectOutputStream oo = new ObjectOutputStream(fo);
 			 oo.writeObject(myStory);
 		 }catch(IOException ioEx){
@@ -75,9 +79,35 @@ public class StoryWriter extends BaseServlet {
 		 
 	}
 	
+	/**
+	 * Saves the story with the user name included on the file name
+	 * @param Answers
+	 * @param myStory
+	 * @param storyName
+	 * @param userName
+	 */
+	public void saveStory(ArrayList<String> Answers,Story myStory,String storyName,String userName){
+		/*
+		 * Where to save the file
+		 * What path shall we take
+		 */
+		 //StoryFileAccess savedStory=new StoryFileAccess(myStory, Answers);
+		Random generator = new Random();
+		int r = Math.abs(generator.nextInt());
+		
+		 try{
+			 FileOutputStream fo = new FileOutputStream("uploadedFiles/"+storyName+r+userName+"Story.story");
+			 ObjectOutputStream oo = new ObjectOutputStream(fo);
+			 oo.writeObject(myStory);
+		 }catch(IOException ioEx){
+			 
+		 }
+		 
+	}
 	
 	/**
-	 * Submits the story
+	 * Submits the story.
+	 * Puts the assertions to the database
 	 * @param Story
 	 * @param out
 	 * @param request
@@ -92,7 +122,7 @@ public class StoryWriter extends BaseServlet {
 		/*
 		 * Collect the information from the text boxes
 		 */
-		for(int ctr=1;ctr<=Story.getBlanks();ctr++){
+		for(int ctr=1;ctr<Story.getBlanks();ctr++){
 			attName="answer"+ctr;
 			answers.add(request.getParameter(attName));
 			conceptDao.AddConcept(answers.get(ctr-1));
@@ -142,8 +172,12 @@ public class StoryWriter extends BaseServlet {
                 }
 			}//End of inner loop
 		}//End of outer loop
+		HttpSession session=request.getSession();
+		User user=(User)session.getAttribute("user");
 		
-		saveStory(answers, Story);
+		if(user==null)
+			saveStory(answers, Story,request.getParameter("storyName"));
+		else saveStory(answers, Story,request.getParameter("storyName"),user.getName());
 	}
 	
 

@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import entity.Relation;
@@ -12,7 +13,7 @@ import entity.Relation;
  *
  * @author Lenovo
  */
-public class Story {
+public class Story implements Serializable{
     
     private String sStory;
     private ArrayList<ArrayList<Relation>> Assertions;
