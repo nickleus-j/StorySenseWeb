@@ -1,6 +1,6 @@
 package servlets;
-/*import serializableObjects.StoryFileAccess;
-*/
+import serializableObjects.StoryFileAccess;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -26,7 +26,6 @@ import model.Story;
  */
 @WebServlet(description = "Writes the story of the learner and saves it", urlPatterns = { "/StoryWriter" })
 public class StoryWriter extends BaseServlet {
-	private static final long serialVersionUID = 1L;
     /**
      * Default constructor. 
      */
@@ -65,7 +64,7 @@ public class StoryWriter extends BaseServlet {
 		 * Where to save the file
 		 * What path shall we take
 		 */
-		 //StoryFileAccess savedStory=new StoryFileAccess(myStory, Answers);
+		 StoryFileAccess savedStory=new StoryFileAccess(myStory, Answers);
 		Random generator = new Random();
 		int r = Math.abs(generator.nextInt());
 		
@@ -91,14 +90,14 @@ public class StoryWriter extends BaseServlet {
 		 * Where to save the file
 		 * What path shall we take
 		 */
-		 //StoryFileAccess savedStory=new StoryFileAccess(myStory, Answers);
+		 StoryFileAccess savedStory=new StoryFileAccess(myStory, Answers);
 		Random generator = new Random();
 		int r = Math.abs(generator.nextInt());
 		
 		 try{
-			 FileOutputStream fo = new FileOutputStream("uploadedFiles/"+storyName+r+userName+"Story.story");
+			 FileOutputStream fo = new FileOutputStream("uploadedFiles/"+storyName+r+userName+".story");
 			 ObjectOutputStream oo = new ObjectOutputStream(fo);
-			 oo.writeObject(myStory);
+			 oo.writeObject(savedStory);
 		 }catch(IOException ioEx){
 			 
 		 }

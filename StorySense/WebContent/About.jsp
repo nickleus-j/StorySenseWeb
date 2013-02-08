@@ -11,12 +11,7 @@
 
 <%@ include file="Insertables/TopBar.jsp" %>
 
-<% /*	Removed code
-		//String navBarURL="Insertables/LearnerNavBar.jsp";
-		//navBarURL="Insertables/ReviewerNavBar.jsp";
-
-		//request.getRequestDispatcher(navBarURL).include(request, response);
-	*/
+<% 
 	if(u!=null){
 		if(User.Roles.learner.isLearner(u.getRole())) {%>
 			<%@ include file="Insertables/LearnerNavBar.jsp" %>

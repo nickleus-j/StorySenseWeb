@@ -36,7 +36,6 @@ import entity.User;
  */
 @WebServlet(description = "Registers a user", urlPatterns = { "/UserRegistrator" })
 public class UserRegistrator extends BaseServlet {
-	private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor. 
@@ -64,7 +63,7 @@ public class UserRegistrator extends BaseServlet {
 			out.print("IO problem");
 		}
 		catch(Exception ex){
-			//Redirect Somewhere
+			out.print("Problem in registering");
 			}
 		
 	}
@@ -216,12 +215,6 @@ public class UserRegistrator extends BaseServlet {
 	}
 	
 	public String getImageFileExtension(String given){
-		/*if(given.equalsIgnoreCase(".jpg")||given.equalsIgnoreCase(".jpeg"))
-			return ".jpg";
-		else if(given.equalsIgnoreCase(".png"))
-			return ".png";
-		else return ".bmp";
-		*/
 		given=given.toLowerCase();
 		if(given.endsWith(".jpg")||given.endsWith(".jpeg"))
 			return ".jpg";

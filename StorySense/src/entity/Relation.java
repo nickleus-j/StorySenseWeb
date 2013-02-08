@@ -4,11 +4,13 @@
  */
 package entity;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Lenovo
  */
-public class Relation {
+public class Relation implements Serializable{
     private String Concept1;
     private String Concept2;
     private String Relationship;
