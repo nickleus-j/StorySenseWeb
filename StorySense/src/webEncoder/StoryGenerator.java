@@ -1,4 +1,4 @@
-package worker;
+package webEncoder;
 
 import model.Story;
 import Parser.TokenParser;

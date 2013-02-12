@@ -1,3 +1,4 @@
+<%@page import="webEncoder.CompleteStoryLoader"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -75,12 +76,17 @@
 		</table>
 	</td>
 	<td>
+	
+		<% CompleteStoryLoader sLoader; %>
+		 out.print(sLoader.loadSampleStory()); %>
+		<!--  
 		<table class="storyTbl">
 			<tr><th>Story Name</th><td>My visit to the Villa</td></tr>
 			<tr><th>Score Earned</th><td>30</td></tr>
 			<tr><th>Date Finished</th><td>October 31, 2012</td></tr>
 			<tr><th colspan="2"><a href="ScoredStory.jsp">See Story</a></th></tr>
 		</table>
+		-->
 	</td>
 	
 	<td>

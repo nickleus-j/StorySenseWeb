@@ -1,4 +1,4 @@
-package worker;
+package webEncoder;
 
 import java.io.IOException;
 import java.util.ArrayList;

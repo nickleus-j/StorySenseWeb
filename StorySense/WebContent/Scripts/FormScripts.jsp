@@ -1,5 +1,5 @@
 <%@page import="worker.RegistrationElements"%>
-<%@page import="worker.WebCodeMaker"%>
+<%@page import="webEncoder.WebCodeMaker"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%!	/*String that represents the elements' ID and names*/
