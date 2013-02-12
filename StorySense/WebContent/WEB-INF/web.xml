@@ -33,7 +33,6 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description>Registration Servlet for user accounts</description>
     <display-name>UserRegistration</display-name>
@@ -52,7 +51,6 @@
     <servlet-name>user_Registration</servlet-name>
     <url-pattern>/user_Registration</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description>Writes the story of the learner and saves it</description>
     <display-name>StoryWriter</display-name>
@@ -63,5 +61,17 @@
     <servlet-name>StoryWriter</servlet-name>
     <url-pattern>/StoryWriter</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <description>Loads a story</description>
+    <display-name>StoryLoader</display-name>
+    <servlet-name>StoryLoaderr</servlet-name>
+    <servlet-class>servlets.StoryLoader</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StoryLoader</servlet-name>
+    <url-pattern>/StoryLoader</url-pattern>
+  </servlet-mapping>
+  
   
 </web-app>

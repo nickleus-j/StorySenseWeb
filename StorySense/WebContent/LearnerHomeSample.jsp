@@ -95,7 +95,7 @@
 	
 	</table>
 	
-	
+	<iframe src="StoryLoader" width="400" height="300"/>
 	
 	</div>
 <%@ include file="Insertables/Footer.jsp" %>

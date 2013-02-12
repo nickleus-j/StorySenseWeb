@@ -4,13 +4,15 @@
  */
 package model;
 
+import java.io.Serializable;
+
 import entity.Relation;
 
 /**
  *
  * @author Lenovo
  */
-public class Question {
+public class Question implements Serializable{
     private Relation Relation = new Relation();
     private String Question;
     private String Option1;

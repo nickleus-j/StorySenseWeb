@@ -4,13 +4,14 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Lenovo
  */
-public class Query {
+public class Query implements Serializable{
     private String Query;
     private ArrayList<String> arrValues;
 

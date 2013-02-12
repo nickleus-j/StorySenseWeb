@@ -67,10 +67,4 @@ public class WebCodeMaker {
 			return tableCode;
 	}	
 	
-	public String writeStory(){
-		StoryGenerator storyMaker=new StoryGenerator(10, 60);//Number of templates and Confidence for now
-		Story myStory=storyMaker.getStory();
-		
-		return myStory.getsStory();
-	}
 }
