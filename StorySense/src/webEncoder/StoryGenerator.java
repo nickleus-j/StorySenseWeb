@@ -63,8 +63,8 @@ public Story getStory()
    //STfilename = FileSrch();
    //RTfilename = FileSrch();/home/nickleus/git/StorySense/StorySense/WebContent
    System.out.println(this.getClass().getResource(getClass().getName()));
-   STfilename = "/home/nickleus/git/StorySense/StorySense/StoryTemplates/StoryTemplate" + i + ".txt";
-   RTfilename = "/home/nickleus/git/StorySense/StorySense/RelationTemplates/RelationTemplate" + i + ".txt";
+   STfilename = "StoryTemplates/StoryTemplate" + i + ".txt";
+   RTfilename = "RelationTemplates/RelationTemplate" + i + ".txt";
   
    System.out.println("opening: " + STfilename +"  ----- "+RTfilename);
    

@@ -9,18 +9,12 @@
 <title>Leader board</title>
 
 </head>
-
-
-
 <body>
-
 
 <%@ include file="Insertables/TopBar.jsp" %>
 <%@ include file="Insertables/LearnerNavBar.jsp" %>
 	<div class="container">
 	<h1>Top 10 learners</h1>
-	
-
 	<table align="center" width="75%" bgcolor="white" >
 	
 	<tr>
@@ -28,9 +22,7 @@
 	<%		WebCodeMaker encoder=new WebCodeMaker(out);
 		out.write(encoder.getleaderBoardHTMLTable());
 		%>
-	</tr>
-	
-	
+	</tr>	
 	
 	</table><br/>
 	</div>

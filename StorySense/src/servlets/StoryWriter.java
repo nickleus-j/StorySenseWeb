@@ -14,9 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
+import dao.AcomplishmentDAO;
 import dao.ConceptDAO;
 import dao.DAOFactory;
 import dao.RelationDAO;
+import entity.Acomplishment;
 import entity.User;
 
 import model.Story;
@@ -71,7 +73,8 @@ public class StoryWriter extends BaseServlet {
 		 try{
 			 FileOutputStream fo = new FileOutputStream("uploadedFiles/"+storyName+r+"Story.story");
 			 ObjectOutputStream oo = new ObjectOutputStream(fo);
-			 oo.writeObject(myStory);
+			 oo.writeObject(savedStory);
+			 fo.close();
 		 }catch(IOException ioEx){
 			 
 		 }
@@ -95,14 +98,60 @@ public class StoryWriter extends BaseServlet {
 		int r = Math.abs(generator.nextInt());
 		
 		 try{
-			 FileOutputStream fo = new FileOutputStream("uploadedFiles/"+storyName+r+userName+".story");
+			 //Save the file
+			 String fName="uploadedFiles/"+storyName+r+userName+".story";
+			 FileOutputStream fo = new FileOutputStream(fName);
 			 ObjectOutputStream oo = new ObjectOutputStream(fo);
 			 oo.writeObject(savedStory);
+			 fo.close();
+			 
+			 /*Put file URL to database*/
+			 DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+			AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
+			Acomplishment story=new Acomplishment();
+			 
+			story.setTemplateID(1);
+			
 		 }catch(IOException ioEx){
 			 
 		 }
 		 
 	}
+	
+	public void saveStory(ArrayList<String> Answers,Story myStory,String storyName,User givenU){
+		/*
+		 * Where to save the file
+		 * What path shall we take
+		 */
+		 StoryFileAccess savedStory=new StoryFileAccess(myStory, Answers);
+		Random generator = new Random();
+		int r = Math.abs(generator.nextInt());
+		
+		 try{
+			 //Save the file
+			 String fName="uploadedFiles/"+storyName+r+givenU.getName()+".story";
+			 FileOutputStream fo = new FileOutputStream(fName);
+			 ObjectOutputStream oo = new ObjectOutputStream(fo);
+			 oo.writeObject(savedStory);
+			 fo.close();
+			 
+			 /*Put file URL to database*/
+			 DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+			AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
+			Acomplishment story=new Acomplishment();
+			 
+			story.setTemplateID(1);
+			story.setAccountID(givenU.getAccountID());
+			story.setFileURL(fName);
+			story.setName(storyName);
+			myAcomDAO.addStoryAcomplishment(story);
+			
+		 }catch(IOException ioEx){
+			 
+		 }
+		 
+	}
+	
 	
 	/**
 	 * Submits the story.
@@ -175,8 +224,8 @@ public class StoryWriter extends BaseServlet {
 		User user=(User)session.getAttribute("user");
 		
 		if(user==null)
-			saveStory(answers, Story,request.getParameter("storyName"));
-		else saveStory(answers, Story,request.getParameter("storyName"),user.getName());
+			saveStory(answers, Story,request.getParameter("storyName"),"Unknown");
+		else saveStory(answers, Story,request.getParameter("storyName"),user);
 	}
 	
 

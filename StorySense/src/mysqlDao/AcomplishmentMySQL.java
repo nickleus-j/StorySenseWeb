@@ -44,13 +44,13 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
 
-            ps = con.prepareStatement("SELECT * from storyaccomplishment");
+            ps = con.prepareStatement("SELECT * from storyaccomplishment order by finishtime DESC");
             rs = ps.executeQuery();
             
             Acomplishment Story;
             ArrayList<Acomplishment> Stories=null;
             
-            if(rs.first()){
+            
             	Stories=new ArrayList<Acomplishment>();
             	
             	/*Loop that inserts the stories into the list*/
@@ -64,13 +64,15 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             		Story.setFinishTime(rs.getTimestamp("finishTime"));
             		Stories.add(Story);
             	}
-            }
+            
             
             rs.close();
             ps.close();
             con.close();
             
-            return Stories;
+            if(!Stories.isEmpty())
+              return Stories;
+            return null;
 		}
         catch (Exception ex)
         {
@@ -93,7 +95,7 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
 
-            ps = con.prepareStatement("SELECT * from storyaccomplishment WHERE AccountID = ?");
+            ps = con.prepareStatement("SELECT * from storyaccomplishment WHERE AccountID = ? ORDER BY finishTime DESC");
             ps.setInt(1, AccountID);
             rs = ps.executeQuery();
             
@@ -135,7 +137,7 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
 
-            ps = con.prepareStatement("SELECT * from storyaccomplishment WHERE templateID = ?");
+            ps = con.prepareStatement("SELECT * from storyaccomplishment WHERE templateID = ? order by finishtime DESC");
             ps.setInt(1, TemplateID);
             rs = ps.executeQuery();
             
@@ -178,12 +180,12 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
         	
         	ps = con.prepareStatement("INSERT INTO storyaccomplishment" +
         			" (AccountID,templateID,Name,fileURL, finishTime) " +
-        			"VALUES (?,?,?,?,?)");
+        			"VALUES (?,?,?,?,now())");
             ps.setInt(1, story.getAccountID());
             ps.setInt(2, story.getTemplateID());
             ps.setString(3, story.getName());
             ps.setString(4, story.getFileURL());
-            ps.setTimestamp(5, story.getFinishTime());
+            //ps.setTimestamp(5, story.getFinishTime());
             ps.execute();
             ps.close();
             
@@ -205,11 +207,6 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
         	Connection con = myFactory.getConnection();
 			ps = con.prepareStatement("update storyaccomplishment SET AccountID= ?, templateID = ?, Name = ?," +
 					"fileURL = ?, finishTime = ? where ID = ?");
-			/*ps.setInt(1,U.getAccountID());
-			ps.setString(2, U.getName());
-			ps.setString(3, U.getPassword());
-			ps.setInt(4, U.getRole());
-			ps.setBoolean(5, U.isAccountActive());*/
 			
 			ps.setInt(1,story.getAccountID());
 			ps.setInt(2,story.getTemplateID());

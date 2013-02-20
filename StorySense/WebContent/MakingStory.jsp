@@ -6,6 +6,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <link rel="stylesheet" href="Style/Default.css"/> 
 <title>Complete the Story</title>
+
+<script type="text/javascript">
+
+/*Submit the registration form
+ */
+function submitRegistration()
+{	
+	 document.getElementById("Answers").submit();
+	//document.getElementById("Registration").submit();
+}
+
+function validateAnsers(){
+	
+}
+
+
+</script>
 </head>
 <body>
 
@@ -19,7 +36,7 @@
 	<table align="center" width="50%" bgcolor="skyblue">
 	<tr>
 	<td>Story Name<input type="text" name="storyName"/></td>
-	<td><input type="reset"/></td>
+	<td id="nameValidation"><input type="reset"/></td>
 	</tr>
 	
 	<tr>

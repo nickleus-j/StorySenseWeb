@@ -38,6 +38,8 @@ public class StoryLoader extends BaseServlet {
 			StoryFileAccess storyFile=(StoryFileAccess)oi.readObject();
 			out.println("The story");
 			out.write(preview(storyFile));
+			oi.close();
+			fileIn.close();
 		}catch(IOException ioEx){
 			out.println("Error in reading the story"+ioEx.getMessage());
 		}

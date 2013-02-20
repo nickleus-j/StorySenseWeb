@@ -397,5 +397,44 @@ public class UserMySQL extends UserDAO {
 		return null;
 	}
 
+	@Override
+	public User getUser(int id) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from account WHERE accountID=?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            
+            User u=null;
+            if(rs.first()){
+            	u=new User();
+            	u.setAccountID(rs.getInt("accountID"));
+            	u.setName(rs.getString("Name"));
+            	u.setPassword(rs.getString("Password"));
+            	u.setRole(rs.getInt("role"));
+            	u.setActiveStatus(rs.getInt("Active"));
+            	u.setLevel(rs.getInt("Level"));
+            	u.setPoints(rs.getInt("Points"));
+            }
+            
+
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return u;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(UserMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
 	
 }
