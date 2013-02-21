@@ -7,22 +7,7 @@
  <link rel="stylesheet" href="Style/Default.css"/> 
 <title>Complete the Story</title>
 
-<script type="text/javascript">
-
-/*Submit the registration form
- */
-function submitRegistration()
-{	
-	 document.getElementById("Answers").submit();
-	//document.getElementById("Registration").submit();
-}
-
-function validateAnsers(){
-	
-}
-
-
-</script>
+<script src="Scripts/CompleteStoriesForm.js"></script>
 </head>
 <body>
 
@@ -32,10 +17,10 @@ function validateAnsers(){
 	<div class="container">
 	<h1>Fill the blanks with your answers to complete the story</h1>
 	
-	<form name="Answers" action="StoryWriter">
+	<form name="Answers" id="Answers" action="StoryWriter">
 	<table align="center" width="50%" bgcolor="skyblue">
 	<tr>
-	<td>Story Name<input type="text" name="storyName"/></td>
+	<td>Story Name<input type="text" id="storyName" name="storyName"/></td>
 	<td id="nameValidation"><input type="reset"/></td>
 	</tr>
 	
@@ -52,8 +37,13 @@ function validateAnsers(){
 	</td></tr>
 	
 	<tr>
+		<td id="errorStory" rowspan="2" class="ErrorMessage">^
+		</td>
+	</tr>
+	
+	<tr>
 		<td><input type="button" value="Generate new Story"></td>
-		<td><input type="Submit" value="Submit Story"></td>
+		<td><input type="button" value="Submit Story" onclick="validateAnsers()"></td>
 	</tr>
 	
 	</table>

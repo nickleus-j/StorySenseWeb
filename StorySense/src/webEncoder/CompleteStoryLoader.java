@@ -33,6 +33,9 @@ public class CompleteStoryLoader {
         String story_preview = Story.getsStory();
         for (int i=0; i<StoryF.getAnswers().size(); i++)
         {
+        story_preview = story_preview.replaceFirst("<input type='text' width='15' name='answer"+(i+1)+
+        		"' id='answer"+(i+1)+"'/>.",
+        		StoryF.getAnswers().get(i)+" ");
         story_preview = story_preview.replaceFirst("<input type='text' width='15' name='answer"+(i+1)+"' />.",
         		StoryF.getAnswers().get(i)+" ");
         }

@@ -1572,6 +1572,6 @@ public class TokenParser {
         return processed;
     }
     private String getBlankHtmlCode(){
-    	return "<input type='text' width='15' name='answer"+blank_counter+"' />";
+    	return "<input type='text' width='15' name='answer"+blank_counter+"' id='answer"+blank_counter+"'/>";
     }
 }
