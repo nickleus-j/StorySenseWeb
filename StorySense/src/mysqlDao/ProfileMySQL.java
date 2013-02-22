@@ -99,7 +99,7 @@ public class ProfileMySQL extends ProfileDAO {
             	P.setFirstName(rs.getString("FirstName"));
             	P.setSurname(rs.getString("Surname"));
             	P.setBirthDay(rs.getDate("Birthday"));
-            	P.setLevel(rs.getInt("Level"));
+            	P.setLevel(1);
             	P.setImageURL(rs.getString("picUrl"));
             }
             

@@ -111,6 +111,39 @@ public class CompleteStoryLoader {
 		}catch(IOException ie){}
 	}
 	
+	/**
+	 * Show description of stories made by the user
+	 */
+	public void PreviewUserStories(User myUser,JspWriter out){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
+		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStoriesOfUser(myUser.getAccountID());
+		
+		try{
+			
+			
+			/*Table header
+			out.write("<tr>");
+			out.write("<th> Title </th>");
+			out.write("<th> Time Finished </th>");
+			out.write("<td>Link</td>");
+			out.write("</tr>");
+			
+			/*Loop that shows the story Links*/
+			for(int ctr=0;ctr<Stories.size();ctr++){
+				out.write("<tr align=\"center\">");
+				out.write("<td>"+Stories.get(ctr).getName()+"</td>");
+				out.write("<td>50</td>");
+				out.write("<td>"+Stories.get(ctr).getFinishTime()+"</td>");
+				out.write("<td>5</td>");
+				out.write("<td>See Story</td>");
+				out.write("</tr>");
+			}/*End of Loop*/
+			//out.write("</table>");
+		}catch(IOException ie){}
+	}
+	
+	
 	/*For demo purpose*/
 	public String loadSampleStory(){
 		FileInputStream fileIn;

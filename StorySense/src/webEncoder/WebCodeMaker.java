@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 import javax.servlet.jsp.JspWriter;
 
-import model.Story;
 
 import dao.DAOFactory;
 import dao.ProfileDAO;
 import dao.UserDAO;
+import entity.Profile;
 import entity.User;
 
 /**
@@ -54,16 +54,38 @@ public class WebCodeMaker {
 		ProfileDAO profileDAO=myDAOFactory.createProfileDAO();
 		
 		ArrayList<User> Users=(ArrayList<User>)myUserDAO.getTopLearners();
-		ArrayList<String> picURls=(ArrayList<String>)profileDAO.getLeaderPicUrl();
 			for(int ctr=0;ctr<Users.size();ctr++)
 				tableCode=tableCode.concat("<tr align='center'>"+
-				"<td class='lBoardbBox'>" +
-				"<img src='"+picURls.get(ctr)+"' class='profPic'/>"+Users.get(ctr).getName()+"</td>"+
+				"<td class='lBoardbBox'>" +Users.get(ctr).getName()+"</td>"+
 				"<td class='lBoardbBox'>"+Users.get(ctr).getLevel()+"</td>"+
 				"<td class='lBoardbBox'>"+Users.get(ctr).getPoints()+"</td>"+
 				"</tr>");
 				
 			return tableCode;
-	}	
+	}
+	
+	public String enterUserImageTag(User u){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		ProfileDAO profileDAO=myDAOFactory.createProfileDAO();
+		String imgCode="";
+		
+		Profile profile=profileDAO.getProfile(u);
+		imgCode=imgCode.concat("<img width=\"100\" height=\"100\" src='"+profile.getImageURL()+"'/>");
+		
+		return imgCode;
+		
+	}
+	
+	public String enterUserRealName(User u){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		ProfileDAO profileDAO=myDAOFactory.createProfileDAO();
+		String imgCode="";
+		
+		Profile profile=profileDAO.getProfile(u);
+		imgCode=profile.getFirstName()+" "+ profile.getSurname();
+		
+		return imgCode;
+		
+	}
 	
 }

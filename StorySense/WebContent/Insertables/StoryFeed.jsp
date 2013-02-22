@@ -27,9 +27,18 @@ font-family: Segoe UI; font-size: 20pt;
 
 <div id="center" class="column">
 
+<table width="100%">
+ <tr><td>
+<table id="tableBorderfeed" bgcolor = "orange" width="90%">
+		<tr id="fontStylefeed" ><th colspan = 3>Story Feed</th></tr>
+	</table>	
+	 </td></tr>
+	 </table>
+<table width="100%" bgcolor="White">
 <% CompleteStoryLoader sLoader=new CompleteStoryLoader();
 		 sLoader.showStories(out);
 		 %>
+		 </table>
 
  <!--  <table width="100%">
  <tr><td>
