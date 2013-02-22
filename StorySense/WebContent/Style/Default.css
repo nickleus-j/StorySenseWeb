@@ -8,8 +8,10 @@ body {
 	color: #000;
 }
 
+.wrap {width: 960px; margin: 0 auto;}
 
 h1,h2{
+	font-face: Times New Roman;
 	text-align: center;
 }
 
@@ -18,9 +20,26 @@ font-size: 130%;
 }
 
 .header  {
-	background: Seagreen;
+	width: 100%;
+	background-image:url('../StorySense/images/topPanel.png'); 
 	color:#FF0;
 	top: 0;
+}
+
+.Logo{
+	text-align: center;
+	width:30%;
+
+}
+
+.Logo2{
+	width: 80%;
+	margin-right: 0;
+}
+
+
+.Logo3{
+	width: 40%;
 }
 
 
@@ -32,13 +51,13 @@ font-size: 130%;
 	float:right;
 	width: 35%;
 }
-
+/*
 div.header{
 	width:100%;
-	background: seagreen;
+	background: seagrFeen;
 	color:white;
 	float:left;
-}
+}*/
 
 
 ul, ol, dl {
@@ -46,21 +65,28 @@ ul, ol, dl {
 	margin: 0;
 }
 
-.container {
+
+.content{
+	width: 70%;
+	max-width: 1260px;
+	float:left;
+	margin: 1.1em 1em 1.2em 1em;
+	/*
+	float: left;
+	background:#e5eecc;*/
+	
+}
+
+.content2{
 	width: 50%;
 	max-width: 1260px;
-	margin: 0 25% 0 25%;
-	
 	/*background:#e5eecc;*/
 	
 }
 
-
 .sidebar1, .navbar {
 	float: left;
 	width:20%;
-	background: black;/*#300;*/
-	color:#FFF;
 	padding-bottom: 5%;
 	margin: 1.1em 1em 1.2em 1em;
 	position: relative;
@@ -77,13 +103,13 @@ ul, ol, dl {
   
   }
 
-/*
+
 .navbar{
-	background: crimson;
+	background-image:url('../StorySense/images/leaderboard.png');
 	color: yellow;
 	float: left;
 }
-*/
+
 .navbar li{
 	margin: 0 1em 0 0;
   	padding: 5%;
@@ -97,9 +123,10 @@ ul, ol, dl {
 	width:100%;
 	
 }
+/*
 .navbar a:VISITED{
 	color: lightgreen;
-}
+}*/
 .navbar a:HOVER{
 	font-size: 110%;
 	color: yellow;
@@ -109,7 +136,6 @@ ul, ol, dl {
 
 
 th{
-	text-align: left;
 }
 
 .content { margin-right: -1px; } /* this 1px negative margin can be placed on any of the columns in this layout with the same corrective effect. */
@@ -125,11 +151,11 @@ ul.footList, .navbar ul{
 
 
 .foot {
+	padding:40px;
 	margin-top: 1.2em;
 	position: relative;/* this gives IE6 hasLayout to properly clear */
 	clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
-	width:100%;
-	background: DarkseaGreen;
+	width:90%;
 }
 
 footlist{
@@ -151,4 +177,39 @@ footlist{
 	height:0;
 	font-size: 1px;
 	line-height: 0px;
+}
+
+
+
+body {
+  min-width: 600px;      /* 2x LC width + RC width */
+}
+#container {
+  padding-left: 200px;   /* LC width */
+  padding-right: 200px;  /* RC width */
+}
+#container .column {
+  position: relative;
+  float: left;
+}
+#center {
+  width: 100%;
+}
+#left {
+  width: 200px;          /* LC width */
+  right: 200px;          /* LC width */
+  margin-left: -100%;
+  margin-top: 2%;
+}
+#right {
+  width: 200px;          /* RC width */
+  margin-right: -200px;  /* RC width */
+  margin-top: 2%;
+}
+#footer {
+  clear: both;
+}
+/*** IE6 Fix ***/
+* html #left {
+  left: 150px;           /* RC width */
 }

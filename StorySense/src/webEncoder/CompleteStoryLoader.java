@@ -18,13 +18,9 @@ import entity.User;
 
 public class CompleteStoryLoader {
 
-	//private User myUser;
 	
 	public CompleteStoryLoader(){}
-	/*
-	public CompleteStoryLoader(User u){
-		myUser=u;
-	}
+
 	
 	/*Methods*/
 	public String previewStory(StoryFileAccess StoryF)
@@ -33,6 +29,9 @@ public class CompleteStoryLoader {
         String story_preview = Story.getsStory();
         for (int i=0; i<StoryF.getAnswers().size(); i++)
         {
+        	/*revised story writer format
+        	 * 
+        	 */
         story_preview = story_preview.replaceFirst("<input type='text' width='15' name='answer"+(i+1)+
         		"' id='answer"+(i+1)+"'/>.",
         		StoryF.getAnswers().get(i)+" ");
@@ -76,12 +75,41 @@ public class CompleteStoryLoader {
 			myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
 			out.write("<b>Title</b>: "+Stories.get(ctr).getName()+" <b>Made by </b>"+myUser.getName()+"<br/>");
 			out.println(loadStory(Stories.get(ctr).getFileURL()));
-		}
+		}/*End of Loop*/
 		
 		out.write("</pre>");
 		}catch(IOException ie){}
 	}
 	
+	/**
+	 * Show description of stories made by the user
+	 */
+	public void showUserStoryPreviews(User myUser,JspWriter out){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
+		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStoriesOfUser(myUser.getAccountID());
+		
+		try{
+			out.write("<table><caption>your stories</caption>");
+			
+			/*Table header*/
+			out.write("<tr>");
+			out.write("<th> Title </th>");
+			out.write("<th> Time Finished </th>");
+			out.write("<td>Link</td>");
+			out.write("</tr>");
+			
+			/*Loop that shows the story Links*/
+			for(int ctr=0;ctr<Stories.size();ctr++){
+				out.write("<tr>");
+				out.write("<td>"+Stories.get(ctr).getName()+"</td>");
+				out.write("<td>"+Stories.get(ctr).getFinishTime()+"</td>");
+				out.write("<td>See Story</td>");
+				out.write("</tr>");
+			}/*End of Loop*/
+			out.write("</table>");
+		}catch(IOException ie){}
+	}
 	
 	/*For demo purpose*/
 	public String loadSampleStory(){

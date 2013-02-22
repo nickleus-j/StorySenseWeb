@@ -55,15 +55,14 @@ public class WebCodeMaker {
 		
 		ArrayList<User> Users=(ArrayList<User>)myUserDAO.getTopLearners();
 		ArrayList<String> picURls=(ArrayList<String>)profileDAO.getLeaderPicUrl();
-		//tableCode=tableCode.concat("<tr><td>User size"+Users.size()+"</td></tr>");
 			for(int ctr=0;ctr<Users.size();ctr++)
-				tableCode=tableCode.concat("<tr>"+
-				"<td><img src='"+picURls.get(ctr)+"' class='profPic'/>"+Users.get(ctr).getName()+"</td>"+
-				"<td>"+Users.get(ctr).getLevel()+"</td>"+
-				"<td>"+Users.get(ctr).getPoints()+"</td>"+
+				tableCode=tableCode.concat("<tr align='center'>"+
+				"<td class='lBoardbBox'>" +
+				"<img src='"+picURls.get(ctr)+"' class='profPic'/>"+Users.get(ctr).getName()+"</td>"+
+				"<td class='lBoardbBox'>"+Users.get(ctr).getLevel()+"</td>"+
+				"<td class='lBoardbBox'>"+Users.get(ctr).getPoints()+"</td>"+
 				"</tr>");
 				
-		 //return "<tr><td>lddd</td></tr>";
 			return tableCode;
 	}	
 	
