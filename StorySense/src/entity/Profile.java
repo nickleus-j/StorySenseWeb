@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Profile {
 
 	//User | Point | picUrl | Birthday   | Firstname | Surname
-	private int Account,Level,Point;
+	private int Account;
 	private Date birthDay;
 	private String FirstName,Surname,imageURL,dateString;
 	
@@ -17,12 +17,7 @@ public class Profile {
 	public void setAccount(int account) {
 		Account = account;
 	}
-	public int getLevel() {
-		return Level;
-	}
-	public void setLevel(int level) {
-		Level = level;
-	}
+	
 	public Date getBirthDay() {
 		return birthDay;
 	}
@@ -46,12 +41,6 @@ public class Profile {
 	}
 	public void setImageURL(String imageURL) {
 		this.imageURL = imageURL;
-	}
-	public int getPoint() {
-		return Point;
-	}
-	public void setPoint(int point) {
-		Point = point;
 	}
 	public String getDateString() {
 		return dateString;

@@ -6,7 +6,7 @@
 <title>Story Sense</title>
 
   <link rel="stylesheet" href="Style/Default.css"> 
-  
+  <!--  
   <style type="text/css">
   
   .storyTbl{
@@ -16,6 +16,7 @@
   }
   
   </style>
+  -->
   
 </head>
 <body bgcolor="CCFFFF">

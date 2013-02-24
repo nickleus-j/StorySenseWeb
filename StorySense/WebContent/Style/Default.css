@@ -28,8 +28,6 @@ font-size: 130%;
 
 .Logo{
 	text-align: center;
-	width:30%;
-
 }
 
 .Logo2{
@@ -133,9 +131,10 @@ ul, ol, dl {
 	/*background: maroon;*/
 }
 
-
-
-th{
+.centralForm{
+	background: white;
+	margin:10%;
+	border-color:black;
 }
 
 .content { margin-right: -1px; } /* this 1px negative margin can be placed on any of the columns in this layout with the same corrective effect. */
@@ -179,7 +178,9 @@ footlist{
 	line-height: 0px;
 }
 
-
+.hiddenElem{
+	visibility: hidden;
+}
 
 body {
   min-width: 600px;      /* 2x LC width + RC width */

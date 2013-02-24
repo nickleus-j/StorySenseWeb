@@ -51,7 +51,7 @@ public class WebCodeMaker {
 		
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		UserDAO myUserDAO = myDAOFactory.createUserDAO();
-		ProfileDAO profileDAO=myDAOFactory.createProfileDAO();
+		
 		
 		ArrayList<User> Users=(ArrayList<User>)myUserDAO.getTopLearners();
 			for(int ctr=0;ctr<Users.size();ctr++)

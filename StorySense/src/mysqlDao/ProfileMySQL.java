@@ -31,14 +31,14 @@ public class ProfileMySQL extends ProfileDAO {
         	DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
         	Connection con = myFactory.getConnection();
         	
-        	ps = con.prepareStatement("INSERT INTO profile (Account,Level,picUrl,Birthday,Firstname,Surname) " +
-        			"VALUES (?,?,?,?,?,?");
+        	ps = con.prepareStatement("INSERT INTO profile (Account,picUrl,Birthday,Firstname,Surname) " +
+        			"VALUES (?,?,?,?,?");
             ps.setInt(1, profile.getAccount());
-            ps.setInt(2, profile.getLevel());
-            ps.setString(3, profile.getImageURL());
-            ps.setDate(4, profile.getBirthDay());
-            ps.setString(5, profile.getFirstName());
-            ps.setString(6, profile.getSurname());
+            //ps.setInt(2, profile.getLevel());
+            ps.setString(2, profile.getImageURL());
+            ps.setDate(3, profile.getBirthDay());
+            ps.setString(4, profile.getFirstName());
+            ps.setString(5, profile.getSurname());
             ps.execute();
             ps.close();
 
@@ -59,14 +59,14 @@ public class ProfileMySQL extends ProfileDAO {
 		try{
 			DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
         	Connection con = myFactory.getConnection();
-			ps = con.prepareStatement("update profile  SET FirstName= ?, Surname = ?, Birthday = ?, Point = ?, " +
+			ps = con.prepareStatement("update profile  SET FirstName= ?, Surname = ?, Birthday = ?,  " +
 					"picUrl = ? where Account = ?");
 			ps.setString(1, profile.getFirstName());
 			ps.setString(2, profile.getSurname());
 			ps.setDate(3, profile.getBirthDay());
-			ps.setInt(4, profile.getPoint());
-			ps.setString(5, profile.getImageURL());
-			ps.setInt(6,profile.getAccount());
+			//ps.setInt(4, profile.getPoint());
+			ps.setString(4, profile.getImageURL());
+			ps.setInt(5,profile.getAccount());
 			ps.executeUpdate();
 			
 			ps.close();
@@ -99,7 +99,6 @@ public class ProfileMySQL extends ProfileDAO {
             	P.setFirstName(rs.getString("FirstName"));
             	P.setSurname(rs.getString("Surname"));
             	P.setBirthDay(rs.getDate("Birthday"));
-            	P.setLevel(1);
             	P.setImageURL(rs.getString("picUrl"));
             }
             
@@ -137,7 +136,6 @@ public class ProfileMySQL extends ProfileDAO {
             	P.setFirstName(rs.getString("FirstName"));
             	P.setSurname(rs.getString("Surname"));
             	P.setBirthDay(rs.getDate("Birthday"));
-            	P.setLevel(rs.getInt("Level"));
             	P.setImageURL(rs.getString("picUrl"));
             }
             

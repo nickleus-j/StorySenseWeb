@@ -40,18 +40,5 @@ font-family: Segoe UI; font-size: 20pt;
 		 %>
 		 </table>
 
- <!--  <table width="100%">
- <tr><td>
-	<table id="tableBorderfeed" bgcolor = "orange">
-		<tr id="fontStylefeed" ><th colspan = 3>Story Feed</th></tr>
-	</table>	
- </td></tr>
-  <tr><td>
-	<table id="tableBorderfeed2">
-		<thead><tr id="fontStylefeed" bgcolor="white" height="525px"><th colspan = 3></th></tr></thead>
-	</table>	
- </td></tr>
- </table>
- -->
 </div>
 
