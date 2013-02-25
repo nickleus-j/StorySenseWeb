@@ -37,7 +37,7 @@
 	</td></tr>
 	
 	<tr>
-		<td id="errorStory" rowspan="2" class="ErrorMessage">^
+		<td id="errorStory" rowspan="2" class="ErrorMessage">
 		</td>
 	</tr>
 	

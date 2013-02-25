@@ -135,6 +135,7 @@ ul, ol, dl {
 	background: white;
 	margin:5%;
 	border-color:black;
+	text-align: justify;
 }
 
 .content { margin-right: -1px; } /* this 1px negative margin can be placed on any of the columns in this layout with the same corrective effect. */

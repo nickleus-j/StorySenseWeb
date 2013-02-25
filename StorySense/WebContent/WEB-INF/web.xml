@@ -61,7 +61,6 @@
     <servlet-name>StoryWriter</servlet-name>
     <url-pattern>/StoryWriter</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description>Loads a story</description>
     <display-name>StoryLoader</display-name>
@@ -72,6 +71,4 @@
     <servlet-name>StoryLoader</servlet-name>
     <url-pattern>/StoryLoader</url-pattern>
   </servlet-mapping>
-  
-  
 </web-app>

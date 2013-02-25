@@ -62,57 +62,65 @@ h4{
 <tr>
 <td colspan=4 align="center"><h1><% out.print(sessionUser.getName());%></h1> 
 </td>
-</tr><tr><td></td><td></td><td></td><td><input type="button" value="Edit Profile"></td></tr>
+</tr><tr><td></td><td></td><td></td><td>
+<input type="button" value="Edit Profile" onclick="changeProfile()">
+</td></tr>
 
 <tr>
 
 	<td width="25%" class = "datacellone">
 		Password Settings
 	</td></tr>
-	<tr><td></td><td>
-		<form method="post">
-
-        
+	<tr>
+	<td></td><td colspan="2">
+		
+        <form method="post" id="PasswordForm" name="PasswordForm" action="UserUpdator">
 		<table>
   		<tr id="passwordRow">
   	
   		<td id="passwordCell">
-  			<input type="button" id="ChangePassBt" value="Change Password" onclick="ShowPasswordChanger()" >
+  			<input type="button" id="ChangePassBt" value="Change Password"  onclick="ShowPasswordChanger()" />
   			</td>
   		</tr>
   		<tr id="changepasswordRow" class="hiddenElem">
-  		<th>Password</th><td id="passwordCell"><input type="text" name="newPass" ></td>
+  		<th>Password</th><td id="passwordCell"><input type="password" name="newPass" id="newPass"/></td>
   		</tr>
   		<tr id="confirmationPassRow" class="hiddenElem">
-  		<th> Confirm Password</th><td id="passwordCell"><input type="text" name="ConfirmPass"></td>
+  		<th> Confirm Password</th><td id="passwordCell">
+  		<input type="password" name="ConfirmPass" id="ConfirmPass"/></td>
   		</tr>
-  		<tr id="submitPassRow" class="hiddenElem">
-  			<th> <input type="button" id="CancelPassBt" value="Cancel"  onclick='hidePasswordChanger()'> </th>
-  			<td id="passwordCell"><input type="submit" id="ChangePassBt"></td>
+  		<tr id="submitPassRow" class="hiddenElem" >
+  			<th> <input type="button" id="CancelPassBt" value="Cancel"  onclick='hidePasswordChanger()'/> </th>
+  			<td id="passwordCell">
+  			<input type="button" id="ChangePasswordBt" onclick="passwordChangeValidation()" value="Use new Password"/>
+  			</td>
+  		</tr>
+  		<tr>
+  			<td id="passError" colspan="2" class="ErrorMessage"></td>
   		</tr>
 		</table></form>
 	</td>
-</tr>
+ 	</tr>
 <tr>
 <td width="25%" class = "datacellone">
 Information
 </td>
 </tr>
-	<tr> 
+	<tr id="orig1stName"> 
 		<td> </td>
 		<td width="30%"><h4>First Name:</h4></td> 
 		<td><% out.print(theProfile.getFirstName());%></td>
 		<td width="20%"></td>
 	</tr>
 	
-	<tr> 
+	<tr id="origsurname"> 
 		<td> </td>
 		<td><h4>Last Name:</h4></td> 
 		<td> <% out.print(theProfile.getSurname());%></td>
 		<td></td>
 	</tr>
 
-	<tr> 
+	<tr id="origBday"> 
 		<td> </td>
 		<td><h4>Birthday:</h4></td> 
 		<td><% out.print(theProfile.getDateString());%></td>
@@ -121,66 +129,49 @@ Information
 	
 	<tr> 
 		<td> </td>
-		<td colspan="2">
+		<td colspan="3">
 			<form name="chnageProfile" id="chnageProfile" action="UserRegistrator" 
-		method="post" ENCTYPE="multipart/form-data">
-		<table  align="center" class="hiddenElem">
+		method="post" ENCTYPE="multipart/form-data" class="hiddenElem">
+		<table  align="center" >
 	
 		  <tr>
 		</tr> 
 		
 		<tr>
-		<th>Username or Alias or Codename</th>
-		<td><input type="text" name="username" id="username"/></td>
+		<th>Username</th>
+		<td>
+		<input type="text" name="username" id="username" value="<% out.write(sessionUser.getName());%>"/>
+		</td>
 		<td class="ErrorMessage" name="usernameError" id="usernameError"></td>
 		</tr>
 		
 	
 		<tr>
 		<th>Firstname</th>
-		<td><input type="text" placeholder="your name" name="firstname" id="firstname"/></td>
+		<td>
+		<input type="text" placeholder="your name" name="firstname" id="firstname"
+			value="<% out.write(theProfile.getFirstName());%>"/>
+		</td>
 		<td class="ErrorMessage" id="firstnameError"></td>
 		</tr>
 		
 		<tr>
 		<th>Surname</th>
-		<td><input type="text" placeholder="your family name" name="surname" id="surname"/></td>
+		<td>
+		<input type="text" placeholder="your family name" name="surname" id="surname"
+			value="<% out.write(theProfile.getSurname());%>"/>
+		</td>
 		<td class="ErrorMessage" id="surnameError"></td>
 		</tr>
-	
-		<tr><th>BirthDay<br/></th><td>
-		Month <select id="MonthBox" name="month" onchange="populateDayBox(Registration)">
-		<% 
-			DateProvider oP=new DateProvider();
-				for(int ctr=0;ctr<12;ctr++)
-			out.println("<option value='"+oP.getMonth(ctr)+"'>"+oP.getMonth(ctr)+"</option>");
-		;
-		%>
-
-		</select> 
-		Day <select id="DayBox" name="day">
-		<%
-		for(int ctr=1;ctr<=31;ctr++)
-			out.println("<option value='"+ctr+"'>"+ctr+"</option>");
-		%>
-		</select>
-	
-		Year <select id="YearBox" name="year" onchange="populateDayBox(Registration)">
-		<%=oP.provideYearOptions(100)%>
 		
-		</select>
-		
-		<br/></td>
-		<td class="ErrorMessage" id="bdayError"></td>
-		</tr>
-		
+		<!-- No need to modify birthday -->
 		
 		<tr>
 		<th>Profile Picture</th>
 		<td>
-
-		 
-		 <input type="file" name="profPic" id="profPic"/>
+         Click to change<br/>
+		 <% out.write(profileEncoder.enterUserImageTag(sessionUser)); %>
+		 <input type="file" name="profPic" id="profPic" value="<% out.write(theProfile.getImageURL());%>"/>
 		 
 		</td>
 		<td class="ErrorMessage" id="pictureError"></td>
@@ -188,8 +179,10 @@ Information
 	
 		
 		<tr>
-		<th>Reset Form <input type="reset" value="Reset form"></th>
-		<th>Done <input type="button" value="Register" onclick="evaluateForm()"></th>
+		<th><input type="reset" value="Reset form">
+			<input type="button" value="cancel">
+		</th>
+		<th> <input type="button" value="Save Changes" ></th>
 		</tr>
 		
 		
@@ -239,5 +232,4 @@ Statistics
 </tr>
 
 </table>
-
 </div>

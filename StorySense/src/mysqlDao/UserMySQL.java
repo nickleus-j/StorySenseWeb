@@ -130,7 +130,7 @@ public class UserMySQL extends UserDAO {
 		try{
 			DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
         	Connection con = myFactory.getConnection();
-			ps = con.prepareStatement("update account  SET Name= ?, Password = ?, role = ?,Active = ? where accountID = ?");
+			ps = con.prepareStatement("update account  SET Name= ?, Password = md5(?), role = ?,Active = ? where accountID = ?");
 			
 			ps.setString(1, U.getName());
 			ps.setString(2, U.getPassword());
