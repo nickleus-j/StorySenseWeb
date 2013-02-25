@@ -133,7 +133,7 @@ ul, ol, dl {
 
 .centralForm{
 	background: white;
-	margin:10%;
+	margin:5%;
 	border-color:black;
 }
 
@@ -179,8 +179,9 @@ footlist{
 }
 
 .hiddenElem{
-	visibility: hidden;
+	display: none;
 }
+
 
 body {
   min-width: 600px;      /* 2x LC width + RC width */
@@ -188,6 +189,7 @@ body {
 #container {
   padding-left: 200px;   /* LC width */
   padding-right: 200px;  /* RC width */
+  
 }
 #container .column {
   position: relative;

@@ -5,31 +5,79 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Log in</title>
+
+<style>
+.tableLogin {
+
+	border: solid black 0.5px;
+	border-radius: 0px 0px 15px 15px;
+	background: white;
+	padding: 10px;
+}
+
+.tableLogin2 {
+	border: solid black 0.5px;
+	border-radius: 15px 15px 0px 0px;
+	background: #708090;
+	width: 408px;
+	padding: 10px;
+}
+
+.tableLogin td{
+	padding-right: 55px;
+	padding-left: 75px;
+}
+
+
+.tableLogin th{
+	color: black;
+	font-family: "Segoe UI";
+}
+
+#logInHeader{
+color: white;
+}
+</style>
+
 </head>
 <body>
 
 <form id="logInForm" action="LogIn" method="post">
-<table class="Logo" align="center">
-<tr><td>
-<img src="images/storysenselogo.jpg" />
-</td></tr>
+<img src="images/storysenselogo.png" width="90%"/>
+<br><br>
+<table class="tableLogin2" align="center">
+
+<tr id="logInHeader" >
+<th>
+Log in
+</th>
+</tr>
 </table>
-<table class="logIn" align="center">
+
+<table class="tableLogin" align="center">
 
 
 <tr>
-	<th>User name</th><td id="nameCell"><input type="Text" name="username"/></td>
+	<th>Username</th>
 </tr>
+<tr><td colspan=2 id="nameCell"><input type="Text" name="username" style="width: 250px;"/></td></tr>
 
+<tr><td></td></tr>
 <tr>
-	<th>Password</th><td id="passwordCell"><input type="password" name="password"/></td>
+	<th>Password</th>
 </tr>
+<tr><td colspan=2 id="passwordCell"><input type="password" name="password" style="width: 250px;"/></td></tr>
 
+<tr><td colspan=3><hr></td></tr>
 <tr>
 	<td align="left"><input type="reset"/></td><td align="right"><input type="Submit" value="Log In"/></td>
 </tr>
 
+<tr></tr>
+
 </table>
+
+
 </form>
 
 
