@@ -34,11 +34,11 @@ font-family: Segoe UI; font-size: 20pt;
 	</table>	
 	 </td></tr>
 	 </table>
-<table width="100%" bgcolor="White">
+
 <% CompleteStoryLoader sLoader=new CompleteStoryLoader();
 		 sLoader.showStories(out);
 		 %>
-		 </table>
+
 
 </div>
 

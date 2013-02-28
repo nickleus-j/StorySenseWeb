@@ -33,29 +33,38 @@ public class UserUpdator extends BaseServlet {
 		try{
 			theUser=(User) request.getSession().getAttribute("user");
 			uProfile=getProfile(theUser);
+			String username=request.getParameter("username"),firstname=request.getParameter("firstname");
 			
-			if(request.getParameter("ConfirmPass")!=null)
-				updatUserPassword(theUser, request.getParameter("ConfirmPass"));
-			else if(request.getParameter("username")!=null)
-				updateUserName(theUser, request.getParameter("username"));
+			 //if(username!=null&&!username.isEmpty()&&!username.matches(theUser.getName())){
+				updateUserName(theUser, username);
+			 //if(firstname!=null&&!firstname.isEmpty())
+				updateProfile(uProfile, request);
+			
 			
 			response.sendRedirect("../StorySense/View_Profile.jsp");
-		}catch(Exception ex){}
+		}catch(Exception ex){
+			System.out.println(ex);
+		}
 		
 	}
 	
-	private void updatUserPassword(User user,String password){
-		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
-		UserDAO userDao=myDAOFactory.createUserDAO();
-		user.setPassword(password);
-		userDao.updateUser(user);
-	}
+	
 
 	private void updateUserName(User user,String name){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		UserDAO userDao=myDAOFactory.createUserDAO();
 		user.setName(name);
 		userDao.updateUser(user);
-		
+	}
+	public void updateProfile(Profile userProfile,HttpServletRequest request){
+		String firstname,surname;
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+        ProfileDAO profileDAO=myDAOFactory.createProfileDAO();
+        
+		firstname=request.getParameter("firstname");
+		surname=request.getParameter("surname");
+		userProfile.setFirstName(firstname);
+		userProfile.setSurname(surname);
+		profileDAO.setProfile(userProfile);
 	}
 }

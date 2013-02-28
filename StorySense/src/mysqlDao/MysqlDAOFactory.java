@@ -3,6 +3,7 @@ package mysqlDao;
 import dao.AcomplishmentDAO;
 import dao.ConceptDAO;
 import dao.DAOFactory;
+import dao.LikedStoryDAO;
 import dao.ProfileDAO;
 import dao.RatingDAO;
 import dao.RelationDAO;
@@ -42,6 +43,11 @@ public class MysqlDAOFactory extends DAOFactory{
 
 	@Override
 	public TemplateDAO createTemplateDAO() {return new TemplateMySQL();}
+
+	@Override
+	public LikedStoryDAO createLikeDAO() {
+		return new LikedStoryMysql();
+	}
 
 	
 }

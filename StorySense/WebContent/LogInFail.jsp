@@ -8,16 +8,10 @@
 <link rel="stylesheet" href="Style/Default.css"> 
 </head>
 <body>
-
-<%@ include file="Insertables/TopBar.jsp" %>
-
-
-
-
-<div class="container">
-	<h1 class="ErrorMessage">Log In fail</h1>
-	Please try again<br/>
-	<%@ include file="Insertables/LogInForm.jsp" %>
+<div id="container">
+	<h1 class="ErrorMessage">Log In failed</h1>
+	<h3 class="ErrorMessage">Please try again</h3>
+	<%@ include file="Insertables/LogInTable.jsp" %>
 	
 	<h2>Don't have an account? 
 	<button onClick="window.location.href='Register.jsp'">Register</button></h2> 

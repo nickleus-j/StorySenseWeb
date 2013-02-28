@@ -35,5 +35,6 @@ public abstract class DAOFactory {
 	    public abstract ProfileDAO createProfileDAO();
 	    public abstract RatingDAO createRatingDAO();
 	    public abstract TemplateDAO createTemplateDAO();
+	    public abstract LikedStoryDAO createLikeDAO();
 	    
 }

@@ -73,6 +73,7 @@ public class ProfileMySQL extends ProfileDAO {
 			con.close();
 		}catch(Exception ex){
 			Logger.getLogger(ProfileMySQL.class.getName()).log(Level.SEVERE, null, ex);
+			
 		}
 
 	}

@@ -9,6 +9,7 @@ import javax.servlet.jsp.JspWriter;
 
 import dao.AcomplishmentDAO;
 import dao.DAOFactory;
+import dao.LikedStoryDAO;
 import dao.UserDAO;
 
 import model.Story;
@@ -68,16 +69,21 @@ public class CompleteStoryLoader {
 		User myUser;
 		
 		try{
-		out.write("<pre>");
-		out.println("Stories");
-		for(int ctr=0;ctr<Stories.size();ctr++){
-			out.write("<hr/>");
-			myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
-			out.write("<b>Title</b>: "+Stories.get(ctr).getName()+" <b>Made by </b>"+myUser.getName()+"<br/>");
-			out.println(loadStory(Stories.get(ctr).getFileURL()));
-		}/*End of Loop*/
+		//out.write("<p>");
+		out.write("<table>");
+		out.println("<caption>Stories</caption>");
 		
-		out.write("</pre>");
+		/*loop that displays the stories*/
+		for(int ctr=0;ctr<Stories.size();ctr++){
+			out.write("<tr class=\"storyHead\">");
+			myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
+			out.write("<th>Title:</th><td> "+Stories.get(ctr).getName()+"</td> <th>Made by </th>" +
+					"<td>"+myUser.getName()+"</td></tr><tr><td colspan=\"4\">");
+			out.println(loadStory(Stories.get(ctr).getFileURL()));
+			out.write("</td></tr>");
+		}/*End of Loop*/
+		out.write("</table>");
+		//out.write("</p>");
 		}catch(IOException ie){}
 	}
 	
@@ -117,6 +123,7 @@ public class CompleteStoryLoader {
 	public void PreviewUserStories(User myUser,JspWriter out){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
+		LikedStoryDAO myLikeDAO=myDAOFactory.createLikeDAO();
 		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStoriesOfUser(myUser.getAccountID());
 		
 		try{
@@ -131,12 +138,14 @@ public class CompleteStoryLoader {
 			
 			/*Loop that shows the story Links*/
 			for(int ctr=0;ctr<Stories.size();ctr++){
+				myLikeDAO.countStoryLikes(Stories.get(ctr).getID());
 				out.write("<tr align=\"center\">");
 				out.write("<td>"+Stories.get(ctr).getName()+"</td>");
 				out.write("<td>50</td>");
 				out.write("<td>"+Stories.get(ctr).getFinishTime()+"</td>");
-				out.write("<td>5</td>");
+				out.write("<td>"+myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"</td>");
 				out.write("<td>See Story</td>");
+				
 				out.write("</tr>");
 			}/*End of Loop*/
 			//out.write("</table>");

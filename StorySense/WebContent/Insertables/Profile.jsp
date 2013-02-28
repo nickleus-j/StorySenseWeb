@@ -74,7 +74,7 @@ h4{
 	<tr>
 	<td></td><td colspan="2">
 		
-        <form method="post" id="PasswordForm" name="PasswordForm" action="UserUpdator">
+        <form method="post" id="PasswordForm" name="PasswordForm" action="PasswordChanger"">
 		<table>
   		<tr id="passwordRow">
   	
@@ -120,17 +120,17 @@ Information
 		<td></td>
 	</tr>
 
-	<tr id="origBday"> 
+	 <tr id="origBday"> 
 		<td> </td>
 		<td><h4>Birthday:</h4></td> 
-		<td><% out.print(theProfile.getDateString());%></td>
+		<td><% out.print(theProfile.getBirthDay());%></td>
 		<td></td>
 	</tr>
 	
 	<tr> 
 		<td> </td>
 		<td colspan="3">
-			<form name="chnageProfile" id="chnageProfile" action="UserRegistrator" 
+			<form name="chnageProfile" id="chnageProfile" action="UserUpdator" 
 		method="post" ENCTYPE="multipart/form-data" class="hiddenElem">
 		<table  align="center" >
 	
@@ -182,7 +182,7 @@ Information
 		<th><input type="reset" value="Reset form">
 			<input type="button" value="cancel">
 		</th>
-		<th> <input type="button" value="Save Changes" ></th>
+		<th> <input type="submit" value="Save Changes" ></th>
 		</tr>
 		
 		

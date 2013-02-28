@@ -183,6 +183,10 @@ footlist{
 	display: none;
 }
 
+.storyHead{
+	padding: 1.2em;
+	margin: 10%;
+}
 
 body {
   min-width: 600px;      /* 2x LC width + RC width */

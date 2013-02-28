@@ -23,6 +23,7 @@ public class Profile {
 	}
 	public void setBirthDay(Date birthDay) {
 		this.birthDay = birthDay;
+		dateString=this.birthDay+"";
 	}
 	public String getFirstName() {
 		return FirstName;

@@ -49,7 +49,6 @@ public class UserRegistrator extends BaseServlet {
 		try{
 			HttpSession theSession=request.getSession();
 			out = response.getWriter();
-			//createUser(request,out);
 			
 			User myUser=createUser(request,out);
 			
@@ -58,7 +57,7 @@ public class UserRegistrator extends BaseServlet {
 			
 			 
 			redirectUser(myUser, request, response);
-		}//catch(ServletException ServletProblem){out.print("Sevlet problem");}
+		}
 		catch(IOException IOe){
 			out.print("IO problem");
 		}

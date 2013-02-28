@@ -224,4 +224,38 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
 
 	}
 
+	@Override
+	public Acomplishment getStory(int ID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from storyaccomplishment WHERE ID = ? ");
+            ps.setInt(1, ID);
+            rs = ps.executeQuery();
+            
+            Acomplishment Story=null;
+            
+            if(rs.first()){
+            	Story=new Acomplishment();
+            	Story.setID(rs.getInt("ID"));
+            	Story.setAccountID(rs.getInt("AccountID"));
+            	Story.setTemplateID(rs.getInt("templateID"));
+            	Story.setName(rs.getString("Name"));
+            	Story.setFileURL(rs.getString("fileURL"));
+            	Story.setFinishTime(rs.getTimestamp("finishTime"));
+            }
+            
+            ps.close();
+			con.close();
+            return Story;
+		}catch(Exception ex){
+			Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+
 }
