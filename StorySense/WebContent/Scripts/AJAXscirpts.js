@@ -42,7 +42,7 @@ xmlhttp.onreadystatechange=function()
 xmlhttp.open("GET","getcustomer.asp?q="+str,true);LikeChanger
 xmlhttp.send();*/
 
-function showNumberOfLikes(elemID,storyID){
+function showNumberOfLikes(elemID,storyID,res,btIDElemName){
 var xmlhttp=getAJAXRequest();
 if (elemID==null||elemID=="")
   {
@@ -58,8 +58,10 @@ if (xmlhttp.readyState==4 && xmlhttp.status==200)
   }
 }
 
-xmlhttp.open("GET","LikeChanger?q="+storyID,true);
+xmlhttp.open("GET","LikeChanger?q="+storyID+"&res="+res,true);
 xmlhttp.send();
+
+document.getElementById(btIDElemName).innerHTML="Like No more";
 
 }
 

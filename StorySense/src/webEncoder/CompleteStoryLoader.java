@@ -111,12 +111,14 @@ public class CompleteStoryLoader {
 		String val="<tr><th>Likes</th><td id=\""+storyID+"\"" +
 				">"+myLikeDAO.countStoryLikes(myStory.getID())+"</td>";
 		
+		String btElemName="btStory" +storyID,btIDElemName="id=\""+btElemName+"\"";
+		
 		if(myLikeDAO.didUserLike(SessionUser.getAccountID(), myStory.getID())){
-			val=val.concat("<td>Like No more</td>");
+			val=val.concat("<td "+btIDElemName+">Like No more</td>");
 		}
-		else val=val.concat("<td><button " +
-				"onclick=\"showNumberOfLikes('"+storyID+"'," +myStory.getID()
-						+")\">Like</button></td>");
+		else val=val.concat("<td><button "+btIDElemName+
+				" onclick=\"showNumberOfLikes('"+storyID+"'," +myStory.getID()+","+"'like','"+btElemName+"')\">" +
+				"Like</button></td>");
 		
 		val=val.concat("</tr>");
 		return val;

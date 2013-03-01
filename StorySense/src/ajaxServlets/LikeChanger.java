@@ -30,12 +30,18 @@ public class LikeChanger extends BaseServlet {
 	public void executeCustomCode(HttpServletRequest request,
 			HttpServletResponse response) {
 		response.setContentType("text/html"); 
-		//User myUser=(User)request.getSession().getAttribute("user");
+		User myUser=(User)request.getSession().getAttribute("user");
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		LikedStoryDAO LikeDAO=myDAOFactory.createLikeDAO();
-		
+		String like;
 		try {
-			response.getWriter().write(""+LikeDAO.countStoryLikes(Integer.parseInt(request.getParameter("q"))));
+			int sID=Integer.parseInt(request.getParameter("q"));
+			
+			like=request.getParameter("res");
+			
+			if(like.matches("like"))
+				LikeDAO.likeStory(myUser.getAccountID(), sID);
+			response.getWriter().write(""+LikeDAO.countStoryLikes(sID));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
