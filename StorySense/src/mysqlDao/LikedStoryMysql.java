@@ -233,4 +233,33 @@ public class LikedStoryMysql extends LikedStoryDAO {
 
 	}
 
+	@Override
+	public boolean didUserLike(int userID, int storyID) {
+		boolean like;
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from likedstory WHERE storyAccomID=? AND userID=?");
+            ps.setInt(1, storyID);
+            ps.setInt(2, userID);
+            rs = ps.executeQuery();
+            
+            like=rs.first();
+            
+            rs.close();
+            ps.close();
+            con.close();
+            return like;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(LikedStoryMysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return false;
+	}
+
 }

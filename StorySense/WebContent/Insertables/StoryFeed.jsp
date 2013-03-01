@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="webEncoder.CompleteStoryLoader"%>
+<%@page import="entity.User"%>
 <style TYPE="text/css">
 #tableBorderfeed
 {
@@ -35,7 +36,7 @@ font-family: Segoe UI; font-size: 20pt;
 	 </td></tr>
 	 </table>
 
-<% CompleteStoryLoader sLoader=new CompleteStoryLoader();
+<% CompleteStoryLoader sLoader=new CompleteStoryLoader((User)request.getSession().getAttribute("user"));
 		 sLoader.showStories(out);
 		 %>
 
