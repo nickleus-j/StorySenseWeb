@@ -229,7 +229,21 @@ public class LikedStoryMysql extends LikedStoryDAO {
 
 	@Override
 	public void disLike(int userID, int storyID) {
-		
+		PreparedStatement ps;
+		try{
+			DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+        	Connection con = myFactory.getConnection();
+			ps = con.prepareStatement("DELETE from likedstory WHERE userID=? AND storyAccomID=?");
+			ps.setInt(1,userID);
+			ps.setInt(2, storyID);
+			
+			ps.executeUpdate();
+			
+			ps.close();
+			con.close();
+		}catch(Exception ex){
+			Logger.getLogger(AchievementMysql.class.getName()).log(Level.SEVERE, null, ex);
+		}
 
 	}
 

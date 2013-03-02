@@ -23,45 +23,36 @@ function getAJAXRequest(){
 }
 
 
-/*
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
-    }
-  }
-xmlhttp.open("GET","getcustomer.asp?q="+str,true);LikeChanger
-xmlhttp.send();*/
-
 function showNumberOfLikes(elemID,storyID,res,btIDElemName){
 var xmlhttp=getAJAXRequest();
+var bt=document.getElementById(btIDElemName);
 if (elemID==null||elemID=="")
   {
   document.getElementById(elemID).innerHTML="";
   return;
   }
 
-xmlhttp.onreadystatechange=function()
-{
-if (xmlhttp.readyState==4 && xmlhttp.status==200)
-  {
-  document.getElementById(elemID).innerHTML=xmlhttp.responseText;
-  }
-}
+xmlhttp.onreadystatechange=function(){
+	if (xmlhttp.readyState==4 && xmlhttp.status==200){
+		document.getElementById(elemID).innerHTML=xmlhttp.responseText;
+	}
+  };
 
 xmlhttp.open("GET","LikeChanger?q="+storyID+"&res="+res,true);
 xmlhttp.send();
 
-document.getElementById(btIDElemName).innerHTML="Like No more";
+
+var dislikeFunction="showNumberOfLikes('"+elemID+"'," +storyID+","+"'--','"+btIDElemName+"')";
+var likeFunction="showNumberOfLikes('"+elemID+"'," +storyID+","+"'like','"+btIDElemName+"')";
+
+if(res=="like"){
+	bt.innerHTML="Like No more";
+	bt.setAttribute("onclick",dislikeFunction);
+}
+else{
+	bt.innerHTML="Like";
+	bt.setAttribute("onclick",likeFunction);
+}
 
 }
 

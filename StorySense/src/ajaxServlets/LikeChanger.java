@@ -41,9 +41,10 @@ public class LikeChanger extends BaseServlet {
 			
 			if(like.matches("like"))
 				LikeDAO.likeStory(myUser.getAccountID(), sID);
+			else 
+				LikeDAO.disLike(myUser.getAccountID(), sID);
 			response.getWriter().write(""+LikeDAO.countStoryLikes(sID));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
 	}
