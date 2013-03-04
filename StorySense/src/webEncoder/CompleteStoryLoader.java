@@ -149,7 +149,8 @@ public class CompleteStoryLoader {
 				out.write("<tr>");
 				out.write("<td>"+Stories.get(ctr).getName()+"</td>");
 				out.write("<td>"+Stories.get(ctr).getFinishTime()+"</td>");
-				out.write("<td>See Story</td>");
+				out.write("<td>"+createStoryLink(Stories.get(ctr).getID(), "storyStage")+"</td>");
+				//out.write("<td>See Story</td>");
 				out.write("</tr>");
 			}/*End of Loop*/
 			out.write("</table>");
@@ -176,12 +177,18 @@ public class CompleteStoryLoader {
 				out.write("<td>50</td>");
 				out.write("<td>"+Stories.get(ctr).getFinishTime()+"</td>");
 				out.write("<td>"+myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"</td>");
-				out.write("<td>See Story</td>");
+				out.write("<td>"+createStoryLink(Stories.get(ctr).getID(), "storyStage")+"</td>");
 				
 				out.write("</tr>");
 			}/*End of Loop*/
 			//out.write("</table>");
 		}catch(IOException ie){}
+	}
+	
+	private String createStoryLink(int storyID,String stageID){
+		String link="<a onclick=\"showStory('"+stageID+"',"+storyID+")\">";
+		
+		return link.concat("See Story</a>");
 	}
 	
 	

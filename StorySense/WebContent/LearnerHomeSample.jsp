@@ -7,7 +7,7 @@
 <title>Story Sense</title>
 
   <link rel="stylesheet" href="Style/Default.css"> 
-  
+   <script src="Scripts/AJAXscirpts.js"></script>
   <style type="text/css">
   
   .storyTbl{
@@ -59,7 +59,9 @@ font-family: Segoe UI; font-size: 13pt;
 				<tr id="fontStyle3"><th width="15%">Story Name</th><th width="15%">Score Earned</th><th width="15%">Date Finished</th><th width="15%">Likes</th><th width="15%">View</th></tr>
 			</table>
 		</td></tr>
-		
+		<tr >
+			<td id="storyStage"></td>
+		</tr>
 		<tr><td>
 			<table  id="tableBorder3" bgcolor = "#FF88FF">
 				
