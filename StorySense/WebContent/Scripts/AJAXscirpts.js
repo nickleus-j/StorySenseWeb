@@ -62,9 +62,21 @@ else{
 
 }/*End of function*/
 
-/*Shows the story*/
+
+var currentStage;
+
+function hideElement(elem){elem.setAttribute("class","hiddenElem");}
+function showElement(elem){elem.setAttribute("class","r");}
+
+/*Shows the story where one story is shown one at a time*/
 function showStory(stageID,storyID){
 	var xmlhttp=getAJAXRequest();
+	
+	/*hide current stage if it is not null
+	 * The stage is where the story is displayed 
+	 */
+	if(currentStage!=null)
+		hideElement(currentStage);
 	
 	/*Check if the element passed is valid*/
 	if (stageID==null||stageID=="")
@@ -73,13 +85,18 @@ function showStory(stageID,storyID){
 	  return;
 	  }
 	
+	
 	/*What happens when a response from the server is obtained StoryShower*/
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			document.getElementById(stageID).innerHTML=xmlhttp.responseText;
+			
+			//showElement(document.getElementById(stageID));
 		}
 	  };
 	  
 	  xmlhttp.open("GET","StoryShower?q="+storyID+"&screen="+stageID,true);
 	  xmlhttp.send();
+	  currentStage=document.getElementById(stageID);
+		showElement(currentStage);
 }

@@ -172,19 +172,25 @@ public class CompleteStoryLoader {
 		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
 		LikedStoryDAO myLikeDAO=myDAOFactory.createLikeDAO();
 		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStoriesOfUser(myUser.getAccountID());
-		
+		String stageID;
 		try{
 			
 			
 			/*Loop that shows the story Links*/
 			for(int ctr=0;ctr<Stories.size();ctr++){
 				myLikeDAO.countStoryLikes(Stories.get(ctr).getID());
+				stageID="stage"+Stories.get(ctr).getID();
+				
+				/*Generate HTML code*/
 				out.write("<tr align=\"center\">");
 				out.write("<td>"+Stories.get(ctr).getName()+"</td>");
 				out.write("<td>50</td>");
 				out.write("<td>"+Stories.get(ctr).getFinishTime()+"</td>");
 				out.write("<td>"+myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"</td>");
-				out.write("<td>"+createStoryLink(Stories.get(ctr).getID(), "storyStage")+"</td>");
+				out.write("<td>"+createStoryLink(Stories.get(ctr).getID(), stageID)+"</td>");
+				
+				out.write("</tr>" +
+						"<tr><td class=\"hiddenElem\" id=\""+stageID+"\"></td>");
 				
 				out.write("</tr>");
 			}/*End of Loop*/
