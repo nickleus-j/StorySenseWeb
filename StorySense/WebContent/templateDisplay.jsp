@@ -19,8 +19,9 @@
 <body>
 
 <%@ include file="Insertables/TopBar.jsp" %>
-<%@ include file="Insertables/LearnerNavBar.jsp" %>
-	<div class="container">
+	<div id="container">
+
+<div id="center" class="column">
 	<h1>Choose a Template</h1>
 	
 	<table align="center" class="templateContainer">
@@ -45,6 +46,9 @@
 	
 	<h2>Can't Pick? Use a random template
 	<button onClick="window.location.href='MakingStory.jsp'">Go</button></h2>
+	</div>
+	<%@ include file="Insertables/LearnerNavBar.jsp" %>
+	<%@ include file="Insertables/FeaturedStory.jsp" %>
 	</div>
 	<%@ include file="Insertables/Footer.jsp" %>
 

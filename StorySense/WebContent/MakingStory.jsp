@@ -13,8 +13,9 @@
 
 
 <%@ include file="Insertables/TopBar.jsp" %>
-<%@ include file="Insertables/LearnerNavBar.jsp" %>
-	<div class="container">
+
+	<div id="container">
+	<div id="center" class="column">
 	<h1>Fill the blanks with your answers to complete the story</h1>
 	
 	<form name="Answers" id="Answers" action="StoryWriter">
@@ -49,6 +50,10 @@
 	</table>
 	</form>
 	</div>
+	<%@ include file="Insertables/LearnerNavBar.jsp" %>
+	<%@ include file="Insertables/FeaturedStory.jsp" %>
+	</div>
+	
 <%@ include file="Insertables/Footer.jsp" %>
 
 </body>

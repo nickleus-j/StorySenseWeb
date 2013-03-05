@@ -44,7 +44,7 @@ public class LogIn extends BaseServlet {
                 session.setAttribute("user", myUser);
                 
                 if(User.Roles.learner.isLearner(myUser.getRole()))
-                	response.sendRedirect("../StorySense/LearnerHomeSample.jsp");
+                	response.sendRedirect("../StorySense/LearnerHomeSample2.jsp");
                 else if(User.Roles.learner.isReviwer(myUser.getRole()))
                 	response.sendRedirect("../StorySense/ValidatedStories.jsp");
             } else {

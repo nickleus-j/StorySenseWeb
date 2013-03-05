@@ -19,19 +19,12 @@ import webEncoder.CompleteStoryLoader;
 public class StoryShower extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
-    public StoryShower() {
-        // TODO Auto-generated constructor stub
-    }
 
 	@Override
 	public void executeCustomCode(HttpServletRequest request,
 			HttpServletResponse response) {
 		response.setContentType("text/html"); 
 		int sID=Integer.parseInt(request.getParameter("q"));
-		//String stage=request.getParameter("screen");
 		CompleteStoryLoader sLoader=new CompleteStoryLoader();
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();

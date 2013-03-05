@@ -17,6 +17,12 @@ import serializableObjects.StoryFileAccess;
 import entity.Acomplishment;
 import entity.User;
 
+/**
+ * This loads the stories from the server to be returned to the browser
+ * The AJAXscripts must be loaded from the html file for full functionality
+ * @author nickleus`
+ *
+ */
 public class CompleteStoryLoader {
 
 	private User SessionUser;
@@ -45,7 +51,9 @@ public class CompleteStoryLoader {
         return story_preview;
     }
 	
-	
+	/**
+	 * Loads a story given the file entered
+	 */
 	public String loadStory(String fileUrl){
 		FileInputStream fileIn;
 		try {
@@ -76,8 +84,7 @@ public class CompleteStoryLoader {
 		
 		try{
 		//out.write("<p>");
-		out.write("<table>");
-		out.println("<caption>Stories</caption>");
+		out.write("<table id=\"tableBorderfeed2\" bgcolor=\"white\">");
 		out.write("<tr><td id='1st'></td></tr>");
 		/*loop that displays the stories*/
 		for(int ctr=0;ctr<Stories.size();ctr++){
@@ -115,7 +122,7 @@ public class CompleteStoryLoader {
 		
 		if(myLikeDAO.didUserLike(SessionUser.getAccountID(), myStory.getID())){
 			val=val.concat("<td><button "+btIDElemName+" onclick=\"showNumberOfLikes('"+storyID+"'," +myStory.getID()+","+
-					"'----','"+btElemName+"')\">" +"Like No more</button></td>");
+					"'----','"+btElemName+"')\">" +"Unlike</button></td>");
 		}
 		else val=val.concat("<td><button "+btIDElemName+
 				" onclick=\"showNumberOfLikes('"+storyID+"'," +myStory.getID()+","+"'like','"+btElemName+"')\">" +
@@ -185,10 +192,15 @@ public class CompleteStoryLoader {
 		}catch(IOException ie){}
 	}
 	
-	private String createStoryLink(int storyID,String stageID){
-		String link="<a onclick=\"showStory('"+stageID+"',"+storyID+")\">";
-		
-		return link.concat("See Story</a>");
+	/**
+	 * Creates a HTML element to Asynchronously get the Story from the server
+	 * @param storyID : The ID of the Accomplishment
+	 * @param stageID : Where the story will be written
+	 * @return
+	 */
+	public String createStoryLink(int storyID,String stageID){
+		String link="<button onclick=\"showStory('"+stageID+"',"+storyID+")\">";
+		return link.concat("See Story</button>");
 	}
 	
 	

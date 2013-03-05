@@ -41,9 +41,13 @@ color: white;
 
 </head>
 <body>
-
 <form id="logInForm" action="LogIn" method="post">
-<img src="images/storysenselogo.png" width="90%"/>
+<table align="center">
+<tr><td align="center">
+<img src="images/storysenselogo.png" width="70%" height="60%"/>
+</td></tr>
+</table>
+
 <br><br>
 <table class="tableLogin2" align="center">
 
@@ -68,7 +72,7 @@ Log in
 </tr>
 <tr><td colspan=2 id="passwordCell"><input type="password" name="password" style="width: 250px;"/></td></tr>
 
-<tr><td colspan=3><hr></td></tr>
+<tr><td colspan=3></td></tr>
 <tr>
 	<td align="left"><input type="reset"/></td><td align="right"><input type="Submit" value="Log In"/></td>
 </tr>

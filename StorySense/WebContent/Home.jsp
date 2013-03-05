@@ -14,11 +14,11 @@
 
 	<div class="container">
 	<%@ include file="Insertables/LogInTable.jsp" %>
-	<hr/>
+
 	<h2>Don't have an account? 
 	<button onClick="window.location.href='Register.jsp'">Register</button></h2>
 	
 	</div>
-<%@ include file="Insertables/Footer.jsp" %>
+
 </body>
 </html>

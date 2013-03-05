@@ -52,7 +52,7 @@ var likeFunction="showNumberOfLikes('"+elemID+"'," +storyID+","+"'like','"+btIDE
 /*If the user hit the like
  * then the button will be replaced with an cancel the like button*/
 if(res=="like"){
-	bt.innerHTML="Like No more";
+	bt.innerHTML="Unlike";
 	bt.setAttribute("onclick",dislikeFunction);
 }
 else{
@@ -62,7 +62,7 @@ else{
 
 }/*End of function*/
 
-
+/*Shows the story*/
 function showStory(stageID,storyID){
 	var xmlhttp=getAJAXRequest();
 	

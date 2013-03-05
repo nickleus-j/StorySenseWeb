@@ -27,7 +27,7 @@ color: white;
 
 #tableBorder3
 {
-border: 5px solid #770077;
+border: 5px solid green;
 border-radius: 0px;
 width: 100%;
 font-family: Segoe UI; font-size: 13pt;
@@ -47,7 +47,7 @@ font-family: Segoe UI; font-size: 13pt;
 <table width="80%" align="right">
 	
 	<tr align="center"><td>
-		<table id="tableBorder3" bgcolor = "#BB0099">
+		<table id="tableBorder3" bgcolor = "#7DFB9D">
 		<thead><tr><th  id="fontStyle2">My Stories</th></tr></thead>	
 		</table>
 	</td></tr>
@@ -55,21 +55,24 @@ font-family: Segoe UI; font-size: 13pt;
 
 	<tr><td>
 		<tr><td>
-			<table id="tableBorder3" bgcolor = "#BB0099">
+			<table id="tableBorder3" bgcolor = "#7DFB9D">
 				<tr id="fontStyle3"><th width="15%">Story Name</th><th width="15%">Score Earned</th><th width="15%">Date Finished</th><th width="15%">Likes</th><th width="15%">View</th></tr>
 			</table>
 		</td></tr>
-		<tr >
-			<td id="storyStage"></td>
-		</tr>
+		
 		<tr><td>
-			<table  id="tableBorder3" bgcolor = "#FF88FF">
+			<table  id="tableBorder3" bgcolor = "white">
 				
 			<% CompleteStoryLoader sLoader=new CompleteStoryLoader();
 			sLoader.PreviewUserStories((User)request.getSession().getAttribute("user"), out);
 			%>
+			
+			<tr >
+			<td id="storyStage" colspan="5"></td>
+		</tr>
 			</table>
 		</td></tr>
+		
 	
 </table>
 

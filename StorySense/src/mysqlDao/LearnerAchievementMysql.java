@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 import dao.DAOFactory;
 import dao.LearnerAcievementDAO;
 import dbConnection.DBConnectionFactory;
-import entity.Achievement;
 import entity.Learnerachievement;
 import entity.User;
 

@@ -39,6 +39,7 @@ font-family: "Segoe UI";
 
 </style>
 <div style="Clear:both;"></div>
+<br/><br/><br/>
 <div class="divisionFooter">
 <table>
 <tr>

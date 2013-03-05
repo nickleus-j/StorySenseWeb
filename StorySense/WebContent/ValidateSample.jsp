@@ -57,139 +57,176 @@ function nextStory(){
 
 </script>
 
+<style>
+
+	.tableTopValidateSample{
+		width: 100%;
+		background: #B8C9FF;
+		font-family: "Segoe UI";
+		max-width: "100%";
+	}
+	
+	.tableTopValidateSample th{
+	}
+
+	#header{
+		background: #0087BD;
+	}
+	
+	#subheader{
+		background: #002387;
+		color: white;
+		align: center;
+		size: 18px;
+		padding: 10px;
+	}
+	
+	
+	.innerTableValidateSample{
+		border-collapse: collapse; 
+		align: center;
+		width: 90%;
+		border-color: #000080;
+		border-style: groove;
+		border-width: 3px;
+		padding:5px;
+	}
+	
+	.innerTableValidateSample td{
+		width: 15%;
+		border-color: #000080;
+		border-style: groove;
+		border-width: 3px;
+		text-align: center;
+	}
+	
+	.innerTableValidateSample th{
+		width: 40%;
+		border-color: #000080;
+		border-style: groove;
+		border-width: 3px;
+		text-align: center;
+	}
+	
+</style>
 
 </head>
 <body>
 
-<%@ include file="Insertables/TopBar.jsp" %>
-<%@ include file="Insertables/ReviewerNavBar.jsp" %>
 	<div class="container">
-	<h1>Answer the form to give a Score</h1>
 	
 	
-	<table align="center" width="50%" bgcolor="white" id="storyDesc">
+	<table class="tableTopValidateSample" align="center">
 	
-	<tr>
-		<th colspan="2">Level Preference:</th>
-		<td>
+	<tr><td colspan = "3"><img src="images/validateSample/validateStoriesheader.png" height="80%" width="100%"/></td></tr>
+	<tr align="center">
+		<td colspan="3" style="align: center;"><p>Select the level to evaluate:
 		<select onchange="nextStory()">
 		<option>5</option>
 		<option>4</option>
 		<option>3</option>
 		<option>2</option>
 		<option>1</option>
-		</select>
+		</select></p>
 		</td>
 		
 	</tr>
 	
-	
+	<tr align="center">
+	<td align="left" width="15%" align="center">
+	<img src="images/validateSample/arrow.png" onclick="changeStory(-1)"/>
+	</td>
+	<td>
+		<img src="images/dis.jpg" height="10%" width="15%"></br>
+		<b>"A Walk in the Park"</b> </br>by Jake The Dog  
+	</td>
+	<td align="right" width="15%" align="center"><img src="images/validateSample/arrow2.png"
+	onclick="changeStory(1)"/></td>
+	</tr>
 	<tr>
-	<td><Button onclick="changeStory(-1)">Previous Story</Button>
-	</td>
-	<td>Story Name</td>
-	<th><h3 ID="StoryTitle">A Walk in the Park</h3></th>
-	<td><Button onclick="changeStory(1)">Next Story</Button>
-	</td>
+	<td> </td>
 	</tr>
 	
-	</table>
 	
-	<hr/>
-	
-	<table align="center" width="50%" bgcolor="white">
-		<caption>Story</caption>
-
+		
+		<tr><td id="subheader"> Story</td></tr>
 		
 		<tr>
-			<td>
+			<td colspan="3" align="center"><p>
 				Let's take a trip to park. 
 				A Memorial is an object we can find in the park. 
 		Last week, I was Skating when I was at the park. 
 		After going to the park, I went to the bay. 
-			</td>
+			</p></td>
 		</tr>
+		
+		
+	<tr><td id="subheader">Validation</td></tr>
 	
+	<tr><td colspan=3 ><br/><br/>
+		<table class="innerTableValidateSample" align="center">
+		<tr>
+		<td>Knowledge</td>
+		<td>Strongly Disagree</td>
+		<td>Disagree</td>
+		<td>Agree</td>
+		<td>Strongly Agree</td>
+		</tr>
+		<tr>
+		<th>Memorial is an object</th>
+			<td><input type="radio"  name ="v1"></td><td><input type="radio" name ="v1"></td>
+			<td><input type="radio"  name ="v1"></td><td><input type="radio"  name ="v1"></td>
+		</tr>
+		<tr>
+		<th>Memorial can be found in the park</th>
+			<td><input type="radio" name ="v2"></td><td><input type="radio" name ="v2"></td>
+			<td><input type="radio" name ="v2"></td><td><input type="radio" name ="v2"></td>
+		</tr>
+		
+		<tr>
+		<th>Skating is an Action</th>
+			<td><input type="radio" name ="v3"></td><td><input type="radio" name ="v3"></td>
+			<td><input type="radio" name ="v3"></td><td><input type="radio" name ="v3"></td>
+		</tr>
+		<tr>
+		<th>Bay  is a place</th>
+			<td><input type="radio" name ="v4"></td><td><input type="radio" name ="v4"></td>
+			<td><input type="radio" name ="v4"></td><td><input type="radio" name ="v4"></td>
+		</tr>
+		
+		</table>
+	</td>
+	</tr>
+	
+	<tr></tr><tr></tr>
+	<tr>
+	<td colspan="3" align="center"><p>How do you like the story&nbsp;&nbsp;&nbsp;
+	<select>
+	<option> --------------- </option>
+	<option>Unsatisfactory</option>
+	<option>Almost Satisfactory</option>
+	<option>Satisfactory</option>
+	<option>Above Satisfactory</option>
+	<option>Excellent</option>
+	</select></p></td>
+	</tr>
+	
+	<tr>
+	<td colspan="3" align="center"><p>Score for finishing the template: 25</p></td>
+	</tr>
+	<tr>
+	<td colspan="3" align="center"><img src="images/validateSample/submitEvaluation.png" width="25%"/></td>
+	</tr>
+	<tr></tr>
 	</table>
 	
-	<hr>
-
-	<table align="center" width="50%" bgcolor="white" border="1" id="Extraction">
-	<caption>Knowledge from the Story</caption>
-	<tr>
-	<th>Knowledge</th>
-		<th>Strongly Disagree</th>
-		<th>Disagree</th>
-		<th>Agree</th>
-		<th>Strongly Agree</th>
-	</tr>
-	<tr>
-	<td>Memorial is an object</td>
-		<td><input type="radio"  name ="v1"></td><td><input type="radio" name ="v1"></td>
-		<td><input type="radio"  name ="v1"></td><td><input type="radio"  name ="v1"></td>
-	</tr>
-	<tr>
-	<td>Memorial can be found in the park</td>
-		<td><input type="radio" name ="v2"></td><td><input type="radio" name ="v2"></td>
-		<td><input type="radio" name ="v2"></td><td><input type="radio" name ="v2"></td>
-	</tr>
 	
-	<tr>
-	<td>Skating is an Action</td>
-		<td><input type="radio" name ="v3"></td><td><input type="radio" name ="v3"></td>
-		<td><input type="radio" name ="v3"></td><td><input type="radio" name ="v3"></td>
-	</tr>
-	<tr>
-	<td>Bay  is a place</td>
-		<td><input type="radio" name ="v4"></td><td><input type="radio" name ="v4"></td>
-		<td><input type="radio" name ="v4"></td><td><input type="radio" name ="v4"></td>
-	</tr>
-	
-	</table>
 	
 	<!--  
 	<table align="center" width="50%" bgcolor="white" border="1" id="ExtractionTbl">
 	<caption>Knowledge from the Story</caption>
 	
 	-->
-	
-	</table>
-	<hr>
-	<table align="center" width="50%" bgcolor="white">
-	
-	<tr>
-	<th>How do you like the story</th>
-	<td><select>
-	<option>Unsatisfactory</option>
-	<option>Almost Satisfactory</option>
-	<option>Satisfactory</option>
-	<option>Above Satisfactory</option>
-	<option>Excellent</option>
-	</select></td>
-	</tr>
-	
-	<!-- 
-	<tr>
-	<th>Rate the vocabulary out of 5</th>
-	<td><select>
-	<option>1</option>
-	<option>2</option>
-	<option>3</option>
-	<option>4</option>
-	<option>5</option>
-	</select></td>
-	</tr> -->
-	
-	<tr>
-	<td>Score for finishing the template</td>
-	<th><h2 id="templateScore">25</h2></th>
-	</tr>
-	<tr>
-	<td align="center" colspan="2"><input type="button" value="Submit and calculate Total"></td>
-	</tr>
-	</table>
-	
-	<hr>
 	
 	</div>
 <%@ include file="Insertables/Footer.jsp" %>
