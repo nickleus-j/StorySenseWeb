@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>About Story Sense</title>
+<title>Please Log In</title>
 <link rel="stylesheet" href="Style/Default.css"> 
 </head>
 <body>

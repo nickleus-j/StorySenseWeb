@@ -190,7 +190,7 @@ public class CompleteStoryLoader {
 				out.write("<td>"+createStoryLink(Stories.get(ctr).getID(), stageID)+"</td>");
 				
 				out.write("</tr>" +
-						"<tr><td class=\"hiddenElem\" id=\""+stageID+"\"></td>");
+						"<tr><td class=\"hiddenElem\" id=\""+stageID+"\" colspan='5'></td>");
 				
 				out.write("</tr>");
 			}/*End of Loop*/

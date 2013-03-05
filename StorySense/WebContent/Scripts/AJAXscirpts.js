@@ -2,8 +2,9 @@
 	This File is for ajax javascript events
 */
 function getAJAXRequest(){
+	var request;
 	try {// Non IE Browser?
-		var request = new XMLHttpRequest();
+		request = new XMLHttpRequest();
 	}
 	catch(e1)	{
 		try{ // IE 6+?
