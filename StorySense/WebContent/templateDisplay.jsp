@@ -8,10 +8,24 @@
 
 <style>
 
+#tableBorder3
+{
+border: 2px solid black;
+border-radius: 4px;
+margin-left: -50%;
+width: 200%;
+}
+
 .templateContainer{
 	background: white;
 	width:50%;
 }
+
+
+#fontStyle2{
+font-family: Segoe UI; font-size: 20pt;
+}
+
 
 </style>
 
@@ -19,36 +33,36 @@
 <body>
 
 <%@ include file="Insertables/TopBar.jsp" %>
-	<div id="container">
-
-<div id="center" class="column">
-	<h1>Choose a Template</h1>
+<div width="100%">
+<table style="margin: auto;">
+	<tr><td>
+	<table id="tableBorder3" bgcolor = "Yellow">
+	<thead></br><tr id="fontStyle2" ><th colspan = 2>Choose a template</th></tr></thead>	
+	</table>
+	</td></tr>
 	
-	<table align="center" class="templateContainer">
-	<caption>Pick a template to create story</caption>
+	<br /><br />
+	
+	<tr><td>
+	<table colspan="3" id="tableBorder3" class="templateContainer" CELLPADDING="10" CELLSPACING="4">
 	<tr>
-	<th>
+	<th align="center">
 	Level
 		<select>
-		<option>5</option>
-		<option>4</option>
-		<option>3</option>
-		<option>2</option>
-		<option>1</option>
+		<option>5:</option>
+		<option>4:</option>
+		<option>3: </option>
+		<option>2: </option>
+		<option>1: </option>
 		</select>
-	</th>
-	<td>
+		
 		<button onClick="window.location.href='StoryToAnsSample.jsp'">Pick template</button>
-	</td>
-	</tr>
-	
+	</th>
+	<tr ><td colspan="2" align="center">Can't Pick? Use a random template 
+	<button onClick="window.location.href='MakingStory.jsp'">Go</button></td></tr>
 	</table>
-	
-	<h2>Can't Pick? Use a random template
-	<button onClick="window.location.href='MakingStory.jsp'">Go</button></h2>
-	</div>
-	<%@ include file="Insertables/LearnerNavBar.jsp" %>
-	<%@ include file="Insertables/FeaturedStory.jsp" %>
+	</td></tr>
+	</table>
 	</div>
 	<%@ include file="Insertables/Footer.jsp" %>
 

@@ -70,7 +70,6 @@ public class CompleteStoryLoader {
 		}
 		return "Error";
 	}
-	
 	/**
 	 * Shows the stories requires the AjaxScripts
 	 * @param out
@@ -78,30 +77,70 @@ public class CompleteStoryLoader {
 	public void showStories(JspWriter out){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
-		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStories();
-		UserDAO myUserDao=myDAOFactory.createUserDAO();
+		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStories(10);
+		
+		encodeStoriesInHTML(out,Stories,myDAOFactory.createUserDAO());
+	}
+	
+	
+	private void encodeStoriesInHTML(JspWriter out,ArrayList<Acomplishment> Stories,UserDAO myUserDao){
 		User myUser;
+		try{
+			//out.write("<p>");
+			out.write("<table id=\"tableBorderfeed2\" bgcolor=\"white\">");
+			out.write("<tr><td id='1st'></td></tr>");
+			/*loop that displays the stories*/
+			for(int ctr=0;ctr<Stories.size();ctr++){
+				out.write("<tr class=\"storyHead\">");
+				myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
+				out.write("<th>Title:</th><td> "+Stories.get(ctr).getName()+"</td> <th>Made by </th>" +
+						"<td>"+myUser.getName()+"</td></tr>");
+				
+				if(SessionUser!=null)
+					out.write(generateLikeRow(Stories.get(ctr))+"</tr>");
+				out.write("<tr><td colspan=\"4\">");
+				out.println("<br/>"+loadStory(Stories.get(ctr).getFileURL()));
+				out.write("<hr/></td></tr>");
+				
+			}/*End of Loop*/
+			out.write("</table>");
+			//out.write("</p>");
+			}catch(IOException ie){}
+	}
+	
+	public void encodeStoriesInHTML(JspWriter out,ArrayList<Acomplishment> Stories,User myUser){
 		
 		try{
-		//out.write("<p>");
-		out.write("<table id=\"tableBorderfeed2\" bgcolor=\"white\">");
-		out.write("<tr><td id='1st'></td></tr>");
-		/*loop that displays the stories*/
-		for(int ctr=0;ctr<Stories.size();ctr++){
-			out.write("<tr class=\"storyHead\">");
-			myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
-			out.write("<th>Title:</th><td> "+Stories.get(ctr).getName()+"</td> <th>Made by </th>" +
-					"<td>"+myUser.getName()+"</td></tr>");
-			
-			if(SessionUser!=null)
-				out.write(generateLikeRow(Stories.get(ctr))+"</tr>");
-			out.write("<tr><td colspan=\"4\">");
-			out.println("<br/>"+loadStory(Stories.get(ctr).getFileURL()));
-			out.write("<hr/></td></tr>");
-		}/*End of Loop*/
-		out.write("</table>");
-		//out.write("</p>");
-		}catch(IOException ie){}
+			//out.write("<p>");
+			out.write("<table id=\"tableBorderfeed2\" bgcolor=\"white\">");
+			out.write("<tr><td id='1st'></td></tr>");
+			/*loop that displays the stories*/
+			for(int ctr=0;ctr<Stories.size();ctr++){
+				out.write("<tr class=\"storyHead\">");
+				out.write("<th>Title:</th><td> "+Stories.get(ctr).getName()+"</td> <th>Made by </th>" +
+						"<td>"+myUser.getName()+"</td></tr>");
+				
+				if(SessionUser!=null)
+					out.write(generateLikeRow(Stories.get(ctr))+"</tr>");
+				out.write("<tr><td colspan=\"4\">");
+				out.println("<br/>"+loadStory(Stories.get(ctr).getFileURL()));
+				out.write("<hr/></td></tr>");
+			}/*End of Loop*/
+			out.write("</table>");
+			//out.write("</p>");
+			}catch(IOException ie){}
+	}
+	
+	/**
+	 * Shows the stories requires the AjaxScripts
+	 * @param out
+	 */
+	public void showStories(JspWriter out,int limit){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
+		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStories(limit);
+		
+		encodeStoriesInHTML(out,Stories,myDAOFactory.createUserDAO());
 	}
 	
 	/**This generates an HTML code to be 
@@ -109,7 +148,7 @@ public class CompleteStoryLoader {
 	 * The row generated shows the number of people who liked
 	 * the story
 	 */
-	private String generateLikeRow(Acomplishment myStory){
+	public String generateLikeRow(Acomplishment myStory){
 		//User myUser=(User)request.getSession().getAttribute("user");
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		LikedStoryDAO myLikeDAO=myDAOFactory.createLikeDAO();
@@ -210,7 +249,7 @@ public class CompleteStoryLoader {
 	}
 	
 	
-	/*For demo purpose*/
+	/**For demo purpose*/
 	public String loadSampleStory(){
 		FileInputStream fileIn;
 		try {

@@ -31,7 +31,7 @@ public class StoryShower extends BaseServlet {
 		
 		try{
 			String url=myAcomDAO.getStory(sID).getFileURL();
-			response.getWriter().write(sLoader.loadStory(url));
+			response.getWriter().write("<hr>"+sLoader.loadStory(url)+"<hr>");
 		}catch(IOException ioEX){}
 		
 	}

@@ -66,8 +66,14 @@ else{
 
 var currentStage;
 
-function hideElement(elem){elem.setAttribute("class","hiddenElem");}
-function showElement(elem){elem.setAttribute("class","r");}
+function hideElement(elem){
+	elem.setAttribute("class","hiddenElem");
+	//elem.setAttribute("onclick","showElement("+elem+")");
+}
+function showElement(elem){
+	elem.setAttribute("class","storyPreviewStage");
+	//elem.setAttribute("onclick","hideElement("+elem+")");
+}
 
 /*Shows the story where one story is shown one at a time*/
 function showStory(stageID,storyID){
@@ -75,7 +81,7 @@ function showStory(stageID,storyID){
 	
 	/*hide current stage if it is not null
 	 * The stage is where the story is displayed 
-	 */
+	 
 	if(currentStage!=null)
 		hideElement(currentStage);
 	

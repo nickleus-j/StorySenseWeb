@@ -30,15 +30,13 @@ font-family: Segoe UI; font-size: 20pt;
 
 <table width="100%">
  <tr><td>
-<table id="tableBorderfeed" bgcolor = "orange" width="90%">
+<table id="tableBorderfeed" bgcolor = "orange" width="90%" onload="">
 		<tr id="fontStylefeed" ><th colspan = 3>Story Feed</th></tr>
 	</table>	
 	 </td></tr>
 	 </table>
 
-<% CompleteStoryLoader sLoader=new CompleteStoryLoader((User)request.getSession().getAttribute("user"));
-		 sLoader.showStories(out);
-		 %>
+<table id="tableBorderfeed2" bgcolor="white" ></table>
 
 
 </div>

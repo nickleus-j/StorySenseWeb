@@ -37,7 +37,7 @@ font-family: Segoe UI; font-size: 20pt;
 	<tr><th  align="center" id="fontStyle2">&nbsp;</th></tr>
 	<tr><th  align="center"> <% out.print(webEncoder.enterUserImageTag(myUser)); %> </th></tr>
 	<tr><th  align="center" id="fontStyle2"><% out.print(webEncoder.enterUserRealName(myUser)); %></th></tr>
-	<tr><th  align="center" id="fontStyle2">Level 15</th></tr>
+	<tr><th  align="center" id="fontStyle2">Level <% out.print(myUser.getLevel()); %></th></tr>
 	<tr><th  align="center" id="fontStyle2">&nbsp;</th></tr>
 	</table>
 	

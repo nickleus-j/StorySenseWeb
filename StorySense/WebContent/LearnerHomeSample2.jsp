@@ -8,8 +8,9 @@
   <link rel="stylesheet" href="Style/Default.css"> 
   
   <script src="Scripts/AJAXscirpts.js"></script>
+  <script src="Scripts/StoryFeedScript.js"></script>
 </head>
-<body bgcolor="CCFFFF">
+<body bgcolor="CCFFFF" onload="loadStories(10)">
 <%@ include file="Insertables/TopBar.jsp" %>
 <div id="container">
 <%@ include file="Insertables/StoryFeed.jsp" %>

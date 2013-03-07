@@ -131,6 +131,11 @@ ul, ol, dl {
 	/*background: maroon;*/
 }
 
+.storyPreviewStage{
+	margin: 10%;
+	padding: 2.1em;
+}
+
 .centralForm{
 	background: white;
 	margin:5%;
