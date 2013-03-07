@@ -8,11 +8,7 @@
   <%@ include file="Scripts/evaluatedStoriesScript.jsp" %>
 <title>Complete the Story</title>
 <style>
-img{
-  	width: 50px;
-  	height: 50px;
-  
-  }
+
   
 #validatedStoriesHeader{
   	background: #002387;
@@ -48,8 +44,8 @@ img{
 </head>
 <body>
 
-
-<div class="container">
+<%@ include file="Insertables/ReviewerNavBar.jsp" %>
+<div id="container">
 	
 
 	<table align="center" width="100%" class="validatedStoriesTable">
@@ -65,7 +61,7 @@ img{
 	</tr>
 	
 	<tr>
-	<td><img src="images/Untitled.jpg" /> </td>
+	<td><img src="images/Untitled.jpg" class="profPic"/> </td>
 	<td><b>KyleXY</b> </td>
 	<td>Park Trip</td>
 	<td>6</td>
@@ -84,7 +80,7 @@ img{
 	
 	<tr>
 	
-	<td><img src="images/disPic.jpg" /> </td>
+	<td><img src="images/disPic.jpg" class="profPic"/> </td>
 	<td><b>Viziox</b> </td>
 	<td>Delightful Message</td>
 	<td>7</td>

@@ -22,7 +22,7 @@
   
   #fontStyle2{
 font-family: Segoe UI; font-size: 20pt;
-color: white;
+color: black;
 }
 
 #tableBorder3
@@ -64,7 +64,8 @@ font-family: Segoe UI; font-size: 13pt;
 			<table  id="tableBorder3" bgcolor = "white">
 				
 			<% CompleteStoryLoader sLoader=new CompleteStoryLoader();
-			sLoader.PreviewUserStories((User)request.getSession().getAttribute("user"), out);
+			sLoader.PreviewUserStories(u, out);
+			/* (User)request.getSession().getAttribute("user")*/
 			%>
 			
 			<tr >

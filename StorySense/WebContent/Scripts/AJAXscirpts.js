@@ -66,26 +66,38 @@ else{
 
 var currentStage;
 
+function gethiddenElemClass(){return "hiddenElem";}
+function getShownElemClass(){return "storyPreviewStage";}
+
 function hideElement(elem){
-	elem.setAttribute("class","hiddenElem");
+	elem.setAttribute("class",gethiddenElemClass());
 	//elem.setAttribute("onclick","showElement("+elem+")");
 }
 function showElement(elem){
-	elem.setAttribute("class","storyPreviewStage");
+	elem.setAttribute("class",getShownElemClass());
 	//elem.setAttribute("onclick","hideElement("+elem+")");
 }
 
+function toggleShoHider(bt,stageID){
+	var elem=document.getElementById(stageID);
+	if(elem.getAttribute("class")==gethiddenElemClass()){
+		//bt.setAttribute("onclick", "showElement("+stageID+")");
+		bt.innerHTML="Hide Story";
+		showElement(document.getElementById(stageID));
+		
+	}
+	else if(elem.getAttribute("class")==getShownElemClass()){
+		//bt.setAttribute("onclick", "hideElement("+stageID+")");
+		bt.innerHTML="See Story";
+		hideElement(document.getElementById(stageID));
+	}
+}
+
 /*Shows the story where one story is shown one at a time*/
-function showStory(stageID,storyID){
+function showStory(stageID,storyID,btID){
 	var xmlhttp=getAJAXRequest();
-	
-	/*hide current stage if it is not null
-	 * The stage is where the story is displayed 
-	 
-	if(currentStage!=null)
-		hideElement(currentStage);
-	
-	/*Check if the element passed is valid*/
+	var bt=document.getElementById(btID);
+
 	if (stageID==null||stageID=="")
 	  {
 	  document.getElementById(stageID).innerHTML="";
@@ -97,13 +109,13 @@ function showStory(stageID,storyID){
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			document.getElementById(stageID).innerHTML=xmlhttp.responseText;
-			
+			toggleShoHider(bt,stageID);
 			//showElement(document.getElementById(stageID));
 		}
 	  };
 	  
 	  xmlhttp.open("GET","StoryShower?q="+storyID+"&screen="+stageID,true);
 	  xmlhttp.send();
-	  currentStage=document.getElementById(stageID);
-		showElement(currentStage);
+	  //currentStage=document.getElementById(stageID);
+		//showElement(document.getElementById(stageID));
 }

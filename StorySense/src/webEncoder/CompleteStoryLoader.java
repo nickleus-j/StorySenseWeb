@@ -244,7 +244,9 @@ public class CompleteStoryLoader {
 	 * @return
 	 */
 	public String createStoryLink(int storyID,String stageID){
-		String link="<button onclick=\"showStory('"+stageID+"',"+storyID+")\">";
+		String btID="BT_"+storyID;
+		String link="<button id='"+btID+"' onclick=\"" +
+				"showStory('"+stageID+"',"+storyID+",'"+btID+"')\">";
 		return link.concat("See Story</button>");
 	}
 	

@@ -24,7 +24,7 @@ font-family: Segoe UI; font-size: 20pt;
 	User u=(User)session.getAttribute("user");
 %>
 
-<div id="center">
+
 	<div id="LogoHere">	
 	  <h1> <%
 		if(u!=null){
@@ -50,5 +50,5 @@ font-family: Segoe UI; font-size: 20pt;
 	</div>
 	
 	
-</div>
+
 
