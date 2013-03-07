@@ -47,6 +47,8 @@ public class LogIn extends BaseServlet {
                 	response.sendRedirect("../StorySense/LearnerHomeSample2.jsp");
                 else if(User.Roles.learner.isReviwer(myUser.getRole()))
                 	response.sendRedirect("../StorySense/ValidatedStories.jsp");
+                else if(User.Roles.learner.isAdmin(myUser.getRole()))
+                	response.sendRedirect("../StorySense/AdminHome.jsp");
             } else {
             	response.sendRedirect("LogInFail.jsp");
                 /*RequestDispatcher dispatcher = request.getRequestDispatcher("StorySense/LogInFail.jsp");
