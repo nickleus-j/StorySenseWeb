@@ -113,7 +113,8 @@ function nextStory(){
 </head>
 <body>
 
-	<div class="container">
+<%@ include file="Insertables/ReviewerNavBar.jsp" %>
+	<div id="container">
 	
 	
 	<table class="tableTopValidateSample" align="center">

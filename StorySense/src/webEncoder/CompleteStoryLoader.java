@@ -237,6 +237,40 @@ public class CompleteStoryLoader {
 		}catch(IOException ie){}
 	}
 	
+	public void previewLikedStories(User myUser,JspWriter out){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
+		LikedStoryDAO myLikeDAO=myDAOFactory.createLikeDAO();
+		UserDAO myUserDAO=myDAOFactory.createUserDAO();
+		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getUserLikedStories(myUser.getAccountID());
+		String stageID;
+		User author;
+		try{
+			
+			out.write("<tr><th>Title</th><th>Author</th>" +
+					"<th>Likes</th><th>View</th></tr>");
+			
+			/*Loop that shows the story Links*/
+			for(int ctr=0;ctr<Stories.size();ctr++){
+				myLikeDAO.countStoryLikes(Stories.get(ctr).getID());
+				stageID="LikeStage"+Stories.get(ctr).getID();
+				author=myUserDAO.getUser(Stories.get(ctr).getAccountID());
+				/*Generate HTML code*/
+				out.write("<tr align=\"center\">");
+				out.write("<td>"+Stories.get(ctr).getName()+"</td>");
+				out.write("<td>"+author.getName()+"</td>");
+				out.write("<td>"+myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"</td>");
+				out.write("<td>"+createStoryLink(Stories.get(ctr).getID(), stageID)+"</td>");
+				
+				out.write("</tr>" +
+						"<tr><td class=\"hiddenElem\" id=\""+stageID+"\" colspan='4'></td>");
+				
+				out.write("</tr>");
+			}/*End of Loop*/
+			//out.write("</table>");
+		}catch(IOException ie){}
+	}
+	
 	/**
 	 * Creates a HTML element to Asynchronously get the Story from the server
 	 * @param storyID : The ID of the Accomplishment

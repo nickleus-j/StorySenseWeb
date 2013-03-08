@@ -1,9 +1,14 @@
 package webEncoder;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspWriter;
+
+import dao.DAOFactory;
+import dao.TemplateDAO;
+import entity.Template;
 
 
 import model.Story;
@@ -26,25 +31,33 @@ public class StoryEncoder {
 	
 	public String writeStory(){
 		
-		StoryGenerator storyMaker=new StoryGenerator(10, getConfidence());//Number of templates and Confidence for now
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		TemplateDAO templateFactory=myDAOFactory.createTemplateDAO();
+		ArrayList<Template> templateList=(ArrayList<Template>)templateFactory.getAlltemplates();
+		StoryGenerator storyMaker=new StoryGenerator(templateList, getConfidence());//Number of templates and Confidence for now
 		Story myStory=storyMaker.getStory();
 		
 		return myStory.getsStory();
 	}
 	
 	public void encodeStory(){
-		StoryGenerator storyMaker=new StoryGenerator(10, getConfidence());//Number of templates and Confidence for now
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		TemplateDAO templateFactory=myDAOFactory.createTemplateDAO();
+		ArrayList<Template> templateList=(ArrayList<Template>)templateFactory.getAlltemplates();
+		StoryGenerator storyMaker=new StoryGenerator(templateList, getConfidence());//Number of templates and Confidence for now
+		
 		Story myStory=storyMaker.getStory();
+		
 		Request.getSession().setAttribute("Story", myStory);
+		Request.getSession().setAttribute(TEMPLATEID, storyMaker.getTemplateID());
 		try {
 			Out.write(myStory.getsStory());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	public String getStoryAttributeName(){return "Story";}
 	public int getConfidence(){ return 60;}
-	
+	public static final String  TEMPLATEID="templateID";
 }

@@ -436,5 +436,49 @@ public class UserMySQL extends UserDAO {
 		return null;
 	}
 
+	@Override
+	public List<User> getUserWhoLiked(int storyID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from account " +
+            		"WHERE accountID IN (SELECT userID from likedstory WHERE storyAccomID=?)");
+            ps.setInt(1, storyID);
+            rs = ps.executeQuery();
+            
+            User u;
+            ArrayList<User> Users=new ArrayList<User>();
+            while(rs.next()){
+            	u=new User();
+            	u.setAccountID(rs.getInt("accountID"));
+            	u.setName(rs.getString("Name"));
+            	u.setPassword(rs.getString("Password"));
+            	u.setRole(rs.getInt("role"));
+            	u.setActiveStatus(rs.getInt("Active"));
+            	u.setLevel(rs.getInt("Level"));
+            	u.setPoints(rs.getInt("Points"));
+            	Users.add(u);
+            }
+            
+
+            rs.close();
+            ps.close();
+            con.close();
+            
+            //if(!Users.isEmpty())
+            	return Users;
+            // return null;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(UserMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
 	
 }

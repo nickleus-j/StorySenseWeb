@@ -1,5 +1,6 @@
 package servlets;
 import serializableObjects.StoryFileAccess;
+import webEncoder.StoryEncoder;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,11 +29,12 @@ import model.Story;
  */
 @WebServlet(description = "Writes the story of the learner and saves it", urlPatterns = { "/StoryWriter" })
 public class StoryWriter extends BaseServlet {
-    /**
+    private int templateID;
+	/**
      * Default constructor. 
      */
     public StoryWriter() {
-        
+        templateID=1;
     }
 
 	@Override
@@ -40,9 +42,13 @@ public class StoryWriter extends BaseServlet {
 			HttpServletResponse response) {
 		PrintWriter out=null;
 		HttpSession session=request.getSession();
+		
 		try{
 			out = response.getWriter();
 			Story myStory=(Story)session.getAttribute("Story");
+			
+			templateID=(int) session.getAttribute(StoryEncoder.TEMPLATEID);
+			//User theUser=(User)session.getAttribute("user");
 			out.println("The story");
 			
 			if(myStory!=null){
@@ -110,7 +116,11 @@ public class StoryWriter extends BaseServlet {
 			AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
 			Acomplishment story=new Acomplishment();
 			 
-			story.setTemplateID(1);
+			story.setTemplateID(templateID);
+			story.setAccountID(0);
+			story.setFileURL(fName);
+			story.setName(storyName);
+			myAcomDAO.addStoryAcomplishment(story);
 			
 		 }catch(IOException ioEx){
 			 
@@ -140,7 +150,7 @@ public class StoryWriter extends BaseServlet {
 			AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
 			Acomplishment story=new Acomplishment();
 			 
-			story.setTemplateID(1);
+			story.setTemplateID(templateID);
 			story.setAccountID(givenU.getAccountID());
 			story.setFileURL(fName);
 			story.setName(storyName);

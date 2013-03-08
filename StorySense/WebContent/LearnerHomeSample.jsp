@@ -25,7 +25,7 @@ font-family: Segoe UI; font-size: 20pt;
 color: black;
 }
 
-#tableBorder3
+#tableBorder3 ,.headTbl
 {
 border: 5px solid green;
 border-radius: 0px;
@@ -47,7 +47,7 @@ font-family: Segoe UI; font-size: 13pt;
 <table width="80%" align="right">
 	
 	<tr align="center"><td>
-		<table id="tableBorder3" bgcolor = "#7DFB9D">
+		<table id="tableBorder3" class="tableBorder3" bgcolor = "#7DFB9D">
 		<thead><tr><th  id="fontStyle2">My Stories</th></tr></thead>	
 		</table>
 	</td></tr>
@@ -74,7 +74,23 @@ font-family: Segoe UI; font-size: 13pt;
 			</table>
 		</td></tr>
 		
+		<tr align="center"><td>
+		<table class="headTbl" bgcolor = "#7DFB9D">
+		<thead><tr><th  id="fontStyle2">Stories You Like</th></tr></thead>	
+		</table>
+	</td></tr>
 	
+	<tr><td>
+			<table  id="tableBorder3" bgcolor = "white">
+				
+			<% 
+			sLoader.previewLikedStories(u, out);
+			/* (User)request.getSession().getAttribute("user")*/
+			%>
+			
+			<tr >
+			<td id="storyStage" colspan="5"></td>
+		</tr>
 </table>
 
 
