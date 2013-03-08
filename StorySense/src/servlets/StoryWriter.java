@@ -19,7 +19,10 @@ import dao.AcomplishmentDAO;
 import dao.ConceptDAO;
 import dao.DAOFactory;
 import dao.RelationDAO;
+import dao.TemplateDAO;
+import dao.UserDAO;
 import entity.Acomplishment;
+import entity.Template;
 import entity.User;
 
 import model.Story;
@@ -48,7 +51,6 @@ public class StoryWriter extends BaseServlet {
 			Story myStory=(Story)session.getAttribute("Story");
 			
 			templateID=(int) session.getAttribute(StoryEncoder.TEMPLATEID);
-			//User theUser=(User)session.getAttribute("user");
 			out.println("The story");
 			
 			if(myStory!=null){
@@ -155,13 +157,31 @@ public class StoryWriter extends BaseServlet {
 			story.setFileURL(fName);
 			story.setName(storyName);
 			myAcomDAO.addStoryAcomplishment(story);
-			
+			updateUserScore(givenU, getTemplateFromDB());
 		 }catch(IOException ioEx){
 			 
 		 }
 		 
 	}
 	
+	public Template getTemplateFromDB(DAOFactory myDAOFactory){
+		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
+		return templateDao.getTemplate(templateID);
+	}
+	
+	public Template getTemplateFromDB(){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
+		return templateDao.getTemplate(templateID);
+	}
+	
+	private void updateUserScore(User givenUser,Template givenTemplate){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		UserDAO userDao=myDAOFactory.createUserDAO();
+		
+		givenUser.setPoints(givenUser.getPoints()+givenTemplate.getPlusScore());
+		userDao.increaseUserPoints(givenUser, givenTemplate.getPlusScore());
+	}
 	
 	/**
 	 * Submits the story.

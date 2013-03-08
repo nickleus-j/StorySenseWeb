@@ -18,4 +18,5 @@ public abstract class UserDAO {
 	public abstract User getUser(int id);
 	public abstract boolean authenticateUser(String Name,String Password);
 	public abstract List<User> getUserWhoLiked(int storyID);
+	public abstract void increaseUserPoints(User u,int score);
 }

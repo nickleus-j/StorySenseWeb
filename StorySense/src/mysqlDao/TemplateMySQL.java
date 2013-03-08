@@ -341,4 +341,44 @@ public class TemplateMySQL extends TemplateDAO {
 		return null;
 	}
 
+	@Override
+	public Template getTemplate(int id) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * FROM template WHERE TemplateID=?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+           
+            
+            Template t=null;
+            
+            if(rs.first()){
+            	t=new Template();
+            	t.setTemplateID(rs.getInt("TemplateID"));
+            	t.setName(rs.getString("Name"));
+            	t.setLevelRequirement(rs.getInt("LevelReq"));
+            	t.setPlusScore(rs.getInt("plusScore"));
+            	t.setStoryURL(rs.getString("StoryURL"));
+            	t.setRelationURL(rs.getString("RelationURL"));
+            	//templates.add(t);
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return t;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(TemplateMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
 }
