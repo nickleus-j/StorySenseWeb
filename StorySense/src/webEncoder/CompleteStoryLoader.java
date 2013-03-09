@@ -157,20 +157,28 @@ public class CompleteStoryLoader {
 		String val="<tr><th>Likes</th><td id=\""+storyID+"\"" +
 				">"+myLikeDAO.countStoryLikes(myStory.getID())+"</td>";
 		
-		String btElemName="btStory" +storyID,btIDElemName="id=\""+btElemName+"\"";
+		val=val.concat("<td>"+generateLikeButtonHTML(storyID, myStory)+"</td>");
 		
-		if(myLikeDAO.didUserLike(SessionUser.getAccountID(), myStory.getID())){
-			val=val.concat("<td><button "+btIDElemName+" onclick=\"showNumberOfLikes('"+storyID+"'," +myStory.getID()+","+
-					"'----','"+btElemName+"')\">" +"Unlike</button></td>");
-		}
-		else val=val.concat("<td><button "+btIDElemName+
-				" onclick=\"showNumberOfLikes('"+storyID+"'," +myStory.getID()+","+"'like','"+btElemName+"')\">" +
-				"Like</button></td>");
-		
-		val=val.concat("</tr>");
-		return val;
+		return val.concat("</tr>");
 	}
 	
+	
+	private String generateLikeButtonHTML(String storyID,Acomplishment myStory){
+		String btElemName="btStory" +storyID,btIDElemName="id=\""+btElemName+"\"";
+		String btCode="";
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		LikedStoryDAO myLikeDAO=myDAOFactory.createLikeDAO();
+		
+		if(myLikeDAO.didUserLike(SessionUser.getAccountID(), myStory.getID())){
+			btCode=btCode.concat("<button "+btIDElemName+" onclick=\"showNumberOfLikes('"+storyID+"'," +myStory.getID()+","+
+					"'--','"+btElemName+"')\">" +"Unlike");
+		}
+		else btCode=btCode.concat("<button "+btIDElemName+
+				" onclick=\"showNumberOfLikes('"+storyID+"'," +myStory.getID()+","+"'like','"+btElemName+"')\">" +
+				"Like");
+		
+		return btCode.concat("</button>");
+	}
 	
 	/**
 	 * Show description of stories made by the user
@@ -243,7 +251,7 @@ public class CompleteStoryLoader {
 		LikedStoryDAO myLikeDAO=myDAOFactory.createLikeDAO();
 		UserDAO myUserDAO=myDAOFactory.createUserDAO();
 		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getUserLikedStories(myUser.getAccountID());
-		String stageID;
+		String stageID,likeCtrID;
 		User author;
 		HtmlLinkEncoder linkEncoder=new HtmlLinkEncoder();
 		try{
@@ -256,12 +264,19 @@ public class CompleteStoryLoader {
 				myLikeDAO.countStoryLikes(Stories.get(ctr).getID());
 				stageID="LikeStage"+Stories.get(ctr).getID();
 				author=myUserDAO.getUser(Stories.get(ctr).getAccountID());
+				likeCtrID="likeStory"+Stories.get(ctr).getID();
 				/*Generate HTML code*/
 				out.write("<tr align=\"center\">");
 				out.write("<td>"+Stories.get(ctr).getName()+"</td>");
-				//out.write("<td>"+author.getName()+"</td>");
 				out.write("<td>"+linkEncoder.createLinkToUser(author)+"</td>");
-				out.write("<td>"+myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"</td>");
+				
+				if(SessionUser==myUser)
+					out.write("<td>"+myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"</td>");
+				else out.write("<td><b id='"+likeCtrID+"'>"+
+					myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"</b>"+
+					generateLikeButtonHTML(likeCtrID, Stories.get(ctr))+"</td>");
+					
+				
 				out.write("<td>"+createStoryLink(Stories.get(ctr).getID(), stageID)+"</td>");
 				
 				out.write("</tr>" +

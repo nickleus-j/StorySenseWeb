@@ -64,7 +64,7 @@ font-family: Segoe UI; font-size: 13pt;
 		<tr><td>
 			<table  id="tableBorder3" bgcolor = "white">
 				
-			<% CompleteStoryLoader sLoader=new CompleteStoryLoader();
+			<% CompleteStoryLoader sLoader=new CompleteStoryLoader(u);
 			sLoader.PreviewUserStories(myUser, out);
 			%>
 			
