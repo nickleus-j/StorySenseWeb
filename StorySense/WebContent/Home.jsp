@@ -16,7 +16,7 @@
 	<%@ include file="Insertables/LogInTable.jsp" %>
 
 	<h2>Don't have an account? 
-	<button onClick="window.location.href='Register.jsp'">Register</button></h2>
+	<button onClick="window.location.href='Register.jsp'">Register Now</button></h2>
 	
 	</div>
 

@@ -14,17 +14,12 @@ import servlets.BaseServlet;
 
 /**
  * Servlet implementation class LikeChanger
+ * This servlet manipulates the like table in the database
  */
 @WebServlet(description = "Changes Upon likes", urlPatterns = { "/LikeChanger" })
 public class LikeChanger extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
-    public LikeChanger() {
-        // TODO Auto-generated constructor stub
-    }
 
 	@Override
 	public void executeCustomCode(HttpServletRequest request,
