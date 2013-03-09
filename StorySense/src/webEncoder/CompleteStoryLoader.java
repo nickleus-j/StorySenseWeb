@@ -245,6 +245,7 @@ public class CompleteStoryLoader {
 		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getUserLikedStories(myUser.getAccountID());
 		String stageID;
 		User author;
+		HtmlLinkEncoder linkEncoder=new HtmlLinkEncoder();
 		try{
 			
 			out.write("<tr><th>Title</th><th>Author</th>" +
@@ -258,7 +259,8 @@ public class CompleteStoryLoader {
 				/*Generate HTML code*/
 				out.write("<tr align=\"center\">");
 				out.write("<td>"+Stories.get(ctr).getName()+"</td>");
-				out.write("<td>"+author.getName()+"</td>");
+				//out.write("<td>"+author.getName()+"</td>");
+				out.write("<td>"+linkEncoder.createLinkToUser(author)+"</td>");
 				out.write("<td>"+myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"</td>");
 				out.write("<td>"+createStoryLink(Stories.get(ctr).getID(), stageID)+"</td>");
 				

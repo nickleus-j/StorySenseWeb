@@ -29,7 +29,9 @@ font-family: Segoe UI; font-size: 20pt;
 </style>
 
 <div >
-<% User myUser=(User)request.getSession().getAttribute("user");
+<% User myUser=(User)request.getAttribute("viewedUser");
+	if(myUser==null)
+		myUser=(User)session.getAttribute("user");
 	WebCodeMaker webEncoder=new WebCodeMaker(out);
 %>
 <br/>

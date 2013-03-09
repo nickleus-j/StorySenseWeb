@@ -37,10 +37,11 @@ font-family: Segoe UI; font-size: 13pt;
 }
   
   </style>
-  
+
 </head>
 <body>
 <%@ include file="Insertables/TopBar.jsp" %>
+ <% request.setAttribute("viewedUser", u); %> 
 <%@ include file="Insertables/accountbar.jsp" %>
 <div>
 	
@@ -64,7 +65,7 @@ font-family: Segoe UI; font-size: 13pt;
 			<table  id="tableBorder3" bgcolor = "white">
 				
 			<% CompleteStoryLoader sLoader=new CompleteStoryLoader();
-			sLoader.PreviewUserStories(u, out);
+			sLoader.PreviewUserStories(myUser, out);
 			/* (User)request.getSession().getAttribute("user")*/
 			%>
 			
@@ -84,7 +85,7 @@ font-family: Segoe UI; font-size: 13pt;
 			<table  id="tableBorder3" bgcolor = "white">
 				
 			<% 
-			sLoader.previewLikedStories(u, out);
+			sLoader.previewLikedStories(myUser, out);
 			/* (User)request.getSession().getAttribute("user")*/
 			%>
 			

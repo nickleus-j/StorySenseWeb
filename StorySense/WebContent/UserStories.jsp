@@ -1,90 +1,105 @@
+<%@page import="webEncoder.CompleteStoryLoader"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
- <link rel="stylesheet" href="Style/Default.css"/> 
-<title>Completed Stories</title>
-<style>
-img{
-  	width: 50px;
-  	height: 50px;
+<title>Story Sense</title>
+
+  <link rel="stylesheet" href="Style/Default.css"> 
+   <script src="Scripts/AJAXscirpts.js"></script>
+  <style type="text/css">
   
+  .storyTbl{
+  	width: 100%;
+  	height: 100%;
+  	background: skyblue;
   }
+  
+  #tableStyle0{
+    width: 120%;
+  }
+  
+  #fontStyle2{
+font-family: Segoe UI; font-size: 20pt;
+color: black;
+}
 
-</style>
+#tableBorder3 ,.headTbl
+{
+border: 5px solid green;
+border-radius: 0px;
+width: 100%;
+font-family: Segoe UI; font-size: 13pt;
+}
+
+#learnerstories {
+}
+  
+  </style>
+  
 </head>
-
 <body>
-
-
 <%@ include file="Insertables/TopBar.jsp" %>
-<%@ include file="Insertables/LearnerNavBar.jsp" %>
-	<div class="container">
-	<h1>Stories from other learners</h1>
-	<form>
-	<input type="submit" value="submit"/>
-	<table align="center" width="75%" bgcolor="skyblue" >
-	<tr>
-	<th>Author</th>
-	<td>KyleXY <img src="images/Untitled.jpg" /></td>
-	<th>Story Title</th>
-	<td>Park Trip</td>
+<%@ include file="Insertables/accountbar.jsp" %>
+<div>
 	
-	<th>How do you like the story</th>
+<table width="80%" align="right">
 	
-	<td><select>
-	<option>I don't like it</option>
-	<option>It is okay</option>
-	<option>I like it</option>
-	<option>I really like it</option>
-	</select></td>
-	
-	</tr>
-	
-	<tr>
-	<th colspan="2">Story: </th>
-	<td colspan="4">
-	<hr>
-		Let's take a trip to park. 
-		A skate board is an object we can find in the park. 
-		Last week, I was relaxing when I was at the park. 
-		After going to the park, I went to the skyscraper. 
-	<hr>
+	<tr align="center"><td>
+		<table id="tableBorder3" class="tableBorder3" bgcolor = "#7DFB9D">
+		<thead><tr><th  id="fontStyle2">Stories of
+			<% out.print(myUser.getName()); %></th></tr></thead>	
+		</table>
 	</td></tr>
 	
-	<tr>
-	
-	<th>Author</th>
-	<td>Viziox <img src="images/disPic.jpg" /></td>
-	<th>Story Title</th>
-	<td>Delightful Message</td>
-	
-	<th>How much do you like the story</th>
-	<td><select>
-	<option>I don't like it</option>
-	<option>It is okay</option>
-	<option>I like it</option>
-	<option>I really like it</option>
-	</select></td>
-	</tr>
-	
-	<tr>
-	<th colspan="2">Story: </th>
-	<td colspan="4">
-	<hr>
-		I was given a message by a mailman on a sunny day. After reading the letter
-		I felt delightful.
-	<hr>
+
+	<tr><td>
+		<tr><td>
+			<table id="tableBorder3" bgcolor = "#7DFB9D">
+				<tr id="fontStyle3"><th width="15%">Story Name</th><th width="15%">Score Earned</th><th width="15%">Date Finished</th><th width="15%">Likes</th><th width="15%">View</th></tr>
+			</table>
+		</td></tr>
+		
+		<tr><td>
+			<table  id="tableBorder3" bgcolor = "white">
+				
+			<% CompleteStoryLoader sLoader=new CompleteStoryLoader();
+			sLoader.PreviewUserStories(myUser, out);
+			%>
+			
+			<tr >
+			<td id="storyStage" colspan="5"></td>
+		</tr>
+			</table>
+		</td></tr>
+		
+		<tr align="center"><td>
+		<table class="headTbl" bgcolor = "#7DFB9D">
+		<thead><tr><th  id="fontStyle2">Stories <% out.print(myUser.getName()); %> Like</th></tr></thead>	
+		</table>
 	</td></tr>
 	
-	
-	
-	
-	</table>
-	</form>
-	</div>
+	<tr><td>
+			<table  id="tableBorder3" bgcolor = "white">
+				
+			<% 
+			sLoader.previewLikedStories(myUser, out);
+			%>
+			
+			<tr >
+			<td id="storyStage" colspan="5"></td>
+		</tr>
+</table>
+
+
+</div>
 <%@ include file="Insertables/Footer.jsp" %>
+
+
+
+	
+	
 
 </body>
 </html>

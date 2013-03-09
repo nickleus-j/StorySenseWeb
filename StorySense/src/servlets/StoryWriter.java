@@ -157,22 +157,35 @@ public class StoryWriter extends BaseServlet {
 			story.setFileURL(fName);
 			story.setName(storyName);
 			myAcomDAO.addStoryAcomplishment(story);
-			updateUserScore(givenU, getTemplateFromDB());
+			
+			/*Update the score of the user after saving the story*/
+			updateUserScore(givenU, getTemplateFromDB(myDAOFactory));
 		 }catch(IOException ioEx){
 			 
 		 }
 		 
 	}
 	
-	public Template getTemplateFromDB(DAOFactory myDAOFactory){
+	/**
+	 * gets a template from the database
+	 * @param myDAOFactory
+	 * @return
+	 */
+	private Template getTemplateFromDB(DAOFactory myDAOFactory){
 		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
 		return templateDao.getTemplate(templateID);
 	}
 	
-	public Template getTemplateFromDB(){
+	private Template getTemplateFromDB(){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
 		return templateDao.getTemplate(templateID);
+	}
+	
+	public Template getTemplateFromDB(int templateKey){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
+		return templateDao.getTemplate(templateKey);
 	}
 	
 	private void updateUserScore(User givenUser,Template givenTemplate){
