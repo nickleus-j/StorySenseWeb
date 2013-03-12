@@ -274,7 +274,7 @@ public class RelationMysql extends RelationDAO {
 	            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
 	            Connection con = myFactory.getConnection();
 
-	            ps = con.prepareStatement("SELECT * FROM relation");
+	            ps = con.prepareStatement("SELECT * FROM Relation");
 	            rs = ps.executeQuery();
 
 	            while(rs.next())

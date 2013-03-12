@@ -110,12 +110,9 @@ function showStory(stageID,storyID,btID){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			document.getElementById(stageID).innerHTML=xmlhttp.responseText;
 			toggleShoHider(bt,stageID);
-			//showElement(document.getElementById(stageID));
 		}
 	  };
 	  
 	  xmlhttp.open("GET","StoryShower?q="+storyID+"&screen="+stageID,true);
 	  xmlhttp.send();
-	  //currentStage=document.getElementById(stageID);
-		//showElement(document.getElementById(stageID));
 }

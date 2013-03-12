@@ -163,6 +163,13 @@ public class CompleteStoryLoader {
 	}
 	
 	
+	/**
+	 * Generates HTML syntax for a button that will like/unlike a
+	 * story when clicked
+	 * @param storyID
+	 * @param myStory
+	 * @return
+	 */
 	private String generateLikeButtonHTML(String storyID,Acomplishment myStory){
 		String btElemName="btStory" +storyID,btIDElemName="id=\""+btElemName+"\"";
 		String btCode="";
@@ -170,8 +177,8 @@ public class CompleteStoryLoader {
 		LikedStoryDAO myLikeDAO=myDAOFactory.createLikeDAO();
 		
 		if(myLikeDAO.didUserLike(SessionUser.getAccountID(), myStory.getID())){
-			btCode=btCode.concat("<button "+btIDElemName+" onclick=\"showNumberOfLikes('"+storyID+"'," +myStory.getID()+","+
-					"'--','"+btElemName+"')\">" +"Unlike");
+			btCode=btCode.concat("<button "+btIDElemName+" " +
+					"onclick=\"showNumberOfLikes('"+storyID+"'," +myStory.getID()+",'--','"+btElemName+"')\">" +"Unlike");
 		}
 		else btCode=btCode.concat("<button "+btIDElemName+
 				" onclick=\"showNumberOfLikes('"+storyID+"'," +myStory.getID()+","+"'like','"+btElemName+"')\">" +
@@ -270,12 +277,10 @@ public class CompleteStoryLoader {
 				out.write("<td>"+Stories.get(ctr).getName()+"</td>");
 				out.write("<td>"+linkEncoder.createLinkToUser(author)+"</td>");
 				
-				if(SessionUser==myUser)
-					out.write("<td>"+myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"</td>");
-				else out.write("<td><b id='"+likeCtrID+"'>"+
-					myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"</b>"+
-					generateLikeButtonHTML(likeCtrID, Stories.get(ctr))+"</td>");
-					
+				/*Like column*/
+				out.write("<td><b id='"+likeCtrID+"'>"+
+						myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"</b>"+
+						generateLikeButtonHTML(likeCtrID, Stories.get(ctr))+"</td>");
 				
 				out.write("<td>"+createStoryLink(Stories.get(ctr).getID(), stageID)+"</td>");
 				
@@ -302,22 +307,4 @@ public class CompleteStoryLoader {
 	}
 	
 	
-	/**For demo purpose*/
-	public String loadSampleStory(){
-		FileInputStream fileIn;
-		try {
-			fileIn = new FileInputStream("The introduction of Simba522066365Simba.story");
-			
-			ObjectInputStream oi = new ObjectInputStream(fileIn);
-			StoryFileAccess storyFile=(StoryFileAccess)oi.readObject();
-			fileIn.close();
-			return previewStory(storyFile);
-		} catch(IOException ioEx){
-			return "File path problems D:";
-		}
-		catch(Exception ex){
-			//out.println("Error in getting the story\n"+ex.getMessage());
-		}
-		return "Error";
-	}
 }

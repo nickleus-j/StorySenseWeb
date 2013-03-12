@@ -17,7 +17,6 @@ function loadStories(limit){
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			document.getElementById(stageID).innerHTML=xmlhttp.responseText;
-			//showElement(document.getElementById(stageID));
 		}
 	  };
 	  

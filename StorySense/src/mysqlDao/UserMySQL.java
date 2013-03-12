@@ -364,6 +364,10 @@ public class UserMySQL extends UserDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
 
+            /*
+             * SELECT SUM(plusScore) from storyaccomplishment,template 
+             * WHERE template.TemplateID=storyaccomplishment.templateID AND AccountID=?
+             */
             ps = con.prepareStatement("SELECT * from account WHERE role=1 ORDER BY  Points DESC LIMIT 10");
             rs = ps.executeQuery();
             
