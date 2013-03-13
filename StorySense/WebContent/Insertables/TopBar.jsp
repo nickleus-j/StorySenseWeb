@@ -1,3 +1,4 @@
+<%@page import="webEncoder.WebCodeMaker"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="entity.*"
@@ -26,19 +27,20 @@ font-family: Segoe UI; font-size: 20pt;
 
 <div id="center">
 	<div id="LogoHere">	
-	  <h1> <%
+	   <%WebCodeMaker userEncoder=new WebCodeMaker(out);
 		if(u!=null){
-			//out.println("Hello "+u.getName());
+			//<img src="images/storysenselogo3.png" ></img>
+			out.write(userEncoder.showUserHTMl(u));
 			%>
 			
 	<%  }
 		else {
-	%><%@ include file="LogInForm.jsp" %> <% } %></h1></div>
+	%><%@ include file="LogInForm.jsp" %> <% } %></div>
 	<div>
 	
 	<table bgcolor="white" align="center" id = "tableBorderTopBar">
 	<tr>
-	<td id="fontStyleTopbar"><img src="images/storysenselogo3.png" ></img></td>
+	<td id="fontStyleTopbar"><img src="images/storysenselogo3.png"/></td>
 	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/LearnerHomeSample2.jsp"><img src="images/HomeButtons/home.png" onmouseover="this.src='images/HomeButtons/homeB.png'" onmouseout="this.src='images/HomeButtons/home.png'"  border="0" width="160"/></a> </td>
 	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/templateDisplay.jsp"><img src="images/HomeButtons/Create Stories.png" onmouseover="this.src='images/HomeButtons/Create StoriesB.png'" onmouseout="this.src='images/HomeButtons/Create Stories.png'"  border="0" width="160"/></a></td>
 	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/LearnerHomeSample.jsp"><img src="images/HomeButtons/My Stories.png" onmouseover="this.src='images/HomeButtons/My StoriesB.png'" onmouseout="this.src='images/HomeButtons/My Stories.png'"  border="0" width="160"/></a></td>

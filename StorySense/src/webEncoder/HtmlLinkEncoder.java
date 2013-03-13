@@ -3,7 +3,7 @@ package webEncoder;
 import entity.User;
 
 /**
- * Creates html Link code to be printed from a JSP writer
+ * Creates HTML Link code to be printed from a JSP writer
  * @author Nickleus Jimenez
  */
 public class HtmlLinkEncoder {

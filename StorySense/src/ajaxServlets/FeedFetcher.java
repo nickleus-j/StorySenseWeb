@@ -18,6 +18,7 @@ import entity.User;
 
 import servlets.BaseServlet;
 import webEncoder.CompleteStoryLoader;
+import webEncoder.HtmlLinkEncoder;
 
 /**
  * Servlet implementation class FeedFetcher
@@ -54,14 +55,15 @@ public class FeedFetcher extends BaseServlet {
 	private void encodeStoriesInHTML(PrintWriter out,ArrayList<Acomplishment> Stories,UserDAO myUserDao,User SessionUser){
 		CompleteStoryLoader sLoader=new CompleteStoryLoader(SessionUser);
 		User myUser;
+		HtmlLinkEncoder linkEncoer=new HtmlLinkEncoder();
 		
-			out.write("<tr><td id='1st'></td></tr>");
+			
 			/*loop that displays the stories*/
 			for(int ctr=0;ctr<Stories.size();ctr++){
 				out.write("<tr class=\"storyHead\">");
 				myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
 				out.write("<th>Title:</th><td> "+Stories.get(ctr).getName()+"</td> <th>Made by </th>" +
-						"<td>"+myUser.getName()+"</td></tr>");
+						"<td>"+linkEncoer.createLinkToUser(myUser)+"</td></tr>");
 				
 				if(SessionUser!=null)
 					out.write(sLoader.generateLikeRow(Stories.get(ctr))+"</tr>");

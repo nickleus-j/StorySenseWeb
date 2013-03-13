@@ -51,12 +51,12 @@ public class WebCodeMaker {
 		
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		UserDAO myUserDAO = myDAOFactory.createUserDAO();
-		
+		HtmlLinkEncoder linkEncoder=new HtmlLinkEncoder();
 		
 		ArrayList<User> Users=(ArrayList<User>)myUserDAO.getTopLearners();
 			for(int ctr=0;ctr<Users.size();ctr++)
 				tableCode=tableCode.concat("<tr align='center'>"+
-				"<td class='lBoardbBox'>" +Users.get(ctr).getName()+"</td>"+
+				"<td class='lBoardbBox'>" +linkEncoder.createLinkToUser(Users.get(ctr))+"</td>"+
 				"<td class='lBoardbBox'>"+Users.get(ctr).getLevel()+"</td>"+
 				"<td class='lBoardbBox'>"+Users.get(ctr).getPoints()+"</td>"+
 				"</tr>");
@@ -64,6 +64,12 @@ public class WebCodeMaker {
 			return tableCode;
 	}
 	
+	/**
+	 * Generates a string that will be used in HTML documents
+	 * to show an image
+	 * @param u
+	 * @return
+	 */
 	public String enterUserImageTag(User u){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		ProfileDAO profileDAO=myDAOFactory.createProfileDAO();
@@ -71,6 +77,25 @@ public class WebCodeMaker {
 		
 		Profile profile=profileDAO.getProfile(u);
 		imgCode=imgCode.concat("<img width=\"100\" height=\"100\" src='"+profile.getImageURL()+"'/>");
+		
+		return imgCode;
+		
+	}
+	/**
+	 * Generates a string that will be used in HTML documents
+	 * to show an image
+	 * @param u
+	 * @param width
+	 * @param height
+	 * @return
+	 */
+	public String enterUserImageTag(User u,int width,int height){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		ProfileDAO profileDAO=myDAOFactory.createProfileDAO();
+		String imgCode="";
+		
+		Profile profile=profileDAO.getProfile(u);
+		imgCode=imgCode.concat("<img width=\""+width+"\" height=\""+height+"\" src='"+profile.getImageURL()+"'/>");
 		
 		return imgCode;
 		
@@ -86,6 +111,15 @@ public class WebCodeMaker {
 		
 		return imgCode;
 		
+	}
+	
+	public String showUserHTMl(User u){
+		String code="Hello ";
+		if(u!=null){
+			code=code.concat(u.getName());
+			code=enterUserImageTag(u,50,50).concat(code);
+		}
+		return code;
 	}
 	
 }

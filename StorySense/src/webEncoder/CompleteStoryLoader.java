@@ -111,7 +111,6 @@ public class CompleteStoryLoader {
 	public void encodeStoriesInHTML(JspWriter out,ArrayList<Acomplishment> Stories,User myUser){
 		
 		try{
-			//out.write("<p>");
 			out.write("<table id=\"tableBorderfeed2\" bgcolor=\"white\">");
 			out.write("<tr><td id='1st'></td></tr>");
 			/*loop that displays the stories*/
