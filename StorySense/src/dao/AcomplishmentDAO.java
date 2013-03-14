@@ -8,6 +8,9 @@ public abstract class AcomplishmentDAO {
 	public abstract List<Acomplishment> getAllStories();
 	public abstract List<Acomplishment> getAllStories(int limit);
 	public abstract List<Acomplishment> getAllStoriesOfUser(int AccountID);
+	public abstract List<Acomplishment> getStoriesToRate(int AccountID);
+	public abstract List<Acomplishment> getStoriesRated(int readerID);
+	public abstract List<Acomplishment> getUserStoriesToRatedbyReader(int readerID,int writerID);
 	public abstract List<Acomplishment> getAllStoriesOfTemplate(int TemplateID);
 	public abstract Acomplishment getStory(int ID);
 	public abstract void addStoryAcomplishment(Acomplishment story);

@@ -3,6 +3,7 @@ package mysqlDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -31,6 +32,34 @@ import entity.Acomplishment;
  */
 public class AcomplishmentMySQL extends AcomplishmentDAO {
 
+	/*
+	 * while(rs.next()){
+            	Story=new Acomplishment();
+            	Story.setID(rs.getInt("ID"));
+            	Story.setAccountID(rs.getInt("AccountID"));
+            	Story.setTemplateID(rs.getInt("templateID"));
+            	Story.setName(rs.getString("Name"));
+            	Story.setFileURL(rs.getString("fileURL"));
+            	Story.setFinishTime(rs.getTimestamp("finishTime"));
+            	Stories.add(Story);
+            }
+            ArrayList<Acomplishment>
+	 */
+	
+	private void addResultsToList(ArrayList<Acomplishment> Stories,ResultSet rs) throws SQLException{
+		Acomplishment Story;
+		while(rs.next()){
+        	Story=new Acomplishment();
+        	Story.setID(rs.getInt("ID"));
+        	Story.setAccountID(rs.getInt("AccountID"));
+        	Story.setTemplateID(rs.getInt("templateID"));
+        	Story.setName(rs.getString("Name"));
+        	Story.setFileURL(rs.getString("fileURL"));
+        	Story.setFinishTime(rs.getTimestamp("finishTime"));
+        	Stories.add(Story);
+        }
+	}
+	
 	/**
 	 * get all the stories accomplished in the database
 	 * @return Stories : the stories accomplished
@@ -47,13 +76,12 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             ps = con.prepareStatement("SELECT * from storyaccomplishment order by finishtime DESC");
             rs = ps.executeQuery();
             
-            Acomplishment Story;
             ArrayList<Acomplishment> Stories=null;
             
             
             	Stories=new ArrayList<Acomplishment>();
             	
-            	/*Loop that inserts the stories into the list*/
+            	/*Loop that inserts the stories into the list
             	while(rs.next()){
             		Story=new Acomplishment();
             		Story.setID(rs.getInt("ID"));
@@ -63,7 +91,9 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             		Story.setFileURL(rs.getString("fileURL"));
             		Story.setFinishTime(rs.getTimestamp("finishTime"));
             		Stories.add(Story);
-            	}
+            	}*/
+            	
+            	addResultsToList(Stories, rs);
             
             
             rs.close();
@@ -99,18 +129,9 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             ps.setInt(1, AccountID);
             rs = ps.executeQuery();
             
-            Acomplishment Story;
+            //Acomplishment Story;
             ArrayList<Acomplishment> Stories=new ArrayList<Acomplishment>();
-            while(rs.next()){
-            	Story=new Acomplishment();
-            	Story.setID(rs.getInt("ID"));
-            	Story.setAccountID(rs.getInt("AccountID"));
-            	Story.setTemplateID(rs.getInt("templateID"));
-            	Story.setName(rs.getString("Name"));
-            	Story.setFileURL(rs.getString("fileURL"));
-            	Story.setFinishTime(rs.getTimestamp("finishTime"));
-            	Stories.add(Story);
-            }
+            addResultsToList(Stories, rs);
             
             rs.close();
             ps.close();
@@ -141,18 +162,9 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             ps.setInt(1, TemplateID);
             rs = ps.executeQuery();
             
-            Acomplishment Story;
+          //Acomplishment Story;
             ArrayList<Acomplishment> Stories=new ArrayList<Acomplishment>();
-            while(rs.next()){
-            	Story=new Acomplishment();
-            	Story.setID(rs.getInt("ID"));
-            	Story.setAccountID(rs.getInt("AccountID"));
-            	Story.setTemplateID(rs.getInt("templateID"));
-            	Story.setName(rs.getString("Name"));
-            	Story.setFileURL(rs.getString("fileURL"));
-            	Story.setFinishTime(rs.getTimestamp("finishTime"));
-            	Stories.add(Story);
-            }
+            addResultsToList(Stories, rs);
             
             rs.close();
             ps.close();
@@ -271,23 +283,9 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             ps.setInt(1, limit);
             rs = ps.executeQuery();
             
-            Acomplishment Story;
-            ArrayList<Acomplishment> Stories=null;
-            
-            
-            	Stories=new ArrayList<Acomplishment>();
-            	
-            	/*Loop that inserts the stories into the list*/
-            	while(rs.next()){
-            		Story=new Acomplishment();
-            		Story.setID(rs.getInt("ID"));
-            		Story.setAccountID(rs.getInt("AccountID"));
-            		Story.setTemplateID(rs.getInt("templateID"));
-            		Story.setName(rs.getString("Name"));
-            		Story.setFileURL(rs.getString("fileURL"));
-            		Story.setFinishTime(rs.getTimestamp("finishTime"));
-            		Stories.add(Story);
-            	}
+          //Acomplishment Story;
+            ArrayList<Acomplishment> Stories=new ArrayList<Acomplishment>();
+            addResultsToList(Stories, rs);
             
             
             rs.close();
@@ -320,24 +318,9 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             ps.setInt(1, userID);
             rs = ps.executeQuery();
             
-            Acomplishment Story;
-            ArrayList<Acomplishment> Stories=null;
-            
-            
-            	Stories=new ArrayList<Acomplishment>();
-            	
-            	/*Loop that inserts the stories into the list*/
-            	while(rs.next()){
-            		Story=new Acomplishment();
-            		Story.setID(rs.getInt("ID"));
-            		Story.setAccountID(rs.getInt("AccountID"));
-            		Story.setTemplateID(rs.getInt("templateID"));
-            		Story.setName(rs.getString("Name"));
-            		Story.setFileURL(rs.getString("fileURL"));
-            		Story.setFinishTime(rs.getTimestamp("finishTime"));
-            		Stories.add(Story);
-            	}
-            
+          //Acomplishment Story;
+            ArrayList<Acomplishment> Stories=new ArrayList<Acomplishment>();
+            addResultsToList(Stories, rs);
             
             rs.close();
             ps.close();
@@ -346,6 +329,108 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             //if(!Stories.isEmpty())
               return Stories;
            // return null;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
+	@Override
+	public List<Acomplishment> getStoriesToRate(int AccountID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from storyaccomplishment " +
+            		"WHERE ID NOT IN (SELECT accomplishmentID from rating WHERE readerID =?)");
+            ps.setInt(1, AccountID);
+            rs = ps.executeQuery();
+            
+          //Acomplishment Story;
+            ArrayList<Acomplishment> Stories=new ArrayList<Acomplishment>();
+            addResultsToList(Stories, rs);
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return Stories;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
+	/**
+	 * Gets the stories made by an author to be revieed by a certain
+	 * reviewer
+	 */
+	@Override
+	public List<Acomplishment> getUserStoriesToRatedbyReader(int readerID,
+			int writerID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from storyaccomplishment " +
+            		"WHERE ID NOT IN (SELECT accomplishmentID from rating WHERE readerID =?) AND AccountID=?");
+            ps.setInt(1, readerID);
+            ps.setInt(2, writerID);
+            rs = ps.executeQuery();
+            
+          //Acomplishment Story;
+            ArrayList<Acomplishment> Stories=new ArrayList<Acomplishment>();
+            addResultsToList(Stories, rs);
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return Stories;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
+	/**
+	 * get the stories alreaDY Rated
+	 */
+	@Override
+	public List<Acomplishment> getStoriesRated(int readerID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from storyaccomplishment " +
+            		"WHERE ID IN (SELECT accomplishmentID from rating WHERE readerID =?)");
+            ps.setInt(1, readerID);
+            rs = ps.executeQuery();
+            
+          //Acomplishment Story;
+            ArrayList<Acomplishment> Stories=new ArrayList<Acomplishment>();
+            addResultsToList(Stories, rs);
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return Stories;
 		}
         catch (Exception ex)
         {

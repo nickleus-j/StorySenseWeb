@@ -118,7 +118,8 @@ public class RatingMySQL extends RatingDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
 
-            ps = con.prepareStatement("SELECT * FROM rating WHERE readerID = ?");
+            ps = con.prepareStatement("SELECT * from rating WHERE accomplishmentID " +
+            		"IN (SELECT ID FROM storyaccomplishment WHERE AccountID=?) ");
             ps.setInt(1, WriterID);
             rs = ps.executeQuery();
             
@@ -189,6 +190,47 @@ public class RatingMySQL extends RatingDAO {
         	Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+	}
+
+	/**
+	 * gets the ratings of certain accomplishments
+	 */
+	@Override
+	public List<Rating> getRatingsOfAccomplishment(int accomID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from rating WHERE accomplishmentID = ?");
+            ps.setInt(1, accomID);
+            rs = ps.executeQuery();
+            
+            Rating Score;
+            ArrayList<Rating> ratings=new ArrayList<Rating>();
+            while(rs.next()){
+            	Score=new Rating();
+            	Score.setAccomplishmentID(rs.getInt("accomplishmentID"));
+            	Score.setReaderID(rs.getInt("readerID"));
+            	Score.setScore(rs.getInt("Score"));
+            	ratings.add(Score);
+            }
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            if(ratings.isEmpty())
+            	return null;
+            return ratings;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(RatingMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
 	}
 
 }

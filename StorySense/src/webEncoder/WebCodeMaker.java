@@ -101,6 +101,11 @@ public class WebCodeMaker {
 		
 	}
 	
+	/**Returns HTML code that show the users' image with his/her
+	 * real name
+	 * @param u
+	 * @return
+	 */
 	public String enterUserRealName(User u){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		ProfileDAO profileDAO=myDAOFactory.createProfileDAO();
