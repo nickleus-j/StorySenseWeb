@@ -41,8 +41,10 @@
 
 
 </style>
+<script src="Scripts/AJAXscirpts.js"></script>
+  <script src="Scripts/StoryFeedScript.js"></script>
 </head>
-<body>
+<body onload="loadStoriesToReview(10)">
 
 <%@ include file="Insertables/ReviewerNavBar.jsp" %>
 <div id="container">

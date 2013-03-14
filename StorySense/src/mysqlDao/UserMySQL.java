@@ -3,6 +3,7 @@ package mysqlDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -231,6 +232,20 @@ public class UserMySQL extends UserDAO {
 		return null;
 	}
 
+	private void addResultsIntoList(ArrayList<User> Users,ResultSet rs) throws SQLException{
+		User u;
+		while(rs.next()){
+        	u=new User();
+        	u.setAccountID(rs.getInt("accountID"));
+        	u.setName(rs.getString("Name"));
+        	u.setPassword(rs.getString("Password"));
+        	u.setRole(rs.getInt("role"));
+        	u.setActiveStatus(rs.getInt("Active"));
+        	u.setLevel(rs.getInt("Level"));
+        	u.setPoints(rs.getInt("Points"));
+        	Users.add(u);
+        }
+	}
 	/**
 	 * Gets all the users in the database
 	 */
@@ -246,9 +261,10 @@ public class UserMySQL extends UserDAO {
             ps = con.prepareStatement("SELECT * FROM account");
             rs = ps.executeQuery();
             
-            User u;
+            //User u;
             ArrayList<User> Users=new ArrayList<User>();
-            while(rs.next()){
+            addResultsIntoList(Users,rs);
+            /*while(rs.next()){
             	u=new User();
             	u.setAccountID(rs.getInt("accountID"));
             	u.setName(rs.getString("Name"));
@@ -258,7 +274,8 @@ public class UserMySQL extends UserDAO {
             	u.setLevel(rs.getInt("Level"));
             	u.setPoints(rs.getInt("Points"));
             	Users.add(u);
-            }
+            }*/
+            
 
             rs.close();
             ps.close();
@@ -371,19 +388,9 @@ public class UserMySQL extends UserDAO {
             ps = con.prepareStatement("SELECT * from account WHERE role=1 ORDER BY  Points DESC LIMIT 10");
             rs = ps.executeQuery();
             
-            User u;
+          //User u;
             ArrayList<User> Users=new ArrayList<User>();
-            while(rs.next()){
-            	u=new User();
-            	u.setAccountID(rs.getInt("accountID"));
-            	u.setName(rs.getString("Name"));
-            	u.setPassword(rs.getString("Password"));
-            	u.setRole(rs.getInt("role"));
-            	u.setActiveStatus(rs.getInt("Active"));
-            	u.setLevel(rs.getInt("Level"));
-            	u.setPoints(rs.getInt("Points"));
-            	Users.add(u);
-            }
+            addResultsIntoList(Users,rs);
             
 
             rs.close();
@@ -454,19 +461,9 @@ public class UserMySQL extends UserDAO {
             ps.setInt(1, storyID);
             rs = ps.executeQuery();
             
-            User u;
+          //User u;
             ArrayList<User> Users=new ArrayList<User>();
-            while(rs.next()){
-            	u=new User();
-            	u.setAccountID(rs.getInt("accountID"));
-            	u.setName(rs.getString("Name"));
-            	u.setPassword(rs.getString("Password"));
-            	u.setRole(rs.getInt("role"));
-            	u.setActiveStatus(rs.getInt("Active"));
-            	u.setLevel(rs.getInt("Level"));
-            	u.setPoints(rs.getInt("Points"));
-            	Users.add(u);
-            }
+            addResultsIntoList(Users,rs);
             
 
             rs.close();
