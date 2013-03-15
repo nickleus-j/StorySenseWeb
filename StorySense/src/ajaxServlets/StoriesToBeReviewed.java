@@ -49,7 +49,7 @@ public class StoriesToBeReviewed extends BaseServlet {
 		try{
 			limit=Integer.parseInt(request.getParameter(AttributeNames.querylimit.toString()));
 			
-			if(limit!=0)
+			if(level==0)
 				Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoriesToRate(sessionUser.getAccountID());
 			else 
 				Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoryWithAtLeastLevel(sessionUser.getAccountID(), level);

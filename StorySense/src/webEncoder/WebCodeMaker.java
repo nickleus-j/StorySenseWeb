@@ -130,14 +130,14 @@ public class WebCodeMaker {
 	}
 	
 	public String getTemplateComboBoxHTML(){
-		String Code="<select id=\"level\" onchange=\"ReviewStoriesInLevel(10,1,level)\">",options="";
+		String Code="<select id=\"level\" onchange=\"ReviewStoriesInLevel(10,1,this.value)\">";
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
 		ArrayList<Template> templates=(ArrayList<Template>)templateDao.getGroupedtemplates();
 		
 		for(int ctr=0;ctr<templates.size();ctr++){
-			options="<option>"+templates.get(ctr).getLevelRequirement()+"</option>";
-			Code=Code.concat(options);
+			
+			Code=Code.concat("<option>"+templates.get(ctr).getLevelRequirement()+"</option>");
 		}
 		
 		return Code.concat("</select>");
