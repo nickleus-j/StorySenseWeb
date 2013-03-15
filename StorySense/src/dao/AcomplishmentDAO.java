@@ -16,4 +16,6 @@ public abstract class AcomplishmentDAO {
 	public abstract void addStoryAcomplishment(Acomplishment story);
 	public abstract void updateStory(Acomplishment story);
 	public abstract List<Acomplishment> getUserLikedStories(int userID);
+	public abstract List<Acomplishment> getStoryWithLevel(int readerID,int level);
+	public abstract List<Acomplishment> getStoryWithAtLeastLevel(int readerID,int level);
 }

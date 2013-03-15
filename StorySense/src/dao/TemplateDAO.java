@@ -15,5 +15,6 @@ public abstract class TemplateDAO {
 	public abstract List<Template> getTemplatebyScore(int minimumPoints);
 	public abstract List<Template> getTemplatebyName(String Name);
 	public abstract List<Template> getAlltemplates();
+	public abstract List<Template> getGroupedtemplates();
 	public abstract Template getTemplate(int id);
 }

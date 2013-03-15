@@ -17,6 +17,7 @@ import entity.User;
 import servlets.BaseServlet;
 import webEncoder.CompleteStoryLoader;
 import webEncoder.HtmlLinkEncoder;
+import worker.AttributeNames;
 
 /**
  * Servlet implementation class StoriesToBeReviewed
@@ -28,21 +29,31 @@ public class StoriesToBeReviewed extends BaseServlet {
     /**
      * Default constructor. 
      */
-    public StoriesToBeReviewed() {
-        // TODO Auto-generated constructor stub
-    }
+    public StoriesToBeReviewed() { }
 
 	@Override
 	public void executeCustomCode(HttpServletRequest request,
 			HttpServletResponse response) {
-		int limit=10;
-		
+		int limit=10,level=0;
+		User sessionUser=(User)request.getSession().getAttribute(AttributeNames.user.toString());
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
-		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStories(limit);
+		ArrayList<Acomplishment> Stories;
+		
 		try{
-			limit=Integer.parseInt(request.getParameter("limit"));
-			Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStories(limit);
+			level=Integer.parseInt(request.getParameter(AttributeNames.Level.toString()));
+		}catch(Exception ex){
+			level=0;
+		}
+		
+		try{
+			limit=Integer.parseInt(request.getParameter(AttributeNames.querylimit.toString()));
+			
+			if(limit!=0)
+				Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoriesToRate(sessionUser.getAccountID());
+			else 
+				Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoryWithAtLeastLevel(sessionUser.getAccountID(), level);
+			
 			encodeStoriesInHTML(response.getWriter(), Stories,myDAOFactory.createUserDAO());
 				
 			response.getWriter().print("");
@@ -61,21 +72,11 @@ public class StoriesToBeReviewed extends BaseServlet {
 		CompleteStoryLoader sLoader=new CompleteStoryLoader();
 		User myUser;
 		String stageID="";
+		String tblIni="<tr><th colspan=6 id=\"validatedStoriesHeader\">" +
+				"Stories from other learners</th></tr>" +
+				"<tr><th>Author</th><th>Story Title</th><th>Show Story</th></tr>";
 			
-			/*loop that displays the stories
-			for(int ctr=0;ctr<Stories.size();ctr++){
-				out.write("<tr class=\"storyHead\">");
-				myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
-				out.write("<th>Title:</th><td> "+Stories.get(ctr).getName()+"</td> <th>Made by </th>" +
-						"<td>"+myUser.getName()+"</td></tr>");
-				
-				
-				out.write("<tr><td colspan=\"4\">");
-				out.write("<br/>"+sLoader.loadStory(Stories.get(ctr).getFileURL()));
-				out.write("<hr/></td></tr>");
-				
-			}/*End of Loop onshow=""*/
-			
+		out.write(tblIni);
 			/*Loop that shows the story Links*/
 			for(int ctr=0;ctr<Stories.size();ctr++){
 
@@ -84,7 +85,7 @@ public class StoriesToBeReviewed extends BaseServlet {
 				out.write("<tr>");
 				out.write("<td>"+myUser.getName()+"</td>");
 				out.write("<td>"+Stories.get(ctr).getName()+"</td>");
-				out.write("<td>"+sLoader.createStoryLink(Stories.get(ctr).getID(), stageID)+"</td>");
+				out.write("<td><a>"+sLoader.createStoryLink(Stories.get(ctr).getID(), stageID)+"</a></td>");
 				
 				out.write("</tr>" +
 						"<tr><td class=\"hiddenElem\" id=\""+stageID+"\" colspan='3'></td>");

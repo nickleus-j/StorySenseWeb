@@ -1,3 +1,4 @@
+<%@page import="webEncoder.WebCodeMaker"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -50,6 +51,17 @@
 <div id="container">
 	
 
+	<table align="center" width="100%" >
+	<tr>
+		<th>Pick Minimum Level
+		
+			<% 
+			WebCodeMaker htmlWriter=new WebCodeMaker(out); 
+			out.write(htmlWriter.getTemplateComboBoxHTML());
+			%>
+		
+		</th>
+	</tr></table>
 	<table align="center" width="100%" class="validatedStoriesTable" id="validatedStoriesTable">
 	
 	<tr>
@@ -59,7 +71,7 @@
 	</tr>
 	
 	<tr>
-	<th>Profile Picture</th><th>Author</th><th>Story Title</th><th>Rating Given</th><th>Show Story</th>
+	<th>Author</th><th>Story Title</th><th>Show Story</th>
 	</tr>
 	</table>
 	</div>

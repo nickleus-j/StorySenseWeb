@@ -39,11 +39,23 @@ font-family: Segoe UI; font-size: 20pt;
 	<table bgcolor="white" align="center" id = "tableBorderTopBar">
 	<tr>
 	<td id="fontStyleTopbar"><img src="images/storysenselogo3.png" ></img></td>
-	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/ValidatedStories.jsp"><img src="images/HomeButtons/home.png" onmouseover="this.src='images/HomeButtons/homeB.png'" onmouseout="this.src='images/HomeButtons/home.png'"  border="0" width="160"/></a> </td>
+	<td id="fontStyleTopbar" width="15%" align="center">
+	<a href="../StorySense/ReviewerHome.jsp">
+	<img src="images/HomeButtons/home.png" onmouseover="this.src='images/HomeButtons/homeB.png'" onmouseout="this.src='images/HomeButtons/home.png'"  border="0" width="160"/>
+	</a> </td>
+	
+	
 	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/ValidateSample.jsp"><img src="images/HomeButtons/Create Stories.png" onmouseover="this.src='images/HomeButtons/Create StoriesB.png'" onmouseout="this.src='images/HomeButtons/Create Stories.png'"  border="0" width="160"/></a></td>
 	
-	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/View_Profile.jsp"><img src="images/HomeButtons/Profile.png" onmouseover="this.src='images/HomeButtons/ProfileB.png'" onmouseout="this.src='images/HomeButtons/Profile.png'"  border="0" width="160"/></a></td>
-	<td id="fontStyleTopbar2" width="15%" align="center"><a href="Logout"><img src="images/HomeButtons/Logout.png" onmouseover="this.src='images/HomeButtons/LogoutB.png'" onmouseout="this.src='images/HomeButtons/Logout.png'"  border="0" width="160" /></a></td>
+	<td id="fontStyleTopbar" width="15%" align="center">
+		<a href="../StorySense/ValidatedStories.jsp">Validated Stories</a>
+		</td>
+		
+	<td id="fontStyleTopbar2" width="15%" align="center">
+	<a href="Logout">
+	<img src="images/HomeButtons/Logout.png" onmouseover="this.src='images/HomeButtons/LogoutB.png'" onmouseout="this.src='images/HomeButtons/Logout.png'"  border="0" width="160" />
+		</a></td>
+		
 	</tr>
 	</table>
 	

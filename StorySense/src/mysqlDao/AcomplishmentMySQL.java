@@ -439,4 +439,76 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
 		return null;
 	}
 
+	/**
+	 * Gets the stories where their template basis has the following level specified
+	 */
+	@Override
+	public List<Acomplishment> getStoryWithLevel(int readerID,int level) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from storyaccomplishment " +
+            		"WHERE ID NOT IN (SELECT accomplishmentID from rating WHERE readerID =?) AND " +
+            		"templateID IN (SELECT TemplateID from template WHERE LevelReq=?)");
+            ps.setInt(1, readerID);
+            ps.setInt(2, level);
+            rs = ps.executeQuery();
+            
+          //Acomplishment Story;
+            ArrayList<Acomplishment> Stories=new ArrayList<Acomplishment>();
+            addResultsToList(Stories, rs);
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return Stories;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
+	/**
+	 * Gets stories with at least this level
+	 */
+	@Override
+	public List<Acomplishment> getStoryWithAtLeastLevel(int readerID,int level) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from storyaccomplishment " +
+            		"WHERE ID NOT IN (SELECT accomplishmentID from rating WHERE readerID =?) AND " +
+            		"templateID IN (SELECT TemplateID from template WHERE LevelReq>=?)");
+            ps.setInt(1, readerID);
+            ps.setInt(2, level);
+            rs = ps.executeQuery();
+            
+          //Acomplishment Story;
+            ArrayList<Acomplishment> Stories=new ArrayList<Acomplishment>();
+            addResultsToList(Stories, rs);
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return Stories;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
 }

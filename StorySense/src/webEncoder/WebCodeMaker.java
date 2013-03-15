@@ -8,8 +8,10 @@ import javax.servlet.jsp.JspWriter;
 
 import dao.DAOFactory;
 import dao.ProfileDAO;
+import dao.TemplateDAO;
 import dao.UserDAO;
 import entity.Profile;
+import entity.Template;
 import entity.User;
 
 /**
@@ -125,6 +127,20 @@ public class WebCodeMaker {
 			code=enterUserImageTag(u,50,50).concat(code);
 		}
 		return code;
+	}
+	
+	public String getTemplateComboBoxHTML(){
+		String Code="<select id=\"level\" onchange=\"ReviewStoriesInLevel(10,1,level)\">",options="";
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
+		ArrayList<Template> templates=(ArrayList<Template>)templateDao.getGroupedtemplates();
+		
+		for(int ctr=0;ctr<templates.size();ctr++){
+			options="<option>"+templates.get(ctr).getLevelRequirement()+"</option>";
+			Code=Code.concat(options);
+		}
+		
+		return Code.concat("</select>");
 	}
 	
 }

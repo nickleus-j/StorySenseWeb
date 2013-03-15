@@ -162,6 +162,7 @@ public class TemplateMySQL extends TemplateDAO {
 		
 	}
 
+	
 	/**
 	 * gets the templates with a minimum level
 	 */
@@ -373,6 +374,49 @@ public class TemplateMySQL extends TemplateDAO {
             con.close();
             
             return t;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(TemplateMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
+	@Override
+	public List<Template> getGroupedtemplates() {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from template " +
+            		"WHERE TemplateID IN (SELECT templateID from storyaccomplishment GROUP BY templateID)" +
+            		"GROUP BY LevelReq");
+            rs = ps.executeQuery();
+           
+            
+            Template t;
+            ArrayList<Template> templates=new ArrayList<Template>();
+            while(rs.next()){
+            	t=new Template();
+            	t.setTemplateID(rs.getInt("TemplateID"));
+            	t.setName(rs.getString("Name"));
+            	t.setLevelRequirement(rs.getInt("LevelReq"));
+            	t.setPlusScore(rs.getInt("plusScore"));
+            	t.setStoryURL(rs.getString("StoryURL"));
+            	t.setRelationURL(rs.getString("RelationURL"));
+            	templates.add(t);
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+            
+            if(templates.isEmpty())
+            	return null;
+            return templates;
 		}
         catch (Exception ex)
         {

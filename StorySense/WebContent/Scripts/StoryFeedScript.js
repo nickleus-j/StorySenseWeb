@@ -49,3 +49,46 @@ function loadStoriesToReview(limit){
 	xmlhttp.open("GET","ReviewerFeed?limit="+limit+"&screen="+stageID,true);
 	xmlhttp.send();
 }
+
+function loadStoriesToReview(limit,page){
+	var xmlhttp=getAJAXRequest(),stageID="validatedStoriesTable";
+	_curretnStoryLimit=limit;
+	/*Check if the element passed is valid*/
+	if (stageID==null||stageID=="")
+	  {
+	  document.getElementById(stageID).innerHTML="";
+	  return;
+	  }
+	
+	/*What happens when a response from the server is obtained StoryShower*/
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			document.getElementById(stageID).innerHTML=xmlhttp.responseText;
+		}
+	  };
+	  
+	xmlhttp.open("GET","ReviewerFeed?limit="+limit+"&screen="+stageID+"&page="+page,true);
+	xmlhttp.send();
+}
+
+function ReviewStoriesInLevel(limit,page,level){
+	var xmlhttp=getAJAXRequest(),stageID="validatedStoriesTable";
+	_curretnStoryLimit=limit;
+	/*Check if the element passed is valid*/
+	if (stageID==null||stageID=="")
+	  {
+	  document.getElementById(stageID).innerHTML="";
+	  return;
+	  }
+	
+	/*What happens when a response from the server is obtained StoryShower*/
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			document.getElementById(stageID).innerHTML=xmlhttp.responseText;
+		}
+	  };
+	  
+	xmlhttp.open("GET","ReviewerFeed?limit="+limit+"&screen="+stageID+
+			"&page="+page+"&level="+level,true);
+	xmlhttp.send();
+}
