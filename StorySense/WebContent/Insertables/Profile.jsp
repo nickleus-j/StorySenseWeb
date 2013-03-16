@@ -34,6 +34,8 @@
 
 #profileDiv{
 	max-width:60%;
+	margin-top: 3%;
+	margin-left: 2%;
 	}
 
 h4{
