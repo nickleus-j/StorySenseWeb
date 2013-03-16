@@ -21,10 +21,7 @@
 	color: white;
 	}
 	
-	td{
-	font-family: "Segoe UI";
-	padding: 10px;
-	}
+	
 	
 .tableStyleProfile{
 	background: #FEDFDF;

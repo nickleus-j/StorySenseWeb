@@ -39,7 +39,7 @@ font-family: Segoe UI; font-size: 13pt;
   </style>
 
 </head>
-<body>
+<body bgcolor="CCFFFF">
 <%@ include file="Insertables/TopBar.jsp" %>
  <% request.setAttribute("viewedUser", u); %> 
 <%@ include file="Insertables/accountbar.jsp" %>

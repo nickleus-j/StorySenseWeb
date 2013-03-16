@@ -124,7 +124,8 @@ public class WebCodeMaker {
 		String code="Hello ";
 		if(u!=null){
 			code=code.concat(u.getName());
-			code=enterUserImageTag(u,50,50).concat(code);
+			code=code.concat(", Welcome to Story Sense!");
+			code=enterUserImageTag(u,30,30).concat(code);
 		}
 		return code;
 	}

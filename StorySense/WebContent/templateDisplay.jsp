@@ -30,7 +30,7 @@ font-family: Segoe UI; font-size: 20pt;
 </style>
 
 </head>
-<body>
+<body bgcolor="CCFFFF">
 
 <%@ include file="Insertables/TopBar.jsp" %>
 <div width="100%">

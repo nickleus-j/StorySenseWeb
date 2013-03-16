@@ -9,14 +9,14 @@
 
 <script src="Scripts/CompleteStoriesForm.js"></script>
 </head>
-<body>
+<body bgcolor="CCFFFF">
 
 
 <%@ include file="Insertables/TopBar.jsp" %>
 
 	<div id="container">
 	<div id="center" class="column">
-	<h1>Fill the blanks with your answers to complete the story</h1>
+	<h1>Come on let us write a story! Help me finish the story by putting words into the blanks</h1>
 	
 	<form name="Answers" id="Answers" action="StoryWriter">
 	<table align="center" width="50%" bgcolor="skyblue">

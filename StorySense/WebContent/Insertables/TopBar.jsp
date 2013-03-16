@@ -18,6 +18,12 @@ border-right-style: dotted;
 #fontStyleTopbar2{
 font-family: Segoe UI; font-size: 20pt;
 }
+.divisionHeader {
+   	width:100%;
+   	height:35px;   /* Height of the footer */
+	background-color: #159cdb;
+	margin-bottom: 1%;
+}
 </style>
 
 
@@ -26,7 +32,9 @@ font-family: Segoe UI; font-size: 20pt;
 %>
 
 <div id="center">
-	<div id="LogoHere">	
+	
+<div style="Clear:both;"></div>
+<div class="divisionHeader">
 	   <%WebCodeMaker userEncoder=new WebCodeMaker(out);
 		if(u!=null){
 			//<img src="images/storysenselogo3.png" ></img>
