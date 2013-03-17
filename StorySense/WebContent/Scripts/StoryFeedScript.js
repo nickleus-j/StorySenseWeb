@@ -92,3 +92,24 @@ function ReviewStoriesInLevel(limit,page,level){
 			"&page="+page+"&level="+level,true);
 	xmlhttp.send();
 }
+
+function loadStoriesReviewed(limit){
+	var xmlhttp=getAJAXRequest(),stageID="validatedStoriesTable";
+	_curretnStoryLimit=limit;
+	/*Check if the element passed is valid*/
+	if (stageID==null||stageID=="")
+	  {
+	  document.getElementById(stageID).innerHTML="";
+	  return;
+	  }
+	
+	/*What happens when a response from the server is obtained StoryShower*/
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			document.getElementById(stageID).innerHTML=xmlhttp.responseText;
+		}
+	  };
+	  
+	xmlhttp.open("GET","StoriesRated?limit="+limit+"&screen="+stageID,true);
+	xmlhttp.send();
+}

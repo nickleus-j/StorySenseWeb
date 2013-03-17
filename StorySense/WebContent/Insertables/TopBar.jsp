@@ -43,7 +43,9 @@ font-family: Segoe UI; font-size: 20pt;
 			
 	<%  }
 		else {
-	%><%@ include file="LogInForm.jsp" %> <% } %></div>
+	%><%@ include file="LogInForm.jsp" %> <% } %>
+	</div>
+	
 	<div>
 	
 	<table bgcolor="white" align="center" id = "tableBorderTopBar">

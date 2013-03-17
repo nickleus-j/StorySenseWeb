@@ -32,20 +32,6 @@ import entity.Acomplishment;
  */
 public class AcomplishmentMySQL extends AcomplishmentDAO {
 
-	/*
-	 * while(rs.next()){
-            	Story=new Acomplishment();
-            	Story.setID(rs.getInt("ID"));
-            	Story.setAccountID(rs.getInt("AccountID"));
-            	Story.setTemplateID(rs.getInt("templateID"));
-            	Story.setName(rs.getString("Name"));
-            	Story.setFileURL(rs.getString("fileURL"));
-            	Story.setFinishTime(rs.getTimestamp("finishTime"));
-            	Stories.add(Story);
-            }
-            ArrayList<Acomplishment>
-	 */
-	
 	private void addResultsToList(ArrayList<Acomplishment> Stories,ResultSet rs) throws SQLException{
 		Acomplishment Story;
 		while(rs.next()){

@@ -44,7 +44,7 @@
 <script src="Scripts/AJAXscirpts.js"></script>
   <script src="Scripts/StoryFeedScript.js"></script>
 </head>
-<body onload="loadStoriesToReview(10)">
+<body onload="loadStoriesReviewed(10)">
 
 <%@ include file="Insertables/ReviewerNavBar.jsp" %>
 <div id="container">
