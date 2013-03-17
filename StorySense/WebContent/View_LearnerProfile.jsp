@@ -11,13 +11,9 @@
   <link rel="stylesheet" href="Style/Default.css"> 
   <script src="Scripts/ProfileManagement.js"></script>
 </head>
-<body >
+<body bgcolor="CCFFFF">
 <%@ include file="Insertables/TopBar.jsp" %>
-
-
-
 <div id="container">
-
 <div id="center" class="column">
 <%@ include file="Insertables/Profile.jsp" %>
 </div>

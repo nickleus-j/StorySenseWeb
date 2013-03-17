@@ -21,10 +21,7 @@
 	color: white;
 	}
 	
-	td{
-	font-family: "Segoe UI";
-	padding: 10px;
-	}
+	
 	
 .tableStyleProfile{
 	background: #FEDFDF;
@@ -34,6 +31,8 @@
 
 #profileDiv{
 	max-width:60%;
+	margin-top: 3%;
+	margin-left: 2%;
 	}
 
 h4{

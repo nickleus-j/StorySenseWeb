@@ -144,7 +144,7 @@ public class WebCodeMaker {
 	}
 	
 	public String getChooseTemplateLevelHTML(){
-		String Code="<select id=\"level\">";
+		String Code="<select id=\"level\" >";
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
 		ArrayList<Template> templates=(ArrayList<Template>)templateDao.getGroupedtemplates();

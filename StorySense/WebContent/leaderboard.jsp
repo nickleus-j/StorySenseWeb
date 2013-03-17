@@ -13,7 +13,7 @@
   </style>
   
 </head>
-<body>
+<body bgcolor="CCFFFF">
 
 <%@ include file="Insertables/TopBar.jsp" %>
 <div>
