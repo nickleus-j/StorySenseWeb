@@ -143,4 +143,18 @@ public class WebCodeMaker {
 		return Code.concat("</select>");
 	}
 	
+	public String getChooseTemplateLevelHTML(){
+		String Code="<select id=\"level\">";
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
+		ArrayList<Template> templates=(ArrayList<Template>)templateDao.getGroupedtemplates();
+		
+		for(int ctr=0;ctr<templates.size();ctr++){
+			
+			Code=Code.concat("<option>"+templates.get(ctr).getLevelRequirement()+"</option>");
+		}
+		
+		return Code.concat("</select>");
+	}
+	
 }

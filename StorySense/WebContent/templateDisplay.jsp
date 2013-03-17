@@ -48,15 +48,9 @@ font-family: Segoe UI; font-size: 20pt;
 	<tr>
 	<th align="center">
 	Level
-		<select>
-		<option>5:</option>
-		<option>4:</option>
-		<option>3: </option>
-		<option>2: </option>
-		<option>1: </option>
-		</select>
+		<% out.write(userEncoder.getChooseTemplateLevelHTML()); %>
 		
-		<button onClick="window.location.href='StoryToAnsSample.jsp'">Pick template</button>
+		
 	</th>
 	<tr ><td colspan="2" align="center">Can't Pick? Use a random template 
 	<button onClick="window.location.href='MakingStory.jsp'">Go</button></td></tr>
