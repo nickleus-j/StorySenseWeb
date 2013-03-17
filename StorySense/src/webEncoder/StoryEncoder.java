@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspWriter;
 
+import worker.AttributeNames;
+
 import dao.DAOFactory;
 import dao.TemplateDAO;
 import entity.Template;
@@ -24,6 +26,7 @@ public class StoryEncoder {
 	private HttpServletRequest Request;
 	private JspWriter Out;
 	
+	public StoryEncoder(){}
 	public StoryEncoder(HttpServletRequest request,JspWriter out){
 		Request=request;
 		Out=out;
@@ -40,6 +43,11 @@ public class StoryEncoder {
 		return myStory.getsStory();
 	}
 	
+	/**
+	 * Encode story based on the templates in the server
+	 * Parts of the incomplete story will be generated in the server
+	 * then the user will see blanks to fill
+	 */
 	public void encodeStory(){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		TemplateDAO templateFactory=myDAOFactory.createTemplateDAO();
@@ -48,13 +56,39 @@ public class StoryEncoder {
 		
 		Story myStory=storyMaker.getStory();
 		
-		Request.getSession().setAttribute("Story", myStory);
+		Request.getSession().setAttribute(AttributeNames.Story.toString(), myStory);
 		Request.getSession().setAttribute(TEMPLATEID, storyMaker.getTemplateID());
 		try {
 			Out.write(myStory.getsStory());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Encodes a story to be completed based on the level
+	 * @param level
+	 */
+	public String encodeStory(int level){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		TemplateDAO templateFactory=myDAOFactory.createTemplateDAO();
+		ArrayList<Template> templateList;
+		
+		if(level==0)
+			templateList=(ArrayList<Template>)templateFactory.getAlltemplates();
+		else templateList=(ArrayList<Template>) templateFactory.getTemplatebyLevel(level);
+		
+		//Number of templates and Confidence for now
+		StoryGenerator storyMaker=new StoryGenerator(templateList, getConfidence());
+		
+		Story myStory=storyMaker.getStory();
+		
+		Request.getSession().setAttribute(AttributeNames.Story.toString(), myStory);
+		Request.getSession().setAttribute(TEMPLATEID, storyMaker.getTemplateID());
+		
+		if(myStory!=null)
+			return myStory.getsStory();
+		return "No story was generated";
 	}
 	
 	public String getStoryAttributeName(){return "Story";}

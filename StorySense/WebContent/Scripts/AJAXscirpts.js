@@ -116,3 +116,26 @@ function showStory(stageID,storyID,btID){
 	  xmlhttp.open("GET","StoryShower?q="+storyID+"&screen="+stageID,true);
 	  xmlhttp.send();
 }
+
+/*Shows the story where one story is shown one at a time*/
+function generateStory(stageID,level){
+	var xmlhttp=getAJAXRequest();
+	stage=document.getElementById(stageID);
+
+	if (stageID==null||stageID=="")
+	  {
+		stage.innerHTML="";
+	  return;
+	  }
+	
+	showElement(stage);
+	/*What happens when a response from the server is obtained StoryShower*/
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			stage.innerHTML=xmlhttp.responseText;
+		}
+	  };
+	  
+	  xmlhttp.open("GET","AJAXStoryGen?level="+storyID+"&screen="+stageID,true);
+	  xmlhttp.send();
+}
