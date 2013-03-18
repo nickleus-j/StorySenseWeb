@@ -71,7 +71,7 @@ public class StoriesToBeReviewed extends BaseServlet {
 	public void encodeStoriesInHTML(PrintWriter out,ArrayList<Acomplishment> Stories,UserDAO myUserDao){
 		CompleteStoryLoader sLoader=new CompleteStoryLoader();
 		User myUser;
-		String stageID="";
+		String stageID="reviewArea";
 		String tblIni="<tr><th colspan=6 id=\"validatedStoriesHeader\">" +
 				"Stories from other learners</th></tr>" +
 				"<tr><th>Author</th><th>Story Title</th><th>Show Story</th></tr>";
@@ -79,23 +79,33 @@ public class StoriesToBeReviewed extends BaseServlet {
 		out.write(tblIni);
 			/*Loop that shows the story Links*/
 			for(int ctr=0;ctr<Stories.size();ctr++){
-
+				stageID="storyPane"+ctr;
 				myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
 				/*Generate HTML code*/
 				out.write("<tr>");
 				out.write("<td>"+myUser.getName()+"</td>");
 				out.write("<td>"+Stories.get(ctr).getName()+"</td>");
-				out.write("<td><a>"+sLoader.createStoryLink(Stories.get(ctr).getID(), stageID)+"</a></td>");
+				out.write("<td><a>"+createReviewLink(Stories.get(ctr).getID(), stageID)+"</a></td>");
 				
 				out.write("</tr>" +
 						"<tr><td class=\"hiddenElem\" id=\""+stageID+"\" colspan='3'></td>");
 				
 				out.write("</tr>");
 				
-			}/*
+				
+			}
+			stageID="reviewArea";
+			/*
 			out.write("<tr><td align='center' colspan='5' onshow=\"loadMoreStoriesInFeed()\">" +
 			"<button onclick=\"loadMoreStoriesInFeed()\">Load More</button></td></tr>");
 			*/
+	}
+	
+	public String createReviewLink(int storyID,String stageID){
+		String btID="BT_"+storyID;
+		String link="<button id='"+btID+"' onclick=\"" +
+				"generateRelationPane('"+stageID+"',"+storyID+")\">";
+		return link.concat("See Story</button>");
 	}
 	
 }

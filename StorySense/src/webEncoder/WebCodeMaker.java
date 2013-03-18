@@ -124,7 +124,7 @@ public class WebCodeMaker {
 		String code="Hello ";
 		if(u!=null){
 			code=code.concat(u.getName());
-			code=enterUserImageTag(u,50,50).concat(code);
+			code=enterUserImageTag(u,30,30).concat(code)+" Welcome to Story Sense";
 		}
 		return code;
 	}
@@ -143,6 +143,11 @@ public class WebCodeMaker {
 		return Code.concat("</select>");
 	}
 	
+	/**
+	 * have a combo box that will show the levels available from
+	 * the templates 
+	 * @return
+	 */
 	public String getChooseTemplateLevelHTML(){
 		String Code="<select id=\"level\" >";
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);

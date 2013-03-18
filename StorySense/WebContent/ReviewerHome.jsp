@@ -75,6 +75,9 @@
 	</tr>
 	</table>
 	</div>
+	<div id="reviewArea">
+	
+	</div>
 <%@ include file="Insertables/Footer.jsp" %>
 
 </body>

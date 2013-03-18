@@ -61,6 +61,7 @@ public class CompleteStoryLoader {
 			ObjectInputStream oi = new ObjectInputStream(fileIn);
 			StoryFileAccess storyFile=(StoryFileAccess)oi.readObject();
 			fileIn.close();
+			oi.close();
 			return previewStory(storyFile);
 		} catch(IOException ioEx){
 			return "File path problems D:";
