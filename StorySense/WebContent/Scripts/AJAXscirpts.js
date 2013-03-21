@@ -96,12 +96,10 @@ function toggleShoHider(bt,stageID){
 function toggleShowHider(stageID){
 	var elem=document.getElementById(stageID);
 	if(elem.getAttribute("class")==gethiddenElemClass()){
-		//bt.setAttribute("onclick", "showElement("+stageID+")");
 		showElement(document.getElementById(stageID));
 		
 	}
 	else if(elem.getAttribute("class")==getShownElemClass()){
-		//bt.setAttribute("onclick", "hideElement("+stageID+")");
 		hideElement(document.getElementById(stageID));
 	}
 }

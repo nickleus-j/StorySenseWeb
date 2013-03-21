@@ -85,12 +85,13 @@ public class StoriesToBeReviewed extends BaseServlet {
 				/*Generate HTML code*/
 				out.write("<tr>");
 				out.write("<td>"+myUser.getName()+"</td>");
-				out.write("<td>"+Stories.get(ctr).getName()+"</td>");
+				out.write("<td>"+sLoader.createStoryLink(Stories.get(ctr), ("storyPane"+ctr))+"</td>");
 				out.write("<td><a>"+createReviewLink(Stories.get(ctr).getID(), stageID)+"</a></td>");
+				/*out.write("<td>"+Stories.get(ctr).getName()+"</td>");
 				
-				out.write("</tr>" +
-						"<tr><td class=\"hiddenElem\" id=\""+("storyPane"+ctr)+"\" colspan='3'></td>");
-				out.write("</tr>");
+				*/
+				out.write("</tr><tr><td class=\"hiddenElem\" id=\""+
+				("storyPane"+ctr)+"\" colspan='3'></td></tr>");
 			}
 			
 			/*
@@ -103,7 +104,7 @@ public class StoriesToBeReviewed extends BaseServlet {
 		String btID="BT_"+storyID;
 		String link="<a href='#reviewArea' id='"+btID+"' onclick=\"" +
 				"generateRelationPane('"+stageID+"',"+storyID+")\">";
-		return link.concat("See Story</a>");
+		return link.concat("Rate Story</a>");
 	}
 	
 }
