@@ -93,6 +93,19 @@ function toggleShoHider(bt,stageID){
 	}
 }
 
+function toggleShowHider(stageID){
+	var elem=document.getElementById(stageID);
+	if(elem.getAttribute("class")==gethiddenElemClass()){
+		//bt.setAttribute("onclick", "showElement("+stageID+")");
+		showElement(document.getElementById(stageID));
+		
+	}
+	else if(elem.getAttribute("class")==getShownElemClass()){
+		//bt.setAttribute("onclick", "hideElement("+stageID+")");
+		hideElement(document.getElementById(stageID));
+	}
+}
+
 /*Shows the story where one story is shown one at a time*/
 function showStory(stageID,storyID,btID){
 	var xmlhttp=getAJAXRequest();
@@ -116,6 +129,31 @@ function showStory(stageID,storyID,btID){
 	  xmlhttp.open("GET","StoryShower?q="+storyID+"&screen="+stageID,true);
 	  xmlhttp.send();
 }
+
+
+/*Shows the story where one story is shown one at a time*/
+function showStory(stageID,storyID){
+	var xmlhttp=getAJAXRequest();
+
+	if (stageID==null||stageID=="")
+	  {
+	  document.getElementById(stageID).innerHTML="";
+	  return;
+	  }
+	
+	
+	/*What happens when a response from the server is obtained StoryShower*/
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			document.getElementById(stageID).innerHTML=xmlhttp.responseText;
+			showElement(document.getElementById(stageID));
+		}
+	  };
+	  
+	  xmlhttp.open("GET","StoryShower?q="+storyID+"&screen="+stageID,true);
+	  xmlhttp.send();
+}
+
 
 /*Shows the story where one story is shown one at a time*/
 function generateStory(stageID,level){
@@ -155,6 +193,7 @@ function generateRelationPane(stageID,storyID){
 	/*What happens when a response from the server is obtained StoryShower*/
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			showElement(document.getElementById(stageID));
 			stage.innerHTML=xmlhttp.responseText;
 		}
 	  };

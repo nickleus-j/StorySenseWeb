@@ -21,6 +21,7 @@ import worker.AttributeNames;
 
 /**
  * Servlet implementation class StoriesToBeReviewed
+ * @author Nickleus
  */
 @WebServlet(name = "ReviewerFeed", description = "Gets a feed of information fro the reviewer", urlPatterns = { "/ReviewerFeed" })
 public class StoriesToBeReviewed extends BaseServlet {
@@ -79,7 +80,7 @@ public class StoriesToBeReviewed extends BaseServlet {
 		out.write(tblIni);
 			/*Loop that shows the story Links*/
 			for(int ctr=0;ctr<Stories.size();ctr++){
-				stageID="storyPane"+ctr;
+				//stageID="storyPane"+ctr;
 				myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
 				/*Generate HTML code*/
 				out.write("<tr>");
@@ -88,13 +89,10 @@ public class StoriesToBeReviewed extends BaseServlet {
 				out.write("<td><a>"+createReviewLink(Stories.get(ctr).getID(), stageID)+"</a></td>");
 				
 				out.write("</tr>" +
-						"<tr><td class=\"hiddenElem\" id=\""+stageID+"\" colspan='3'></td>");
-				
+						"<tr><td class=\"hiddenElem\" id=\""+("storyPane"+ctr)+"\" colspan='3'></td>");
 				out.write("</tr>");
-				
-				
 			}
-			stageID="reviewArea";
+			
 			/*
 			out.write("<tr><td align='center' colspan='5' onshow=\"loadMoreStoriesInFeed()\">" +
 			"<button onclick=\"loadMoreStoriesInFeed()\">Load More</button></td></tr>");
@@ -103,9 +101,9 @@ public class StoriesToBeReviewed extends BaseServlet {
 	
 	public String createReviewLink(int storyID,String stageID){
 		String btID="BT_"+storyID;
-		String link="<button id='"+btID+"' onclick=\"" +
+		String link="<a href='#reviewArea' id='"+btID+"' onclick=\"" +
 				"generateRelationPane('"+stageID+"',"+storyID+")\">";
-		return link.concat("See Story</button>");
+		return link.concat("See Story</a>");
 	}
 	
 }

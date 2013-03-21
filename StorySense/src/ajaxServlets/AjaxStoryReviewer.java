@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.AcomplishmentDAO;
 import dao.DAOFactory;
+import dao.RelationshipDAO;
 import entity.Acomplishment;
 import entity.Relation;
 
@@ -19,6 +20,7 @@ import model.Story;
 
 import serializableObjects.StoryFileAccess;
 import servlets.BaseServlet;
+import webEncoder.CompleteStoryLoader;
 
 /**
  * Servlet implementation class AjaxStoryReviewer
@@ -86,12 +88,28 @@ public class AjaxStoryReviewer extends BaseServlet {
 	public void enterAssertions(Story theStory,PrintWriter out){
 		ArrayList<ArrayList<Relation>> assertions=theStory.getAssertions();
 		ArrayList<Relation> relations;
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		RelationshipDAO relationDao=myDAOFactory.createRelationshipDAO();
+		String tblHeaders="<th>Knowledge</th><th>Strongly Disagree</th><th>Disagree</th>" +
+				"<th>Agree</th><th>Strongly Agree</th>";
+		//CompleteStoryLoader sLoader=new CompleteStoryLoader();
+		out.write("<table>");
+		out.write("<caption class=\"subheader\">Validation</caption>");
+		out.write("<th>Assertion</th>"+tblHeaders);
+		
 		for(int ctr=0;ctr<assertions.size();ctr++){
 			relations=assertions.get(ctr);
 			for(int i=0;i<relations.size();i++){
-				out.write(relations.get(i).getConcept1()+" "+
-				relations.get(i).getRelationship()+" "+relations.get(i).getConcept2()+"<hr/>");
+				out.write("<tr><td>"+relations.get(i).getConcept1()+" "+
+				relationDao.getRelationshipSentence(relations.get(i).getRelationship())+
+				" "+relations.get(i).getConcept2()+" </td>");
+				
+				out.write("</tr>");
 			}/*End of relation Loop*/
 		}/*End of Assertion loop*/
+		out.write("</table>");
 	}/*End of function*/
+	
+	
+	
 }

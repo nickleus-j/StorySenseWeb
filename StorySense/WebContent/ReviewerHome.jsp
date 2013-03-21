@@ -22,7 +22,13 @@
 	border: solid #1874CD 1px;
 }
 
-
+.subheader{
+		background: #002387;
+		color: white;
+		align: center;
+		size: 18px;
+		padding: 10px;
+	}
 .validatedStoriesTable th{
 	font-family: "Segoe UI";
 	font-size: 14px;
@@ -75,7 +81,8 @@
 	</tr>
 	</table>
 	</div>
-	<div id="reviewArea">
+	
+	<div id="reviewArea" >
 	
 	</div>
 <%@ include file="Insertables/Footer.jsp" %>

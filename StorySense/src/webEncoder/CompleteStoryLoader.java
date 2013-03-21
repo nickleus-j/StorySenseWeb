@@ -306,5 +306,19 @@ public class CompleteStoryLoader {
 		return link.concat("See Story</button>");
 	}
 	
+	/**
+	 * Creates a HTML element to Asynchronously get the Story from the server
+	 * using the story name with a hyperlink
+	 * @param theStory
+	 * @param stageID
+	 * @return
+	 */
+	public String createStoryLink(Acomplishment theStory,String stageID){
+		int storyID=theStory.getID();
+		String btID="Link_"+storyID;
+		String link="<a id='"+btID+"' onclick=\"" +
+				"showStory('"+stageID+"',"+storyID+")\">";
+		return link.concat(theStory.getName()+"</a>");
+	}
 	
 }

@@ -233,4 +233,41 @@ public class RatingMySQL extends RatingDAO {
 		return null;
 	}
 
+	@Override
+	public Rating getRatingsOfReader(int readerID, int accomID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from rating WHERE readerID=? AND accomplishmentID=?");
+            ps.setInt(1, readerID);
+            ps.setInt(2, accomID);
+            rs = ps.executeQuery();
+            
+            Rating Score=null;
+            //ArrayList<Rating> ratings=new ArrayList<Rating>();
+            if(rs.first()){
+            	Score=new Rating();
+            	Score.setAccomplishmentID(rs.getInt("accomplishmentID"));
+            	Score.setReaderID(rs.getInt("readerID"));
+            	Score.setScore(rs.getInt("Score"));
+            	
+            }
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return Score;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(RatingMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
 }
