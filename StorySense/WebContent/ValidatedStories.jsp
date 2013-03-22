@@ -50,6 +50,7 @@
 <div id="container">
 	
 
+	
 	<table align="center" width="100%" class="validatedStoriesTable" id="validatedStoriesTable">
 	
 	<tr>

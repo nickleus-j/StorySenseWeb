@@ -63,7 +63,7 @@
 		<th>Filter Users
 		<% 
 			WebCodeMaker htmlWriter=new WebCodeMaker(out); 
-			out.write(htmlWriter.getUsersToBeRated(u.getAccountID()));
+			out.write(htmlWriter.getUsersToBeRated());
 		%>
 		</th>
 	

@@ -74,6 +74,7 @@ function loadStoriesToReview(limit,page){
 function ReviewStoriesInLevel(limit,page,level){
 	var xmlhttp=getAJAXRequest(),stageID="validatedStoriesTable";
 	_curretnStoryLimit=limit;
+	var user = document.getElementById("user").value;
 	/*Check if the element passed is valid*/
 	if (stageID==null||stageID=="")
 	  {
@@ -89,7 +90,7 @@ function ReviewStoriesInLevel(limit,page,level){
 	  };
 	  
 	xmlhttp.open("GET","ReviewerFeed?limit="+limit+"&screen="+stageID+
-			"&page="+page+"&level="+level,true);
+			"&page="+page+"&level="+level+"&u="+user,true);
 	xmlhttp.send();
 }
 

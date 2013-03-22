@@ -165,6 +165,25 @@ public class WebCodeMaker {
 	
 	
 	/**
+	 * Gets the stories
+	 * @return
+	 */
+	public String getUsersToBeRated(){
+		String Code="<select id=\"user\" onchange=\"ReviewStoriesInUser(10,1,this.value)\">";
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		UserDAO myUserDao=myDAOFactory.createUserDAO();
+		ArrayList<User> users=(ArrayList<User>)myUserDao.getUsersWithRole(User.Roles.learner.getValue());
+		
+		Code=Code.concat("<option></option>");
+		for(int ctr=0;ctr<users.size();ctr++){
+			
+			Code=Code.concat("<option>"+users.get(ctr).getName()+"</option>");
+		}
+		
+		return Code.concat("</select>");
+	}
+	
+	/**
 	 * have a combo box that will show the levels available from
 	 * the templates 
 	 * @return
@@ -175,6 +194,7 @@ public class WebCodeMaker {
 		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
 		ArrayList<Template> templates=(ArrayList<Template>)templateDao.getGroupedtemplates();
 		
+		Code=Code.concat("<option></option>");
 		for(int ctr=0;ctr<templates.size();ctr++){
 			
 			Code=Code.concat("<option>"+templates.get(ctr).getLevelRequirement()+"</option>");
@@ -194,6 +214,7 @@ public class WebCodeMaker {
 		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
 		ArrayList<Template> templates=(ArrayList<Template>)templateDao.getGroupedtemplates();
 		
+		Code=Code.concat("<option></option>");
 		for(int ctr=0;ctr<templates.size();ctr++){
 			
 			Code=Code.concat("<option>"+templates.get(ctr).getLevelRequirement()+"</option>");
