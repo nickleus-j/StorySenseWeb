@@ -497,4 +497,40 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
 		return null;
 	}
 
+	@Override
+	public List<Acomplishment> getUserStoryWithAtLeastLevel(int level,
+			int writerID, int readerID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from storyaccomplishment " +
+            		"WHERE ID NOT IN (SELECT accomplishmentID from rating WHERE readerID =?) AND " +
+            		"templateID IN (SELECT TemplateID from template WHERE LevelReq>=?) AND " +
+            		"AccountID=?");
+            ps.setInt(1, readerID);
+            ps.setInt(2, level);
+            ps.setInt(3, writerID);
+            rs = ps.executeQuery();
+            
+          //Acomplishment Story;
+            ArrayList<Acomplishment> Stories=new ArrayList<Acomplishment>();
+            addResultsToList(Stories, rs);
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return Stories;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
 }

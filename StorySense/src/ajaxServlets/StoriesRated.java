@@ -90,9 +90,6 @@ public class StoriesRated extends BaseServlet {
 				
 				out.write("</tr>");
 				
-			}/*
-			out.write("<tr><td align='center' colspan='5' onshow=\"loadMoreStoriesInFeed()\">" +
-			"<button onclick=\"loadMoreStoriesInFeed()\">Load More</button></td></tr>");
-			*/
+			}
 	}
 }

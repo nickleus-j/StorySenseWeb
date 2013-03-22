@@ -144,6 +144,27 @@ public class WebCodeMaker {
 	}
 	
 	/**
+	 * Gets the stories
+	 * @param readerID
+	 * @return
+	 */
+	public String getUsersToBeRated(int readerID){
+		String Code="<select id=\"user\" onchange=\"ReviewStoriesInUser(10,1,this.value)\">";
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		UserDAO myUserDao=myDAOFactory.createUserDAO();
+		ArrayList<User> users=(ArrayList<User>)myUserDao.getUsersRatedByReviewer(readerID);
+		
+		Code=Code.concat("<option></option>");
+		for(int ctr=0;ctr<users.size();ctr++){
+			
+			Code=Code.concat("<option>"+users.get(ctr).getName()+"</option>");
+		}
+		
+		return Code.concat("</select>");
+	}
+	
+	
+	/**
 	 * have a combo box that will show the levels available from
 	 * the templates 
 	 * @return
@@ -162,7 +183,11 @@ public class WebCodeMaker {
 		return Code.concat("</select>");
 	}
 	
-	
+	/**
+	 * 
+	 * @param onChangeFunc
+	 * @return
+	 */
 	public String getChooseTemplateLevelHTML(String onChangeFunc){
 		String Code="<select id=\"level\" onchange=\""+onChangeFunc+"\">";
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);

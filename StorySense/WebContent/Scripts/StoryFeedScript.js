@@ -93,6 +93,30 @@ function ReviewStoriesInLevel(limit,page,level){
 	xmlhttp.send();
 }
 
+function ReviewStoriesInUser(limit,page,user){
+	var xmlhttp=getAJAXRequest(),stageID="validatedStoriesTable";
+	var level=document.getElementById("level").value;
+	_curretnStoryLimit=limit;
+	/*Check if the element passed is valid*/
+	if (stageID==null||stageID=="")
+	  {
+	  document.getElementById(stageID).innerHTML="";
+	  return;
+	  }
+	
+	/*What happens when a response from the server is obtained StoryShower*/
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			document.getElementById(stageID).innerHTML=xmlhttp.responseText;
+		}
+	  };
+	  
+	xmlhttp.open("GET","ReviewerFeed?limit="+limit+"&screen="+stageID+
+			"&page="+page+"&level="+level+"&u="+user,true);
+	xmlhttp.send();
+}
+
+
 function loadStoriesReviewed(limit){
 	var xmlhttp=getAJAXRequest(),stageID="validatedStoriesTable";
 	_curretnStoryLimit=limit;

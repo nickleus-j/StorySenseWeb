@@ -340,19 +340,9 @@ public class UserMySQL extends UserDAO {
             ps.setInt(1, role);
             rs = ps.executeQuery();
             
-            User u;
+          //User u;
             ArrayList<User> Users=new ArrayList<User>();
-            while(rs.next()){
-            	u=new User();
-            	u.setAccountID(rs.getInt("accountID"));
-            	u.setName(rs.getString("Name"));
-            	u.setPassword(rs.getString("Password"));
-            	u.setRole(rs.getInt("role"));
-            	u.setActiveStatus(rs.getInt("Active"));
-            	u.setLevel(rs.getInt("Level"));
-            	u.setPoints(rs.getInt("Points"));
-            	Users.add(u);
-            }
+            addResultsIntoList(Users,rs);
 
             rs.close();
             ps.close();
@@ -498,6 +488,40 @@ public class UserMySQL extends UserDAO {
 		}catch(Exception ex){
 			Logger.getLogger(UserMySQL.class.getName()).log(Level.SEVERE, null, ex);
 		}
+	}
+
+	@Override
+	public List<User> getUsersRatedByReviewer(int readerID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from account WHERE accountID IN " +
+            		"(SELECT AccountID from storyaccomplishment WHERE ID IN " +
+            		"(SELECT accomplishmentID from rating WHERE readerID=?))");
+            ps.setInt(1, readerID);
+            rs = ps.executeQuery();
+            
+          //User u;
+            ArrayList<User> Users=new ArrayList<User>();
+            addResultsIntoList(Users,rs);
+
+            rs.close();
+            ps.close();
+            con.close();
+            
+            if(!Users.isEmpty())
+            	return Users;
+            else return null;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(UserMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
 	}
 
 	

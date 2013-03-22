@@ -36,9 +36,11 @@ public class StoriesToBeReviewed extends BaseServlet {
 	public void executeCustomCode(HttpServletRequest request,
 			HttpServletResponse response) {
 		int limit=10,level=0;
+		User u=null;
 		User sessionUser=(User)request.getSession().getAttribute(AttributeNames.user.toString());
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
+		UserDAO myUserDao=myDAOFactory.createUserDAO();
 		ArrayList<Acomplishment> Stories;
 		
 		try{
@@ -48,16 +50,28 @@ public class StoriesToBeReviewed extends BaseServlet {
 		}
 		
 		try{
+			u=myUserDao.findUserWithName(request.getParameter("u"));
+		}catch(Exception ex){
+			u=null;
+		}
+		
+		try{
 			limit=Integer.parseInt(request.getParameter(AttributeNames.querylimit.toString()));
 			
 			if(level==0)
 				Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoriesToRate(sessionUser.getAccountID());
-			else 
+			else if(u==null)
 				Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoryWithAtLeastLevel(sessionUser.getAccountID(), level);
+			else{
+				Stories=(ArrayList<Acomplishment>)myAcomDAO.getUserStoryWithAtLeastLevel(level,
+						u.getAccountID(), sessionUser.getAccountID());
+			}
 			
-			encodeStoriesInHTML(response.getWriter(), Stories,myDAOFactory.createUserDAO());
+			if(Stories!=null)
+				encodeStoriesInHTML(response.getWriter(), Stories,myDAOFactory.createUserDAO());
+			else 
 				
-			response.getWriter().print("");
+			response.getWriter().print("Error");
 		}catch(IOException ioEX){}
 		
 	}
@@ -87,17 +101,11 @@ public class StoriesToBeReviewed extends BaseServlet {
 				out.write("<td>"+myUser.getName()+"</td>");
 				out.write("<td>"+sLoader.createStoryLink(Stories.get(ctr), ("storyPane"+ctr))+"</td>");
 				out.write("<td><a>"+createReviewLink(Stories.get(ctr).getID(), stageID)+"</a></td>");
-				/*out.write("<td>"+Stories.get(ctr).getName()+"</td>");
-				
-				*/
+
 				out.write("</tr><tr><td class=\"hiddenElem\" id=\""+
 				("storyPane"+ctr)+"\" colspan='3'></td></tr>");
-			}
-			
-			/*
-			out.write("<tr><td align='center' colspan='5' onshow=\"loadMoreStoriesInFeed()\">" +
-			"<button onclick=\"loadMoreStoriesInFeed()\">Load More</button></td></tr>");
-			*/
+			}/*End of Loop*/
+
 	}
 	
 	public String createReviewLink(int storyID,String stageID){

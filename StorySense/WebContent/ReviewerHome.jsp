@@ -59,10 +59,17 @@
 
 	<table align="center" width="100%" >
 	<tr>
+	
+		<th>Filter Users
+		<% 
+			WebCodeMaker htmlWriter=new WebCodeMaker(out); 
+			out.write(htmlWriter.getUsersToBeRated(u.getAccountID()));
+		%>
+		</th>
+	
 		<th>Pick Minimum Level
 		
-			<% 
-			WebCodeMaker htmlWriter=new WebCodeMaker(out); 
+			<%
 			out.write(htmlWriter.getTemplateComboBoxHTML());
 			%>
 		
