@@ -64,7 +64,7 @@
 	</tr>
 	
 	<tr>
-		<td><input type="button" value="Generate new Story"></td>
+		<td><input type="button" value="Generate new Story" onClick="window.location.href='MakingStory.jsp'"></td>
 		<td><input type="button" value="Submit Story" onclick="validateAnsers()"></td>
 	</tr>
 	

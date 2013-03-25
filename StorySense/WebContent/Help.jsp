@@ -55,7 +55,9 @@
 <body bgcolor="CCFFFF">
 <%@ include file="Insertables/TopBar.jsp" %>
 
-<div id="helpDiv" >
+
+<div id="container">
+<div id="helpDiv" class="column">
 <table class="helpTable" align="center">
 	<tr>
 	<th>
@@ -204,6 +206,10 @@ story.</p>
 	</td>
 	</tr>
 </table>
+</div>
+
+<%@ include file="Insertables/FeaturedStory.jsp" %>
+
 
 </div>
 </body>
