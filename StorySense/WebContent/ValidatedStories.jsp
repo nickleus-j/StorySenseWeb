@@ -60,7 +60,7 @@
 	</tr>
 	
 	<tr>
-	<th>Profile Picture</th><th>Author</th><th>Story Title</th><th>Rating Given</th><th>Show Story</th>
+	<th>Author</th><th>Story Title</th><th>Rating Given</th>
 	</tr>
 	</table>
 	</div>

@@ -17,13 +17,15 @@
   }
   
   #helpDiv {
-  max-width: 50%;
+  margin-top: 2%;
+  max-width: 100%;
   font-family: "Segoe UI";
   }
   
   .helpTable{
   border-left: thin solid black;
   border-right: thin solid black;
+  width: 50%;
   }
   
   .helpTable th{
@@ -50,10 +52,11 @@
   </style>
   
 </head>
-<body>
+<body bgcolor="CCFFFF">
+<%@ include file="Insertables/TopBar.jsp" %>
 
-<div id="helpDiv">
-<table class="helpTable">
+<div id="helpDiv" >
+<table class="helpTable" align="center">
 	<tr>
 	<th>
 	Help

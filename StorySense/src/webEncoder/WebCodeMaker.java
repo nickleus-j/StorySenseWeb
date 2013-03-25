@@ -120,6 +120,11 @@ public class WebCodeMaker {
 		
 	}
 	
+	/**
+	 * Welcomes the current user
+	 * @param u
+	 * @return HTML code that welcomes the current user
+	 */
 	public String showUserHTMl(User u){
 		String code="Hello ";
 		if(u!=null){
@@ -129,6 +134,11 @@ public class WebCodeMaker {
 		return code;
 	}
 	
+	/**
+	 * Returns HTML code that shows a combo box that determines the level 
+	 * of templates to be displayed
+	 * @return
+	 */
 	public String getTemplateComboBoxHTML(){
 		String Code="<select id=\"level\" onchange=\"ReviewStoriesInLevel(10,1,this.value)\">";
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
