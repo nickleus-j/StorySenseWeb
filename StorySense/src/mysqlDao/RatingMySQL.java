@@ -270,4 +270,33 @@ public class RatingMySQL extends RatingDAO {
 		return null;
 	}
 
+	@Override
+	public int getTotalScore(int accomID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+            int total=0;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT sum(Score) AS Total from rating WHERE accomplishmentID=?");
+            ps.setInt(1, accomID);
+            rs = ps.executeQuery();
+            
+            if(rs.first())
+            	total=rs.getInt("Total");
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return total;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(RatingMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return 0;
+	}
+
 }

@@ -10,6 +10,7 @@ import javax.servlet.jsp.JspWriter;
 import dao.AcomplishmentDAO;
 import dao.DAOFactory;
 import dao.LikedStoryDAO;
+import dao.RatingDAO;
 import dao.UserDAO;
 
 import model.Story;
@@ -228,6 +229,7 @@ public class CompleteStoryLoader {
 		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStoriesOfUser(myUser.getAccountID());
 		String stageID;
 		try{
+			RatingDAO rateDao=myDAOFactory.createRatingDAO();
 			
 			
 			/*Loop that shows the story Links*/
@@ -238,7 +240,7 @@ public class CompleteStoryLoader {
 				/*Generate HTML code*/
 				out.write("<tr align=\"center\">");
 				out.write("<td>"+Stories.get(ctr).getName()+"</td>");
-				out.write("<td>50</td>");
+				out.write("<td>"+rateDao.getTotalScore(Stories.get(ctr).getID())+"</td>");
 				out.write("<td>"+Stories.get(ctr).getFinishTime()+"</td>");
 				out.write("<td>"+myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"</td>");
 				out.write("<td>"+createStoryLink(Stories.get(ctr).getID(), stageID)+"</td>");

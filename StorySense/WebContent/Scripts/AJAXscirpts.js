@@ -86,7 +86,7 @@ function toggleShoHider(bt,stageID){
 		showElement(document.getElementById(stageID));
 		
 	}
-	else if(elem.getAttribute("class")==getShownElemClass()){
+	else (elem.getAttribute("class")==getShownElemClass()){
 		//bt.setAttribute("onclick", "hideElement("+stageID+")");
 		bt.innerHTML="See Story";
 		hideElement(document.getElementById(stageID));
@@ -121,6 +121,9 @@ function showStory(stageID,storyID,btID){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			document.getElementById(stageID).innerHTML=xmlhttp.responseText;
 			toggleShoHider(bt,stageID);
+		}
+		else{
+			document.getElementById(stageID).innerHTML="Error occured";
 		}
 	  };
 	  
