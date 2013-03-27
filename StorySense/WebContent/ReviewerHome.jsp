@@ -89,9 +89,9 @@
 	</table>
 	</div>
 	
-	<div id="reviewArea" >
+	<div id="reviewArea">
 	<form method="post">
-	<table id="validationTable">
+	<table id="validationTable" class="hiddenElem">
 	<caption class="subheader">Validation</caption>
 	<tr>
 		<td colspan="2" id="assertionTbl">

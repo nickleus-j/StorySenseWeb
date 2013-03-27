@@ -71,11 +71,9 @@ function getShownElemClass(){return "storyPreviewStage";}
 
 function hideElement(elem){
 	elem.setAttribute("class",gethiddenElemClass());
-	//elem.setAttribute("onclick","showElement("+elem+")");
 }
 function showElement(elem){
 	elem.setAttribute("class",getShownElemClass());
-	//elem.setAttribute("onclick","hideElement("+elem+")");
 }
 
 function toggleShoHider(bt,stageID){
@@ -193,11 +191,13 @@ function generateRelationPane(stageID,storyID){
 	  return;
 	  }
 	
+	showElement(document.getElementById("validationTable"));
 	showElement(stage);
 	/*What happens when a response from the server is obtained StoryShower*/
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
-			showElement(document.getElementById(stageID));
+			
+			//showElement(document.getElementById(stageID));
 			stage.innerHTML=xmlhttp.responseText;
 		}
 	  };
