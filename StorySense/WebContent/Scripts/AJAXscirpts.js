@@ -86,7 +86,7 @@ function toggleShoHider(bt,stageID){
 		showElement(document.getElementById(stageID));
 		
 	}
-	else (elem.getAttribute("class")==getShownElemClass()){
+	else if(elem.getAttribute("class")==getShownElemClass()){
 		//bt.setAttribute("onclick", "hideElement("+stageID+")");
 		bt.innerHTML="See Story";
 		hideElement(document.getElementById(stageID));
@@ -108,7 +108,7 @@ function toggleShowHider(stageID){
 function showStory(stageID,storyID,btID){
 	var xmlhttp=getAJAXRequest();
 	var bt=document.getElementById(btID);
-
+	var stage=document.getElementById(stageID);
 	if (stageID==null||stageID=="")
 	  {
 	  document.getElementById(stageID).innerHTML="";
@@ -119,8 +119,10 @@ function showStory(stageID,storyID,btID){
 	/*What happens when a response from the server is obtained StoryShower*/
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
-			document.getElementById(stageID).innerHTML=xmlhttp.responseText;
+			
+			stage.innerHTML=xmlhttp.responseText;
 			toggleShoHider(bt,stageID);
+			
 		}
 		else{
 			document.getElementById(stageID).innerHTML="Error occured";
@@ -133,7 +135,7 @@ function showStory(stageID,storyID,btID){
 
 
 /*Shows the story where one story is shown one at a time*/
-function showStory(stageID,storyID){
+function showStoryClicked(stageID,storyID){
 	var xmlhttp=getAJAXRequest();
 
 	if (stageID==null||stageID=="")
@@ -147,7 +149,8 @@ function showStory(stageID,storyID){
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			document.getElementById(stageID).innerHTML=xmlhttp.responseText;
-			showElement(document.getElementById(stageID));
+			toggleShowHider(stageID);
+			//showElement(document.getElementById(stageID));
 		}
 	  };
 	  

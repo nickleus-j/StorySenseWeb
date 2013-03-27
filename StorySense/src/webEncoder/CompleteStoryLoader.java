@@ -319,7 +319,7 @@ public class CompleteStoryLoader {
 		int storyID=theStory.getID();
 		String btID="Link_"+storyID;
 		String link="<a id='"+btID+"' onclick=\"" +
-				"showStory('"+stageID+"',"+storyID+")\">";
+				"showStoryClicked('"+stageID+"',"+storyID+")\">";
 		return link.concat(theStory.getName()+"</a>");
 	}
 	

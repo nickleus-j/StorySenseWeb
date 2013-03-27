@@ -86,7 +86,7 @@ public class StoriesToBeReviewed extends BaseServlet {
 	public void encodeStoriesInHTML(PrintWriter out,ArrayList<Acomplishment> Stories,UserDAO myUserDao){
 		CompleteStoryLoader sLoader=new CompleteStoryLoader();
 		User myUser;
-		String stageID="reviewArea";
+		String stageID="assertionTbl";
 		String tblIni="<tr><th colspan=6 id=\"validatedStoriesHeader\">" +
 				"Stories from other learners</th></tr>" +
 				"<tr><th>Author</th><th>Story Title</th><th>Show Story</th></tr>";

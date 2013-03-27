@@ -90,6 +90,18 @@
 	</div>
 	
 	<div id="reviewArea" >
+	<form method="post">
+	<table id="validationTable">
+	<caption class="subheader">Validation</caption>
+	<tr>
+		<td colspan="2" id="assertionTbl">
+		</td>
+	</tr>
+	<tr>
+		<td><input type="reset"/></td>
+		<td><input type="submit" value="Done"/></td>
+	</tr>
+	</table></form>
 	
 	</div>
 <%@ include file="Insertables/Footer.jsp" %>

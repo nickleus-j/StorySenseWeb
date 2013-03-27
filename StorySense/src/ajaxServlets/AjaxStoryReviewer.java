@@ -21,6 +21,7 @@ import model.Story;
 import serializableObjects.StoryFileAccess;
 import servlets.BaseServlet;
 import webEncoder.CompleteStoryLoader;
+import webEncoder.RatingFormEncoder;
 
 /**
  * Servlet implementation class AjaxStoryReviewer
@@ -41,6 +42,7 @@ public class AjaxStoryReviewer extends BaseServlet {
 		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
 		Acomplishment ratedStory;
 		Story theStory;
+		RatingFormEncoder ratingHtml=new RatingFormEncoder();
 		StoryFileAccess sfa;
 		int sID=Integer.parseInt(request.getParameter("q"));
 		
@@ -48,8 +50,11 @@ public class AjaxStoryReviewer extends BaseServlet {
 		sfa=getStoryFile(ratedStory.getFileURL());
 		theStory=sfa.getMyStory();
 		
+		
+		
 		try {
-			enterAssertions(theStory, response.getWriter());
+			PrintWriter out=response.getWriter();
+			out.write(ratingHtml.enterAssertionsTableCode(theStory));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -84,31 +89,7 @@ public class AjaxStoryReviewer extends BaseServlet {
 			relations.get(ctr).getRelationship()+" "+relations.get(ctr).getConcept2()+"<hr/>");
 		}/*End of loop*/
 	}
-	
-	public void enterAssertions(Story theStory,PrintWriter out){
-		ArrayList<ArrayList<Relation>> assertions=theStory.getAssertions();
-		ArrayList<Relation> relations;
-		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
-		RelationshipDAO relationDao=myDAOFactory.createRelationshipDAO();
-		String tblHeaders="<th>Knowledge</th><th>Strongly Disagree</th><th>Disagree</th>" +
-				"<th>Agree</th><th>Strongly Agree</th>";
-		//CompleteStoryLoader sLoader=new CompleteStoryLoader();
-		out.write("<table>");
-		out.write("<caption class=\"subheader\">Validation</caption>");
-		out.write("<th>Assertion</th>"+tblHeaders);
-		
-		for(int ctr=0;ctr<assertions.size();ctr++){
-			relations=assertions.get(ctr);
-			for(int i=0;i<relations.size();i++){
-				out.write("<tr><td>"+relations.get(i).getConcept1()+" "+
-				relationDao.getRelationshipSentence(relations.get(i).getRelationship())+
-				" "+relations.get(i).getConcept2()+" </td>");
-				
-				out.write("</tr>");
-			}/*End of relation Loop*/
-		}/*End of Assertion loop*/
-		out.write("</table>");
-	}/*End of function*/
+
 	
 	
 	
