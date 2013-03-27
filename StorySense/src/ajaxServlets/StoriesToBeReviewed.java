@@ -94,7 +94,6 @@ public class StoriesToBeReviewed extends BaseServlet {
 		out.write(tblIni);
 			/*Loop that shows the story Links*/
 			for(int ctr=0;ctr<Stories.size();ctr++){
-				//stageID="storyPane"+ctr;
 				myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
 				/*Generate HTML code*/
 				out.write("<tr>");
@@ -107,11 +106,14 @@ public class StoriesToBeReviewed extends BaseServlet {
 			}/*End of Loop*/
 
 	}
-	
+	/*
+	 * "generateRelationPane('"+stageID+"',"+storyID+")\">"
+	 * Requires ReviewerScripts.jsp
+	 */
 	public String createReviewLink(int storyID,String stageID){
 		String btID="BT_"+storyID;
 		String link="<a href='#reviewArea' id='"+btID+"' onclick=\"" +
-				"generateRelationPane('"+stageID+"',"+storyID+")\">";
+				"createRelationPaneHtml("+storyID+")\">";
 		return link.concat("Rate Story</a>");
 	}
 	

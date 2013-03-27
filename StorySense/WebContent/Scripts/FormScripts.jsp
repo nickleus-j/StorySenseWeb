@@ -58,7 +58,6 @@ function populateDayBox(dForm){
 function submitRegistration()
 {	
 	 document.getElementById(<% encoder.writeJsElementReference(RegisFormName);%>).submit();
-	//document.getElementById("Registration").submit();
 }
 
 /**

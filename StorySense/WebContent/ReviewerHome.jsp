@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <link rel="stylesheet" href="Style/Default.css"/> 
- 
+ <%@ include file="Scripts/ReviewerScripts.jsp" %>
   <%@ include file="Scripts/evaluatedStoriesScript.jsp" %>
 <title>Complete the Story</title>
 <style>
@@ -42,10 +42,19 @@
 .validatedStoriesTable td{
 	text-align: center;
 	font-family: "Segoe UI";
-	font-size: 14px;
 }
 
+.innerTableValidateSample {
+	margin: 5%;
+}
 
+.innerTableValidateSample th{
+		width: 40%;
+		border-color: #000080;
+		border-style: groove;
+		border-width: .2em;
+		text-align: center;
+	}
 
 </style>
 <script src="Scripts/AJAXscirpts.js"></script>
@@ -93,8 +102,13 @@
 	<form method="post">
 	<table id="validationTable" class="hiddenElem">
 	<caption class="subheader">Validation</caption>
-	<tr>
-		<td colspan="2" id="assertionTbl">
+	<tr >
+		<th class="subheader" >Story </th>
+		<td colspan="3" id="<% out.write(storyCellID); %>">
+		</td>
+	</tr>
+	<tr class="innerTableValidateSample">
+		<td colspan="4" id="assertionTbl" >
 		</td>
 	</tr>
 	<tr>

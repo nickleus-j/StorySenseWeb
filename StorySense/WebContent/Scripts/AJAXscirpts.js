@@ -183,7 +183,7 @@ function generateStory(stageID,level){
 /*Shows the story where one story is shown one at a time*/
 function generateRelationPane(stageID,storyID){
 	var xmlhttp=getAJAXRequest();
-	stage=document.getElementById(stageID);
+	var stage=document.getElementById(stageID);
 
 	if (stageID==null||stageID=="")
 	  {
