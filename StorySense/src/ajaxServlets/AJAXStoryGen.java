@@ -1,5 +1,7 @@
 package ajaxServlets;
 
+import infoResource.AttributeNames;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,7 +9,6 @@ import javax.servlet.jsp.JspWriter;
 
 import servlets.BaseServlet;
 import webEncoder.StoryEncoder;
-import worker.AttributeNames;
 
 /**
  * Servlet implementation class AJAXStoryGen

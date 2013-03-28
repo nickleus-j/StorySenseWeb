@@ -1,4 +1,6 @@
-package ajaxServlets;
+package ajaxReviewer;
+
+import infoResource.AttributeNames;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +19,6 @@ import entity.User;
 import servlets.BaseServlet;
 import webEncoder.CompleteStoryLoader;
 import webEncoder.HtmlLinkEncoder;
-import worker.AttributeNames;
 
 /**
  * Servlet implementation class StoriesToBeReviewed

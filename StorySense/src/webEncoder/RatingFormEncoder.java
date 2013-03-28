@@ -1,5 +1,7 @@
 package webEncoder;
 
+import infoResource.ReviewerResource;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -62,7 +64,7 @@ public class RatingFormEncoder {
 				"<th>Agree</th><th>Strongly Agree</th>";
 		
 		
-		RateFormHtml=RateFormHtml.concat("<table>"+tblHeaders);
+		RateFormHtml=RateFormHtml.concat("<table align=\"center\">"+tblHeaders);
 		
 		for(int ctr=0;ctr<assertions.size();ctr++){
 			relations=assertions.get(ctr);
@@ -71,11 +73,23 @@ public class RatingFormEncoder {
 				relationDao.getRelationshipSentence(relations.get(i).getRelationship())+
 				" "+relations.get(i).getConcept2()+" </td>");
 				
-				RateFormHtml=RateFormHtml.concat(getasseriontValidationHtml(ctr));
+				RateFormHtml=RateFormHtml.concat(getasseriontValidationHtml(ctr*10+i));
 				
 				RateFormHtml=RateFormHtml.concat("</tr>");
 			}/*End of relation Loop*/
 		}/*End of Assertion loop*/
 		return RateFormHtml.concat("</table>");
 	}/*End of function*/
+	
+	public String createSatisfactionSelectHtml(){
+		String select="<select name=\"quality\">";
+		ReviewerResource rr=new ReviewerResource();
+		String[] options=rr.getSatisfactionOptions();
+		
+		for(int ctr=0;ctr<options.length;ctr++)
+			select=select.concat("<option>"+options[ctr]+"</option>");
+		
+		return select.concat("</select>");
+	}
+	
 }

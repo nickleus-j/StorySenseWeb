@@ -1,4 +1,4 @@
-package worker;
+package infoResource;
 /**
  * The names of the elements in the form are here so that the names of the elements do not need to be memorized
  * @author nickleus

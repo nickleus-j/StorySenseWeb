@@ -1,4 +1,4 @@
-package ajaxServlets;
+package ajaxReviewer;
 
 import java.io.FileInputStream;
 import java.io.IOException;

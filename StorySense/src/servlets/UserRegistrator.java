@@ -1,5 +1,7 @@
 package servlets;
 
+import infoResource.RegistrationElements;
+
 import java.io.File;
 
 import java.io.IOException;
@@ -22,8 +24,7 @@ import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-import worker.DateProvider;
-import worker.RegistrationElements;
+import unclassified.DateProvider;
 
 import dao.DAOFactory;
 import dao.UserDAO;

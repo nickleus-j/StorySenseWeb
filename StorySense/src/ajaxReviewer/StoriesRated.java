@@ -1,4 +1,6 @@
-package ajaxServlets;
+package ajaxReviewer;
+
+import infoResource.AttributeNames;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import servlets.BaseServlet;
 
 import webEncoder.CompleteStoryLoader;
-import worker.AttributeNames;
 import dao.AcomplishmentDAO;
 import dao.DAOFactory;
 import dao.RatingDAO;

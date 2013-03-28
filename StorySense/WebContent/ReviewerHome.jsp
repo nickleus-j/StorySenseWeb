@@ -1,3 +1,4 @@
+<%@page import="webEncoder.RatingFormEncoder"%>
 <%@page import="webEncoder.WebCodeMaker"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -48,13 +49,28 @@
 	margin: 5%;
 }
 
-.innerTableValidateSample th{
-		width: 40%;
-		border-color: #000080;
-		border-style: groove;
-		border-width: .2em;
-		text-align: center;
+.assertions{
+	margin: 25%;
+	border-color: #000080;
+	border-style: groove;
+	text-align: center;
+}
+
+.assertions th{
+	/*width: 40%;*/
+	border-color: #000080;
+	border-style: groove;
+	text-align: center;
+	border-width: .2em;
 	}
+
+.assertions td{
+	border-color: #000080;
+	border-style: groove;
+	text-align: center;
+	border-width: .1em;
+	}
+
 
 </style>
 <script src="Scripts/AJAXscirpts.js"></script>
@@ -102,15 +118,29 @@
 	<form method="post">
 	<table id="validationTable" class="hiddenElem">
 	<caption class="subheader">Validation</caption>
+	
+	<tr>
+		<td id="descStage" colspan="4">
+		
+		</td>
+	</tr>
 	<tr >
 		<th class="subheader" >Story </th>
 		<td colspan="3" id="<% out.write(storyCellID); %>">
 		</td>
 	</tr>
 	<tr class="innerTableValidateSample">
-		<td colspan="4" id="assertionTbl" >
+		<td colspan="4" id="assertionTbl" class="assertions">
 		</td>
 	</tr>
+	
+	<tr>
+		<th>Quality</th><td>
+		<% RatingFormEncoder rfe=new RatingFormEncoder();
+			out.write(rfe.createSatisfactionSelectHtml());
+		%>
+	</tr>
+	
 	<tr>
 		<td><input type="reset"/></td>
 		<td><input type="submit" value="Done"/></td>

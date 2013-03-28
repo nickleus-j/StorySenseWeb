@@ -3,7 +3,7 @@
     <%@page import="webEncoder.WebCodeMaker"%>
 <%!
 	String storyCellID="storyCell",validationTable="validationTable",assertionTbl="assertionTbl";
-
+	String StoryDescReview="StoryDescRev",descriptionStage="descStage";
 %>
 
 <% WebCodeMaker encoder=new WebCodeMaker(out); %>
@@ -49,12 +49,32 @@ function createRelationPaneHtml(storyID){
 	/*What happens when a response from the server is obtained StoryShower*/
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200&&stage!=null){
+			generateDescription(storyID);
 			putRatingStoryToCell(storyID);
 			stage.innerHTML=xmlhttp.responseText;
 		}
 	  };
 	  
 	  xmlhttp.open("GET","StoryRater?q="+storyID+"&screen="+stageID,true);
+	  xmlhttp.send();
+}
+
+function generateDescription(storyID){
+	var xmlhttp=getAJAXRequest();
+	
+	var stage=document.getElementById(<% encoder.writeJsElementReference(descriptionStage); %>);
+	var href=<%encoder.writeJsElementReference(StoryDescReview);%>;
+	if(stage==null)
+		return;
+	
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200&&stage!=null){
+			putRatingStoryToCell(storyID);
+			stage.innerHTML=xmlhttp.responseText;
+		}
+	  };
+	  
+	  xmlhttp.open("GET",href+"?q="+storyID,true);
 	  xmlhttp.send();
 }
 

@@ -1,4 +1,4 @@
-<%@page import="worker.RegistrationElements"%>
+<%@page import="infoResource.RegistrationElements"%>
 <%@page import="webEncoder.WebCodeMaker"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 

@@ -1,12 +1,13 @@
 package webEncoder;
 
+import infoResource.AttributeNames;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspWriter;
 
-import worker.AttributeNames;
 
 import dao.DAOFactory;
 import dao.TemplateDAO;
