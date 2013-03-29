@@ -154,6 +154,7 @@
 		<% RatingFormEncoder rfe=new RatingFormEncoder();
 			out.write(rfe.createSatisfactionSelectHtml());
 		%>
+		</td>
 	</tr>
 	
 	<tr>
@@ -163,7 +164,7 @@
 			</a></td>
 		<td class="ErrorMessage" id="errorCell"></td>
 		<td><input type="reset" value="undo everything"/></td>
-		<td><input type="button" value="Done" onclick="checkForm()"/></td>
+		<td><input type="submit" value="Done" /></td>
 	</tr>
 	</table></form>
 	

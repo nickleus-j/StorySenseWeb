@@ -93,39 +93,30 @@ function getInputNames(){
 	var form=document.forms[<% encoder.writeJsElementReference(validationFormHtmlID);%>];
 	var errorCell=document.getElementById(<% encoder.writeJsElementReference(warningCellHtmlID);%>);
 	
+	errorCell.innerHTML="";
 	for(var ctr=0;ctr<form.elements.length;ctr++){
 		arr.push(form.elements[ctr].name);
-		errorCell.innerHTML=errorCell.innerHTML+arr[ctr];
+		errorCell.innerHTML=errorCell.innerHTML+arr[ctr]+"**<br>";
 	}
 	return arr;
-	//var current;
-	var formName=<% encoder.writeJsElementReference(validationFormHtmlID);%>;
 }
 
 
 function checkForm(){
 	var form=document.forms[<% encoder.writeJsElementReference(validationFormHtmlID);%>];
 	var errorCell=document.getElementById(<% encoder.writeJsElementReference(warningCellHtmlID);%>);
-	
-	
-	for(var ctr=0;ctr<form.elements.length;ctr++){
+	var current;
+	var formName=<% encoder.writeJsElementReference(validationFormHtmlID);%>;
+	var List,nameList=getInputNames();
+	/*for(var ctr=0;ctr<form.elements.length;ctr++){
 		if(form.elements[ctr].value==null||form.elements[ctr].value==""){
 			errorCell.innerHTML="There unanswered form entries <br>"+form.elements[ctr].name+ctr;
 			return;
 		}
-	}
-	/*errorCell.innerHTML="";
-	nameList=getInputNames();
-	for(var ctr=0;ctr<nameList.length;ctr++){
-		current=document.forms[formName][nameList[ctr]];
-		if(current.value==null||current.value==""){
-			errorCell.innerHTML=errorCell.innerHTML+"There unanswered form entries <br>"+
-			ctr+current.name+"=="+nameList[ctr];
-			return;
-		}
-		else errorCell.innerHTML=errorCell.innerHTML+current.name+"___"+current.value+"<br>";
 	}*/
-	submitRegistration();
+	
+
+	//submitRegistration();
 }
 
 
