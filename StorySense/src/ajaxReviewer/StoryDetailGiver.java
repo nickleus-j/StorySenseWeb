@@ -20,14 +20,12 @@ import servlets.BaseServlet;
  */
 @WebServlet(name = "StoryDescRev", urlPatterns = { "/StoryDescRev" })
 public class StoryDetailGiver extends BaseServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 10L;
 
     /**
      * Default constructor. 
      */
-    public StoryDetailGiver() {
-        // TODO Auto-generated constructor stub
-    }
+    public StoryDetailGiver() {}
 
 	@Override
 	public void executeCustomCode(HttpServletRequest request,

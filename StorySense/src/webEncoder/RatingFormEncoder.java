@@ -5,6 +5,7 @@ import infoResource.ReviewerResource;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import model.Question;
 import model.Story;
 import dao.DAOFactory;
 import dao.RelationshipDAO;
@@ -42,10 +43,10 @@ public class RatingFormEncoder {
 	
 	public String getasseriontValidationHtml(int id){
 		String formRow="<td>",assertID="assert_"+id;
-		formRow=formRow.concat("<input type=\"radio\" name =\""+assertID+"\" value=\""+SD+"\"></td>");
-		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+D+"\"></td>");
-		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+A+"\"></td>");
-		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+SA+"\"></td>");
+		formRow=formRow.concat("<input type=\"radio\" name =\""+assertID+"\" value=\""+0+"\"></td>");
+		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+1+"\"></td>");
+		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+3+"\"></td>");
+		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+4+"\"></td>");
 		return formRow;
 	}
 	
@@ -60,8 +61,8 @@ public class RatingFormEncoder {
 		ArrayList<Relation> relations;
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		RelationshipDAO relationDao=myDAOFactory.createRelationshipDAO();
-		String tblHeaders="<th>Knowledge</th><th>Strongly Disagree</th><th>Disagree</th>" +
-				"<th>Agree</th><th>Strongly Agree</th>";
+		String tblHeaders="<th>Knowledge</th><th>"+SD+"</th><th>"+D+"</th><th>"+A+"</th>" +
+				"<th>"+SA+"</th>";
 		
 		
 		RateFormHtml=RateFormHtml.concat("<table align=\"center\">"+tblHeaders);
@@ -80,6 +81,33 @@ public class RatingFormEncoder {
 		}/*End of Assertion loop*/
 		return RateFormHtml.concat("</table>");
 	}/*End of function*/
+	
+	public String generateQuestionTblHtml(Story theStory){
+		String code="<table>";
+		
+		return code.concat(showStoryQuestions(theStory)+"</table>");
+	}
+	
+	/**
+	 * Requires to be place in a table element in HTML
+	 * @param theStory
+	 * @return
+	 */
+	public String showStoryQuestions(Story theStory){
+		String code="",caption="<Caption>Questions</Caption>";
+		ArrayList<Question> questions=theStory.getQuestion();
+		
+		if(!questions.isEmpty())
+			code=code.concat(caption);
+		
+		for(int ctr=0;ctr<questions.size();ctr++){
+			code=code.concat("<tr><td>"+questions.get(ctr).getQuestion()+"</td>");
+			code=code.concat("<td>"+questions.get(ctr).getOption1()+"</td>");
+			code=code.concat("<td>"+questions.get(ctr).getOption2()+"</td></tr>");
+		}
+		
+		return code;
+	}
 	
 	public String createSatisfactionSelectHtml(){
 		String select="<select name=\"quality\">";

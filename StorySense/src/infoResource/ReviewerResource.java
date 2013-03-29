@@ -8,4 +8,5 @@ public class ReviewerResource {
 		
 		return options;
 	}
+	public String getSatisfactionBoxId(){return "quality";}
 }

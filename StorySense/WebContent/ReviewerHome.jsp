@@ -30,6 +30,18 @@
 		size: 18px;
 		padding: 10px;
 	}
+	
+.subheader a{
+	color:white;
+}
+.subheader a:ACTIVE{
+	color: yellow;
+}
+
+.subheader a:VISITED{
+	color: skyblue;
+}
+
 .validatedStoriesTable th{
 	font-family: "Segoe UI";
 	font-size: 14px;
@@ -86,16 +98,19 @@
 	<tr>
 	
 		<th>Filter Users
-		<% 
-			WebCodeMaker htmlWriter=new WebCodeMaker(out); 
-			out.write(htmlWriter.getUsersToBeRated());
+		<% /*The webcodemaker known as encoder
+			is already declared in an included jsp file
+			//WebCodeMaker encoder=new WebCodeMaker(out); 
+			*/
+			
+			out.write(encoder.getUsersToBeRated());
 		%>
 		</th>
 	
 		<th>Pick Minimum Level
 		
 			<%
-			out.write(htmlWriter.getTemplateComboBoxHTML());
+			out.write(encoder.getTemplateComboBoxHTML());
 			%>
 		
 		</th>
@@ -115,7 +130,7 @@
 	</div>
 	
 	<div id="reviewArea">
-	<form method="post">
+	<form method="get" id="validationForm">
 	<table id="validationTable" class="hiddenElem">
 	<caption class="subheader">Validation</caption>
 	
@@ -142,8 +157,13 @@
 	</tr>
 	
 	<tr>
-		<td><input type="reset"/></td>
-		<td><input type="submit" value="Done"/></td>
+		<td class="subheader" colspan="2">
+		<a href=<% encoder.writeJsElementReference(validatedStoriesTableID);%>>
+			See Other Stories
+			</a></td>
+		<td class="ErrorMessage" id="errorCell"></td>
+		<td><input type="reset" value="undo everything"/></td>
+		<td><input type="button" value="Done" onclick="checkForm()"/></td>
 	</tr>
 	</table></form>
 	
