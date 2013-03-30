@@ -130,7 +130,7 @@
 	</div>
 	
 	<div id="reviewArea">
-	<form method="get" id="validationForm">
+	<form method="get" id="validationForm" action="RatingStory">
 	<table id="validationTable" class="hiddenElem">
 	<caption class="subheader">Validation</caption>
 	
@@ -162,7 +162,10 @@
 		<a href=<% encoder.writeJsElementReference(validatedStoriesTableID);%>>
 			See Other Stories
 			</a></td>
-		<td class="ErrorMessage" id="errorCell"></td>
+		<td class="ErrorMessage" id="errorCell">
+			<input type="hidden" id=<% encoder.writeJsElementReference(hiddenValVault);%>
+			 name=<% encoder.writeJsElementReference(hiddenValVault);%>>
+		</td>
 		<td><input type="reset" value="undo everything"/></td>
 		<td><input type="submit" value="Done" /></td>
 	</tr>

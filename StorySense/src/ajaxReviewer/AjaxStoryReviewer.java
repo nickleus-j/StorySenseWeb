@@ -55,7 +55,7 @@ public class AjaxStoryReviewer extends BaseServlet {
 		try {
 			PrintWriter out=response.getWriter();
 			out.write(ratingHtml.enterAssertionsTableCode(theStory));
-			out.write(ratingHtml.generateQuestionTblHtml(theStory));
+			//out.write(ratingHtml.generateQuestionTblHtml(theStory));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -40,7 +40,7 @@ public class CompleteStoryLoader {
         for (int i=0; i<StoryF.getAnswers().size(); i++)
         {
         	/*revised story writer format
-        	 * 
+        	 * File version difference causes multiple replacements
         	 */
         story_preview = story_preview.replaceFirst("<input type='text' width='15' name='answer"+(i+1)+
         		"' id='answer"+(i+1)+"'/>.",

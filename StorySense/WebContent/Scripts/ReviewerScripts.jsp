@@ -1,11 +1,17 @@
+<%@page import="infoResource.ReviewerResource"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@page import="webEncoder.WebCodeMaker"%>
+    <% ReviewerResource rRes=new ReviewerResource();
+    
+    %>
 <%!
+
 	String storyCellID="storyCell",validationTable="validationTable",assertionTbl="assertionTbl";
 	String StoryDescReview="StoryDescRev",descriptionStage="descStage";
 	String validatedStoriesTable="validatedStoriesTable",validatedStoriesTableID="#container";
 	String validationFormHtmlID="validationForm",warningCellHtmlID="errorCell";
+	String hiddenValVault="acomID";
 %>
 
 <% WebCodeMaker encoder=new WebCodeMaker(out); %>
@@ -41,7 +47,10 @@ function createRelationPaneHtml(storyID){
 	var xmlhttp=getAJAXRequest();
 	var stageID=<% encoder.writeJsElementReference(assertionTbl); %>;
 	var stage=document.getElementById(<% encoder.writeJsElementReference(assertionTbl); %>);
-
+	var hElem=document.getElementById(<% encoder.writeJsElementReference(hiddenValVault); %>);
+	
+	hElem.value=storyID;
+	
 	if (stageID==null||stageID=="")
 	  {
 		stage.innerHTML="";
@@ -105,18 +114,16 @@ function getInputNames(){
 function checkForm(){
 	var form=document.forms[<% encoder.writeJsElementReference(validationFormHtmlID);%>];
 	var errorCell=document.getElementById(<% encoder.writeJsElementReference(warningCellHtmlID);%>);
-	var current;
-	var formName=<% encoder.writeJsElementReference(validationFormHtmlID);%>;
-	var List,nameList=getInputNames();
-	/*for(var ctr=0;ctr<form.elements.length;ctr++){
+	
+	for(var ctr=0;ctr<form.elements.length;ctr++){
 		if(form.elements[ctr].value==null||form.elements[ctr].value==""){
 			errorCell.innerHTML="There unanswered form entries <br>"+form.elements[ctr].name+ctr;
 			return;
 		}
-	}*/
+	}
 	
 
-	//submitRegistration();
+	submitRegistration();
 }
 
 

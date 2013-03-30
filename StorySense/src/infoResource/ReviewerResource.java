@@ -9,4 +9,5 @@ public class ReviewerResource {
 		return options;
 	}
 	public String getSatisfactionBoxId(){return "quality";}
+	public String getStoryIDParameter(){return "acomID";}
 }

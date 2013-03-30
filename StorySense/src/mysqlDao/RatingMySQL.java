@@ -155,7 +155,7 @@ public class RatingMySQL extends RatingDAO {
         	DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
         	Connection con = myFactory.getConnection();
         	
-        	ps = con.prepareStatement("INSERT INTO rating (accomplishmentID,readerID,Score " +
+        	ps = con.prepareStatement("INSERT INTO rating (accomplishmentID,readerID,Score) " +
         			"VALUES (?,?,?)");
             ps.setInt(1, r.getAccomplishmentID());
             ps.setInt(2, r.getReaderID());

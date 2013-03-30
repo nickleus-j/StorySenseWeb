@@ -14,7 +14,7 @@ import entity.Relation;
 public class RatingFormEncoder {
 
 	private String SA,A, D,SD;
-	
+	public static final String  Assert="assert_";
 	public RatingFormEncoder(){
 		SA="Strongly Agree";
 		A="Agree";
@@ -42,7 +42,7 @@ public class RatingFormEncoder {
 	}/*End of function*/
 	
 	public String getasseriontValidationHtml(int id){
-		String formRow="<td>",assertID="assert_"+id;
+		String formRow="<td>",assertID=Assert+id;
 		formRow=formRow.concat("<input type=\"radio\" name =\""+assertID+"\" value=\""+0+"\"></td>");
 		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+1+"\"></td>");
 		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+3+"\" checked=\"checked\"></td>");
@@ -110,7 +110,7 @@ public class RatingFormEncoder {
 	}
 	
 	public String createSatisfactionSelectHtml(){
-		String select="<select name=\"quality\">";
+		String select="<select name=\"quality\" id=\"quality\">";
 		ReviewerResource rr=new ReviewerResource();
 		String[] options=rr.getSatisfactionOptions();
 		
