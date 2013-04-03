@@ -29,9 +29,11 @@ import dao.AcomplishmentDAO;
 import dao.DAOFactory;
 import dao.RatingDAO;
 import dao.RelationDAO;
+import dao.UserDAO;
 import entity.Acomplishment;
 import entity.Rating;
 import entity.Relation;
+import entity.Template;
 import entity.User;
 
 /**
@@ -106,35 +108,21 @@ public class RatingStory extends BaseServlet {
 				  scores.add(value);
 		      }
 		 }
-		
-		 /*FileItemFactory factory = new DiskFileItemFactory();
-	        ServletFileUpload upload = new ServletFileUpload(factory);
-			
-	        List<FileItem> items = null;	//List that will contain the items
-	        items = upload.parseRequest(request);
-			
-	        for(FileItem item: items){
-				  if (item.isFormField()&&item.getFieldName().startsWith(RatingFormEncoder.Assert)){
-					  value=Integer.parseInt(request.getParameter(item.getFieldName()));
-					  scores.add(value);
-				  } 
-	        }/*End of Loop*/
 		 
 		return scores;
 	}
 	
 	public void rateStory(HttpServletRequest request,PrintWriter out)throws IOException,Exception{
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
-		RatingDAO myRatingDao=myDAOFactory.createRatingDAO();
 		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
 		Acomplishment ratedStory;
 		HttpSession theSession=request.getSession();
 		ArrayList<Integer> scores=getAssertionScores(request);
 		ReviewerResource RRes=new ReviewerResource();
-		int sID=Integer.parseInt(request.getParameter(RRes.getStoryIDParameter()));
+		int sID=Integer.parseInt(request.getParameter(RRes.getStoryIDParameter())),score;
 		Story theStory;
 		AjaxStoryReviewer ajaxSReviewer=new AjaxStoryReviewer();
-		User currentUser=(User) theSession.getAttribute("user");
+		
 		
 		ratedStory=myAcomDAO.getStory(sID);
 		theStory=ajaxSReviewer.getStoryFile(ratedStory.getFileURL()).getMyStory();
@@ -143,12 +131,29 @@ public class RatingStory extends BaseServlet {
 		out.println("Story: "+ratedStory.getName()+"--");
 		
 		
+		score=calculateScore(scores, request.getParameter(RRes.getSatisfactionBoxId()));
+		saveRating(score, sID, theSession);
+		updateUserScore(ratedStory.getAccountID(),score);
+	}
+	
+	private void saveRating(int score,int sID,HttpSession theSession){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		RatingDAO myRatingDao=myDAOFactory.createRatingDAO();
+		User currentUser=(User) theSession.getAttribute("user");
 		Rating theRating=new Rating();
 		theRating.setReaderID(currentUser.getAccountID());
 		theRating.setAccomplishmentID(sID);
-		theRating.setScore(calculateScore(scores, request.getParameter(RRes.getSatisfactionBoxId())));
+		theRating.setScore(score);
 		myRatingDao.addRating(theRating);
-		//relationDAO.
+	}
+	
+	public void updateUserScore(int writeID,int Additionalscore){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		UserDAO userDao=myDAOFactory.createUserDAO();
+		
+		User givenUser=userDao.getUser(writeID);
+		givenUser.setPoints(givenUser.getPoints()+Additionalscore);
+		userDao.increaseUserPoints(givenUser, Additionalscore);
 	}
 	
 	private int calculateScore(ArrayList<Integer> scores,String qual){
@@ -165,7 +170,7 @@ public class RatingStory extends BaseServlet {
 		for(int ctr=0;ctr<scores.size();ctr++){
 			result+=(scores.get(ctr)*10);
 		}
-		return result+(QualIndex+1)*10;
+		return result+(QualIndex+1)*5;
 	}
 	
 	private void updateRelationScores(ArrayList<Integer> scores,ArrayList<ArrayList<Relation>> assertions){

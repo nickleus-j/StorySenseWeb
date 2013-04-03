@@ -175,12 +175,7 @@ public class StoryWriter extends BaseServlet {
 		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
 		return templateDao.getTemplate(templateID);
 	}
-	
-	private Template getTemplateFromDB(){
-		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
-		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
-		return templateDao.getTemplate(templateID);
-	}
+
 	
 	public Template getTemplateFromDB(int templateKey){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
@@ -195,6 +190,7 @@ public class StoryWriter extends BaseServlet {
 		givenUser.setPoints(givenUser.getPoints()+givenTemplate.getPlusScore());
 		userDao.increaseUserPoints(givenUser, givenTemplate.getPlusScore());
 	}
+	
 	
 	/**
 	 * Submits the story.
