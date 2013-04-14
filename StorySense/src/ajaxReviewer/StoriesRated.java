@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspWriter;
 
 import servlets.BaseServlet;
 
@@ -19,6 +20,7 @@ import dao.DAOFactory;
 import dao.RatingDAO;
 import dao.UserDAO;
 import entity.Acomplishment;
+import entity.Rating;
 import entity.User;
 
 /**
@@ -92,5 +94,69 @@ public class StoriesRated extends BaseServlet {
 				out.write("</tr>");
 				
 			}
+	}
+	
+	
+	
+	public void encodeScoresInHTML(PrintWriter out,User writer){
+		CompleteStoryLoader sLoader=new CompleteStoryLoader();
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		RatingDAO myRatingDao=myDAOFactory.createRatingDAO();
+		UserDAO myUserDao=myDAOFactory.createUserDAO();
+		AcomplishmentDAO acomDao=myDAOFactory.createAcomplishmentDAO();
+		ArrayList<Rating> ratings=(ArrayList<Rating>) myRatingDao.getRatingsOfWriter(writer.getAccountID());
+		User myUser;
+		Acomplishment myAcom;
+		String stageID="";
+		String tblIni="<tr><th>Reviewer</th><th>Story Title</th><th>Score</th></tr>";
+			
+		out.write(tblIni);
+		for(int ctr=0;ctr<ratings.size();ctr++){
+			stageID="rating--"+ctr;
+			myUser=myUserDao.getUser(ratings.get(ctr).getReaderID());
+			myAcom=acomDao.getStory(ratings.get(ctr).getAccomplishmentID());
+			/*Generate HTML code*/
+			out.write("<tr>");
+			out.write("<td>"+myUser.getName()+"</td>");
+			out.write("<td>"+sLoader.createStoryLink(myAcom, stageID)+"</td>");
+			out.write("<td>"+ratings.get(ctr).getScore()+"</td>");
+			out.write("</tr>" +"<tr><td class=\"hiddenElem\" id=\""+stageID+"\" colspan='3'></td>");
+			
+			out.write("</tr>");
+		}/*End of loop*/
+	}
+	
+	public void encodeScoresInHTML(JspWriter out,User writer,CompleteStoryLoader sLoader,String tblCode){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		RatingDAO myRatingDao=myDAOFactory.createRatingDAO();
+		UserDAO myUserDao=myDAOFactory.createUserDAO();
+		AcomplishmentDAO acomDao=myDAOFactory.createAcomplishmentDAO();
+		ArrayList<Rating> ratings=(ArrayList<Rating>) myRatingDao.getRatingsOfWriter(writer.getAccountID());
+		User myUser;
+		Acomplishment myAcom;
+		String stageID="";
+		String tblIni=tblCode+"<tr><th>Reviewer</th><th>Story Title</th><th>Score</th></tr>";
+		
+		try{
+		out.write(tblIni);
+		if(ratings!=null)
+		for(int ctr=0;ctr<ratings.size();ctr++){
+			stageID="rating--"+ctr;
+			myUser=myUserDao.getUser(ratings.get(ctr).getReaderID());
+			myAcom=acomDao.getStory(ratings.get(ctr).getAccomplishmentID());
+			/*Generate HTML code*/
+			out.write("<tr>");
+			out.write("<td>"+myUser.getName()+"</td>");
+			out.write("<td>"+sLoader.createStoryLink(myAcom, stageID)+"</td>");
+			out.write("<td>"+ratings.get(ctr).getScore()+"</td>");
+			out.write("</tr>" +"<tr><td class=\"hiddenElem\" id=\""+stageID+"\" colspan='3'></td>");
+			
+			out.write("</tr>");
+			}/*End of loop*/
+		else out.write("<tr><th colspan=\"3\">No scores yet</th></tr>");
+		out.write("</table>");
+		}
+		
+		catch(IOException ioex){}
 	}
 }

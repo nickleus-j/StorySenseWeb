@@ -6,27 +6,53 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Registration</title>
+<style>
+#fontStyle2{
+font-family: Segoe UI; font-size: 20pt;
+}
+#tableBorderReg
+{
+border: 2px solid black;
+border-radius: 4px;
+margin: auto;
+width: 100%;
+}
+.divisionHeader {
+   	width:100%;
+   	height:30%;   /* Height of the footer */
+	background-color: #159cdb;
+	margin-bottom: 1%;
+	align: left;
+	border-radius: 4px;
+	
+}
+</style>
   <link rel="stylesheet" href="Style/Default.css"> 
 
   <%@ include file="Scripts/FormScripts.jsp" %>
 
 </head>
-<body>
-
-<div class="header">
-	<div id="LogoHere">	<h1>Story Sense</h1></div>
-	<div id="log">Please register</div>	
+<body bgcolor="CCFFFF">
+<div style="Clear:both;"></div>
+<div class="divisionHeader">
+	<img src="images/storysenselogo3.png"/>
 </div>
 
-	<div class="container">
-	<h1>Fill out the form</h1>
+<div width="100%">
+	<table style="margin: auto;">
+	<tr><td>
+		<table id="tableBorderReg" bgcolor = "Yellow">
+			<thead></br><tr id="fontStyle2" ><th colspan = 3>Fill in the details</th></tr></thead>	
+		</table>
+	</td></tr>
+	<tr><td>
 	  <!-- LearnerHomeSample.jsp -->
 	<form name="Registration" id=<% encoder.writeJsElementReference(RegisFormName);%> action="UserRegistrator" 
 		method="post" ENCTYPE="multipart/form-data">
-	<table align="center">
+	<table align="center" id="tableBorderReg" bgcolor="white" >
 	
 		<tr>
-		<th>Role</th>
+		<th align="right">Role</th>
 			<td><select name="role">
 				<option>Learner</option>
 				<option>Reviewer</option>
@@ -35,37 +61,37 @@
 		</tr>
 		
 		<tr>
-		<th>Username or Alias or Codename</th>
+		<th align="right">Nickname/Display name</th>
 		<td><input type="text" name="username" id="username"/></td>
-		<td class="ErrorMessage" name="usernameError" id="usernameError">:[</td>
+		<td class="ErrorMessage" name="usernameError" id="usernameError"></td>
 		</tr>
 		
 		<tr>
-		<th>Password</th>
+		<th align="right">Password</th>
 		<td><input type="password" name="initialPassword" id="initialPassword"/></td>
 		<td class="ErrorMessage" id="PasswordError" colspan="2"></td>
 		</tr>
 		
 		<tr>
-		<th>Confirm Password</th>
+		<th align="right">Confirm Password</th>
 		<td><input type="password" name="confirmPassword" id="confirmPassword"/></td>
 		
 		</tr>
 	
 		<tr>
-		<th>Firstname</th>
+		<th align="right">Firstname</th>
 		<td><input type="text" placeholder="your name" name="firstname" id="firstname"/></td>
 		<td class="ErrorMessage" id="firstnameError"></td>
 		</tr>
 		
 		<tr>
-		<th>Surname</th>
+		<th align="right">Surname</th>
 		<td><input type="text" placeholder="your family name" name="surname" id="surname"/></td>
 		<td class="ErrorMessage" id="surnameError"></td>
 		</tr>
 	
-		<tr><th>BirthDay<br/></th><td>
-		Month <select id="MonthBox" name="month" onchange="populateDayBox(Registration)">
+		<tr><th align="right">Birthday<br/></th><td>
+		<select id="MonthBox" name="month" onchange="populateDayBox(Registration)">
 		<% 
 			DateProvider oP=new DateProvider();
 				for(int ctr=0;ctr<12;ctr++)
@@ -74,14 +100,14 @@
 		%>
 
 		</select> 
-		Day <select id="DayBox" name="day">
+		<select id="DayBox" name="day">
 		<%
 		for(int ctr=1;ctr<=31;ctr++)
 			out.println("<option value='"+ctr+"'>"+ctr+"</option>");
 		%>
 		</select>
 	
-		Year <select id="YearBox" name="year" onchange="populateDayBox(Registration)">
+		<select id="YearBox" name="year" onchange="populateDayBox(Registration)">
 		<%=oP.provideYearOptions(100)%>
 		
 		</select>
@@ -92,7 +118,7 @@
 		
 		
 		<tr>
-		<th>Profile Picture</th>
+		<th align="right">Profile Picture</th>
 		<td>
 		<!-- 
 		<input type="file" value="Upload picture"/>
@@ -109,15 +135,21 @@
 		</tr>
 	
 		
+		<tr align="center">
+		<th align="right">Reset Form</th>
+		<td align="left"><input type="reset" value="Retry"></td>
+		</tr>
 		<tr>
-		<th>Reset Form <input type="reset" value="Reset form"></th>
-		<th>Done <input type="button" value="Register" onclick="evaluateForm()"></th>
+		<th align="right">Done</th>
+		<td align="left"> <input type="button" value="Finish" onclick="evaluateForm()"></td>
 		</tr>
 		
 		
 		
 	</table>
 	</form>
+	</td></tr>
+	</table>
 	</div>
 <%@ include file="Insertables/Footer.jsp" %>
 

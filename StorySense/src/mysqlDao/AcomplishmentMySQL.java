@@ -533,4 +533,37 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
 		return null;
 	}
 
+	/**
+	 * Have a list of story accomplishments that have been rated by reviewers
+	 */
+	@Override
+	public List<Acomplishment> getAllStoriesRated() {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from storyaccomplishment WHERE ID IN " +
+            		"(SELECT accomplishmentID from rating) ORDER BY finishtime DESC");
+            rs = ps.executeQuery();
+            
+          //Acomplishment Story;
+            ArrayList<Acomplishment> Stories=new ArrayList<Acomplishment>();
+            addResultsToList(Stories, rs);
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return Stories;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
 }

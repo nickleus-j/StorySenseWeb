@@ -148,7 +148,7 @@ public class UserRegistrator extends BaseServlet {
 		//"uploadedFiles/ || /home/nickleus/Pictures/upload/";'
 		init(getServletConfig());
 		  out.println("Token: "+getServletConfig().getInitParameter("token"));
-		String pathPrefix="upPics/";
+		String pathPrefix="/home/nickleus/git/StorySense/StorySense/WebContent/upPics/";
 		
 				String itemName = item.getName();
 				Random generator = new Random();
@@ -171,11 +171,11 @@ public class UserRegistrator extends BaseServlet {
 					String finalimage = buffer.toString()+"_"+r+domainName;
 					//out.println("Final Image==="+finalimage);
 
-					String imgURL=pathPrefix+finalimage;
+					String imgURL=pathPrefix+finalimage,dbURL="upPics/"+finalimage;
 					File savedFile = new File(imgURL);
 					item.write(savedFile);
 
-					myProfile.setImageURL(imgURL);
+					myProfile.setImageURL(dbURL);
 					out.println("<img src="+finalimage+">");
 			
 	}

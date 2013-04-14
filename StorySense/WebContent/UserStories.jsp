@@ -1,4 +1,5 @@
 <%@page import="webEncoder.CompleteStoryLoader"%>
+<%@page import="ajaxReviewer.StoriesRated"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -89,7 +90,27 @@ font-family: Segoe UI; font-size: 13pt;
 			
 			<tr >
 			<td id="storyStage" colspan="5"></td>
-		</tr>
+		</tr></table>
+		</td></tr>
+		
+		<tr align="center"><td>
+		<table class="headTbl" bgcolor = "#7DFB9D">
+		<thead><tr><th  id="fontStyle2">Scores Given </th></tr></thead>	
+		</table>
+	</td></tr>
+	<tr><td>
+			<table  id="tableBorder3" bgcolor = "white">
+				
+			<% 
+			StoriesRated ratedS=new StoriesRated();
+			ratedS.encodeScoresInHTML(out,myUser, sLoader, "<table  id=\"tableBorder3\"  bbgcolor = \"white\">");
+			/* <table  id="tableBorder3" bgcolor = "white">*/
+			%>
+			
+			<tr >
+			<td id="storyStage" colspan="5"></td>
+		</tr></table></td></tr>
+		
 </table>
 
 

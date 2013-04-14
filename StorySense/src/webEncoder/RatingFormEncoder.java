@@ -11,6 +11,12 @@ import dao.DAOFactory;
 import dao.RelationshipDAO;
 import entity.Relation;
 
+/**
+ * Encodes The html elements that will be used in creating
+ * a rating for the stories written
+ * @author nickleus
+ *
+ */
 public class RatingFormEncoder {
 
 	private String SA,A, D,SD;
@@ -30,8 +36,6 @@ public class RatingFormEncoder {
 	public String enterAssertions(Story theStory){
 		String RateFormHtml="<form method=\"post\">";
 		String submitBt="<input type=\"submit\">";
-
-		
 		
 		RateFormHtml=RateFormHtml.concat("<table>");
 		RateFormHtml=RateFormHtml.concat("<caption class=\"subheader\">Validation</caption>");
@@ -109,6 +113,12 @@ public class RatingFormEncoder {
 		return code;
 	}
 	
+	/**
+	 * generates HTML code that will show a
+	 * combobox that will determine how much the 
+	 * reviewer like the story
+	 * @return
+	 */
 	public String createSatisfactionSelectHtml(){
 		String select="<select name=\"quality\" id=\"quality\">";
 		ReviewerResource rr=new ReviewerResource();

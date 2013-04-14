@@ -1,3 +1,4 @@
+<%@page import="ajaxReviewer.StoriesRated"%>
 <%@page import="webEncoder.CompleteStoryLoader"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -31,9 +32,6 @@ border: 5px solid green;
 border-radius: 0px;
 width: 100%;
 font-family: Segoe UI; font-size: 13pt;
-}
-
-#learnerstories {
 }
   
   </style>
@@ -85,7 +83,25 @@ font-family: Segoe UI; font-size: 13pt;
 			
 			<tr >
 			<td id="storyStage" colspan="5"></td>
-		</tr>
+			
+		</tr></table></td></tr>
+	<tr align="center"><td>
+		<table class="headTbl" bgcolor = "#7DFB9D">
+		<thead><tr><th  id="fontStyle2">Scores Given </th></tr></thead>	
+		</table>
+	</td></tr>
+	<tr><td>
+			
+				
+			<% 
+			StoriesRated ratedS=new StoriesRated();
+			ratedS.encodeScoresInHTML(out, u, sLoader, "<table  id=\"tableBorder3\" border=\"2\" bgcolor = \"white\">");
+			/* <table  id="tableBorder3" bgcolor = "white">*/
+			%>
+			
+			</td></tr>
+		
+		
 </table>
 
 

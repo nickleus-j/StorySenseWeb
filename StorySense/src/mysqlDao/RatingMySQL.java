@@ -3,6 +3,7 @@ package mysqlDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -61,6 +62,16 @@ public class RatingMySQL extends RatingDAO {
 		return null;
 	}
 
+	private void addResultsToList(ArrayList<Rating> ratings,ResultSet rs) throws SQLException{
+		Rating Score;
+        while(rs.next()){
+        	Score=new Rating();
+        	Score.setAccomplishmentID(rs.getInt("accomplishmentID"));
+        	Score.setReaderID(rs.getInt("readerID"));
+        	Score.setScore(rs.getInt("Score"));
+        	ratings.add(Score);
+        }
+	}
 	/**
 	 * returns the ratings made by a user
 	 * @return readerRatings
@@ -78,7 +89,7 @@ public class RatingMySQL extends RatingDAO {
             ps = con.prepareStatement("SELECT * FROM rating WHERE readerID = ?");
             ps.setInt(1, readerID);
             rs = ps.executeQuery();
-            
+            /*
             Rating Score;
             ArrayList<Rating> ratings=new ArrayList<Rating>();
             while(rs.next()){
@@ -87,7 +98,9 @@ public class RatingMySQL extends RatingDAO {
             	Score.setReaderID(rs.getInt("readerID"));
             	Score.setScore(rs.getInt("Score"));
             	ratings.add(Score);
-            }
+            }*/
+            ArrayList<Rating> ratings=new ArrayList<Rating>();
+            addResultsToList(ratings, rs);
             
             rs.close();
             ps.close();
@@ -123,15 +136,8 @@ public class RatingMySQL extends RatingDAO {
             ps.setInt(1, WriterID);
             rs = ps.executeQuery();
             
-            Rating Score;
             ArrayList<Rating> ratings=new ArrayList<Rating>();
-            while(rs.next()){
-            	Score=new Rating();
-            	Score.setAccomplishmentID(rs.getInt("accomplishmentID"));
-            	Score.setReaderID(rs.getInt("readerID"));
-            	Score.setScore(rs.getInt("Score"));
-            	ratings.add(Score);
-            }
+            addResultsToList(ratings, rs);
             
             rs.close();
             ps.close();
@@ -208,15 +214,8 @@ public class RatingMySQL extends RatingDAO {
             ps.setInt(1, accomID);
             rs = ps.executeQuery();
             
-            Rating Score;
             ArrayList<Rating> ratings=new ArrayList<Rating>();
-            while(rs.next()){
-            	Score=new Rating();
-            	Score.setAccomplishmentID(rs.getInt("accomplishmentID"));
-            	Score.setReaderID(rs.getInt("readerID"));
-            	Score.setScore(rs.getInt("Score"));
-            	ratings.add(Score);
-            }
+            addResultsToList(ratings, rs);
             
             rs.close();
             ps.close();
