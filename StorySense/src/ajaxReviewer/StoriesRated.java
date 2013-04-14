@@ -77,6 +77,7 @@ public class StoriesRated extends BaseServlet {
 				"<tr><th>Author</th><th>Story Title</th><th>Score</th></tr>";
 			
 		out.write(tblIni);
+		if(Stories!=null)
 			/*Loop that shows the story Links*/
 			for(int ctr=0;ctr<Stories.size();ctr++){
 				stageID="story"+Stories.get(ctr).getID();

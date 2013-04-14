@@ -45,7 +45,10 @@ font-family: Segoe UI; font-size: 20pt;
 		else {
 	%><%@ include file="LogInForm.jsp" %> <% } %>
 	</div>
-	
+	<% 
+	if(u!=null){
+		if(User.Roles.learner.isLearner(u.getRole())) {%>
+		
 	<div>
 	
 	<table bgcolor="white" align="center" id = "tableBorderTopBar">
@@ -61,6 +64,37 @@ font-family: Segoe UI; font-size: 20pt;
 	</table>
 	
 	</div>
+	<%}//End of Learner Condition
+		
+		else if(User.Roles.reviewer.isReviwer(u.getRole())){ %>
+			<div>
 	
+	<table bgcolor="white" align="center" id = "tableBorderTopBar">
+	<tr>
+	<td id="fontStyleTopbar"><img src="images/storysenselogo3.png" ></img></td>
+	<td id="fontStyleTopbar" width="15%" align="center">
+	<a href="../StorySense/ReviewerHome.jsp">
+	<img src="images/HomeButtons/home.png" onmouseover="this.src='images/HomeButtons/homeB.png'" onmouseout="this.src='images/HomeButtons/home.png'"  border="0" width="160"/>
+	</a> </td>
+	
+	
+	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/ValidateSample.jsp"><img src="images/HomeButtons/Create Stories.png" onmouseover="this.src='images/HomeButtons/Create StoriesB.png'" onmouseout="this.src='images/HomeButtons/Create Stories.png'"  border="0" width="160"/></a></td>
+	
+	<td id="fontStyleTopbar" width="15%" align="center">
+		<a href="../StorySense/ValidatedStories.jsp">Validated Stories</a>
+		</td>
+	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/Help.jsp"><img src="images/HomeButtons/Help.png" onmouseover="this.src='images/HomeButtons/HelpB.png'" onmouseout="this.src='images/HomeButtons/Help.png'"  border="0" width="160"/></a></td>	
+	<td id="fontStyleTopbar2" width="15%" align="center">
+	<a href="Logout">
+	<img src="images/HomeButtons/Logout.png" onmouseover="this.src='images/HomeButtons/LogoutB.png'" onmouseout="this.src='images/HomeButtons/Logout.png'"  border="0" width="160" />
+		</a></td>
+		
+	</tr>
+	</table>
+	
+	</div>
+		<%} //End of Reviewer condition
+			
+		}//End of not null condtion %>
 </div>
 

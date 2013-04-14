@@ -133,7 +133,7 @@ public class UserRegistrator extends BaseServlet {
 		  myUserDAO.addUser(newUser, userProfile);
 		  
 		  if(newUser.getName()!=null&&!newUser.getName().isEmpty())
-			  return newUser;
+			  return myUserDAO.findUserWithName(newUser.getName());
 		  return null;
 		  
 	}
