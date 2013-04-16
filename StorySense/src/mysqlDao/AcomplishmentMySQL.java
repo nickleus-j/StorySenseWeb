@@ -26,6 +26,10 @@ import entity.Acomplishment;
   `fileURL` text,
   `finishTime` timestamp NULL DEFAULT NULL,
 
+ Most Liked Story
+ * SELECT ID,account.Name AS Writer,count(storyAccomID) from storyaccomplishment,account,likedstory 
+ * WHERE ID =storyAccomID AND storyaccomplishment.AccountID=account.accountID 
+ * group by storyAccomID ORDER BY count(storyAccomID) DESC limit 1 ;
  * 
  * @author nickleus
  *

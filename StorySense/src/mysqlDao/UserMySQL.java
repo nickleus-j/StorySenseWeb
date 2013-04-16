@@ -472,16 +472,23 @@ public class UserMySQL extends UserDAO {
 	}
 
 	@Override
-	public void increaseUserPoints(User u, int score) {
+	public void increaseUserPoints(User u, int Addend) {
 		PreparedStatement ps;
 		try{
 			DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
         	Connection con = myFactory.getConnection();
-			ps = con.prepareStatement("update account SET Points = ? where accountID = ? ");
+        	
+        	
+        	u.setLevel(getLevel(Addend+u.getPoints()));
+        	
+			ps = con.prepareStatement("update account SET Points = ? , Level = ? where accountID = ? ");
 			
-			ps.setInt(1, score+u.getPoints());
-			ps.setInt(2,u.getAccountID());
+			ps.setInt(1, Addend+u.getPoints());
+			ps.setInt(2, u.getLevel());
+			ps.setInt(3,u.getAccountID());
 			ps.executeUpdate();
+			
+			
 			
 			ps.close();
 			con.close();
@@ -524,5 +531,16 @@ public class UserMySQL extends UserDAO {
 		return null;
 	}
 
+	
+	private int getLevel(int points){
+		int sum=0,limit=20;
+		
+		for(int ctr=1;ctr<=limit;ctr++){
+			sum+=ctr*100;
+			if(points<sum)
+				return ctr-1;
+		}
+		return 21;
+	}
 	
 }

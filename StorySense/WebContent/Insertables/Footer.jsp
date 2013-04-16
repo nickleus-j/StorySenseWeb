@@ -4,9 +4,9 @@ pageEncoding="UTF-8"%>
 .divisionFooter {
 bottom:0;
 width:100%;
-height:275px; /* Height of the footer */
-background-color: #159cdb;
-padding-top: -575px;
+height:200px; /* Height of the footer */
+background-color: black;
+padding-top: -375px;
 }
 .footList li{
 margin: 0 1em 0 0;
@@ -31,8 +31,8 @@ font-size: 17px;
 color: white;
 }
 #footerH1{
-size: 40px;
-color: #0a394f;
+font-size: 22px;
+color: lightblue;
 align:left;
 font-family: "Segoe UI";
 }
@@ -44,19 +44,19 @@ font-family: "Segoe UI";
 <table>
 <tr>
 <td width="20%">
-<h1 id="footerH1">LINKS</h1>
+<p id="footerH1">LINKS</p>
 </td>
 <td width="20%">
-<h1 id="footerH1">BACKGROUND</h1>
+<p id="footerH1">BACKGROUND</p>
 </td>
 <td width="20%">
-<h1 id="footerH1">ABOUT US</h1>
+<p id="footerH1">ABOUT US</p>
 </td>
 <td width="20%">
-<h1 id="footerH1">CONTACT US</h1>
+<p id="footerH1">CONTACT US</p>
 </td>
 <td width="20%">
-<h1 id="footerH1">LIKE US</h1>
+<p id="footerH1">LIKE US</p>
 </td>
 </tr>
 <tr>

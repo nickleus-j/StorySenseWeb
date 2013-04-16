@@ -120,7 +120,7 @@ public class WebCodeMaker {
 		
 	}
 	
-	/**
+	/**width=\"20%\"
 	 * Welcomes the current user
 	 * @param u
 	 * @return HTML code that welcomes the current user
@@ -128,8 +128,10 @@ public class WebCodeMaker {
 	public String showUserHTMl(User u){
 		String code="Hello ";
 		if(u!=null){
-			code=code.concat(u.getName());
-			code=enterUserImageTag(u,30,30).concat(code)+" Welcome to Story Sense";
+			code="</td><td>"+code.concat(u.getName());
+			code="<td rowspan=\"2\">"+enterUserImageTag(u,50,50).concat(code)+
+					"!</td></tr><tr> <td>Welcome to Story Sense!</td>";
+			code="<table ><tr>".concat(code)+"</tr></table>";
 		}
 		return code;
 	}

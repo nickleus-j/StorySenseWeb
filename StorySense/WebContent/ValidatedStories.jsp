@@ -43,11 +43,14 @@
 <script src="Scripts/AJAXscirpts.js"></script>
   <script src="Scripts/StoryFeedScript.js"></script>
 </head>
-<body onload="loadStoriesReviewed(10)">
+<body onload="loadStoriesReviewed(10)" bgcolor="CCFFFF">
 
 <%@ include file="Insertables/ReviewerNavBar.jsp" %>
+
 <div id="container">
-	
+
+</br>
+</br>	
 
 	
 	<table align="center" width="100%" class="validatedStoriesTable" id="validatedStoriesTable">

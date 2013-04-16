@@ -25,7 +25,7 @@
   .helpTable{
   border-left: thin solid black;
   border-right: thin solid black;
-  width: 50%;
+  width: 70%;
   }
   
   .helpTable th{
@@ -209,7 +209,6 @@ story.</p>
 </table>
 </div>
 
-<%@ include file="Insertables/FeaturedStory.jsp" %>
 
 
 </div>

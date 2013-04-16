@@ -88,9 +88,10 @@
 <script src="Scripts/AJAXscirpts.js"></script>
   <script src="Scripts/StoryFeedScript.js"></script>
 </head>
-<body onload="loadStoriesToReview(10)">
+<body onload="loadStoriesToReview(10)" bgcolor="CCFFFF">
 
 <%@ include file="Insertables/ReviewerNavBar.jsp" %>
+</br>
 <div id="container">
 	
 
@@ -115,6 +116,7 @@
 		
 		</th>
 	</tr></table>
+	</br>
 	<table align="center" width="100%" class="validatedStoriesTable" id="validatedStoriesTable">
 	
 	<tr>

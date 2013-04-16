@@ -19,8 +19,8 @@ border-right-style: dotted;
 font-family: Segoe UI; font-size: 20pt;
 }
 .divisionHeader {
-   	width:100%;
-   	height:35px;   /* Height of the footer */
+   	width:30%;
+   /* 	height:55px;   Height of the footer */
 	background-color: #159cdb;
 	margin-bottom: 1%;
 }
@@ -77,11 +77,13 @@ font-family: Segoe UI; font-size: 20pt;
 	<img src="images/HomeButtons/home.png" onmouseover="this.src='images/HomeButtons/homeB.png'" onmouseout="this.src='images/HomeButtons/home.png'"  border="0" width="160"/>
 	</a> </td>
 	
-	
+	<!--  
 	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/ValidateSample.jsp"><img src="images/HomeButtons/Create Stories.png" onmouseover="this.src='images/HomeButtons/Create StoriesB.png'" onmouseout="this.src='images/HomeButtons/Create Stories.png'"  border="0" width="160"/></a></td>
-	
+	-->
 	<td id="fontStyleTopbar" width="15%" align="center">
-		<a href="../StorySense/ValidatedStories.jsp">Validated Stories</a>
+		<a href="../StorySense/ValidatedStories.jsp">
+		<img src="images/evalStories.png" width="160"/>
+		</a>
 		</td>
 	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/Help.jsp"><img src="images/HomeButtons/Help.png" onmouseover="this.src='images/HomeButtons/HelpB.png'" onmouseout="this.src='images/HomeButtons/Help.png'"  border="0" width="160"/></a></td>	
 	<td id="fontStyleTopbar2" width="15%" align="center">
