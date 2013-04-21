@@ -58,7 +58,12 @@ font-family: Segoe UI; font-size: 13pt;
 	<tr><td>
 		<tr><td>
 			<table id="tableBorder3" bgcolor = "#7DFB9D">
-				<tr id="fontStyle3"><th width="15%">Story Name</th><th width="15%">Score Earned</th><th width="15%">Date Finished</th><th width="15%">Likes</th><th width="15%">View</th></tr>
+				<tr id="fontStyle3">
+				<th width="15%">Story Name</th>
+				<th width="15%">Score Earned</th>
+				<th width="15%">Date Finished</th>
+				<th width="15%">Likes</th>
+				<th width="15%">View</th></tr>
 			</table>
 		</td></tr>
 		
@@ -117,10 +122,6 @@ font-family: Segoe UI; font-size: 13pt;
 </div>
 <%@ include file="Insertables/Footer.jsp" %>
 
-
-
-	
-	
 
 </body>
 </html>

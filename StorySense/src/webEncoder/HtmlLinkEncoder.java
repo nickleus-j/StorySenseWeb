@@ -17,4 +17,10 @@ public class HtmlLinkEncoder {
 		
 		return linkToViewUser.concat(given.getName()+"</a>");
 	}
+	
+	public String creaateScoreLink(int Score,int AccomId){
+		String linkToViewUser="<a onclick=\"showScores("+AccomId+")\">";
+		
+		return linkToViewUser.concat(Score+"</a>");
+	}
 }

@@ -240,7 +240,8 @@ public class CompleteStoryLoader {
 				/*Generate HTML code*/
 				out.write("<tr align=\"center\">");
 				out.write("<td>"+Stories.get(ctr).getName()+"</td>");
-				out.write("<td>"+rateDao.getTotalScore(Stories.get(ctr).getID())+"</td>");
+				out.write("<td>"+createScoreLink(rateDao.getTotalScore(Stories.get(ctr).getID()),Stories.get(ctr).getID())
+						+"</td>");
 				out.write("<td>"+Stories.get(ctr).getFinishTime()+"</td>");
 				out.write("<td>"+myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"</td>");
 				out.write("<td>"+createStoryLink(Stories.get(ctr).getID(), stageID)+"</td>");
@@ -322,5 +323,9 @@ public class CompleteStoryLoader {
 				"showStoryClicked('"+stageID+"',"+storyID+")\">";
 		return link.concat(theStory.getName()+"</a>");
 	}
-	
+	public String createScoreLink(int Score,int AccomId){
+		String linkToViewUser="<a onclick=\"showScores("+AccomId+")\">";
+		
+		return linkToViewUser.concat(Score+"</a>");
+	}
 }

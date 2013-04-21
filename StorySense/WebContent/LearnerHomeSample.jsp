@@ -1,3 +1,4 @@
+<%@page import="infoResource.LearnerElemAttr"%>
 <%@page import="ajaxReviewer.StoriesRated"%>
 <%@page import="webEncoder.CompleteStoryLoader"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -9,6 +10,7 @@
 
   <link rel="stylesheet" href="Style/Default.css"> 
    <script src="Scripts/AJAXscirpts.js"></script>
+   <%@ include file="Scripts/LearnerScripts.jsp" %>
   <style type="text/css">
   
   .storyTbl{
@@ -43,7 +45,7 @@ font-family: Segoe UI; font-size: 13pt;
 <%@ include file="Insertables/accountbar.jsp" %>
 <div>
 	
-<table width="80%" align="right">
+<table width="80%" align="right" id="<%out.write(attributeProvider.getLearnerSummaryID()); %>">
 	
 	<tr align="center"><td>
 		<table id="tableBorder3" class="tableBorder3" bgcolor = "#7DFB9D">
@@ -55,7 +57,13 @@ font-family: Segoe UI; font-size: 13pt;
 	<tr><td>
 		<tr><td>
 			<table  id="tableBorder3" bgcolor = "white">
-			<tr id="fontStyle3"><th width="15%">Story Name</th><th width="15%">Score Earned</th><th width="15%">Date Finished</th><th width="15%">Likes</th><th width="15%">View</th></tr>
+			<tr id="fontStyle3">
+			<th width="15%">Story Name</th>
+			<th width="15%">Score Earned</th>
+			<th width="15%">Date Finished</th>
+			<th width="15%">Likes</th>
+			<th width="15%">View</th>
+		</tr>
 				
 			<% CompleteStoryLoader sLoader=new CompleteStoryLoader(myUser);
 			sLoader.PreviewUserStories(myUser, out);
@@ -95,7 +103,7 @@ font-family: Segoe UI; font-size: 13pt;
 				
 			<% 
 			StoriesRated ratedS=new StoriesRated();
-			ratedS.encodeScoresInHTML(out, u, sLoader, "<table  id=\"tableBorder3\" border=\"2\" bgcolor = \"white\">");
+			ratedS.encodeScoresInHTML(out, u, sLoader, "<table  id=\"tableBorder3\"  bgcolor = \"white\">");
 			/* <table  id="tableBorder3" bgcolor = "white">*/
 			%>
 			
@@ -104,6 +112,8 @@ font-family: Segoe UI; font-size: 13pt;
 		
 </table>
 
+<table width="80%" align="right" id="<%out.write(attributeProvider.getScoreSummaryID());%>"  class="hiddenElem" >
+</table>
 
 </div>
 <%@ include file="Insertables/Footer.jsp" %>

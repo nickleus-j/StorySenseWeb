@@ -20,4 +20,5 @@ public abstract class AcomplishmentDAO {
 	public abstract List<Acomplishment> getStoryWithLevel(int readerID,int level);
 	public abstract List<Acomplishment> getStoryWithAtLeastLevel(int readerID,int level);
 	public abstract List<Acomplishment> getUserStoryWithAtLeastLevel(int level,int writerID,int readerID);
+	public abstract Acomplishment getPopularStory();
 }

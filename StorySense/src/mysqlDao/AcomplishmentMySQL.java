@@ -32,7 +32,9 @@ import entity.Acomplishment;
  * group by storyAccomID ORDER BY count(storyAccomID) DESC limit 1 ;
  * 
  * @author nickleus
- *
+ * SELECT Name, ID, count(storyAccomID) from likedstory,storyaccomplishment 
+ * WHERE storyAccomID=ID GROUP BY storyAccomID 
+ * ORDER by count(storyAccomID) DESC, Name;
  */
 public class AcomplishmentMySQL extends AcomplishmentDAO {
 
@@ -567,6 +569,46 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
         {
             Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
+		return null;
+	}
+
+	/**
+	 * Gets the story with the most likes
+	 */
+	@Override
+	public Acomplishment getPopularStory() {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT Name, ID, count(storyAccomID) from likedstory,storyaccomplishment " +
+            		"WHERE storyAccomID=ID GROUP BY storyAccomID " +
+            		"ORDER by count(storyAccomID) DESC, ID");
+            rs = ps.executeQuery();
+            
+            Acomplishment Story=null;
+            
+            if(rs.first()){
+            	Story=getStory(rs.getInt("ID"));
+            	/*
+            	Story.setID(rs.getInt("ID"));
+            	Story.setAccountID(rs.getInt("AccountID"));
+            	Story.setTemplateID(rs.getInt("templateID"));
+            	Story.setName(rs.getString("Name"));
+            	Story.setFileURL(rs.getString("fileURL"));
+            	Story.setFinishTime(rs.getTimestamp("finishTime"));
+            	*/
+            }
+            
+            ps.close();
+			con.close();
+            return Story;
+		}catch(Exception ex){
+			Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		return null;
 	}
 
