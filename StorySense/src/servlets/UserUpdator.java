@@ -34,11 +34,13 @@ public class UserUpdator extends BaseServlet {
 			theUser=(User) request.getSession().getAttribute("user");
 			uProfile=getProfile(theUser);
 			String username=request.getParameter("username"),firstname=request.getParameter("firstname");
+			//String surname=request.getParameter("surname");
 			
-			 //if(username!=null&&!username.isEmpty()&&!username.matches(theUser.getName())){
+			 if(username!=null&&!username.isEmpty()&&!username.matches(theUser.getName()))
 				updateUserName(theUser, username);
-			 //if(firstname!=null&&!firstname.isEmpty())
+			 if(firstname!=null&&!firstname.isEmpty())
 				updateProfile(uProfile, request);
+			
 			
 			
 			response.sendRedirect("../StorySense/View_Profile.jsp");

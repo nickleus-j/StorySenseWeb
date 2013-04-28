@@ -42,16 +42,20 @@ public class StoriesRated extends BaseServlet {
 		ArrayList<Acomplishment> Stories;
 		
 		try{
-			level=Integer.parseInt(request.getParameter(AttributeNames.Level.toString()));
+			level=Integer.parseInt(request.getParameter(AttributeNames.TemplateLevJsAttri.toString()));
 		}catch(Exception ex){
 			level=0;
 		}
 		
 		try{
-			limit=Integer.parseInt(request.getParameter(AttributeNames.querylimit.toString()));
+			//limit=Integer.parseInt(request.getParameter(AttributeNames.querylimit.toString()));
 			
-			
-				Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoriesRated(sessionUser.getAccountID());
+			if(level==0){
+				Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoriesRated(sessionUser.getAccountID());}
+				
+			else{
+				Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoryWithAtLeastLevel(sessionUser.getAccountID(), level);
+			}
 			
 			encodeStoriesInHTML(response.getWriter(), Stories,myDAOFactory.createUserDAO(),sessionUser);
 				

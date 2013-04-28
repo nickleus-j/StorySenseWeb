@@ -21,10 +21,10 @@ function showScores(storyID){
 	  return;
 	  }
 	*/
-	stage.set
+
 	hideElement(document.getElementById(summaryTblId));
-	//stage.innerHTML="<h1>Loading....</h1>";
-	showElement(stage);
+	stage.setAttribute("class","headTbl");
+	//showElement(stage);
 	/*What happens when a response from the server is obtained StoryShower*/
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){

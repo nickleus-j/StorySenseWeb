@@ -38,7 +38,11 @@ font-family: Segoe UI; font-size: 20pt;
 	<table bgcolor = "#7DFB9D" id="tableBorder6" align="left">
 	<tr><th  align="center" id="fontStyle2">&nbsp;</th></tr>
 	<tr><th  align="center"> <% out.print(webEncoder.enterUserImageTag(myUser)); %> </th></tr>
+	<% if(myUser==(User)session.getAttribute("user")){ %>
 	<tr><th  align="center" id="fontStyle2"><% out.print(webEncoder.enterUserRealName(myUser)); %></th></tr>
+	<% }else{ %>
+	<tr><th  align="center" id="fontStyle2"><% out.print(myUser.getName()); %></th></tr>
+	<% }%>
 	<tr><th  align="center" id="fontStyle2">Level <% out.print(myUser.getLevel()); %></th></tr>
 	<tr><th  align="center" id="fontStyle2">&nbsp;</th></tr>
 	</table>

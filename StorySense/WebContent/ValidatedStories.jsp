@@ -42,17 +42,26 @@
 </style>
 <script src="Scripts/AJAXscirpts.js"></script>
   <script src="Scripts/StoryFeedScript.js"></script>
+  <%@ include file="Scripts/ReviewerScripts.jsp" %>
 </head>
 <body onload="loadStoriesReviewed(10)" bgcolor="CCFFFF">
 
 <%@ include file="Insertables/ReviewerNavBar.jsp" %>
-
 <div id="container">
 
-</br>
-</br>	
 
+	<table>
+	<tr>
+	<th>Template level</th>
+	</tr>
 	
+	<tr>
+	<td>
+		<% out.write(encoder.getChooseTemplateLevelHTML(rRes.getTemplateLevBoxId(),
+			"loadStoriesReviewedWithLevel(this.value)")); %>
+	</td>
+	</tr>
+	</table>
 	<table align="center" width="100%" class="validatedStoriesTable" id="validatedStoriesTable">
 	
 	<tr>

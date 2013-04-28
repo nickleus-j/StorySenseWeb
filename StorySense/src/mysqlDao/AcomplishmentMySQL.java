@@ -444,7 +444,7 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             Connection con = myFactory.getConnection();
 
             ps = con.prepareStatement("SELECT * from storyaccomplishment " +
-            		"WHERE ID NOT IN (SELECT accomplishmentID from rating WHERE readerID =?) AND " +
+            		"WHERE ID IN (SELECT accomplishmentID from rating WHERE readerID =?) AND " +
             		"templateID IN (SELECT TemplateID from template WHERE LevelReq=?)");
             ps.setInt(1, readerID);
             ps.setInt(2, level);
@@ -480,7 +480,7 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             Connection con = myFactory.getConnection();
 
             ps = con.prepareStatement("SELECT * from storyaccomplishment " +
-            		"WHERE ID NOT IN (SELECT accomplishmentID from rating WHERE readerID =?) AND " +
+            		"WHERE ID IN (SELECT accomplishmentID from rating WHERE readerID =?) AND " +
             		"templateID IN (SELECT TemplateID from template WHERE LevelReq>=?)");
             ps.setInt(1, readerID);
             ps.setInt(2, level);
@@ -609,6 +609,37 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
 		}catch(Exception ex){
 			Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
 		}
+		return null;
+	}
+
+	@Override
+	public List<Acomplishment> getStoriesOfWriterRated(int writerID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from storyaccomplishment WHERE AccountID=? AND " +
+            		"ID IN  (SELECT accomplishmentID from rating)");
+            ps.setInt(1, writerID);
+            rs = ps.executeQuery();
+            
+          //Acomplishment Story;
+            ArrayList<Acomplishment> Stories=new ArrayList<Acomplishment>();
+            addResultsToList(Stories, rs);
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return Stories;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
 		return null;
 	}
 

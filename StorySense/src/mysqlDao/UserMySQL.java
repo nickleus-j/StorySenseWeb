@@ -511,7 +511,6 @@ public class UserMySQL extends UserDAO {
             		"(SELECT accomplishmentID from rating WHERE readerID=?))");
             ps.setInt(1, readerID);
             rs = ps.executeQuery();
-            
           //User u;
             ArrayList<User> Users=new ArrayList<User>();
             addResultsIntoList(Users,rs);

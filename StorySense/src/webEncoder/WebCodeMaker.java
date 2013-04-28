@@ -216,8 +216,9 @@ public class WebCodeMaker {
 	}
 	
 	/**
-	 * 
-	 * @param onChangeFunc
+	 * This function is used to generate a combo box when the learner needs to 
+	 * pick a level to upgrade
+	 * @param onChangeFunc : The function when the select box changes
 	 * @return
 	 */
 	public String getChooseTemplateLevelHTML(String onChangeFunc){
@@ -227,6 +228,19 @@ public class WebCodeMaker {
 		ArrayList<Template> templates=(ArrayList<Template>)templateDao.getGroupedtemplates();
 		
 		Code=Code.concat("<option></option>");
+		for(int ctr=0;ctr<templates.size();ctr++){
+			
+			Code=Code.concat("<option>"+templates.get(ctr).getLevelRequirement()+"</option>");
+		}
+		
+		return Code.concat("</select>");
+	}
+	public String getChooseTemplateLevelHTML(String boxID,String onChangeFunc){
+		String Code="<select id=\""+boxID+"\" onchange=\""+onChangeFunc+"\">";
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
+		ArrayList<Template> templates=(ArrayList<Template>)templateDao.getGroupedtemplates();
+		
 		for(int ctr=0;ctr<templates.size();ctr++){
 			
 			Code=Code.concat("<option>"+templates.get(ctr).getLevelRequirement()+"</option>");

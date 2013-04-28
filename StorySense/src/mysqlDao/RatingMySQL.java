@@ -89,16 +89,7 @@ public class RatingMySQL extends RatingDAO {
             ps = con.prepareStatement("SELECT * FROM rating WHERE readerID = ?");
             ps.setInt(1, readerID);
             rs = ps.executeQuery();
-            /*
-            Rating Score;
-            ArrayList<Rating> ratings=new ArrayList<Rating>();
-            while(rs.next()){
-            	Score=new Rating();
-            	Score.setAccomplishmentID(rs.getInt("accomplishmentID"));
-            	Score.setReaderID(rs.getInt("readerID"));
-            	Score.setScore(rs.getInt("Score"));
-            	ratings.add(Score);
-            }*/
+           
             ArrayList<Rating> ratings=new ArrayList<Rating>();
             addResultsToList(ratings, rs);
             
@@ -232,6 +223,9 @@ public class RatingMySQL extends RatingDAO {
 		return null;
 	}
 
+	/**
+	 * The the rating of the reader of a certain story
+	 */
 	@Override
 	public Rating getRatingsOfReader(int readerID, int accomID) {
 		try {
@@ -296,6 +290,100 @@ public class RatingMySQL extends RatingDAO {
             Logger.getLogger(RatingMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
 		return 0;
+	}
+
+	@Override
+	public List<Rating> getRatingsOfStoriesWithLevel(int level,int readerID) {
+		PreparedStatement ps;
+        ResultSet rs;
+        try{
+        DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+        Connection con = myFactory.getConnection();
+
+        ps = con.prepareStatement("SELECT * from rating WHERE readerID=? AND accomplishmentID IN " +
+        		"(SELECT ID from storyaccomplishment WHERE templateID IN " +
+        		"(SELECT TemplateID from template WHERE LevelReq=?))");
+        ps.setInt(1, readerID);
+        ps.setInt(2, level);
+        rs = ps.executeQuery();
+       
+        ArrayList<Rating> ratings=new ArrayList<Rating>();
+        addResultsToList(ratings, rs);
+        
+        rs.close();
+        ps.close();
+        con.close();
+        
+        if(ratings.isEmpty())
+        	return null;
+        return ratings;
+        }catch (Exception ex){
+        Logger.getLogger(RatingMySQL.class.getName()).log(Level.SEVERE, null, ex);
+    	}
+		return null;
+	}/*End of Function*/
+	@Override
+	public List<Rating> getRatingsOfStoriesWithMinLevel(int level,int readerID) {
+		PreparedStatement ps;
+        ResultSet rs;
+        try{
+        DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+        Connection con = myFactory.getConnection();
+
+        ps = con.prepareStatement("SELECT * from rating WHERE readerID=? AND accomplishmentID IN " +
+        		"(SELECT ID from storyaccomplishment WHERE templateID IN " +
+        		"(SELECT TemplateID from template WHERE LevelReq>=?))");
+        ps.setInt(1, readerID);
+        ps.setInt(2, level);
+        rs = ps.executeQuery();
+       
+        ArrayList<Rating> ratings=new ArrayList<Rating>();
+        addResultsToList(ratings, rs);
+        
+        rs.close();
+        ps.close();
+        con.close();
+        
+        if(ratings.isEmpty())
+        	return null;
+        return ratings;
+        }catch (Exception ex){
+        Logger.getLogger(RatingMySQL.class.getName()).log(Level.SEVERE, null, ex);
+    	}
+		return null;
+	}/*End of Function*/
+
+	@Override
+	public List<Rating> getRatingsOfReaderToWriter(int readerID, int writerID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from rating WHERE readerID=? AND " +
+            		"accomplishmentID IN (SELECT ID from storyaccomplishment WHERE AccountID=?)");
+            ps.setInt(1, readerID);
+            ps.setInt(1, writerID);
+            rs = ps.executeQuery();
+           
+            ArrayList<Rating> ratings=new ArrayList<Rating>();
+            addResultsToList(ratings, rs);
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            if(ratings.isEmpty())
+            	return null;
+            return ratings;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(RatingMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
 	}
 
 }

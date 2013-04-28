@@ -127,5 +127,49 @@ function checkForm(){
 }
 
 
+function loadStoriesReviewed(limit){
+	var xmlhttp=getAJAXRequest(),stageID="validatedStoriesTable";
+	_curretnStoryLimit=limit;
+	/*Check if the element passed is valid*/
+	if (stageID==null||stageID=="")
+	  {
+	  document.getElementById(stageID).innerHTML="";
+	  return;
+	  }
+	
+	/*What happens when a response from the server is obtained StoryShower*/
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			document.getElementById(stageID).innerHTML=xmlhttp.responseText;
+		}
+	  };
+	  
+	xmlhttp.open("GET","StoriesRated?limit="+limit+"&screen="+stageID+"&"+
+			<%encoder.writeJsElementReference(rRes.getTemplateLevJsAttri()); %>+"=0",true);
+	xmlhttp.send();
+}
+
+
+function loadStoriesReviewedWithLevel(level){
+	var xmlhttp=getAJAXRequest(),stageID=<% encoder.writeJsElementReference(validatedStoriesTable);%>;
+	/*Check if the element passed is valid*/
+	if (stageID==null||stageID=="")
+	  {
+	  document.getElementById(stageID).innerHTML="";
+	  return;
+	  }
+	
+	/*What happens when a response from the server is obtained StoryShower*/
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			document.getElementById(stageID).innerHTML=xmlhttp.responseText;
+		}
+	  };
+	  
+	xmlhttp.open("GET","StoriesRated?limit=10&screen="+stageID+"&"+
+	<%encoder.writeJsElementReference(rRes.getTemplateLevJsAttri()); %>+"="+level,true);
+	xmlhttp.send();
+}
+
 
 </script>
