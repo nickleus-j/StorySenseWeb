@@ -1,3 +1,13 @@
+/*******************************************************************************
+ *Copyright (c) 2013 IBM Corporation and others.
+ *All rights reserved. This program and the accompanying materials
+ *are made available under the terms of the Eclipse Public License v1.0
+ *which accompanies this distribution, and is available at
+ *http://www.eclipse.org/legal/epl-v10.html
+ *
+ *Contributors:
+ *    IBM Corporation - initial API and implementation
+ *******************************************************************************/
 package ajaxReviewer;
 
 import infoResource.AttributeNames;
@@ -36,9 +46,10 @@ public class StoriesRated extends BaseServlet {
 	public void executeCustomCode(HttpServletRequest request,
 			HttpServletResponse response) {
 		int limit=10,level=0;
-		User sessionUser=(User)request.getSession().getAttribute(AttributeNames.user.toString());
+		User sessionUser=(User)request.getSession().getAttribute(AttributeNames.user.toString()),targetlearner=null;
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
+		UserDAO uDao=myDAOFactory.createUserDAO();
 		ArrayList<Acomplishment> Stories;
 		
 		try{
@@ -48,18 +59,32 @@ public class StoriesRated extends BaseServlet {
 		}
 		
 		try{
+			targetlearner=uDao.findUserWithName(request.getParameter(AttributeNames.Learner.toString()));
+		}catch(Exception ex){
+			targetlearner=null;
+		}
+		
+		try{
 			//limit=Integer.parseInt(request.getParameter(AttributeNames.querylimit.toString()));
-			
+			if(targetlearner==null){
 			if(level==0){
 				Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoriesRated(sessionUser.getAccountID());}
 				
 			else{
+				response.getWriter().write("<caption>Stories with Level at least "+level+"</caption>");
 				Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoryWithAtLeastLevel(sessionUser.getAccountID(), level);
-			}
+				}
 			
+			}/*End of null learner condition*/
+			
+			else{
+				response.getWriter().write("<caption>Stories of "+targetlearner.getName()+"</caption>");
+				Stories=(ArrayList<Acomplishment>)myAcomDAO.getUserStoriesratedByReader(sessionUser.getAccountID(), 
+						targetlearner.getAccountID());
+			}/*End of clause where there is a learner being observed*/
 			encodeStoriesInHTML(response.getWriter(), Stories,myDAOFactory.createUserDAO(),sessionUser);
 				
-			response.getWriter().print("");
+			
 		}catch(IOException ioEX){}
 	}
 
@@ -88,7 +113,7 @@ public class StoriesRated extends BaseServlet {
 				myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
 				/*Generate HTML code*/
 				out.write("<tr>");
-				out.write("<td>"+myUser.getName()+"</td>");
+				out.write("<td>"+createLearnerLink(myUser.getName())+"</td>");
 				
 				out.write("<td>"+sLoader.createStoryLink(Stories.get(ctr), stageID)+"</td>");
 				out.write("<td>"+myRatingDao.getRatingsOfReader(sessionUser.getAccountID(),
@@ -99,6 +124,9 @@ public class StoriesRated extends BaseServlet {
 				out.write("</tr>");
 				
 			}
+		else out.write("<tr><th colspan=\"3\">No scores yet</th></tr>");
+		out.write("</table>");
+		
 	}
 	
 	
@@ -123,7 +151,7 @@ public class StoriesRated extends BaseServlet {
 			myAcom=acomDao.getStory(ratings.get(ctr).getAccomplishmentID());
 			/*Generate HTML code*/
 			out.write("<tr>");
-			out.write("<td>"+myUser.getName()+"</td>");
+			out.write("<td>"+createLearnerLink(myUser.getName())+"</td>");
 			out.write("<td>"+sLoader.createStoryLink(myAcom, stageID)+"</td>");
 			out.write("<td>"+ratings.get(ctr).getScore()+"</td>");
 			out.write("</tr>" +"<tr><td class=\"hiddenElem\" id=\""+stageID+"\" colspan='3'></td>");
@@ -137,6 +165,10 @@ public class StoriesRated extends BaseServlet {
 		catch(IOException ioex){}
 	}
 	
-	
+	private String createLearnerLink(String learnerName){
+		String link="<a onclick=\"loadReviwedStoriesOfUser('"+learnerName+"')\">"+learnerName;
+		
+		return link.concat("</a>");
+	}
 	
 }

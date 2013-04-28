@@ -52,10 +52,15 @@
 
 	<table>
 	<tr>
+	<th>Pick Stories of Users</th>
 	<th>Template level</th>
 	</tr>
 	
 	<tr>
+	<td>
+		<% out.write(encoder.getlearnerReviwedSelectionHTML(rRes.getLearnerListBox(),
+				"loadReviwedStoriesOfUser(this.value)", u.getAccountID()));%>
+	</td>
 	<td>
 		<% out.write(encoder.getChooseTemplateLevelHTML(rRes.getTemplateLevBoxId(),
 			"loadStoriesReviewedWithLevel(this.value)")); %>

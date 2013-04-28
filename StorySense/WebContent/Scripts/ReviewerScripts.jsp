@@ -171,5 +171,25 @@ function loadStoriesReviewedWithLevel(level){
 	xmlhttp.send();
 }
 
+function loadReviwedStoriesOfUser(leanerName){
+	var xmlhttp=getAJAXRequest(),stageID=<% encoder.writeJsElementReference(validatedStoriesTable);%>;
+	/*Check if the element passed is valid*/
+	if (stageID==null||stageID=="")
+	  {
+	  document.getElementById(stageID).innerHTML="";
+	  return;
+	  }
+	
+	/*What happens when a response from the server is obtained StoryShower*/
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			document.getElementById(stageID).innerHTML=xmlhttp.responseText;
+		}
+	  };
+	  
+	xmlhttp.open("GET","StoriesRated?limit=10&screen="+stageID+"&"+
+	<%encoder.writeJsElementReference(rRes.getLearnerAttri()); %>+"="+leanerName,true);
+	xmlhttp.send();
+}
 
 </script>

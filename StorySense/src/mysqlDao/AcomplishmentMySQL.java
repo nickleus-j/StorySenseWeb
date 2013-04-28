@@ -1,3 +1,13 @@
+/*******************************************************************************
+ *Copyright (c) 2013 IBM Corporation and others.
+ *All rights reserved. This program and the accompanying materials
+ *are made available under the terms of the Eclipse Public License v1.0
+ *which accompanies this distribution, and is available at
+ *http://www.eclipse.org/legal/epl-v10.html
+ *
+ *Contributors:
+ *    IBM Corporation - initial API and implementation
+ *******************************************************************************/
 package mysqlDao;
 
 import java.sql.Connection;
@@ -376,6 +386,43 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
 
             ps = con.prepareStatement("SELECT * from storyaccomplishment " +
             		"WHERE ID NOT IN (SELECT accomplishmentID from rating WHERE readerID =?) AND AccountID=?");
+            ps.setInt(1, readerID);
+            ps.setInt(2, writerID);
+            rs = ps.executeQuery();
+            
+          //Acomplishment Story;
+            ArrayList<Acomplishment> Stories=new ArrayList<Acomplishment>();
+            addResultsToList(Stories, rs);
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return Stories;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+	
+	/**
+	 * Gets the stories made by an author to be revieed by a certain
+	 * reviewer
+	 */
+	@Override
+	public List<Acomplishment> getUserStoriesratedByReader(int readerID,
+			int writerID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from storyaccomplishment " +
+            		"WHERE ID IN (SELECT accomplishmentID from rating WHERE readerID =?) AND AccountID=?");
             ps.setInt(1, readerID);
             ps.setInt(2, writerID);
             rs = ps.executeQuery();

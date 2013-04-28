@@ -1,3 +1,13 @@
+/*******************************************************************************
+ *Copyright (c) 2013 IBM Corporation and others.
+ *All rights reserved. This program and the accompanying materials
+ *are made available under the terms of the Eclipse Public License v1.0
+ *which accompanies this distribution, and is available at
+ *http://www.eclipse.org/legal/epl-v10.html
+ *
+ *Contributors:
+ *    IBM Corporation - initial API and implementation
+ *******************************************************************************/
 package infoResource;
 
 public class ReviewerResource {
@@ -15,4 +25,6 @@ public class ReviewerResource {
 	public String getTemplateLevelRadioID(){return "strinctLevel";}
 	public String getTemplateMinLevelRadioID(){return "atLeastLevel";}
 	public String getTemplateLevJsAttri(){ return "JsParamlvMinxoxo";}
+	public String getLearnerListBox(){return "learnerList";}
+	public String getLearnerAttri(){ return "learner";}
 }

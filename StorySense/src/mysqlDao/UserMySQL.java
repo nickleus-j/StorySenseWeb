@@ -1,3 +1,13 @@
+/*******************************************************************************
+ *Copyright (c) 2013 IBM Corporation and others.
+ *All rights reserved. This program and the accompanying materials
+ *are made available under the terms of the Eclipse Public License v1.0
+ *which accompanies this distribution, and is available at
+ *http://www.eclipse.org/legal/epl-v10.html
+ *
+ *Contributors:
+ *    IBM Corporation - initial API and implementation
+ *******************************************************************************/
 package mysqlDao;
 
 import java.sql.Connection;
@@ -540,6 +550,41 @@ public class UserMySQL extends UserDAO {
 				return ctr-1;
 		}
 		return 21;
+	}
+
+	@Override
+	public List<User> getUsersLearnersReviewed(int readerID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from account WHERE accountID IN " +
+            		"(SELECT AccountID from storyaccomplishment WHERE ID IN  " +
+            		"(SELECT accomplishmentID from rating WHERE readerID=?))");
+            ps.setInt(1, readerID);
+            rs = ps.executeQuery();
+            
+          //User u;
+            ArrayList<User> Users=new ArrayList<User>();
+            addResultsIntoList(Users,rs);
+            
+
+            rs.close();
+            ps.close();
+            con.close();
+            
+            //if(!Users.isEmpty())
+            	return Users;
+            // return null;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(UserMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
 	}
 	
 }

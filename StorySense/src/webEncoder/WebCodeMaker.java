@@ -1,3 +1,13 @@
+/*******************************************************************************
+ *Copyright (c) 2013 IBM Corporation and others.
+ *All rights reserved. This program and the accompanying materials
+ *are made available under the terms of the Eclipse Public License v1.0
+ *which accompanies this distribution, and is available at
+ *http://www.eclipse.org/legal/epl-v10.html
+ *
+ *Contributors:
+ *    IBM Corporation - initial API and implementation
+ *******************************************************************************/
 package webEncoder;
 
 import java.io.IOException;
@@ -249,7 +259,18 @@ public class WebCodeMaker {
 		return Code.concat("</select>");
 	}
 	
+	public String getlearnerReviwedSelectionHTML(String boxID,String onChangeFunc,int uID){
+		String Code="<select id=\""+boxID+"\" onchange=\""+onChangeFunc+"\">";
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		UserDAO uDao=myDAOFactory.createUserDAO();
+		ArrayList<User> users=(ArrayList<User>)uDao.getUsersLearnersReviewed(uID);
+
+		
+		for(int ctr=0;ctr<users.size();ctr++){
+			Code=Code.concat("<option>"+users.get(ctr).getName()+"</option>");
+		}
+		
+		return Code.concat("</select>");
 	
-	
-	
+	}
 }
