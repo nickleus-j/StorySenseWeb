@@ -40,5 +40,30 @@ function showScores(storyID){
 	  "="+storyID,true);
 	  xmlhttp.send();
 }
+var userStories;
+function getStoryData(userName){
+	var xmlhttp=getAJAXRequest();
+	var stage=document.getElementById("storyStage");
+
+	/* if (stageID==null||stageID=="")
+	  {
+		stage.innerHTML="";
+	  return;
+	  }
+	*/
+
+
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			userStories=xmlhttp.responseText;
+			stage.innerHTML=xmlhttp.responseText;
+		}
+		else stage.innerHTML="<h1>Broken....</h1>";
+	  };
+	  
+	  xmlhttp.open("GET","UserStoriesPreviewer?"+
+	  	<% out.write(wcm.giveJsStringParam(attributeProvider.getUserParamName()));%>+"="+userName,true);
+	  xmlhttp.send();
+}
 
 </script>

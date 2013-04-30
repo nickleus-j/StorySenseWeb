@@ -40,7 +40,7 @@ font-family: Segoe UI; font-size: 20pt;
 			//<img src="images/storysenselogo3.png" ></img>
 			out.write(userEncoder.showUserHTMl(u));
 			%>
-			
+		<script type="text/javascript">var userName=<% userEncoder.writeJsElementReference(u.getName());%></script>
 	<%  }
 		else {
 	%><%@ include file="LogInForm.jsp" %> <% } %>

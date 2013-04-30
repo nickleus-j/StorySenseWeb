@@ -39,7 +39,8 @@ font-family: Segoe UI; font-size: 13pt;
   </style>
 
 </head>
-<body bgcolor="CCFFFF">
+
+<body bgcolor="CCFFFF" onload="getStoryData(userName)">
 <%@ include file="Insertables/TopBar.jsp" %>
  <% request.setAttribute("viewedUser", u); %> 
 <%@ include file="Insertables/accountbar.jsp" %>
@@ -71,7 +72,7 @@ font-family: Segoe UI; font-size: 13pt;
 			%>
 			
 			<tr >
-			<td id="storyStage" colspan="5"></td>
+		<td id="storyStage" colspan="5"></td>
 		</tr>
 			</table>
 		</td></tr>

@@ -16,5 +16,6 @@ public class LearnerElemAttr {
 	public String getScoreSummaryID(){return "storyScoreTbl";}
 	public String getStoryIdParameter(){ return "paramAcom";}
 	public String getLearnerTableDefId(){return "tableBorder3";}
+	public String getUserParamName(){ return "viewedUser";}
 	/*LearnerHomeSample.jsp*/
 }
