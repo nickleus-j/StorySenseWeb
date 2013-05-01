@@ -222,3 +222,24 @@ function generateRelationPane(stageID,storyID){
 	  xmlhttp.open("GET","StoryRater?q="+storyID+"&screen="+stageID,true);
 	  xmlhttp.send();
 }
+
+function sortBy(prop){
+	   return function(a,b){
+	      if( a[prop] > b[prop]){
+	          return 1;
+	      }else if( a[prop] < b[prop] ){
+	          return -1;
+	      }
+	      return 0;
+	   };
+}
+/*//Usage
+yourArray.sort( sortBy("age") );*/
+
+function sortByDate(obj){
+	return function(a,b){
+		  a = new Date(a[obj]);
+		  b = new Date(b[obj]);
+		  return a<b?-1:a>b?1:0;
+		};
+}

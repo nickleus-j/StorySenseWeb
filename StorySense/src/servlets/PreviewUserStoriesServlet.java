@@ -32,6 +32,7 @@ public class PreviewUserStoriesServlet extends BaseServlet {
 	@Override
 	public void executeCustomCode(HttpServletRequest request,
 			HttpServletResponse response) {
+		response.setContentType("application/json");
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		UserDAO userDao=myDAOFactory.createUserDAO();
 		User u;
@@ -42,7 +43,7 @@ public class PreviewUserStoriesServlet extends BaseServlet {
 			PrintWriter out=response.getWriter();
 			uName=request.getParameter(elemAttr.getUserParamName());
 			u=userDao.findUserWithName(uName);
-			if(u!=null)
+			
 				createUserJsonStories(u,out);
 		}catch(Exception ex){
 			
@@ -96,7 +97,8 @@ public class PreviewUserStoriesServlet extends BaseServlet {
 		String stageID;
 		RatingDAO rateDao=myDAOFactory.createRatingDAO();
 		
-		out.write("{story:[");
+		
+		out.write("{\"story\":[");
 		/*Loop that shows the story Links*/
 		for(int ctr=0;ctr<Stories.size();ctr++){
 			myLikeDAO.countStoryLikes(Stories.get(ctr).getID());
@@ -104,17 +106,20 @@ public class PreviewUserStoriesServlet extends BaseServlet {
 			
 			/*Generate HTML code*/
 			
-			out.write("{Name:\""+Stories.get(ctr).getName()+"\",");
-			out.write("Score:\""+rateDao.getTotalScore(Stories.get(ctr).getID())+"\",");
-			out.write("TimeFinished:\""+Stories.get(ctr).getFinishTime()+"\",");
-			out.write("Likes:\""+myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"\",");
-			out.write("stageID:\""+stageID+"\"");
+			out.write("{\"Name\":\""+Stories.get(ctr).getName()+"\",");
+			out.write("\"storyID\":\""+Stories.get(ctr).getID()+"\",");
+			out.write("\"Score\":\""+rateDao.getTotalScore(Stories.get(ctr).getID())+"\",");
+			out.write("\"TimeFinished\":\""+Stories.get(ctr).getFinishTime()+"\",");
+			out.write("\"Likes\":\""+myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"\",");
+			out.write("\"stageID\":\""+stageID+"\"");
 			
-			
-			out.write("},");
+			if(ctr<Stories.size()-1)
+				out.write("},");
+			else out.write("}");
 		}/*End of Loop*/
 		out.write("],");
-		out.write("writer:\""+myUser.getName()+"\"}");
+		out.write("\"writer\":\""+myUser.getName()+"\"}");
+		out.flush();
 	}
 	
 	

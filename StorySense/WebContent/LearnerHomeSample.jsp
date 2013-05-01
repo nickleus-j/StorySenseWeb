@@ -57,7 +57,7 @@ font-family: Segoe UI; font-size: 13pt;
 
 	<tr><td>
 		<tr><td>
-			<table  id="tableBorder3" bgcolor = "white">
+			<table  id=<% wcm.writeJsElementReference(storyPrevID); %> bgcolor = "white" class="headTbl">
 			<tr id="fontStyle3">
 			<th width="15%">Story Name</th>
 			<th width="15%">Score Earned</th>
@@ -76,6 +76,7 @@ font-family: Segoe UI; font-size: 13pt;
 		</tr>
 			</table>
 		</td></tr>
+		
 		
 		<tr align="center"><td>
 		<table class="headTbl" bgcolor = "#7DFB9D">
