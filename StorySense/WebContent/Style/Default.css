@@ -25,7 +25,9 @@ font-size: 130%;
 	color:#FF0;
 	top: 0;
 }
-
+.sortBt:HOVER {
+	background: lightgray;
+	}
 .Logo{
 	text-align: center;
 }

@@ -36,6 +36,8 @@ width: 100%;
 font-family: Segoe UI; font-size: 13pt;
 }
   
+	
+  
   </style>
 
 </head>
@@ -58,16 +60,9 @@ font-family: Segoe UI; font-size: 13pt;
 	<tr><td>
 		<tr><td>
 			<table  id=<% wcm.writeJsElementReference(storyPrevID); %> bgcolor = "white" class="headTbl">
-			<tr id="fontStyle3">
-			<th width="15%">Story Name</th>
-			<th width="15%">Score Earned</th>
-			<th width="15%">Date Finished</th>
-			<th width="15%">Likes</th>
-			<th width="15%">View</th>
-		</tr>
+
 				
 			<% CompleteStoryLoader sLoader=new CompleteStoryLoader(myUser);
-			sLoader.PreviewUserStories(myUser, out);
 			/* (User)request.getSession().getAttribute("user")*/
 			%>
 			
@@ -84,15 +79,15 @@ font-family: Segoe UI; font-size: 13pt;
 		</table>
 	</td></tr>
 	<tr><td>
-			<table  id="tableBorder3" bgcolor = "white">
+	<script type="text/javascript">likedStories=<% out.write(sLoader.PreviewLikedStoriesJson(myUser));%></script>
+			<table  id=<% wcm.writeJsElementReference(likeTable); %>  bgcolor = "white" class="headTbl">
 				
-			<% 
-			sLoader.previewLikedStories(myUser, out);
-			/* (User)request.getSession().getAttribute("user")*/
-			%>
+			
 			
 			<tr >
-			<td id="storyStage" colspan="5"></td>
+			<td id="storyStage" colspan="5">
+			
+			</td>
 			
 		</tr></table></td></tr>
 	<tr align="center"><td>

@@ -223,6 +223,15 @@ function generateRelationPane(stageID,storyID){
 	  xmlhttp.send();
 }
 
+function setUpStoryShowLink(name,storyID,stageID,cell,preposition){
+	var anchor=document.createElement("a");
+	
+	anchor.setAttribute("id",preposition+storyID);
+	anchor.setAttribute("onclick","showStoryClicked('"+stageID+"',"+storyID+")");
+	anchor.innerHTML=name;
+	cell.appendChild(anchor);
+}
+
 function sortBy(prop){
 	   return function(a,b){
 	      if( a[prop] > b[prop]){

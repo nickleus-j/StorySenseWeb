@@ -5,7 +5,7 @@
     
    <% LearnerElemAttr attributeProvider=new LearnerElemAttr();
    	WebCodeMaker wcm=new WebCodeMaker(out);
-   	String storyPrevID="prevStoryTbl";
+   	String storyPrevID="prevStoryTbl",likeTable="likeedStoriesTbl",thClass="sortBt";
    %>
 <script>
 
@@ -42,46 +42,67 @@ function showScores(storyID){
 	  xmlhttp.send();
 }
 
+function createHeadersForSort(elems,row){
+	for(var ctr=0;ctr<elems.length;ctr++){
+		elems[ctr].setAttribute("class",<% out.write(wcm.giveJsStringParam(thClass));%>);
+		row.appendChild(elems[ctr]);
+	}
+}
 
 function createPreviweTblHeaders(table){
-	var nameCell,scoreCell,dateCell,likesCell,row;
-	var nameLink,scoreLink,dateLink,likesLink
+	var nameCell,scoreCell,dateCell,likesCell,row, elems=new Array();
 	
 	row=document.createElement("tr");
+	
 	nameCell=document.createElement("th");
 	scoreCell=document.createElement("th");
 	dateCell=document.createElement("th");
 	likesCell=document.createElement("th");
 	
-	nameLink=document.createElement("a");
-	scoreLink=document.createElement("a");
-	dateLink=document.createElement("a");
-	likesLink=document.createElement("a");
+	elems.push(nameCell);
+	elems.push(scoreCell);
+	elems.push(dateCell);
+	elems.push(likesCell);
 	
-	nameLink.innerHTML="Story Name";
-	scoreLink.innerHTML="Story Score";
-	dateLink.innerHTML="Date Finished";
-	likesLink.innerHTML="Likes";
+	createHeadersForSort(elems,row);
 	
-	nameLink.setAttribute("onclick","sortUserStories(userStories.story,'Name')");
-	scoreLink.setAttribute("onclick","sortUserStories(userStories.story,'Score')");
-	likesLink.setAttribute("onclick","sortUserStories(userStories.story,'Likes')");
+	nameCell.innerHTML="Story Name";
+	scoreCell.innerHTML="Story Score";
+	dateCell.innerHTML="Date Finished";
+	likesCell.innerHTML="Likes";
+	
+	nameCell.setAttribute("onclick","sortUserStories(userStories.story,'Name')");
+	scoreCell.setAttribute("onclick","sortUserStories(userStories.story,'Score')");
+	likesCell.setAttribute("onclick","sortUserStories(userStories.story,'Likes')");
 	dateCell.setAttribute("onclick","sortUserStoriesByDate(userStories.story)");
-	//sortUserStoriesByDate
 	
-	nameCell.appendChild(nameLink);
-	scoreCell.appendChild(scoreLink);
-	dateCell.appendChild(dateLink);
-	likesCell.appendChild(likesLink);
-	
-	row.appendChild(nameCell);
-	row.appendChild(scoreCell);
-	row.appendChild(dateCell);
-	row.appendChild(likesCell);
 	table.appendChild(row);
 }
 
-var userStories;
+function createLikeTblHeders(table){
+	var nameCell,authorCell,likesCell,row, elems=new Array();
+	row=document.createElement("tr");
+	
+	nameCell=document.createElement("th");
+	authorCell=document.createElement("th");
+	likesCell=document.createElement("th");
+	elems.push(nameCell);
+	elems.push(authorCell);
+	elems.push(likesCell);
+	
+	createHeadersForSort(elems,row);
+	nameCell.innerHTML="Title";
+	authorCell.innerHTML="Author";
+	likesCell.innerHTML="Likes";
+	
+	nameCell.setAttribute("onclick","sortLikedStories(likedStories.story,'Name')");
+	authorCell.setAttribute("onclick","sortLikedStories(likedStories.story,'authorName')");
+	likesCell.setAttribute("onclick","sortLikedStories(likedStories.story,'likeNum')");
+	
+	table.appendChild(row);
+}
+
+var userStories,likedStories;
 
 function generateStage(table,id,colWidth){
 	var row=document.createElement("tr"),stage;
@@ -135,18 +156,69 @@ function generateStoryPreviweTable(table){
 	}/*End of loop that writes rows of information*/
 }
 
+function createLinkToUser(userID,text){
+	var anchor=document.createElement("a");
+	anchor.setAttribute("href","viewAUser?uID="+userID);
+	anchor.innerHTML=text;
+	return anchor;
+}
+
+function createLikeCell(storyId,likeNum,container){
+	var likeCtrID="likedStory_"+storyId,bt=document.createElement("button"),b=document.createElement("b");
+	var btElemName="likeBt_"+storyId;
+	b.setAttribute("id",likeCtrID);
+	b.innerHTML=likeNum;
+	bt.setAttribute("id",btElemName);
+	bt.setAttribute("onclick","showNumberOfLikes('"+likeCtrID+"',"+storyId+",'--','"+btElemName+"')");
+	bt.innerHTML="unlike";
+	container.appendChild(b);
+	container.appendChild(bt);
+	//return b;
+}
+
+function generateStoriesLikedTable(table){
+	var nameCell,authorCell,likesCell,row,current,arr;
+	//var stage;
+	arr=likedStories.story;
+	createLikeTblHeders(table);
+
+	
+	for(var ctr=0;ctr<arr.length;ctr++){
+	current=likedStories.story[ctr];
+	row=document.createElement("tr");
+	nameCell=document.createElement("td");
+	authorCell=document.createElement("td");
+	likesCell=document.createElement("td");
+	
+	setUpStoryShowLink(current.Name,current.storyID,current.stageID,nameCell,"likeLink_");
+	authorCell.appendChild(createLinkToUser(current.authorId,current.authorName));
+	createLikeCell(current.storyID,current.likeNum,likesCell);
+	//likesCell.innerHTML=current.likeNum;
+	
+	row.appendChild(nameCell);
+	row.appendChild(authorCell);
+	row.appendChild(likesCell);
+	table.appendChild(row);
+	
+	generateStage(table,current.stageID,"2");
+	
+	}/*End of loop that writes rows of information*/
+}
+
+
 function getStoryData(userName){
 	var xmlhttp=getAJAXRequest();
 	var stage=document.getElementById(<% wcm.writeJsElementReference(storyPrevID); %> );
-	//var sCell=stage=document.getElementById("storyStage");
+	var sCell=document.getElementById(<% wcm.writeJsElementReference(likeTable); %> );
 
 	xmlhttp.onreadystatechange=function(){
 		
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			//userStories=eval("("+xmlhttp.responseText+")");
 			userStories=JSON.parse(xmlhttp.responseText);
-			//sCell.innerHTML=xmlhttp.responseText;
+			//sCell.innerHTML=likedStories;
 			generateStoryPreviweTable(stage);
+			generateStoriesLikedTable(sCell);
 		}
 		//else stage.innerHTML="<h1>Broken....</h1>";
 	  };
@@ -156,12 +228,22 @@ function getStoryData(userName){
 	  xmlhttp.send();
 }
 
+
+
 function sortUserStories(stories,category){
 	var stage=document.getElementById(<% wcm.writeJsElementReference(storyPrevID); %> );
 	
 	stage.innerHTML="";
 	stories.sort( sortBy(category) );
 	generateStoryPreviweTable(stage);
+}
+
+function sortLikedStories(stories,category){
+	var stage=document.getElementById(<% wcm.writeJsElementReference(likeTable); %> );
+	
+	stage.innerHTML="";
+	stories.sort( sortBy(category) );
+	generateStoriesLikedTable(stage);
 }
 
 function sortUserStoriesByDate(stories){

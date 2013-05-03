@@ -306,6 +306,35 @@ public class CompleteStoryLoader {
 		}catch(IOException ie){}
 	}
 	
+	public String PreviewLikedStoriesJson(User myUser){
+		String json="{\"story\":[";
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
+		LikedStoryDAO myLikeDAO=myDAOFactory.createLikeDAO();
+		UserDAO myUserDAO=myDAOFactory.createUserDAO();
+		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getUserLikedStories(myUser.getAccountID());
+		String stageID;
+		User author;
+		
+		for(int ctr=0;ctr<Stories.size();ctr++){
+			myLikeDAO.countStoryLikes(Stories.get(ctr).getID());
+			stageID="LikeStage"+Stories.get(ctr).getID();
+			author=myUserDAO.getUser(Stories.get(ctr).getAccountID());
+			
+			json=json.concat("{\"Name\":\""+Stories.get(ctr).getName()+"\",");
+			json=json.concat("\"authorName\":\""+author.getName()+"\",");
+			json=json.concat("\"authorId\":\""+author.getAccountID()+"\",");
+			json=json.concat("\"storyID\":\""+Stories.get(ctr).getID()+"\",");
+			json=json.concat("\"likeNum\":\""+myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"\",");
+			json=json.concat("\"stageID\":\""+stageID+"\"");
+			if(ctr<Stories.size()-1)
+				json=json.concat("},");
+			else json=json.concat("}");
+		}
+		
+		return json.concat("],\"user\":\""+myUser.getName()+"\"}");
+	}
+	
 	/**
 	 * Creates a HTML element to Asynchronously get the Story from the server
 	 * @param storyID : The ID of the Accomplishment

@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" href="Style/Default.css"> 
    <script src="Scripts/AJAXscirpts.js"></script>
+    <%@ include file="Scripts/LearnerScripts.jsp" %>
   <style type="text/css">
   
   .storyTbl{
@@ -40,9 +41,15 @@ font-family: Segoe UI; font-size: 13pt;
   </style>
   
 </head>
-<body>
+<body onload="getStoryData(userName)">
 <%@ include file="Insertables/TopBar.jsp" %>
 <%@ include file="Insertables/accountbar.jsp" %>
+<% CompleteStoryLoader sLoader=new CompleteStoryLoader(u);
+			//sLoader.PreviewUserStories(myUser, out);
+			%>
+<script > username=<% userEncoder.writeJsElementReference(myUser.getName());%>
+likedStories=<% out.write(sLoader.PreviewLikedStoriesJson(myUser));%>
+</script>
 <div>
 	
 <table width="80%" align="right">
@@ -54,7 +61,7 @@ font-family: Segoe UI; font-size: 13pt;
 		</table>
 	</td></tr>
 	
-
+	<!-- 
 	<tr><td>
 		<tr><td>
 			<table id="tableBorder3" bgcolor = "#7DFB9D">
@@ -66,13 +73,11 @@ font-family: Segoe UI; font-size: 13pt;
 				<th width="15%">View</th></tr>
 			</table>
 		</td></tr>
-		
+		 -->
 		<tr><td>
-			<table  id="tableBorder3" bgcolor = "white">
+			<table  id=<% wcm.writeJsElementReference(storyPrevID); %> bgcolor = "white" class="headTbl">
 				
-			<% CompleteStoryLoader sLoader=new CompleteStoryLoader(u);
-			sLoader.PreviewUserStories(myUser, out);
-			%>
+			
 			
 			<tr >
 			<td id="storyStage" colspan="5"></td>
@@ -87,10 +92,10 @@ font-family: Segoe UI; font-size: 13pt;
 	</td></tr>
 	
 	<tr><td>
-			<table  id="tableBorder3" bgcolor = "white">
+			<table  id=<% wcm.writeJsElementReference(likeTable); %>  bgcolor = "white" class="headTbl">
 				
 			<% 
-			sLoader.previewLikedStories(myUser, out);
+			//sLoader.previewLikedStories(myUser, out);
 			%>
 			
 			<tr >
