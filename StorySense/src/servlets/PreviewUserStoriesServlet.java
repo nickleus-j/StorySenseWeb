@@ -108,9 +108,9 @@ public class PreviewUserStoriesServlet extends BaseServlet {
 			
 			out.write("{\"Name\":\""+Stories.get(ctr).getName()+"\",");
 			out.write("\"storyID\":\""+Stories.get(ctr).getID()+"\",");
-			out.write("\"Score\":\""+rateDao.getTotalScore(Stories.get(ctr).getID())+"\",");
+			out.write("\"Score\":"+rateDao.getTotalScore(Stories.get(ctr).getID())+",");
 			out.write("\"TimeFinished\":\""+Stories.get(ctr).getFinishTime()+"\",");
-			out.write("\"Likes\":\""+myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+"\",");
+			out.write("\"Likes\":"+myLikeDAO.countStoryLikes(Stories.get(ctr).getID())+",");
 			out.write("\"stageID\":\""+stageID+"\"");
 			
 			if(ctr<Stories.size()-1)

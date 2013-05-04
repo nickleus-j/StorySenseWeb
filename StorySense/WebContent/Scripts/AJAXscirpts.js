@@ -232,7 +232,8 @@ function setUpStoryShowLink(name,storyID,stageID,cell,preposition){
 	cell.appendChild(anchor);
 }
 
-function sortBy(prop){
+function sortBy(prop,type){
+	if(type=="+")
 	   return function(a,b){
 	      if( a[prop] > b[prop]){
 	          return 1;
@@ -241,14 +242,31 @@ function sortBy(prop){
 	      }
 	      return 0;
 	   };
+	   else 
+		   return function(a,b){
+		      if( a[prop] > b[prop]){
+		          return -1;
+		      }else if( a[prop] < b[prop] ){
+		          return 1;
+		      }
+		      return 0;
+		   };
 }
+
 /*//Usage
 yourArray.sort( sortBy("age") );*/
 
-function sortByDate(obj){
+function sortByDate(obj,type){
+	if(type=="+")
 	return function(a,b){
 		  a = new Date(a[obj]);
 		  b = new Date(b[obj]);
 		  return a<b?-1:a>b?1:0;
+		};
+	else
+		return function(a,b){
+		  a = new Date(a[obj]);
+		  b = new Date(b[obj]);
+		  return a<b?1:a>b?-1:0;
 		};
 }

@@ -25,7 +25,7 @@ font-size: 130%;
 	color:#FF0;
 	top: 0;
 }
-.sortBt:HOVER {
+.sortBt:HOVER, .clickable:HOVER {
 	background: lightgray;
 	}
 .Logo{

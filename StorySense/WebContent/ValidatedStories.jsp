@@ -70,7 +70,7 @@
 	<table align="center" width="100%" class="validatedStoriesTable" id="validatedStoriesTable">
 	
 	<tr>
-	<th colspan=6 id="validatedStoriesHeader">
+	<th colspan=6 id="validatedStoriesHeader" onclick="loadStoriesReviewed(10)" class="clickable">
 	Stories from other learners
 	</th>
 	</tr>

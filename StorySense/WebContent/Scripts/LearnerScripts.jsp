@@ -5,7 +5,9 @@
     
    <% LearnerElemAttr attributeProvider=new LearnerElemAttr();
    	WebCodeMaker wcm=new WebCodeMaker(out);
-   	String storyPrevID="prevStoryTbl",likeTable="likeedStoriesTbl",thClass="sortBt";
+   	String storyPrevID="prevStoryTbl",likeTable="likedStoriesTbl",thClass="sortBt";
+   	String orderTypreMyStories="myStoriesSortOpt",orderTyprelikedStories="likedStoriesSortOpt";
+   	String AscVal="+",DesVal="-";
    %>
 <script>
 
@@ -232,25 +234,44 @@ function getStoryData(userName){
 
 function sortUserStories(stories,category){
 	var stage=document.getElementById(<% wcm.writeJsElementReference(storyPrevID); %> );
+	var orderTypreMyStories=document.getElementsByName(<% wcm.writeJsElementReference(orderTypreMyStories); %>);
+	var value;
+	
+	for (var i = 0;i < orderTypreMyStories.length; i++) {
+	    if (orderTypreMyStories[i].checked)
+	    	value=orderTypreMyStories[i].value;
+	}
 	
 	stage.innerHTML="";
-	stories.sort( sortBy(category) );
+	stories.sort( sortBy(category,value) );
 	generateStoryPreviweTable(stage);
 }
 
 function sortLikedStories(stories,category){
 	var stage=document.getElementById(<% wcm.writeJsElementReference(likeTable); %> );
+	var orderTypreMyStories=document.getElementsByName(<% wcm.writeJsElementReference(orderTyprelikedStories); %>);
+	
+	for (var i = 0;i < orderTypreMyStories.length; i++) {
+	    if (orderTypreMyStories[i].checked)
+	    	value=orderTypreMyStories[i].value;
+	}
 	
 	stage.innerHTML="";
-	stories.sort( sortBy(category) );
+	stories.sort( sortBy(category,value) );
 	generateStoriesLikedTable(stage);
 }
 
 function sortUserStoriesByDate(stories){
 	var stage=document.getElementById(<% wcm.writeJsElementReference(storyPrevID); %> );
+	var orderTypreMyStories=document.getElementsByName(<% wcm.writeJsElementReference(orderTypreMyStories); %>);
+	var value;
 	
+	for (var i = 0;i < orderTypreMyStories.length; i++) {
+	    if (orderTypreMyStories[i].checked)
+	    	value=orderTypreMyStories[i].value;
+	}
 	stage.innerHTML="";
-	stories.sort( sortByDate("TimeFinished") );
+	stories.sort( sortByDate("TimeFinished",value) );
 	generateStoryPreviweTable(stage);
 }
 

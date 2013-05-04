@@ -1,12 +1,12 @@
 /*******************************************************************************
- *Copyright (c) 2013 IBM Corporation and others.
+ *Copyright (c) 2013 Story Sense
  *All rights reserved. This program and the accompanying materials
  *are made available under the terms of the Eclipse Public License v1.0
  *which accompanies this distribution, and is available at
  *http://www.eclipse.org/legal/epl-v10.html
  *
  *Contributors:
- *    IBM Corporation - initial API and implementation
+ *   Nickleus Jimenez
  *******************************************************************************/
 package ajaxReviewer;
 
@@ -101,7 +101,8 @@ public class StoriesRated extends BaseServlet {
 		RatingDAO myRatingDao=myDAOFactory.createRatingDAO();
 		User myUser;
 		String stageID="";
-		String tblIni="<tr><th colspan=6 id=\"validatedStoriesHeader\">" +
+		String tblIni="<tr class=\"clickable\"><th colspan=6 id=\"validatedStoriesHeader\" " +
+				"onclick=\"loadStoriesReviewed(10)\">" +
 				"Stories from other learners</th></tr>" +
 				"<tr><th>Author</th><th>Story Title</th><th>Score</th></tr>";
 			
