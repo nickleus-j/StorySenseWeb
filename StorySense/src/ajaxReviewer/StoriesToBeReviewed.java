@@ -98,7 +98,8 @@ public class StoriesToBeReviewed extends BaseServlet {
 		CompleteStoryLoader sLoader=new CompleteStoryLoader();
 		User myUser;
 		String stageID="assertionTbl";
-		String tblIni="<tr><th colspan=6 id=\"validatedStoriesHeader\">" +
+		String tblIni="<tr><th colspan=6 id=\"validatedStoriesHeader\" class=\"clickable\" " +
+				"onclick=\"ReviewStoriesInUser(10,1,'')\">" +
 				"Stories from other learners</th></tr>" +
 				"<tr><th>Author</th><th>Story Title</th><th>Show Story</th></tr>";
 			
@@ -108,7 +109,8 @@ public class StoriesToBeReviewed extends BaseServlet {
 				myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
 				/*Generate HTML code*/
 				out.write("<tr>");
-				out.write("<td>"+myUser.getName()+"</td>");
+				out.write("<td class=\"clickable\" onclick=\"ReviewStoriesInUser(10,1,'"+myUser.getName()+"')\">"
+						+myUser.getName()+"</td>");
 				out.write("<td>"+sLoader.createStoryLink(Stories.get(ctr), ("storyPane"+ctr))+"</td>");
 				out.write("<td><a>"+createReviewLink(Stories.get(ctr).getID(), stageID)+"</a></td>");
 

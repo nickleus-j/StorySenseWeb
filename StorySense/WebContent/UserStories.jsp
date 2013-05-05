@@ -57,7 +57,14 @@ likedStories=<% out.write(sLoader.PreviewLikedStoriesJson(myUser));%>
 	<tr align="center"><td>
 		<table id="tableBorder3" class="tableBorder3" bgcolor = "#7DFB9D">
 		<thead><tr><th  id="fontStyle2">Stories of
-			<% out.print(myUser.getName()); %></th></tr></thead>	
+			<% out.print(myUser.getName()); %></th></tr></thead>
+			<tr><td>
+		<input type="radio" name=<% wcm.writeJsElementReference(orderTypreMyStories); %> 
+			Value=<% wcm.writeJsElementReference(AscVal);%> checked/>Ascending
+		<input type="radio" name=<% wcm.writeJsElementReference(orderTypreMyStories); %>
+			Value=<% wcm.writeJsElementReference(DesVal); %>/>Descending
+		</td>
+		</tr>			
 		</table>
 	</td></tr>
 	
@@ -87,7 +94,13 @@ likedStories=<% out.write(sLoader.PreviewLikedStoriesJson(myUser));%>
 		
 		<tr align="center"><td>
 		<table class="headTbl" bgcolor = "#7DFB9D">
-		<thead><tr><th  id="fontStyle2">Stories <% out.print(myUser.getName()); %> Like</th></tr></thead>	
+		<thead><tr><th  id="fontStyle2">Stories <% out.print(myUser.getName()); %> Like</th></tr></thead>
+		<tr><td>
+		<input type="radio" name=<% wcm.writeJsElementReference(orderTyprelikedStories); %> 
+			Value=<% wcm.writeJsElementReference(AscVal); %> checked/>Ascending
+		<input type="radio" name=<% wcm.writeJsElementReference(orderTyprelikedStories); %>
+			Value=<% wcm.writeJsElementReference(DesVal); %>/>Descending
+		</td></tr>		
 		</table>
 	</td></tr>
 	
@@ -113,7 +126,7 @@ likedStories=<% out.write(sLoader.PreviewLikedStoriesJson(myUser));%>
 				
 			<% 
 			StoriesRated ratedS=new StoriesRated();
-			ratedS.encodeScoresInHTML(out,myUser, sLoader, "<table  id=\"tableBorder3\"  bbgcolor = \"white\">");
+			ratedS.encodeScoresInHTML(out,myUser, sLoader, "<table  id=\"tableBorder3\"  bgcolor = \"white\">");
 			/* <table  id="tableBorder3" bgcolor = "white">*/
 			%>
 			

@@ -113,8 +113,8 @@ font-family: Segoe UI; font-size: 13pt;
 				
 			<% 
 			StoriesRated ratedS=new StoriesRated();
-			ratedS.encodeScoresInHTML(out, u, sLoader, "<table  id=\"tableBorder3\"  bgcolor = \"white\">");
-			/* <table  id="tableBorder3" bgcolor = "white">*/
+			ratedS.encodeScoresInHTML(out, u, sLoader, "<table id=\"tableBorder3\"  bgcolor = \"white\">");
+			/* <table id="tableBorder3" bgcolor = "white">*/
 			%>
 			
 			</td></tr>
