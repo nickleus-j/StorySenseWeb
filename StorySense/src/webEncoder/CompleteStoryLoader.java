@@ -1,12 +1,12 @@
 /*******************************************************************************
- *Copyright (c) 2013 IBM Corporation and others.
+ *Copyright (c) 2013 Story Sense
  *All rights reserved. This program and the accompanying materials
  *are made available under the terms of the Eclipse Public License v1.0
  *which accompanies this distribution, and is available at
  *http://www.eclipse.org/legal/epl-v10.html
  *
  *Contributors:
- *    IBM Corporation - initial API and implementation
+ *    Nickleus Jimenez 
  *******************************************************************************/
 package webEncoder;
 
@@ -306,6 +306,13 @@ public class CompleteStoryLoader {
 		}catch(IOException ie){}
 	}
 	
+    /**
+     *Returns a JSON syntax to be parsed. The syntax returned represents
+     * The values of the stories that a user likes. The values are to be 
+     * placed in a table to show the stories the user likes
+     * 
+     * Having it in JSON allows manipulation on the browser/clinet side
+     */
 	public String PreviewLikedStoriesJson(User myUser){
 		String json="{\"story\":[";
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);

@@ -29,6 +29,11 @@ public class PreviewUserStoriesServlet extends BaseServlet {
      */
     public PreviewUserStoriesServlet() {}
 
+/**
+ * The response is written in JSON which is to be parsed for the browser to know 
+ * the objects to be processed on the browser. The values are to be displayed on
+ * table.
+ */ 
 	@Override
 	public void executeCustomCode(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -87,7 +92,7 @@ public class PreviewUserStoriesServlet extends BaseServlet {
 	}
 	
 	/**
-	 * Show description of stories made by the user
+	 * Show description of stories made by the user in JSON
 	 */
 	public void createUserJsonStories(User myUser,PrintWriter out){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);

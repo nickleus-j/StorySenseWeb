@@ -56,7 +56,7 @@ public class StoryLoader extends BaseServlet {
 		catch(Exception ex){
 			out.println("Error in getting the story\n"+ex.getMessage());
 		}
-		
+		out.flush();
 	}
 	
 	private String preview(StoryFileAccess StoryF)
