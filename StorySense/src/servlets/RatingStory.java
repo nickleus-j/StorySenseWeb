@@ -1,12 +1,12 @@
 /*******************************************************************************
- *Copyright (c) 2013 IBM Corporation and others.
+ *Copyright (c) 2013 Story Sense
  *All rights reserved. This program and the accompanying materials
  *are made available under the terms of the Eclipse Public License v1.0
  *which accompanies this distribution, and is available at
  *http://www.eclipse.org/legal/epl-v10.html
  *
  *Contributors:
- *    IBM Corporation - initial API and implementation
+ *    Nickleus Jimenez
  *******************************************************************************/
 package servlets;
 
@@ -47,7 +47,8 @@ import entity.Template;
 import entity.User;
 
 /**
- * Servlet implementation class RatingStory
+ * Deals with giving a score of
+ * a story made by a learner
  */
 @WebServlet(description = "rates a story submitted", urlPatterns = { "/RatingStory" })
 public class RatingStory extends BaseServlet {
@@ -122,6 +123,9 @@ public class RatingStory extends BaseServlet {
 		return scores;
 	}
 	
+    /**
+    This creates a rating for the story
+    **/
 	public void rateStory(HttpServletRequest request,PrintWriter out)throws IOException,Exception{
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
@@ -146,6 +150,9 @@ public class RatingStory extends BaseServlet {
 		updateUserScore(ratedStory.getAccountID(),score);
 	}
 	
+    /**
+     * Places the score in the database
+     **/ 
 	private void saveRating(int score,int sID,HttpSession theSession){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		RatingDAO myRatingDao=myDAOFactory.createRatingDAO();
@@ -157,6 +164,10 @@ public class RatingStory extends BaseServlet {
 		myRatingDao.addRating(theRating);
 	}
 	
+    /**
+     * Updates the score of the user in the database
+     * the user score is used to determine the leaderboard results
+     */ 
 	public void updateUserScore(int writeID,int Additionalscore){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		UserDAO userDao=myDAOFactory.createUserDAO();
@@ -183,6 +194,10 @@ public class RatingStory extends BaseServlet {
 		return result+(QualIndex+1)*5;
 	}
 	
+    /**
+     * This updates the actual knwoledgebase based on the evaluations
+     * of the reviewer.
+     */ 
 	private void updateRelationScores(ArrayList<Integer> scores,ArrayList<ArrayList<Relation>> assertions){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		RelationDAO relationDAO=myDAOFactory.createRelationDAO();

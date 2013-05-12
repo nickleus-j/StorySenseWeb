@@ -1,12 +1,12 @@
 /*******************************************************************************
- *Copyright (c) 2013 IBM Corporation and others.
+ *Copyright (c) 2013 StorySense
  *All rights reserved. This program and the accompanying materials
  *are made available under the terms of the Eclipse Public License v1.0
  *which accompanies this distribution, and is available at
  *http://www.eclipse.org/legal/epl-v10.html
  *
  *Contributors:
- *    IBM Corporation - initial API and implementation
+ *    Nickleus Jimenez
  *******************************************************************************/
 package ajaxLearner;
 
@@ -21,7 +21,7 @@ import servlets.BaseServlet;
 import webEncoder.StoryEncoder;
 
 /**
- * Servlet implementation class AJAXStoryGen
+ * A servelt the 
  */
 @WebServlet(description = "Async Call to generate an  incomplete story", urlPatterns = { "/AJAXStoryGen" })
 public class AJAXStoryGen extends BaseServlet {

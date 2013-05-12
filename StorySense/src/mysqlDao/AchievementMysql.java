@@ -1,12 +1,12 @@
 /*******************************************************************************
- *Copyright (c) 2013 IBM Corporation and others.
+ *Copyright (c) 2013 Story Sense
  *All rights reserved. This program and the accompanying materials
  *are made available under the terms of the Eclipse Public License v1.0
  *which accompanies this distribution, and is available at
  *http://www.eclipse.org/legal/epl-v10.html
  *
  *Contributors:
- *    IBM Corporation - initial API and implementation
+ *    Nickleus Jimenez
  *******************************************************************************/
 package mysqlDao;
 
@@ -74,14 +74,6 @@ public class AchievementMysql extends AchievementDAO {
             
             //Achievement badge;
             ArrayList<Achievement> Achievements=listResult(rs);
-            /*while(rs.next()){
-            	badge=new Achievement();
-            	badge.setID(rs.getInt("ID"));
-            	badge.setTitle(rs.getString("Title"));
-            	badge.setDescription("Description");
-            	Achievements.add(badge);
-            }
-            */
             rs.close();
             ps.close();
             con.close();
@@ -97,6 +89,10 @@ public class AchievementMysql extends AchievementDAO {
 		return null;
 	}
 
+    /**
+     * Puts the entries of a result set in to a list that 
+     * can be manipulated in Java
+    */
 	private ArrayList<Achievement> listResult(ResultSet rs) throws SQLException{
 		Achievement badge;
 		ArrayList<Achievement> Achievements=new ArrayList<Achievement>();
@@ -167,6 +163,10 @@ public class AchievementMysql extends AchievementDAO {
 		return null;
 	}
 
+    /**
+     * Gets the achivements of a certain user from the database
+     * The userid must be represent the id of a learner in the database
+    */
 	@Override
 	public List<Achievement> getUserAchievements(int userId) {
 		try {
@@ -196,6 +196,9 @@ public class AchievementMysql extends AchievementDAO {
 		return null;
 	}
 
+    /**
+     * gets the achievements noby has gotten yet
+    */
 	@Override
 	public List<Achievement> getUnAttainedAchievements() {
 		try {

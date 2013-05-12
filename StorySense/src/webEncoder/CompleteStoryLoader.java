@@ -94,11 +94,13 @@ public class CompleteStoryLoader {
 		encodeStoriesInHTML(out,Stories,myDAOFactory.createUserDAO());
 	}
 	
-	
+	/**
+     * This function is to be used in a JSP File
+    generates HTML code that will display the stories writen and some about them
+    */
 	private void encodeStoriesInHTML(JspWriter out,ArrayList<Acomplishment> Stories,UserDAO myUserDao){
 		User myUser;
 		try{
-			//out.write("<p>");
 			out.write("<table id=\"tableBorderfeed2\" bgcolor=\"white\">");
 			out.write("<tr><td id='1st'></td></tr>");
 			/*loop that displays the stories*/
@@ -116,7 +118,6 @@ public class CompleteStoryLoader {
 				
 			}/*End of Loop*/
 			out.write("</table>");
-			//out.write("</p>");
 			}catch(IOException ie){}
 	}
 	

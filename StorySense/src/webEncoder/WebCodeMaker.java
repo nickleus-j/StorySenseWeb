@@ -254,6 +254,11 @@ public class WebCodeMaker {
 		
 		return Code.concat("</select>");
 	}
+    
+    /**
+    Generates HTML code that displays a combobox
+    containing the possible difficulty levels of stories
+    */
 	public String getChooseTemplateLevelHTML(String boxID,String onChangeFunc){
 		String Code="<select id=\""+boxID+"\" onchange=\""+onChangeFunc+"\">";
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
@@ -261,7 +266,6 @@ public class WebCodeMaker {
 		ArrayList<Template> templates=(ArrayList<Template>)templateDao.getGroupedtemplates();
 		
 		for(int ctr=0;ctr<templates.size();ctr++){
-			
 			Code=Code.concat("<option>"+templates.get(ctr).getLevelRequirement()+"</option>");
 		}
 		
