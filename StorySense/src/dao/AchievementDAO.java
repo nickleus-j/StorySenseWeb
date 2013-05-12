@@ -25,4 +25,7 @@ public abstract class AchievementDAO {
 	public abstract void addAchievement(Achievement medal);
 	public abstract List<Achievement> getAllAchievements();
 	public abstract void updateAchievement(Achievement medal);
+	public abstract Achievement getAchievementById(int id);
+	public abstract List<Achievement> getUserAchievements(int userId);
+	public abstract List<Achievement> getUnAttainedAchievements();
 }

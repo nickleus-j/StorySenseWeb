@@ -10,9 +10,11 @@
  *******************************************************************************/
 package mysqlDao;
 
+import dao.AchievementDAO;
 import dao.AcomplishmentDAO;
 import dao.ConceptDAO;
 import dao.DAOFactory;
+import dao.LearnerAcievementDAO;
 import dao.LikedStoryDAO;
 import dao.ProfileDAO;
 import dao.RatingDAO;
@@ -58,6 +60,12 @@ public class MysqlDAOFactory extends DAOFactory{
 	public LikedStoryDAO createLikeDAO() {
 		return new LikedStoryMysql();
 	}
+
+	@Override
+	public AchievementDAO createAchievementDAO() {return new AchievementMysql();}
+
+	@Override
+	public LearnerAcievementDAO createLearnerAcievementDAO() {return new LearnerAchievementMysql();}
 
 	
 }

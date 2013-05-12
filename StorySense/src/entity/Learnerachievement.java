@@ -24,10 +24,13 @@ CREATE TABLE `learnerachievement` (
 public class Learnerachievement {
 
 	private int AchievementID,learnerID;
+	private String ObtainDate;
 
 	public int getAchievementID() {return AchievementID;}
 	public void setAchievementID(int achievementID) {AchievementID = achievementID;}
 	public int getLearnerID() {return learnerID;}
 	public void setLearnerID(int learnerID) {this.learnerID = learnerID;}
+	public String getObtainDate() {return ObtainDate;}
+	public void setObtainDate(String obtainDate) {ObtainDate = obtainDate;}
 	
 }

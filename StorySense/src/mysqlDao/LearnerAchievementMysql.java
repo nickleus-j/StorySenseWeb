@@ -13,6 +13,7 @@ package mysqlDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,9 +39,10 @@ public class LearnerAchievementMysql extends LearnerAcievementDAO {
         	
         	ps = con.prepareStatement("INSERT INTO learnerachievement" +
         			" (AchievementID,learnerID) " +
-        			"VALUES (?,?)");
+        			"VALUES (?,?,?)");
             ps.setInt(1, medal.getAchievementID());
             ps.setInt(2, medal.getLearnerID());
+            ps.setString(3, medal.getObtainDate()); 
             ps.execute();
             ps.close();
             
@@ -72,6 +74,7 @@ public class LearnerAchievementMysql extends LearnerAcievementDAO {
             	medal=new Learnerachievement();
             	medal.setAchievementID(rs.getInt("AchievementID"));
             	medal.setLearnerID(myUser.getAccountID());
+            	medal.setObtainDate(rs.getString("obtainDate"));
             	Achievements.add(medal);
             }
             
@@ -89,6 +92,18 @@ public class LearnerAchievementMysql extends LearnerAcievementDAO {
 		return null;
 	}
 
+	private ArrayList<Learnerachievement> listResults(ResultSet rs) throws SQLException{
+		Learnerachievement medal;
+        ArrayList<Learnerachievement> Achievements=new ArrayList<Learnerachievement>();
+        while(rs.next()){
+        	medal=new Learnerachievement();
+        	medal.setAchievementID(rs.getInt("AchievementID"));
+        	medal.setLearnerID(rs.getInt("learnerID"));
+        	medal.setObtainDate("obtainDate");
+        	Achievements.add(medal);
+        }
+        return Achievements;
+	}
 	/**
 	 * Get all the achievements obtained by all learners
 	 */
@@ -101,17 +116,11 @@ public class LearnerAchievementMysql extends LearnerAcievementDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
 
-            ps = con.prepareStatement("SELECT * from learnerachievement ");
+            ps = con.prepareStatement("SELECT * from learnerachievement");
             rs = ps.executeQuery();
             
-            Learnerachievement medal;
-            ArrayList<Learnerachievement> Achievements=new ArrayList<Learnerachievement>();
-            while(rs.next()){
-            	medal=new Learnerachievement();
-            	medal.setAchievementID(rs.getInt("AchievementID"));
-            	medal.setLearnerID(rs.getInt("learnerID"));
-            	Achievements.add(medal);
-            }
+            //Learnerachievement medal;
+            ArrayList<Learnerachievement> Achievements=listResults(rs);
             
             rs.close();
             ps.close();

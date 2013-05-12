@@ -41,6 +41,10 @@ public class WebCodeMaker {
 	}
 	
 	/*	Methods	*/
+	/**
+	 * writes String enclosed in double quotes on the generated HTML 
+	 * @param elementName
+	 */
 	public void writeJsElementReference(String elementName){
 		try {
 			out.write("\""+elementName+"\"");
@@ -49,6 +53,11 @@ public class WebCodeMaker {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param elementName
+	 * @return String enclosed in double quotes
+	 */
 	public String giveJsStringParam(String elementName){
 		return "\""+elementName+"\"";
 	}

@@ -8,7 +8,7 @@
  *Contributors:
  *    IBM Corporation - initial API and implementation
  *******************************************************************************/
-package ajaxServlets;
+package ajaxLearner;
 
 import infoResource.LearnerElemAttr;
 

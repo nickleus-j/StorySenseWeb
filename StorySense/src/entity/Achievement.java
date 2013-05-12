@@ -12,7 +12,7 @@ package entity;
 
 public class Achievement {
 	private int ID;
-	private String Title,Description;
+	private String Title,Description,picUrl;
 	
 	
 	public int getID() {return ID;}
@@ -21,5 +21,7 @@ public class Achievement {
 	public void setTitle(String title) {Title = title;}
 	public String getDescription() {return Description;}
 	public void setDescription(String description) {Description = description;}
+	public String getPicUrl() {return picUrl;}
+	public void setPicUrl(String picUrl) {this.picUrl = picUrl;}
 	
 }
