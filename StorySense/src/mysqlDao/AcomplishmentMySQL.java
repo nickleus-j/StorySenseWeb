@@ -83,18 +83,6 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             
             	Stories=new ArrayList<Acomplishment>();
             	
-            	/*Loop that inserts the stories into the list
-            	while(rs.next()){
-            		Story=new Acomplishment();
-            		Story.setID(rs.getInt("ID"));
-            		Story.setAccountID(rs.getInt("AccountID"));
-            		Story.setTemplateID(rs.getInt("templateID"));
-            		Story.setName(rs.getString("Name"));
-            		Story.setFileURL(rs.getString("fileURL"));
-            		Story.setFinishTime(rs.getTimestamp("finishTime"));
-            		Stories.add(Story);
-            	}*/
-            	
             	addResultsToList(Stories, rs);
             
             
@@ -640,14 +628,6 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             
             if(rs.first()){
             	Story=getStory(rs.getInt("ID"));
-            	/*
-            	Story.setID(rs.getInt("ID"));
-            	Story.setAccountID(rs.getInt("AccountID"));
-            	Story.setTemplateID(rs.getInt("templateID"));
-            	Story.setName(rs.getString("Name"));
-            	Story.setFileURL(rs.getString("fileURL"));
-            	Story.setFinishTime(rs.getTimestamp("finishTime"));
-            	*/
             }
             
             ps.close();

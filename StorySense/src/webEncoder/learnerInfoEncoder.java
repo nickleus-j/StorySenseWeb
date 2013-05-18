@@ -39,6 +39,30 @@ public class learnerInfoEncoder {
 		return code.concat("</table>");
 	}
 	
+	public String writeHtmlAchievements(User givenUser,int imgWidth,int imgHeight){
+		String code="<table><tr>";
+		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		AchievementDAO medalDao=daoFactory.createAchievementDAO();
+		ArrayList<Achievement> medals=(ArrayList<Achievement>)medalDao.getUserAchievements(givenUser.getAccountID());
+		
+		if(medals==null||medals.isEmpty()||givenUser.getRole()!=User.Roles.learner.getValue()){
+			code=code.concat("<th> No Badges</th>");
+			return code.concat("</table>");
+		}
+		
+		for(int ctr=0;ctr<medals.size();ctr++){
+			String imgCode="<td><img width=\""+(imgWidth)+"\" height=\""+(imgHeight)+"\" " +
+					" src=\""+medals.get(ctr).getPicUrl()+"\"></td>";
+			code=code.concat(imgCode);
+		}
+		code=code.concat("</tr><tr>");
+		for(int ctr=0;ctr<medals.size();ctr++){
+			code=code.concat("<td>"+medals.get(ctr).getTitle()+"</td>");
+		}
+		code=code.concat("</tr>");
+		return code.concat("</table>");
+	}
+	
 	public void writeHtmlAchievements(JspWriter out,User givenUser){
 		try {
 			out.write("<h2>Achievemnts</h2>");
@@ -47,4 +71,13 @@ public class learnerInfoEncoder {
 			e.printStackTrace();
 		}
 	}
+	
+	public void writeHtmlAchievements(JspWriter out,User givenUser,int imgWidth,int imgHeight){
+		try {
+			out.write("<h2>Achievemnts</h2>");
+			out.write(writeHtmlAchievements(givenUser,imgWidth,imgHeight));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}/**/
 }

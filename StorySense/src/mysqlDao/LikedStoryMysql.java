@@ -102,7 +102,7 @@ public class LikedStoryMysql extends LikedStoryDAO {
 
             ps = con.prepareStatement("SELECT account.Name,storyaccomplishment.Name AS storyName," +
             		"ID AS storyID,account.accountID,likedstory.key from account,storyaccomplishment,likedstory " +
-            		"WHERE account.accountID=storyaccomplishment.AccountID AND storyAccomID=ID AND" +
+            		"WHERE account.accountID=storyaccomplishment.AccountID AND storyAccomID=ID AND " +
             		"account.accountID= ? ");
             ps.setInt(1, userID);
             rs = ps.executeQuery();

@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import achievementExecutors.WritingAchievements;
+
 
 import dao.AcomplishmentDAO;
 import dao.ConceptDAO;
@@ -200,7 +202,10 @@ public class StoryWriter extends BaseServlet {
 		givenUser.setPoints(givenUser.getPoints()+givenTemplate.getPlusScore());
 		userDao.increaseUserPoints(givenUser, givenTemplate.getPlusScore());
 	}
-	
+	private void operateAchievements(User given){
+		WritingAchievements wAchievements=new WritingAchievements();
+		wAchievements.awardFirstStory(given.getAccountID());
+	}
 	
 	/**
 	 * Submits the story.
@@ -274,7 +279,10 @@ public class StoryWriter extends BaseServlet {
 		
 		if(user==null)
 			saveStory(answers, Story,request.getParameter("storyName"),"Unknown");
-		else saveStory(answers, Story,request.getParameter("storyName"),user);
+		else {
+			saveStory(answers, Story,request.getParameter("storyName"),user);
+			operateAchievements(user);
+		}
 	}
 	
 

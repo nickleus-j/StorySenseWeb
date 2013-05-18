@@ -27,4 +27,5 @@ public abstract class LearnerAcievementDAO {
 	public abstract List<Learnerachievement> getLearnerAchievements(User myUser);
 	public abstract List<Learnerachievement> getAllUserRewards();
 	public abstract void updateAchievement(Learnerachievement medal);
+	public abstract boolean hasLearnerAchieved(int userId,int achievementId);
 }

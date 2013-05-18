@@ -95,8 +95,6 @@ font-family: Segoe UI; font-size: 13pt;
 	<script type="text/javascript">likedStories=<% out.write(sLoader.PreviewLikedStoriesJson(myUser));%></script>
 			<table  id=<% wcm.writeJsElementReference(likeTable); %>  bgcolor = "white" class="headTbl">
 				
-			
-			
 			<tr >
 			<td id="storyStage" colspan="5">
 			

@@ -38,11 +38,11 @@ public class LearnerAchievementMysql extends LearnerAcievementDAO {
         	Connection con = myFactory.getConnection();
         	
         	ps = con.prepareStatement("INSERT INTO learnerachievement" +
-        			" (AchievementID,learnerID) " +
-        			"VALUES (?,?,?)");
+        			" (AchievementID,learnerID,ObtainDate) " +
+        			"VALUES (?,?,now())");
             ps.setInt(1, medal.getAchievementID());
             ps.setInt(2, medal.getLearnerID());
-            ps.setString(3, medal.getObtainDate()); 
+            //ps.setString(3, medal.getObtainDate()); 
             ps.execute();
             ps.close();
             
@@ -92,6 +92,35 @@ public class LearnerAchievementMysql extends LearnerAcievementDAO {
 		return null;
 	}
 
+	public boolean hasLearnerAchieved(int userId,int achievementId){
+		boolean result=false;
+		
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from learnerachievement WHERE AchievementID=? AND learnerID=?");
+            ps.setInt(1, achievementId);
+            ps.setInt(2, userId);
+            rs = ps.executeQuery();
+            
+            result=rs.first();
+            rs.close();
+            ps.close();
+            con.close();
+            
+            
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(LearnerAchievementMysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return result;
+	}
+	
 	private ArrayList<Learnerachievement> listResults(ResultSet rs) throws SQLException{
 		Learnerachievement medal;
         ArrayList<Learnerachievement> Achievements=new ArrayList<Learnerachievement>();

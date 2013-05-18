@@ -16,8 +16,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import achievementExecutors.LikeAchievements;
+
+import dao.AchievementDAO;
+import dao.AcomplishmentDAO;
 import dao.DAOFactory;
 import dao.LikedStoryDAO;
+import entity.Acomplishment;
 import entity.User;
 
 import servlets.BaseServlet;
@@ -44,8 +49,10 @@ public class LikeChanger extends BaseServlet {
 			
 			like=request.getParameter("res");
 			
-			if(like.matches("like"))
+			if(like.matches("like")){
 				LikeDAO.likeStory(myUser.getAccountID(), sID);
+				likeAchievementCheck(myDAOFactory,sID);
+			}
 			else 
 				LikeDAO.disLike(myUser.getAccountID(), sID);
 			response.getWriter().write(""+LikeDAO.countStoryLikes(sID));
@@ -54,4 +61,10 @@ public class LikeChanger extends BaseServlet {
 		}  
 	}
 
+	public void likeAchievementCheck(DAOFactory myDAOFactory,int sID){
+		AcomplishmentDAO acomDao=myDAOFactory.createAcomplishmentDAO();
+		Acomplishment storyMade=acomDao.getStory(sID);
+		LikeAchievements likeAchievement=new LikeAchievements();
+		likeAchievement.awardApprovalAchievement(storyMade.getAccountID());
+	}
 }
