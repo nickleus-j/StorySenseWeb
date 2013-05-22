@@ -27,7 +27,7 @@ width: 50%;
 font-family: Segoe UI; font-size: 12pt;
 } 
 
-#fontStylefeed2{
+#fontStylefeed2, .templateProperties{
 font-family: Segoe UI; font-size: 12pt;
 background-color: #660000; 
 color: white;
@@ -37,8 +37,23 @@ color: white;
 margin: 2%;
 }
 </style>
-
+<%@ include file="../Scripts/AdminScripts.jsp" %>
 <div id="center" class="column">
+<table>
+	<tr>
+	<th>Template Name</th>
+	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(templateNameBox));%>/></td>
+	</tr>
+	<tr>
+	<th>Level Required</th>
+	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(levelBox));%>/></td>
+	</tr>
+	<tr>
+	<th>Points Required</th>
+	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(pointBox));%>/></td>
+	</tr>
+</table>
+
  <table id="tableBorderfeed3">
   <tr><th id="fontStylefeed2" colspan="3">Relations</th></tr>
   <tr>
@@ -47,7 +62,10 @@ margin: 2%;
 	  		<tr><td>Concept A</td></tr>
 	  		<tr id="conceptA"><td><input style="width:193px" type="Text" name="Concept A" style="margin-bottom:5%"/></td></tr>
 	  		<tr style="width:193px"><td>Object</td></tr>
-	  		<tr id="object"><td><input style="width:193px" type="Text" name="Object" style="margin-bottom:5%"/></td></tr>
+	  		<tr id="object"><td>
+	  			<input style="width:193px" type="Text" name="Object" style="margin-bottom:5%"/>
+	  			<select id=<% wEncoder.writeJsElementReference(showRelationsBox); %>></select>
+	  			</td></tr>
 	  		<tr style="width:193px"><td>Concept B</td></tr>
 	  		<tr id="conceptB"><td><input style="width:193px" type="Text" name="Concept B" style="margin-bottom:5%"/></td></tr>
 	  	</table>

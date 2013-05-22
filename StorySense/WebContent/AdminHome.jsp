@@ -6,9 +6,10 @@
 <title>Story Sense</title>
 
   <link rel="stylesheet" href="Style/Default.css"> 
-
+<script src="Scripts/AJAXscirpts.js"></script>
 </head>
-<body bgcolor="white">
+
+<body bgcolor="white" onload="initializeAdminHome()">
 <%@ include file="Insertables/AdminNavBar.jsp" %>
 <div id="container">
 <%@ include file="Insertables/CreateTemplate.jsp" %>

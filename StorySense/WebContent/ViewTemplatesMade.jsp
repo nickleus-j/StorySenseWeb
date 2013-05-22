@@ -14,7 +14,7 @@
 <div id="container">
 <div id="center" class="column">
 	<% TemplateEncoder tEncoder=new TemplateEncoder();
-	out.write(tEncoder.showTemplateList());%>
+	out.write(tEncoder.showTemplateList(u.getAccountID()));%>
 
 </div>
 </div>

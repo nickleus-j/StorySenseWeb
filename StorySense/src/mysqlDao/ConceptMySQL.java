@@ -12,6 +12,7 @@ package mysqlDao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -96,6 +97,20 @@ public class ConceptMySQL extends ConceptDAO {
 
 	}
 
+	private List<Concept> getResults(ResultSet rs) throws SQLException{
+		 List<Concept> Concepts=new ArrayList<Concept>();
+         Concept c;
+         
+         while(rs.next()){
+         	c=new Concept();
+         	c.setConceptID(rs.getInt("ConceptID"));
+         	c.setWord_phrase("Word_phrase");
+         	Concepts.add(c);
+         }
+         
+         return Concepts;
+	}
+	
 	/**
 	 * Gets the concepts in the database
 	 */
@@ -104,8 +119,7 @@ public class ConceptMySQL extends ConceptDAO {
 		try {
             PreparedStatement ps;
             ResultSet rs;
-            List<Concept> Concepts=new ArrayList<Concept>();
-            Concept c;
+            List<Concept> Concepts;//=new ArrayList<Concept>();
 
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
@@ -113,13 +127,8 @@ public class ConceptMySQL extends ConceptDAO {
             ps = con.prepareStatement("SELECT * FROM concept ");
             rs = ps.executeQuery();
             
-            while(rs.next()){
-            	c=new Concept();
-            	c.setConceptID(rs.getInt("ConceptID"));
-            	c.setWord_phrase("Word_phrase");
-            	Concepts.add(c);
-            }
-            
+            Concepts=getResults(rs);
+            rs.close();
             ps.close();
             con.close();
             
@@ -140,8 +149,7 @@ public class ConceptMySQL extends ConceptDAO {
 		try {
             PreparedStatement ps;
             ResultSet rs;
-            List<Concept> Concepts=new ArrayList<Concept>();
-            Concept c;
+            List<Concept> Concepts;//=new ArrayList<Concept>();
 
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
@@ -150,12 +158,7 @@ public class ConceptMySQL extends ConceptDAO {
             ps.setString(1, concept);
             rs = ps.executeQuery();
             
-            while(rs.next()){
-            	c=new Concept();
-            	c.setConceptID(rs.getInt("ConceptID"));
-            	c.setWord_phrase("Word_phrase");
-            	Concepts.add(c);
-            }
+            Concepts=getResults(rs);
             
             ps.close();
             con.close();

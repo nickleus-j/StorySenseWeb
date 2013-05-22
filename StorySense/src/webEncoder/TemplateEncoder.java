@@ -38,5 +38,25 @@ public class TemplateEncoder {
 		
 		return code.concat("</table>");
 	}
-	
+
+	public String showTemplateList(int author){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
+		String code="<table border=\"2\"><caption>Templates</caption>";
+		ArrayList<Template> templates=null;
+		
+		templates=(ArrayList<Template>)templateDao.getAlltemplates();
+		
+		if(templates==null||templates.isEmpty())
+			code=code.concat("<tr><td>Problem occured</td></tr>");
+		
+		else{
+			for(int ctr=0;ctr<templates.size();ctr++){
+				code=code.concat("<tr><th>"+templates.get(ctr).getName()+"</th>" +
+						"<td><button>View Template</button></td></tr>");
+			}
+		}
+		
+		return code.concat("</table>");
+	}
 }
