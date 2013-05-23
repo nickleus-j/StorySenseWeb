@@ -15,8 +15,10 @@ import java.io.IOException;
 import javax.servlet.jsp.JspWriter;
 
 import dao.AcomplishmentDAO;
+import dao.ConceptDAO;
 import dao.DAOFactory;
 import entity.Acomplishment;
+import entity.Concept;
 
 public class SidebarEncoder {
 
@@ -30,5 +32,18 @@ public class SidebarEncoder {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}/*End of Meyhod*/
+	
+	public void showPopularTerm(JspWriter out){
+		DAOFactory myDaoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		ConceptDAO conceptDao=myDaoFactory.createConceptDAO();
+		Concept trendingConcept=conceptDao.getPopularConcept();
+		
+		try {
+			out.write(trendingConcept.getWord_phrase());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}/*End of Meyhod*/
 }

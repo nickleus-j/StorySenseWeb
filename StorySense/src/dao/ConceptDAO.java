@@ -21,4 +21,6 @@ public abstract class ConceptDAO {
 	public abstract List<Concept> getConcepts();
 	public abstract List<Concept> getConceptWithMatchingTitle(String concept);
 	public abstract Concept getConcept(String concept);
+	public abstract void updateFrequency(String concept,int freq);
+	public abstract Concept getPopularConcept();
 }
