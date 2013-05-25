@@ -15,16 +15,11 @@
     %>
 <script>
 var relations=<% out.write(adminEnc.getRelationshipsJs());%>;
-
+var concepts=<% out.write(adminEnc.getConceptTextsJs());%>;
 function initializeAdminHome(){
-	var relationSelectBox=document.getElementById(<% wEncoder.writeJsElementReference(showRelationsBox); %>);
-	var option;
-	
-	for(var ctr=0;ctr<relations.length;ctr++){
-		option=document.createElement('option');
-		option.innerHTML=relations[ctr];
-		relationSelectBox.appendChild(option);
-	}/*End of loop*/
+	addRelationships(<% wEncoder.writeJsElementReference(showRelationsBox); %>);
+	addConcepts(<% wEncoder.writeJsElementReference(showConceptsBox1); %>);
+	addConcepts(<% wEncoder.writeJsElementReference(showConceptsBox2); %>);
 }
 
 function addRelationships(elemId){
@@ -35,6 +30,17 @@ function addRelationships(elemId){
 		option=document.createElement('option');
 		option.innerHTML=relations[ctr];
 		relationSelectBox.appendChild(option);
+	}/*End of loop*/
+}
+
+function addConcepts(elemId){
+	var conceptSelectBox=document.getElementById(elemId);
+	var option;
+	
+	for(var ctr=0;ctr<concepts.length;ctr++){
+		option=document.createElement('option');
+		option.innerHTML=concepts[ctr];
+		conceptSelectBox.appendChild(option);
 	}/*End of loop*/
 }
 

@@ -35,7 +35,7 @@ function loadStories(limit){
 }
 
 function loadMoreStoriesInFeed(){
-	if(_curretnStoryLimit<=40)
+	if(_curretnStoryLimit<=60)
 		loadStories(_curretnStoryLimit+10);
 }
 
