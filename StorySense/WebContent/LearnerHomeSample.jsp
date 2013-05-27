@@ -109,12 +109,14 @@ font-family: Segoe UI; font-size: 13pt;
 	<tr><td>
 			
 				
-			<% 
-			StoriesRated ratedS=new StoriesRated();
-			ratedS.encodeScoresInHTML(out, u, sLoader, "<table id=\"tableBorder3\"  bgcolor = \"white\">");
-			/* <table id="tableBorder3" bgcolor = "white">*/
-			%>
-			
+		<% 
+		StoriesRated ratedS=new StoriesRated();
+		//ratedS.encodeScoresInHTML(out, u, sLoader,"<table id=\"scoreTbl\"  bgcolor = \"white\" class=\"headTbl\">");
+		%>
+		<table id="scoreTbl"  bgcolor = "white" class="headTbl"></table>
+		<script>
+		storyScores=<% out.write(ratedS.encodeScoresJson(myUser));%>
+		</script>
 			</td></tr>
 		
 		

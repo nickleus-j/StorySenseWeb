@@ -166,6 +166,35 @@ public class StoriesRated extends BaseServlet {
 		catch(IOException ioex){}
 	}
 	
+	public String encodeScoresJson(User writer){
+		String Code="{\"scores\":[";
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		RatingDAO myRatingDao=myDAOFactory.createRatingDAO();
+		UserDAO myUserDao=myDAOFactory.createUserDAO();
+		AcomplishmentDAO acomDao=myDAOFactory.createAcomplishmentDAO();
+		ArrayList<Rating> ratings=(ArrayList<Rating>) myRatingDao.getRatingsOfWriter(writer.getAccountID());
+		User reader;
+		Acomplishment myAcom;
+		
+		for(int ctr=0;ctr<ratings.size();ctr++){
+			reader=myUserDao.getUser(ratings.get(ctr).getReaderID());
+			myAcom=acomDao.getStory(ratings.get(ctr).getAccomplishmentID());
+			/*Generate HTML code*/
+			Code=Code.concat("{\"Reader\":\""+reader.getName()+"\",");
+			//Code=Code.concat("<td>"+sLoader.createStoryLink(myAcom, stageID)+"</td>");
+			Code=Code.concat("\"Score\":"+ratings.get(ctr).getScore()+",");
+			Code=Code.concat("\"storyId\":"+myAcom.getID()+",");
+			Code=Code.concat("\"StoryName\":\""+myAcom.getName()+"\"");
+			//out.write("</tr>" +"<tr><td class=\"hiddenElem\" id=\""+stageID+"\" colspan='3'></td>");
+			
+			if(ctr<ratings.size()-1)
+				Code=Code.concat("},");
+			else Code=Code.concat("}");
+			}/*End of loop*/
+		
+		return Code.concat("]}");
+	}
+	
 	private String createLearnerLink(String learnerName){
 		String link="<a onclick=\"loadReviwedStoriesOfUser('"+learnerName+"')\">"+learnerName;
 		

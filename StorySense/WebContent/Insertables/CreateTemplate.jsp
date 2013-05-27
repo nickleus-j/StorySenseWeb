@@ -61,20 +61,19 @@ margin: 2%;
 	  	<table id="marginTemplate">
 	  		<tr><td>Concept A</td></tr>
 	  		<tr id="conceptA">
-	  			<td><input style="width:193px" type="Text" name="Concept A" style="margin-bottom:5%"/>
-	  				<select id=<% wEncoder.writeJsElementReference(showConceptsBox1); %>>
+	  			<td>
+	  				<select id=<% wEncoder.writeJsElementReference(showConceptsBox1); %> name="Concept A">
 	  				<option value=""></option>
 	  				</select>
 	  			</td></tr>
 	  		<tr style="width:193px"><td>Object</td></tr>
 	  		<tr id="object"><td>
-	  			<input style="width:193px" type="Text" name="Object" style="margin-bottom:5%"/>
-	  			<select id=<% wEncoder.writeJsElementReference(showRelationsBox); %>></select>
+	  			<select id=<% wEncoder.writeJsElementReference(showRelationsBox); %> name="Object"></select>
 	  			</td></tr>
 	  		<tr style="width:193px"><td>Concept B</td></tr>
 	  		<tr id="conceptB">
-	  			<td><input style="width:193px" type="Text" name="Concept B" style="margin-bottom:5%"/>
-	  				<select id=<% wEncoder.writeJsElementReference(showConceptsBox2); %>>
+	  			<td>
+	  				<select id=<% wEncoder.writeJsElementReference(showConceptsBox2); %> name="Concept B">
 	  				<option value=""></option>
 	  				</select>
 	  			</td></tr>

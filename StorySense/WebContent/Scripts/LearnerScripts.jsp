@@ -104,7 +104,30 @@ function createLikeTblHeders(table){
 	table.appendChild(row);
 }
 
-var userStories,likedStories;
+function createScoreTblHeader(table){
+	var readerCell,scoreCell,storyName,row,elems=new Array();
+	row=document.createElement("tr");
+	
+	readerCell=document.createElement("th");
+	storyName=document.createElement("th");
+	scoreCell=document.createElement("th");
+	elems.push(readerCell);
+	elems.push(storyName);
+	elems.push(scoreCell);
+	createHeadersForSort(elems,row);
+	
+	readerCell.innerHTML="Reader";
+	storyName.innerHTML="Story";
+	scoreCell.innerHTML="Score";
+	
+	readerCell.setAttribute("onclick","sortLikedStories(storyScores.scores,'Reader')");
+	storyName.setAttribute("onclick","sortLikedStories(storyScores.scores,'StoryName')");
+	scoreCell.setAttribute("onclick","sortLikedStories(storyScores.scores,'Score')");
+	table.appendChild(row);
+}
+
+
+var userStories,likedStories,storyScores;
 
 function generateStage(table,id,colWidth){
 	var row=document.createElement("tr"),stage;
@@ -143,7 +166,7 @@ function generateStoryPreviweTable(table){
 	
 	//nameCell.innerHTML=current.Name;
 	setUpStoryNameCell(current.Name,current.storyID,current.stageID,nameCell);
-	scoreCell.innerHTML=current.Score;
+	scoreCell.innerHTML="<a onclick=\"showStoryScores('"+current.Name+"')\" href='#scoreTbl'>"+current.Score+"</a>";
 	dateCell.innerHTML=current.TimeFinished;
 	likesCell.innerHTML=current.Likes;
 	
@@ -207,6 +230,52 @@ function generateStoriesLikedTable(table){
 	}/*End of loop that writes rows of information*/
 }
 
+function generateScoresTable(table){
+	var readerCell,scoreCell,titleCell,row,current,arr=storyScores.scores;
+	createScoreTblHeader(table);
+	
+	for(var ctr=0;ctr<arr.length;ctr++){
+		current=arr[ctr];
+		row=document.createElement("tr");
+		readerCell=document.createElement("td");
+		titleCell=document.createElement("td");
+		scoreCell=document.createElement("td");
+		
+		readerCell.innerHTML=current.Reader;
+		titleCell.innerHTML=current.StoryName;
+		scoreCell.innerHTML=current.Score;
+		row.appendChild(readerCell);
+		row.appendChild(titleCell);
+		row.appendChild(scoreCell);
+		table.appendChild(row);
+	}/*End of Loop*/
+}
+
+function showStoryScores(title){
+	var table=document.getElementById("scoreTbl");
+	var readerCell,scoreCell,titleCell,row,current,arr=storyScores.scores;
+	
+	table.innerHTML="";
+	createScoreTblHeader(table);
+	
+	for(var ctr=0;ctr<arr.length;ctr++){
+		current=arr[ctr];
+		if(current.StoryName==title){
+			row=document.createElement("tr");
+			readerCell=document.createElement("td");
+			titleCell=document.createElement("td");
+			scoreCell=document.createElement("td");
+		
+			readerCell.innerHTML=current.Reader;
+			titleCell.innerHTML=current.StoryName;
+			scoreCell.innerHTML=current.Score;
+			row.appendChild(readerCell);
+			row.appendChild(titleCell);
+			row.appendChild(scoreCell);
+			table.appendChild(row);
+		}/*End of Condition*/
+	}/*End of Loop*/
+}
 
 function getStoryData(userName){
 	var xmlhttp=getAJAXRequest();
@@ -221,6 +290,7 @@ function getStoryData(userName){
 			//sCell.innerHTML=likedStories;
 			generateStoryPreviweTable(stage);
 			generateStoriesLikedTable(sCell);
+			generateScoresTable(document.getElementById("scoreTbl"));
 		}
 		//else stage.innerHTML="<h1>Broken....</h1>";
 	  };
@@ -274,5 +344,8 @@ function sortUserStoriesByDate(stories){
 	stories.sort( sortByDate("TimeFinished",value) );
 	generateStoryPreviweTable(stage);
 }
+
+
+
 
 </script>

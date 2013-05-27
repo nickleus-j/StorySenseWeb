@@ -41,7 +41,7 @@ font-family: Segoe UI; font-size: 13pt;
   </style>
   
 </head>
-<body onload="getStoryData(userName)">
+<body onload="getStoryData(username)">
 <%@ include file="Insertables/TopBar.jsp" %>
 <%@ include file="Insertables/accountbar.jsp" %>
 <% CompleteStoryLoader sLoader=new CompleteStoryLoader(u);
@@ -68,19 +68,6 @@ likedStories=<% out.write(sLoader.PreviewLikedStoriesJson(myUser));%>
 		</table>
 	</td></tr>
 	
-	<!-- 
-	<tr><td>
-		<tr><td>
-			<table id="tableBorder3" bgcolor = "#7DFB9D">
-				<tr id="fontStyle3">
-				<th width="15%">Story Name</th>
-				<th width="15%">Score Earned</th>
-				<th width="15%">Date Finished</th>
-				<th width="15%">Likes</th>
-				<th width="15%">View</th></tr>
-			</table>
-		</td></tr>
-		 -->
 		<tr><td>
 			<table  id=<% wcm.writeJsElementReference(storyPrevID); %> bgcolor = "white" class="headTbl">
 				
@@ -122,17 +109,15 @@ likedStories=<% out.write(sLoader.PreviewLikedStoriesJson(myUser));%>
 		</table>
 	</td></tr>
 	<tr><td>
-			<table  id="tableBorder3" bgcolor = "white">
-				
 			<% 
-			StoriesRated ratedS=new StoriesRated();
-			ratedS.encodeScoresInHTML(out,myUser, sLoader, "<table  id=\"tableBorder3\"  bgcolor = \"white\">");
-			/* <table  id="tableBorder3" bgcolor = "white">*/
-			%>
-			
-			<tr >
-			<td id="storyStage" colspan="5"></td>
-		</tr></table></td></tr>
+		StoriesRated ratedS=new StoriesRated();
+		//ratedS.encodeScoresInHTML(out, u, sLoader,"<table id=\"scoreTbl\"  bgcolor = \"white\" class=\"headTbl\">");
+		%>
+		<table id="scoreTbl"  bgcolor = "white" class="headTbl"></table>
+		<script>
+		storyScores=<% out.write(ratedS.encodeScoresJson(myUser));%>
+		</script>
+		</td></tr>
 		
 </table>
 
