@@ -104,6 +104,12 @@ font-family: Segoe UI; font-size: 13pt;
 	<tr align="center"><td>
 		<table class="headTbl" bgcolor = "#7DFB9D">
 		<thead><tr><th  id="fontStyle2">Scores Given </th></tr></thead>	
+		<tr><td>
+		<input type="radio" name=<% wcm.writeJsElementReference(orderTypeScores); %> 
+			Value=<% wcm.writeJsElementReference(AscVal); %> checked/>Ascending
+		<input type="radio" name=<% wcm.writeJsElementReference(orderTypeScores); %>
+			Value=<% wcm.writeJsElementReference(DesVal); %>/>Descending
+		</td></tr>	
 		</table>
 	</td></tr>
 	<tr><td>

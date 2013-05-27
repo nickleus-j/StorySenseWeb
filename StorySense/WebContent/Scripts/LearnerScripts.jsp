@@ -7,6 +7,7 @@
    	WebCodeMaker wcm=new WebCodeMaker(out);
    	String storyPrevID="prevStoryTbl",likeTable="likedStoriesTbl",thClass="sortBt";
    	String orderTypreMyStories="myStoriesSortOpt",orderTyprelikedStories="likedStoriesSortOpt";
+   	String orderTypeScores="scoresSortOpt";
    	String AscVal="+",DesVal="-";
    %>
 <script>
@@ -120,9 +121,9 @@ function createScoreTblHeader(table){
 	storyName.innerHTML="Story";
 	scoreCell.innerHTML="Score";
 	
-	readerCell.setAttribute("onclick","sortLikedStories(storyScores.scores,'Reader')");
-	storyName.setAttribute("onclick","sortLikedStories(storyScores.scores,'StoryName')");
-	scoreCell.setAttribute("onclick","sortLikedStories(storyScores.scores,'Score')");
+	readerCell.setAttribute("onclick","sortScores(storyScores.scores,'Reader')");
+	storyName.setAttribute("onclick","sortScores(storyScores.scores,'StoryName')");
+	scoreCell.setAttribute("onclick","sortScores(storyScores.scores,'Score')");
 	table.appendChild(row);
 }
 
@@ -329,6 +330,20 @@ function sortLikedStories(stories,category){
 	stage.innerHTML="";
 	stories.sort( sortBy(category,value) );
 	generateStoriesLikedTable(stage);
+}
+
+function sortScores(stories,category){
+	var stage=document.getElementById("scoreTbl");
+	var orderTypreMyStories=document.getElementsByName(<% wcm.writeJsElementReference(orderTypeScores); %>);
+	
+	for (var i = 0;i < orderTypreMyStories.length; i++) {
+	    if (orderTypreMyStories[i].checked)
+	    	value=orderTypreMyStories[i].value;
+	}
+	
+	stage.innerHTML="";
+	stories.sort( sortBy(category,value) );
+	generateScoresTable(stage);
 }
 
 function sortUserStoriesByDate(stories){
