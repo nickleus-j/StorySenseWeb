@@ -48,5 +48,6 @@ public abstract class DAOFactory {
 	    public abstract LikedStoryDAO createLikeDAO();
 	    public abstract AchievementDAO createAchievementDAO();
 	    public abstract LearnerAcievementDAO createLearnerAcievementDAO();
-	    
+	    public abstract NotificationTypeDao createNotificationTypeDao();
+	    public abstract NotificationDao createNotificationDao();
 }

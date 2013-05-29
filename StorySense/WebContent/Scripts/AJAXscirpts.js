@@ -227,7 +227,7 @@ function setUpStoryShowLink(name,storyID,stageID,cell,preposition){
 	var anchor=document.createElement("a");
 	
 	anchor.setAttribute("id",preposition+storyID);
-	anchor.setAttribute("onclick","showStoryClicked('"+stageID+"',"+storyID+")");
+	cell.setAttribute("onclick","showStoryClicked('"+stageID+"',"+storyID+")");
 	anchor.innerHTML=name;
 	cell.appendChild(anchor);
 }

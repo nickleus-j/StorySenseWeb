@@ -121,14 +121,14 @@ function createScoreTblHeader(table){
 	storyName.innerHTML="Story";
 	scoreCell.innerHTML="Score";
 	
-	readerCell.setAttribute("onclick","sortScores(storyScores.scores,'Reader')");
-	storyName.setAttribute("onclick","sortScores(storyScores.scores,'StoryName')");
-	scoreCell.setAttribute("onclick","sortScores(storyScores.scores,'Score')");
+	readerCell.setAttribute("onclick","sortScores(currentScoreList,'Reader')");
+	storyName.setAttribute("onclick","sortScores(currentScoreList,'StoryName')");
+	scoreCell.setAttribute("onclick","sortScores(currentScoreList,'Score')");
 	table.appendChild(row);
 }
 
 
-var userStories,likedStories,storyScores;
+var userStories,likedStories,storyScores,currentScoreList;
 
 function generateStage(table,id,colWidth){
 	var row=document.createElement("tr"),stage;
@@ -145,7 +145,8 @@ function setUpStoryNameCell(name,storyID,stageID,cell){
 	var anchor=document.createElement("a");
 	
 	anchor.setAttribute("id",linkID);
-	anchor.setAttribute("onclick","showStoryClicked('"+stageID+"',"+storyID+")");
+	cell.setAttribute("onclick","showStoryClicked('"+stageID+"',"+storyID+")");
+	
 	anchor.innerHTML=name;
 	cell.appendChild(anchor);
 }
@@ -166,6 +167,7 @@ function generateStoryPreviweTable(table){
 	likesCell=document.createElement("td");
 	
 	//nameCell.innerHTML=current.Name;
+	nameCell.setAttribute("class",<% out.write(wcm.giveJsStringParam(thClass));%>);
 	setUpStoryNameCell(current.Name,current.storyID,current.stageID,nameCell);
 	scoreCell.innerHTML="<a onclick=\"showStoryScores('"+current.Name+"')\" href='#scoreTbl'>"+current.Score+"</a>";
 	dateCell.innerHTML=current.TimeFinished;
@@ -216,6 +218,7 @@ function generateStoriesLikedTable(table){
 	authorCell=document.createElement("td");
 	likesCell=document.createElement("td");
 	
+	nameCell.setAttribute("class",<% out.write(wcm.giveJsStringParam(thClass));%>);
 	setUpStoryShowLink(current.Name,current.storyID,current.stageID,nameCell,"likeLink_");
 	authorCell.appendChild(createLinkToUser(current.authorId,current.authorName));
 	createLikeCell(current.storyID,current.likeNum,likesCell);
@@ -232,7 +235,7 @@ function generateStoriesLikedTable(table){
 }
 
 function generateScoresTable(table){
-	var readerCell,scoreCell,titleCell,row,current,arr=storyScores.scores;
+	var readerCell,scoreCell,titleCell,row,current,arr=currentScoreList;
 	createScoreTblHeader(table);
 	
 	for(var ctr=0;ctr<arr.length;ctr++){
@@ -252,16 +255,24 @@ function generateScoresTable(table){
 	}/*End of Loop*/
 }
 
+function resetScoreTbl(){
+	var table=document.getElementById("scoreTbl");
+	table.innerHTML="";
+	currentScoreList=storyScores.scores;
+	generateScoresTable(table)
+}
+
 function showStoryScores(title){
 	var table=document.getElementById("scoreTbl");
 	var readerCell,scoreCell,titleCell,row,current,arr=storyScores.scores;
-	
+	currentScoreList=new Array();
 	table.innerHTML="";
 	createScoreTblHeader(table);
 	
 	for(var ctr=0;ctr<arr.length;ctr++){
 		current=arr[ctr];
 		if(current.StoryName==title){
+			currentScoreList.push(current);
 			row=document.createElement("tr");
 			readerCell=document.createElement("td");
 			titleCell=document.createElement("td");

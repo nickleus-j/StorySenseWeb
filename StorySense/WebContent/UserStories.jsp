@@ -105,13 +105,15 @@ likedStories=<% out.write(sLoader.PreviewLikedStoriesJson(myUser));%>
 		
 		<tr align="center"><td>
 		<table class="headTbl" bgcolor = "#7DFB9D">
-		<thead><tr><th  id="fontStyle2">Scores Given </th></tr></thead>	
+		<thead><tr><th  id="fontStyle2" colspan="2">Scores Given </th></tr></thead>	
 		<tr><td>
 		<input type="radio" name=<% wcm.writeJsElementReference(orderTypeScores); %> 
 			Value=<% wcm.writeJsElementReference(AscVal); %> checked/>Ascending
 		<input type="radio" name=<% wcm.writeJsElementReference(orderTypeScores); %>
 			Value=<% wcm.writeJsElementReference(DesVal); %>/>Descending
-		</td></tr>	
+		</td>
+		<td><button onclick="resetScoreTbl()">Show All Scores</button></td>
+		</tr>	
 		</table>
 	</td></tr>
 	<tr><td>
@@ -121,7 +123,8 @@ likedStories=<% out.write(sLoader.PreviewLikedStoriesJson(myUser));%>
 		%>
 		<table id="scoreTbl"  bgcolor = "white" class="headTbl"></table>
 		<script>
-		storyScores=<% out.write(ratedS.encodeScoresJson(myUser));%>
+		storyScores=<% out.write(ratedS.encodeScoresJson(myUser));%>;
+		currentScoreList=storyScores.scores;
 		</script>
 		</td></tr>
 		
