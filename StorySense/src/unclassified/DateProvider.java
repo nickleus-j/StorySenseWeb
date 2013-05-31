@@ -1,18 +1,22 @@
 /*******************************************************************************
- *Copyright (c) 2013 IBM Corporation and others.
+ *Copyright (c) 2013 StorySense.
  *All rights reserved. This program and the accompanying materials
  *are made available under the terms of the Eclipse Public License v1.0
  *which accompanies this distribution, and is available at
  *http://www.eclipse.org/legal/epl-v10.html
  *
  *Contributors:
- *    IBM Corporation - initial API and implementation
+ *    Nickleus Jimenez
  *******************************************************************************/
 package unclassified;
 
 //import java.util.ArrayList;
 import java.util.Calendar;
-
+/**
+ * Provides information involving dates like the months
+ * and days
+ * Provides HTML code for picking a date
+ */ 
 public class DateProvider {
 
 	//private ArrayList<String> Countires;

@@ -8,6 +8,10 @@ import dao.RelationshipDAO;
 import entity.Concept;
 import entity.Relationship;
 
+/**
+ * Generates HTML Code involving the pages
+ * used by the Administrators
+ */ 
 public class AdminHtmlEncoder {
 
 	public String getRelationshipsJs(){
