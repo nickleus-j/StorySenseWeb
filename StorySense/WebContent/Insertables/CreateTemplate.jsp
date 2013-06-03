@@ -21,7 +21,7 @@ width: 96%;
 {
 border: 4px solid #660000;
 border-radius: 4px;
-width: 50%;
+width: 75%;
 }
 #fontStylefeed{
 font-family: Segoe UI; font-size: 12pt;
@@ -43,15 +43,29 @@ margin: 2%;
 	<tr>
 	<th>Template Name</th>
 	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(templateNameBox));%>/></td>
-	</tr>
-	<tr>
+	
 	<th>Level Required</th>
 	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(levelBox));%>/></td>
-	</tr>
-	<tr>
+	
 	<th>Points Required</th>
 	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(pointBox));%>/></td>
 	</tr>
+</table>
+
+<table id=<% out.write(wEncoder.giveJsStringParam(variablesTbl));%>>
+<tr>
+<th colspan="4" class="templateProperties">Variables</th>
+</tr>
+<tr>
+<th>Name</th><th>Concept 1</th><th>relationship</th><th>Concept 2</th>
+</tr>
+<tr>
+<td><input name="var1Name" id="var1Name"/></td>
+<td><select name="var1Conc1" id="var1Conc1"></select></td>
+<td><select name="var1Rel" id="var1Rel"></select></td>
+<td><select name="var1Conc2" id="var1Conc2"></select></td>
+</tr>
+
 </table>
 
  <table id="tableBorderfeed3">
@@ -139,6 +153,11 @@ margin: 2%;
  		</table>
  	 </td>
  	 </tr>
+ 	 
+</table>
+<table>
+<tr><th>Relational Template</th><th>Story Template</th></tr>
+ 	 <tr bgcolor="white"><td></td><td></td></tr>
 </table>
 </div>
 

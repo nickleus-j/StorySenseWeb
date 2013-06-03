@@ -11,17 +11,7 @@
 
 <%@ include file="Insertables/TopBar.jsp" %>
 
-<% 
-	if(u!=null){
-		if(User.Roles.learner.isLearner(u.getRole())) {%>
-			<%@ include file="Insertables/LearnerNavBar.jsp" %>
-		<%}//End of Learner Condition
-		
-		else if(User.Roles.reviewer.isReviwer(u.getRole())){ %>
-			<%@ include file="Insertables/ReviewerNavBar.jsp" %>
-		<%} //End of Reviewer condition
-			
-		}//End of not null condtion %>
+
 
 
 <div class="container">
