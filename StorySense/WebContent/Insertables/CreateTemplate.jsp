@@ -59,12 +59,7 @@ margin: 2%;
 <tr>
 <th>Name</th><th>Concept 1</th><th>relationship</th><th>Concept 2</th>
 </tr>
-<tr>
-<td><input name="var1Name" id="var1Name"/></td>
-<td><select name="var1Conc1" id="var1Conc1"></select></td>
-<td><select name="var1Rel" id="var1Rel"></select></td>
-<td><select name="var1Conc2" id="var1Conc2"></select></td>
-</tr>
+
 
 </table>
 
@@ -91,6 +86,9 @@ margin: 2%;
 	  				<option value=""></option>
 	  				</select>
 	  			</td></tr>
+	  		<tr>
+	  		<td><input type="button" onclick="addRelation()" value="Add to relation Template"/></td>
+	  		</tr>
 	  	</table>
 	  </td>
 	  <td>
@@ -157,7 +155,10 @@ margin: 2%;
 </table>
 <table>
 <tr><th>Relational Template</th><th>Story Template</th></tr>
- 	 <tr bgcolor="white"><td></td><td></td></tr>
+ 	 <tr bgcolor="white">
+ 	 <td id=<% wEncoder.writeJsElementReference(rTemplateCell); %>></td>
+ 	 <td id=<% wEncoder.writeJsElementReference(sTemplateCell); %>></td>
+ 	 </tr>
 </table>
 </div>
 
