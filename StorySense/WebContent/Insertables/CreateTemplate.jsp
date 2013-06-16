@@ -42,7 +42,7 @@ margin: 2%;
 <table>
 	<tr>
 	<th>Template Name</th>
-	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(templateNameBox));%>/></td>
+	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(templateNameBox));%> /></td>
 	
 	<th>Level Required</th>
 	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(levelBox));%>/></td>
@@ -77,7 +77,7 @@ margin: 2%;
 	  			</td></tr>
 	  		<tr style="width:193px"><td>Object</td></tr>
 	  		<tr id="object"><td>
-	  			<select id=<% wEncoder.writeJsElementReference(showRelationsBox); %> name="Object"></select>
+	  			<select id=<% wEncoder.writeJsElementReference(showRelationsBox); %> name="Object" ></select>
 	  			</td></tr>
 	  		<tr style="width:193px"><td>Concept B</td></tr>
 	  		<tr id="conceptB">
@@ -86,14 +86,12 @@ margin: 2%;
 	  				<option value=""></option>
 	  				</select>
 	  			</td></tr>
-	  		<tr>
-	  		<td><input type="button" onclick="addRelation()" value="Add to relation Template"/></td>
-	  		</tr>
+	  		
 	  	</table>
 	  </td>
 	  <td>
 	  	<table id="marginTemplate">
-	  		<tr><td><input type="Submit" value="Add" style="width:100px; margin-bottom:10%;"/></td></tr>
+	  		<tr><td><input type="Submit" value="Add" onclick="addRelation()" /></td></tr>
 	  		<tr><td><input type="Submit" value="Edit" style="width:100px; margin-bottom:10%"/></td></tr>
 	  		<tr><td><input type="Submit" value="Delete" style="width:100px; margin-bottom:10%"/></td></tr>
 	  	</table>

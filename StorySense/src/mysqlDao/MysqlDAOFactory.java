@@ -17,6 +17,7 @@ import dao.DAOFactory;
 import dao.LearnerAcievementDAO;
 import dao.LikedStoryDAO;
 import dao.NotificationDao;
+import dao.NotificationMessageDao;
 import dao.NotificationTypeDao;
 import dao.ProfileDAO;
 import dao.RatingDAO;
@@ -74,6 +75,9 @@ public class MysqlDAOFactory extends DAOFactory{
 
 	@Override
 	public NotificationDao createNotificationDao() {return new NotificationMySQL();}
+
+	@Override
+	public NotificationMessageDao createNotificationMessageDao() {return new NotificationMessageMysql();}
 
 	
 }

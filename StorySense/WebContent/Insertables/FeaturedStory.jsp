@@ -41,4 +41,4 @@ font-family: Segoe UI; font-size: 20pt;
 		</td></tr>
 	</table>
 </div>
-
+<%@ include file="NotificationPanel.jsp" %>

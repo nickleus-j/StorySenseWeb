@@ -26,16 +26,7 @@ var givenVariables=0;
 function initializeAdminHome(){
 	addNewVariable("","","ColorOf","Jet");
 	
-	/*addRelationships("var1Rel");
-	addVarConcept("var1Conc1");
-	addVarConcept("var1Conc2");
-	*/
-	
 	addVarRow();
-	
-	
-	storyRelations.push(createRelation("Happy","Is-A",""));
-	storyRelations.push(createRelation("","Is-A","person"));
 	displayRelationTemplate();
 	
 }
@@ -96,6 +87,9 @@ function addVarConcept(elemId){
 	addConcepts(elemId);
 }
 
+/**
+ * Add a row in the web page to indicate the variables in the template
+ */
 function addVarRow(){
 	givenVariables++;
 	var varTbl=document.getElementById(<% wEncoder.writeJsElementReference(variablesTbl); %>);
@@ -106,6 +100,7 @@ function addVarRow(){
 	
 	//bt.setAttribute("id",btElemName);
 	nameBox.setAttribute("id",prefix+"Name");
+	nameBox.setAttribute("onchange","enterStoryVariable("+givenVariables+")");
 	cell.appendChild(nameBox);
 	row.appendChild(cell);
 	
@@ -133,6 +128,10 @@ function addVarRow(){
 	addVarConcept(prefix+"Conc2");
 }
 
+/**
+ * Modfies the list of variables in an array
+ (data structure containing the template variables)
+ */
 function enterStoryVariable(index){
 	var prefix="var"+index;
 	var nameBox=document.getElementById(prefix+"Name");
@@ -174,6 +173,7 @@ function displayRelationTemplate(){
 	var cell=document.getElementById(<% wEncoder.writeJsElementReference(rTemplateCell); %>);
 	var code="<ol>";
 	
+	/*loop that adds the realtions to the preview*/
 	for(var ctr=0;ctr<storyRelations.length;ctr++){
 		if(storyRelations[ctr].concept1==""&&storyRelations[ctr].concept2.length>0){
 			code=code+"<li>? | "+storyRelations[ctr].relation+" | "+storyRelations[ctr].concept2+"</li>";
@@ -185,7 +185,64 @@ function displayRelationTemplate(){
 	}/*End of Loop*/
 	code=code+"</ol>";
 	cell.innerHTML=code;
+	generateRelationTemplatePreview();
 }/*End of Function*/
+
+function setUpRelationBoxesForTmplt(c1Box,c2Box,relBox,index){
+	var prefix="rBox"+index;
+	
+	c1Box.setAttribute("id",prefix+"C1");
+	c2Box.setAttribute("id",prefix+"C2");
+	relBox.setAttribute("id",prefix+"Rel");
+	
+	addRelationships(prefix+"Rel");
+	addVarConcept(prefix+"C1");
+	addVarConcept(prefix+"C2");
+	
+}
+
+function generateRelationTemplatePreview(){
+	var cell=document.getElementById(<% wEncoder.writeJsElementReference(rTemplateCell); %>);
+	var list=document.createElement('ol');
+	var c1Box=document.createElement('select'),c2Box=document.createElement('select');
+	var relBox=document.createElement('select'),item=document.createElement('li');
+	var text;
+	/*Clean up the cell that previews the relation template*/
+	//cell="";
+	
+	/*loop that adds the realtions to the preview*/
+	for(var ctr=0;ctr<storyRelations.length;ctr++){
+		text=document.createElement('b');
+		text.innerHTML="|";
+		
+		
+			//code=code+"<li>? | "+storyRelations[ctr].relation+" | "+storyRelations[ctr].concept2+"</li>";
+			item.appendChild(c1Box);
+			item.appendChild(text);
+			item.appendChild(relBox);
+			text=document.createElement('b');
+			text.innerHTML="|";
+			item.appendChild(text);
+			item.appendChild(c2Box);
+			list.appendChild(item);
+			cell.appendChild(list);
+		
+			setUpRelationBoxesForTmplt(c1Box,c2Box,relBox,ctr);
+			c1Box.setAttribute("value",storyRelations[ctr].c1);
+			c2Box.setAttribute("value",storyRelations[ctr].c2);
+			relBox.setAttribute("value",storyRelations[ctr].relation);
+		
+		c1Box=document.createElement('select');
+		c2Box=document.createElement('select');
+		relBox=document.createElement('select');
+		item=document.createElement('li');
+		
+	}/*End of Loop*/
+	
+	
+	
+}
+
 
 /**
 Add a Relation based on the content of the Relation adding Panel

@@ -17,5 +17,8 @@ public class LearnerElemAttr {
 	public String getStoryIdParameter(){ return "paramAcom";}
 	public String getLearnerTableDefId(){return "tableBorder3";}
 	public String getUserParamName(){ return "viewedUser";}
+	public String getNotificationPanelId(){return "notificationPanel";}
+	public String getNotifPanelId(String suffix){return "notificationPanel"+suffix;}
+	public String notificationListId(String suffix){return "notificationList"+suffix;}
 	/*LearnerHomeSample.jsp*/
 }

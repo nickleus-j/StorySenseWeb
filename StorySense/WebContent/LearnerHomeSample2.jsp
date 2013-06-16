@@ -16,6 +16,7 @@
 <%@ include file="Insertables/StoryFeed.jsp" %>
 <%@ include file="Insertables/LearnerNavBar.jsp" %>
 <%@ include file="Insertables/FeaturedStory.jsp" %>
+<script type="text/javascript">setUpNotifications(<% encoder.writeJsElementReference(u.getName()); %>)</script>
 </div>
 <%@ include file="Insertables/Footer.jsp" %>
 
