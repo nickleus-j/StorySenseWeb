@@ -84,7 +84,7 @@ public class NotificationMessageMysql extends NotificationMessageDao {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
 
-            ps = con.prepareStatement("SELECT * from notifMessage");
+            ps = con.prepareStatement("SELECT * from notifMessage ORDER by MsgID DESC");
             rs = ps.executeQuery();
             
             List<NotifMessage> notifs=getResults(rs);
@@ -112,7 +112,7 @@ public class NotificationMessageMysql extends NotificationMessageDao {
             Connection con = myFactory.getConnection();
 
             ps = con.prepareStatement("SELECT * from notifMessage WHERE NotifID IN " +
-            		"(SELECT NotificationId FROM Notification WHERE notifUser=?)");
+            		"(SELECT NotificationId FROM Notification WHERE notifUser=?) ORDER by MsgID DESC");
             ps.setInt(1, userID);
             rs = ps.executeQuery();
             
@@ -140,8 +140,36 @@ public class NotificationMessageMysql extends NotificationMessageDao {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
 
-            ps = con.prepareStatement("SELECT * from notifMessage WHERE nType=?");
+            ps = con.prepareStatement("SELECT * from notifMessage WHERE nType=? ORDER by MsgID DESC");
             ps.setInt(1, typeID);
+            rs = ps.executeQuery();
+            
+            List<NotifMessage> notifs=getResults(rs);
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return notifs;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(NotificationMessageMysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
+	@Override
+	public List<NotifMessage> getMessagesOfNotice(int notifId) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from notifMessage WHERE NotifID=? ORDER by MsgID DESC");
+            ps.setInt(1, notifId);
             rs = ps.executeQuery();
             
             List<NotifMessage> notifs=getResults(rs);

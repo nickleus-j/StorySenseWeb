@@ -9,5 +9,6 @@ public abstract class NotificationMessageDao {
 	public abstract void updateNotificationMessage(NotifMessage given);
 	public abstract List<NotifMessage> getAllNotifMsgs();
 	public abstract List<NotifMessage> getUserMessages(int userID);
+	public abstract List<NotifMessage> getMessagesOfNotice(int notifId);
 	public abstract List<NotifMessage> getMessagesForType(int typeID);
 }

@@ -27,7 +27,7 @@ function initializeAdminHome(){
 	addNewVariable("","","ColorOf","Jet");
 	
 	addVarRow();
-	displayRelationTemplate();
+	//displayRelationTemplate();
 	
 }
 
@@ -184,8 +184,8 @@ function displayRelationTemplate(){
 		
 	}/*End of Loop*/
 	code=code+"</ol>";
-	cell.innerHTML=code;
-	generateRelationTemplatePreview();
+	cell.innerHTML=cell.innerHTML+code;
+	//generateRelationTemplatePreview();
 }/*End of Function*/
 
 function setUpRelationBoxesForTmplt(c1Box,c2Box,relBox,index){
@@ -196,8 +196,8 @@ function setUpRelationBoxesForTmplt(c1Box,c2Box,relBox,index){
 	relBox.setAttribute("id",prefix+"Rel");
 	
 	addRelationships(prefix+"Rel");
-	addVarConcept(prefix+"C1");
-	addVarConcept(prefix+"C2");
+	setupConceptList(prefix+"C1");
+	setupConceptList(prefix+"C2");
 	
 }
 
@@ -228,10 +228,15 @@ function generateRelationTemplatePreview(){
 			cell.appendChild(list);
 		
 			setUpRelationBoxesForTmplt(c1Box,c2Box,relBox,ctr);
-			c1Box.setAttribute("value",storyRelations[ctr].c1);
+
+			relBox.selectedIndex=storyRelations[ctr].relation;
+			c1Box.selectedIndex=storyRelations[ctr].concept1;
+			c2Box.selectedIndex=storyRelations[ctr].concept2;
+			/*c1Box.setAttribute("value",storyRelations[ctr].c1);
 			c2Box.setAttribute("value",storyRelations[ctr].c2);
 			relBox.setAttribute("value",storyRelations[ctr].relation);
-		
+			*/
+			
 		c1Box=document.createElement('select');
 		c2Box=document.createElement('select');
 		relBox=document.createElement('select');
@@ -251,16 +256,22 @@ function addRelation(){
 	var relBox=document.getElementById(<% wEncoder.writeJsElementReference(showRelationsBox); %>);
 	var c1Box=document.getElementById(<% wEncoder.writeJsElementReference(showConceptsBox1); %>);
 	var c2Box=document.getElementById(<% wEncoder.writeJsElementReference(showConceptsBox2); %>);
-	var rel=relBox.options[relBox.selectedIndex].innerHTML;
-	var c1=c1Box.options[c1Box.selectedIndex].innerHTML;
+	var cell=document.getElementById(<% wEncoder.writeJsElementReference(rTemplateCell); %>);
+	/* var c1=c1Box.options[c1Box.selectedIndex].innerHTML;
 	var c2=c2Box.options[c2Box.selectedIndex].innerHTML;
+	var rel=relBox.options[relBox.selectedIndex].innerHTML; */
+	
+	var c1=c1Box.selectedIndex;
+	var c2=c2Box.selectedIndex;
+	var rel=relBox.selectedIndex;
 	
 	/*Condition must be fullfilled to add the relation*/
-	if(c1==""&&c2.length>0||c2==""&&c1.length>0){
+	/*if(c1==""&&c2.length>0||c2==""&&c1.length>0) {*/
+	if(c1==0&&c2>0||c2==0&&c1>0){
 		storyRelations.push(createRelation(c1,rel,c2));
-		displayRelationTemplate();
-		c1Box.selectedIndex=0;
-		c2Box.selectedIndex=0;
+		generateRelationTemplatePreview();
+		 c1Box.selectedIndex=0;
+		c2Box.selectedIndex=0; 
 	}
 	
 }/*End of Function*/

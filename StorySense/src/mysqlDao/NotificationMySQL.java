@@ -179,4 +179,39 @@ public class NotificationMySQL extends NotificationDao {
 		return null;
 	}
 
+	@Override
+	public Notification getNotification(int id) {
+		Notification result=null;
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+            
+            ps = con.prepareStatement("SELECT * from Notification WHERE NotificationId=?");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            
+            if(rs.first()){
+            	result=new Notification();
+            	result.setNotificationId(id);
+            	result.setNotifUser(rs.getInt("notifUser"));
+            	result.setStartedOn(rs.getTimestamp("StartedOn"));
+            	result.setViewed(rs.getBoolean("viewed"));
+            }
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(NotificationMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return result;
+	}
+
 }

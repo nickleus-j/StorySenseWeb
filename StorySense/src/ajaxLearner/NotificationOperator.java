@@ -1,9 +1,11 @@
 package ajaxLearner;
 
 import dao.DAOFactory;
+import dao.NotificationDao;
 import dao.NotificationMessageDao;
 import dao.UserDAO;
 import entity.NotifMessage;
+import entity.Notification;
 import entity.User;
 import infoResource.AttributeNames;
 
@@ -41,7 +43,50 @@ public class NotificationOperator extends BaseServlet{
 		
 		return json.concat("]");
 	}
-
+	
+	
+	public String getNotifMsgs(int NotificationId){/* MsgID */
+		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		NotificationMessageDao nDao=daoFactory.createNotificationMessageDao();
+		List<NotifMessage> Messages=nDao.getMessagesOfNotice(NotificationId);
+		String json="[";
+		
+		for(int ctr=0;ctr<Messages.size();ctr++){
+			
+			json=json.concat("{");
+			json=json.concat("\"Type\":\""+Messages.get(ctr).getnType()+"\",");
+			json=json.concat("\"Message\":\""+Messages.get(ctr).getMessage()+"\"");
+			if(ctr<Messages.size()-1)
+				json=json.concat("},");
+			else json=json.concat("}");
+		}
+		
+		return json.concat("]");
+	}
+	
+	
+	public String getUserNotifMsgs(User givenUser){/* MsgID */
+		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		NotificationDao noticeDao=daoFactory.createNotificationDao();
+		List<Notification> notices=noticeDao.getUserNotifications(givenUser.getAccountID());
+		String json="[";
+		
+		for(int ctr=0;ctr<notices.size();ctr++){
+			
+			json=json.concat("{\"Time\":\""+notices.get(ctr).getStartedOn()+"\",");
+			json=json.concat("\"Notifications\":"+getNotifMsgs(notices.get(ctr).getNotificationId()));
+			//json=json.concat("{");
+			if(ctr<notices.size()-1)
+				json=json.concat("},");
+			else json=json.concat("}");
+		}
+		
+		return json.concat("]");
+	}
+		
+	
+	
+	
 	@Override
 	public void executeCustomCode(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -52,7 +97,7 @@ public class NotificationOperator extends BaseServlet{
 		response.setContentType("application/json");
 		try{
 			out=response.getWriter();
-			out.write(getNotifMsgs(uDao.findUserWithName(uName)));
+			out.write(getUserNotifMsgs(uDao.findUserWithName(uName)));
 			out.flush();
 		}catch(IOException ioEX){}
 	}
