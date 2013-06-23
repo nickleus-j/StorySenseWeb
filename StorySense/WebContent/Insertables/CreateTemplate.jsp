@@ -38,7 +38,7 @@ margin: 2%;
 }
 </style>
 <%@ include file="../Scripts/AdminScripts.jsp" %>
-<div id="center" class="column">
+<div id="center" class="column" align="left">
 <table>
 	<tr>
 	<th>Template Name</th>
@@ -71,7 +71,9 @@ margin: 2%;
 	  		<tr><td>Concept A</td></tr>
 	  		<tr id="conceptA">
 	  			<td>
-	  				<select id=<% wEncoder.writeJsElementReference(showConceptsBox1); %> name="Concept A">
+	  				<select id=<% wEncoder.writeJsElementReference(showConceptsBox1); %> name="Concept A"
+	  				onChange="resetOtherConceptBoxIndex(this,'<% out.print(showConceptsBox2); %>')"
+	  				>
 	  				<option value=""></option>
 	  				</select>
 	  			</td></tr>
@@ -82,7 +84,8 @@ margin: 2%;
 	  		<tr style="width:193px"><td>Concept B</td></tr>
 	  		<tr id="conceptB">
 	  			<td>
-	  				<select id=<% wEncoder.writeJsElementReference(showConceptsBox2); %> name="Concept B">
+	  				<select id=<% wEncoder.writeJsElementReference(showConceptsBox2); %> name="Concept B"
+	  				onChange="resetOtherConceptBoxIndex(this,'<% out.print(showConceptsBox1); %>')">
 	  				<option value=""></option>
 	  				</select>
 	  			</td></tr>

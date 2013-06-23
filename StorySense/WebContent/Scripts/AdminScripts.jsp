@@ -32,7 +32,7 @@ function initializeAdminHome(){
 }
 
 function addNewVariable(name,c1,rel,c2){
-	if(name.length>0){
+	if(name.length>00&&((c1.length==0&&c2.length>0)||(c2.length==0&&c1.length>0))){
 		storyVariables.push(createVariable(name,c1,rel,c2));
 		addVarRow();
 	}
@@ -96,7 +96,7 @@ function addVarRow(){
 	var prefix="var"+givenVariables;
 	var nameBox=document.createElement('input'),row=document.createElement('tr'),cell=document.createElement('td');
 	var c1Box=document.createElement('select'),c2Box=document.createElement('select');
-	var relBox=document.createElement('select');
+	var relBox=document.createElement('select'),delBt;
 	
 	//bt.setAttribute("id",btElemName);
 	nameBox.setAttribute("id",prefix+"Name");
@@ -108,9 +108,11 @@ function addVarRow(){
 	c1Box.setAttribute("id",prefix+"Conc1");
 	c2Box.setAttribute("id",prefix+"Conc2");
 	relBox.setAttribute("id",prefix+"Rel");
+	delBt=createDeleteButton(prefix+"Delete");
 	
-	c1Box.setAttribute("onchange","enterStoryVariable("+givenVariables+")");
-	c2Box.setAttribute("onchange","enterStoryVariable("+givenVariables+")");
+	c1Box.setAttribute("onchange","modifyVariables("+givenVariables+",this,'Conc2')");
+	c2Box.setAttribute("onchange","modifyVariables("+givenVariables+",this,'Conc1')");//deleteVariable
+	delBt.setAttribute("onclick","deleteVariable("+(givenVariables-1)+")");
 	
 	cell=document.createElement('td');
 	cell.appendChild(c1Box);
@@ -120,6 +122,7 @@ function addVarRow(){
 	row.appendChild(cell);
 	cell=document.createElement('td');
 	cell.appendChild(c2Box);
+	cell.appendChild(delBt);
 	row.appendChild(cell);
 	varTbl.appendChild(row);
 	
@@ -127,6 +130,91 @@ function addVarRow(){
 	addVarConcept(prefix+"Conc1");
 	addVarConcept(prefix+"Conc2");
 }
+
+function deleteVariable(index){
+	storyVariables.splice(index,1);
+	generateVariableTable(index+1);
+	givenVariables--;
+	addVarRow();
+}
+
+function getSelectedValues(spliceIndex,suffix){
+	var selectBox,prefix,arr=new Array();
+	
+	for(var ctr=0;ctr<storyVariables.length;ctr++){
+		if(ctr!=spliceIndex){
+			prefix="var"+(ctr+1);
+			selectBox=document.getElementById(prefix+suffix);
+			if(selectBox!=null)
+				arr.push(selectBox.selectedIndex);
+			else arr.push(0);
+		}/*End of spliceIndex Condition*/
+	}/*End of loop*/
+	return arr;
+}
+
+function generateVariableTable(index){
+	var varTbl=document.getElementById(<% wEncoder.writeJsElementReference(variablesTbl); %>);
+	var delBt;
+	var prefix,nameBox,row,cell,c1Box,c2Box,relBox;
+	var c1Val=getSelectedValues(index,"Conc1"),c2Val=getSelectedValues(index,"Conc2"),relVal=getSelectedValues(index,"Rel");
+	
+	varTbl.innerHTML="";
+	for(var ctr=0;ctr<storyVariables.length;ctr++){
+	 prefix="var"+(ctr+1);
+	 nameBox=document.createElement('input');
+	 row=document.createElement('tr');
+	 cell=document.createElement('td');
+	 c1Box=document.createElement('select');
+	 c2Box=document.createElement('select');
+	 relBox=document.createElement('select');
+	 
+	
+	//bt.setAttribute("id",btElemName);
+	nameBox.setAttribute("id",prefix+"Name");
+	nameBox.setAttribute("onchange","enterStoryVariable("+givenVariables+")");
+	cell.appendChild(nameBox);
+	row.appendChild(cell);
+	
+	
+	c1Box.setAttribute("id",prefix+"Conc1");
+	c2Box.setAttribute("id",prefix+"Conc2");
+	relBox.setAttribute("id",prefix+"Rel");
+	delBt=createDeleteButton(prefix+"Delete");
+	
+	c1Box.setAttribute("onchange","modifyVariables("+givenVariables+",this,'Conc2')");
+	c2Box.setAttribute("onchange","modifyVariables("+givenVariables+",this,'Conc1')");
+	delBt.setAttribute("onclick","deleteVariable("+(givenVariables-1)+")");
+	
+	cell=document.createElement('td');
+	cell.appendChild(c1Box);
+	row.appendChild(cell);
+	cell=document.createElement('td');
+	cell.appendChild(relBox);
+	row.appendChild(cell);
+	cell=document.createElement('td');
+	cell.appendChild(c2Box);
+	cell.appendChild(delBt);
+	row.appendChild(cell);
+	varTbl.appendChild(row);
+	
+	addRelationships(prefix+"Rel");
+	addVarConcept(prefix+"Conc1");
+	addVarConcept(prefix+"Conc2");
+	
+	c1Box.selectedIndex=c1Val[ctr];
+	c2Box.selectedIndex=c2Val[ctr];
+	relBox.selectedIndex=relVal[ctr];
+	
+	/*c2Box.setAttribute("value",storyVariables[ctr].concept2);
+	relBox.setAttribute("value",storyVariables[ctr].relation);
+	*/
+	nameBox.setAttribute("value",storyVariables[ctr].name);
+	}/*End of loop*/
+	setupConceptList(<% wEncoder.writeJsElementReference(showConceptsBox1); %>);
+	setupConceptList(<% wEncoder.writeJsElementReference(showConceptsBox2); %>);
+}
+
 
 /**
  * Modfies the list of variables in an array
@@ -143,7 +231,7 @@ function enterStoryVariable(index){
 	if(index>storyVariables.length)
 		addNewVariable(name,c1,rel,c2);
 	
-	else if(name.length>0&&(c1.length==0&&c2.length>0||c2.length==0&&c1.length>0)){
+	else if(name.length>0&&((c1.length==0&&c2.length>0)||(c2.length==0&&c1.length>0))){
 		index--;
 		storyVariables[index].name=name;
 		storyVariables[index].c1=c1;
@@ -157,13 +245,14 @@ function enterStoryVariable(index){
 	//addNewVariable(nameBox.value,c1Box.value,relBox.value,c2Box.value);
 }
 
-function createRelation(c1,rel,c2){
-	return {"concept1":c1,"relation":rel,"concept2":c2};
+
+function modifyVariables(index,curentConceptBox,couterConceptBoxSuffix){
+	enterStoryVariable(index);
+	resetOtherConceptBoxIndex(curentConceptBox,"var"+index+couterConceptBoxSuffix);
 }
 
-function createVariable(name,c1,rel,c2){
-	return {"name":name,"concept1":c1,"relation":rel,"concept2":c2};
-}
+function createRelation(c1,rel,c2){return {"concept1":c1,"relation":rel,"concept2":c2};}
+function createVariable(name,c1,rel,c2){return {"name":name,"concept1":c1,"relation":rel,"concept2":c2};}
 
 /**
  * Display the contents of the To be
@@ -194,27 +283,40 @@ function setUpRelationBoxesForTmplt(c1Box,c2Box,relBox,index){
 	c1Box.setAttribute("id",prefix+"C1");
 	c2Box.setAttribute("id",prefix+"C2");
 	relBox.setAttribute("id",prefix+"Rel");
-	
+	c1Box.setAttribute("onchange","resetOtherConceptBoxIndex(this,'"+prefix+"C2')");
+	c2Box.setAttribute("onchange","resetOtherConceptBoxIndex(this,'"+prefix+"C1')");
 	addRelationships(prefix+"Rel");
 	setupConceptList(prefix+"C1");
 	setupConceptList(prefix+"C2");
 	
 }
 
+function createDeleteButton(ID){
+	var bt=document.createElement('button');
+	bt.innerHTML="X";
+	bt.setAttribute("ID",ID);
+	return bt;
+}
+
 function generateRelationTemplatePreview(){
 	var cell=document.getElementById(<% wEncoder.writeJsElementReference(rTemplateCell); %>);
 	var list=document.createElement('ol');
-	var c1Box=document.createElement('select'),c2Box=document.createElement('select');
-	var relBox=document.createElement('select'),item=document.createElement('li');
+	var c1Box,c2Box,relBox,item,delBt;
 	var text;
 	/*Clean up the cell that previews the relation template*/
 	//cell="";
-	
+	cell.innerHTML="";
 	/*loop that adds the realtions to the preview*/
 	for(var ctr=0;ctr<storyRelations.length;ctr++){
 		text=document.createElement('b');
 		text.innerHTML="|";
+		c1Box=document.createElement('select');
+		c2Box=document.createElement('select');
+		relBox=document.createElement('select');
+		delBt=createDeleteButton("deleteRel"+ctr);
 		
+		delBt.setAttribute("onclick","deleteRelation("+ctr+")");
+		item=document.createElement('li');
 		
 			//code=code+"<li>? | "+storyRelations[ctr].relation+" | "+storyRelations[ctr].concept2+"</li>";
 			item.appendChild(c1Box);
@@ -224,6 +326,7 @@ function generateRelationTemplatePreview(){
 			text.innerHTML="|";
 			item.appendChild(text);
 			item.appendChild(c2Box);
+			item.appendChild(delBt);
 			list.appendChild(item);
 			cell.appendChild(list);
 		
@@ -232,22 +335,23 @@ function generateRelationTemplatePreview(){
 			relBox.selectedIndex=storyRelations[ctr].relation;
 			c1Box.selectedIndex=storyRelations[ctr].concept1;
 			c2Box.selectedIndex=storyRelations[ctr].concept2;
-			/*c1Box.setAttribute("value",storyRelations[ctr].c1);
-			c2Box.setAttribute("value",storyRelations[ctr].c2);
-			relBox.setAttribute("value",storyRelations[ctr].relation);
-			*/
-			
-		c1Box=document.createElement('select');
-		c2Box=document.createElement('select');
-		relBox=document.createElement('select');
-		item=document.createElement('li');
 		
 	}/*End of Loop*/
-	
-	
-	
 }
 
+
+function resetOtherConceptBoxIndex(currentBox,otherBoxID){
+	var elem=document.getElementById(otherBoxID);
+	
+	if(currentBox.selectedIndex>0)
+		elem.selectedIndex=0;
+}
+
+
+function deleteRelation(index){
+	storyRelations.splice(index,1);
+	generateRelationTemplatePreview();
+}
 
 /**
 Add a Relation based on the content of the Relation adding Panel
@@ -257,9 +361,6 @@ function addRelation(){
 	var c1Box=document.getElementById(<% wEncoder.writeJsElementReference(showConceptsBox1); %>);
 	var c2Box=document.getElementById(<% wEncoder.writeJsElementReference(showConceptsBox2); %>);
 	var cell=document.getElementById(<% wEncoder.writeJsElementReference(rTemplateCell); %>);
-	/* var c1=c1Box.options[c1Box.selectedIndex].innerHTML;
-	var c2=c2Box.options[c2Box.selectedIndex].innerHTML;
-	var rel=relBox.options[relBox.selectedIndex].innerHTML; */
 	
 	var c1=c1Box.selectedIndex;
 	var c2=c2Box.selectedIndex;
