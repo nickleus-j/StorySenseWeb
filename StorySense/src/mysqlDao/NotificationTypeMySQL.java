@@ -56,7 +56,7 @@ public class NotificationTypeMySQL extends NotificationTypeDao {
 	}
 
 	private List<NotificationType> getResults(ResultSet rs) throws SQLException{
-		List<NotificationType> list=new ArrayList<>();
+		List<NotificationType> list=new ArrayList<NotificationType>();
 		NotificationType type;
 		while(rs.next()){
 			type=new NotificationType();

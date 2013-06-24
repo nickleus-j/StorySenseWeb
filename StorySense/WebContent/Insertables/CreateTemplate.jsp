@@ -154,8 +154,17 @@ margin: 2%;
  	 </tr>
  	 
 </table>
+
+<table >
+<tr><th>Workspace</th></tr><tr>
+<td id=<% wEncoder.writeJsElementReference(storyTemplateWorkSpaceID); %>>
+</td>
+</tr></table>
+
 <table>
-<tr><th>Relational Template</th><th>Story Template</th></tr>
+<tr><th>Relational Template</th>
+<th>Story Template </th><td><button onclick="previewStoryTemplate()">Preview</button></td>
+</tr>
  	 <tr bgcolor="white">
  	 <td id=<% wEncoder.writeJsElementReference(rTemplateCell); %>></td>
  	 <td id=<% wEncoder.writeJsElementReference(sTemplateCell); %>></td>

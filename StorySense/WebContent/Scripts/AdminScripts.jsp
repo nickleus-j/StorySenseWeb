@@ -14,7 +14,7 @@
     	String showConceptsBox2="showConceptsBox2";
     	
     	String variablesTbl="varTbl";
-    	
+    	String storyTemplateWorkSpaceID="storyTemplateWorkSpace";
     	String rTemplateCell="relationTemplateCell",sTemplateCell="storyTemplateCell";
     %>
 <script>
@@ -131,6 +131,10 @@ function addVarRow(){
 	addVarConcept(prefix+"Conc2");
 }
 
+/**
+ * Deletes a variable from the list
+ then reflect it on the page
+ */
 function deleteVariable(index){
 	storyVariables.splice(index,1);
 	generateVariableTable(index+1);
@@ -138,6 +142,10 @@ function deleteVariable(index){
 	addVarRow();
 }
 
+/**
+ * Returns an array that contains the selected indexes of the remaining rows that
+ contain the relations
+ */
 function getSelectedValues(spliceIndex,suffix){
 	var selectBox,prefix,arr=new Array();
 	
@@ -347,6 +355,36 @@ function resetOtherConceptBoxIndex(currentBox,otherBoxID){
 		elem.selectedIndex=0;
 }
 
+
+function getVariableValuePreview(given){
+	var val="(";
+	
+	if(given.concept1!="")
+		val=val.concat(given.concept1+", "+given.relation+", ");
+	else val=val.concat("?, "+given.relation+", ");
+	
+	if(given.concept2!="")
+		val=val.concat(given.concept2);
+	else val=val.concat("?");
+	
+	return val.concat(")");
+}
+
+function previewVariablesToTemplate(previewPanel){
+	var code="";
+	text=document.createElement('p');
+	for(var ctr=0;ctr<storyVariables.length;ctr++){
+		code+=("$"+storyVariables[ctr].name+" = "+getVariableValuePreview(storyVariables[ctr])+"<br/>");
+	}/*End of loop*/
+	text.innerHTML=code;
+	previewPanel.appendChild(text);
+}
+
+function previewStoryTemplate(){
+	var pane=document.getElementById(<% wEncoder.writeJsElementReference(sTemplateCell); %>);
+	pane.innerHTML="";
+	previewVariablesToTemplate(pane);
+}
 
 function deleteRelation(index){
 	storyRelations.splice(index,1);

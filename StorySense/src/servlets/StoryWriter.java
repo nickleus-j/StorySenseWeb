@@ -62,7 +62,7 @@ public class StoryWriter extends BaseServlet {
 			out = response.getWriter();
 			Story myStory=(Story)session.getAttribute("Story");
 			
-			templateID=(int) session.getAttribute(StoryEncoder.TEMPLATEID);
+			templateID=Integer.parseInt((String) session.getAttribute(StoryEncoder.TEMPLATEID));
 			out.println("The story");
 			
 			if(myStory!=null){
