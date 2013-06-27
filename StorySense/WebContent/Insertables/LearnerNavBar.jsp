@@ -14,7 +14,7 @@ border: 2px solid black;
 }
 
 #fontStyle2 {
-font-family: Segoe UI; font-size: 20pt;
+font-family: Segoe UI; font-size: 11pt;
 }
 
 .lBoardbBox{
@@ -35,7 +35,7 @@ border: 2px solid black;
  
  <tr><td>
 	<table id="tableBorderLeaderboard" bgcolor = "white" >
-	<tr>
+	<tr id="fontStyle2">
 	<th>Name</th><th>Level</th><th>Points</th>
 	</tr>
 		<%		WebCodeMaker encoder=new WebCodeMaker(out);
@@ -46,4 +46,3 @@ border: 2px solid black;
 </table>
 
 </div>
-

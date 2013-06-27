@@ -198,8 +198,9 @@ body {
   min-width: 600px;      /* 2x LC width + RC width */
 }
 #container {
-  padding-left: 200px;   /* LC width */
+  padding-left: 180px;   /* LC width */
   padding-right: 200px;  /* RC width */
+  max-width: 80%;
   
 }
 #container .column {
@@ -210,13 +211,14 @@ body {
   width: 100%;
 }
 #left {
-  width: 200px;          /* LC width */
-  right: 200px;          /* LC width */
+  width: 50px;          /* LC width */
+  right: 50px;          /* LC width */
   margin-left: -100%;
   margin-top: 2%;
 }
 #right {
   width: 200px;          /* RC width */
+  left: -70px;
   margin-right: -200px;  /* RC width */
   margin-top: 2%;
 }

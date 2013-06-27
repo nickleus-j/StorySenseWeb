@@ -156,7 +156,11 @@ margin: 2%;
 </table>
 
 <table >
-<tr><th>Workspace</th></tr><tr>
+<tr><th>Workspace</th></tr>
+<tr>
+<td><input type="button" value="Add text" onclick="addTemplateText()"/>
+</td></tr>
+<tr>
 <td id=<% wEncoder.writeJsElementReference(storyTemplateWorkSpaceID); %>>
 </td>
 </tr></table>

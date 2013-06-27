@@ -9,17 +9,14 @@ border-radius: 4px;
 width: 100%;
 }
 #fontStylefeatured{
-font-family: Segoe UI; font-size: 20pt;
+font-family: Segoe UI; font-size: 11pt;
 } 
 </style>
 
  <div id="right" class="column">
 	<table>
 		<tr><td>
-			<table id="tableBorderfeatured" bgcolor = "Yellow" >
-			<tr id="fontStylefeatured" >
-				<th colspan = 3>Story of the Week</th></tr>
-			</table>
+			<table id="tableBorderfeatured" bgcolor = "Yellow" ><tr id="fontStylefeatured" ><th colspan = 3>Story of the Week</th></tr></table>
 			<table id="tableBorderfeatured" bgcolor = "white">
 
 				<tr align="center"><td>
@@ -43,6 +40,4 @@ font-family: Segoe UI; font-size: 20pt;
 			</table>
 		</td></tr>
 	</table>
-	<%@ include file="NotificationPanel.jsp" %>
-	
 </div>

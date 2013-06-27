@@ -22,7 +22,7 @@ var relations=<% out.write(adminEnc.getRelationshipsJs());%>;
 var concepts=<% out.write(adminEnc.getConceptTextsJs());%>;
 var storyRelations=new Array(),storyVariables=new Array();
 var givenVariables=0;
-
+var sTmplElems=new Array(),sTmplVarBoxes=new Array();
 function initializeAdminHome(){
 	addNewVariable("","","ColorOf","Jet");
 	
@@ -137,9 +137,30 @@ function addVarRow(){
  */
 function deleteVariable(index){
 	storyVariables.splice(index,1);
-	generateVariableTable(index+1);
-	givenVariables--;
+	generateVariableTable(index);
+	givenVariables=storyVariables.length;
 	addVarRow();
+}
+
+function createChooseVariableElement(){
+	var opt,choices=document.createElement('select');
+	
+	for(var ctr=0;ctr<storyVariables.length;ctr++){
+		opt=document.createElement('option');
+		opt.innerHTML=storyVariables[ctr].name;
+		choices.appendChild(choices);
+	}/*End of loop*/
+	return choices;
+}
+
+function refreshVariableList(){
+	var current;
+	for(var ctr=0;ctr<sTmplVarBoxes.length;ctr++){
+		current=sTmplVarBoxes[ctr].selectedIndex;
+		//addVarConcept(sTmplVarBoxes[ctr].id);
+		sTmplVarBoxes[ctr]=createChooseVariableElement();
+		sTmplVarBoxes[ctr].selectedIndex=current;
+	}/*End of Loop*/
 }
 
 /**
@@ -149,7 +170,7 @@ function deleteVariable(index){
 function getSelectedValues(spliceIndex,suffix){
 	var selectBox,prefix,arr=new Array();
 	
-	for(var ctr=0;ctr<storyVariables.length;ctr++){
+	for(var ctr=0;ctr<=storyVariables.length;ctr++){
 		if(ctr!=spliceIndex){
 			prefix="var"+(ctr+1);
 			selectBox=document.getElementById(prefix+suffix);
@@ -157,17 +178,26 @@ function getSelectedValues(spliceIndex,suffix){
 				arr.push(selectBox.selectedIndex);
 			else arr.push(0);
 		}/*End of spliceIndex Condition*/
+		
 	}/*End of loop*/
 	return arr;
 }
 
+function createVarTblHdr(){
+	return "<tr><th colspan=\"4\" class=\"templateProperties\">Variables</th>"+
+	"</tr><tr><th>Name</th><th>Concept 1</th><th>relationship</th><th>Concept 2</th></tr>";
+}
+
+/**
+ * 
+ */
 function generateVariableTable(index){
 	var varTbl=document.getElementById(<% wEncoder.writeJsElementReference(variablesTbl); %>);
 	var delBt;
 	var prefix,nameBox,row,cell,c1Box,c2Box,relBox;
 	var c1Val=getSelectedValues(index,"Conc1"),c2Val=getSelectedValues(index,"Conc2"),relVal=getSelectedValues(index,"Rel");
 	
-	varTbl.innerHTML="";
+	varTbl.innerHTML=createVarTblHdr();
 	for(var ctr=0;ctr<storyVariables.length;ctr++){
 	 prefix="var"+(ctr+1);
 	 nameBox=document.createElement('input');
@@ -180,7 +210,7 @@ function generateVariableTable(index){
 	
 	//bt.setAttribute("id",btElemName);
 	nameBox.setAttribute("id",prefix+"Name");
-	nameBox.setAttribute("onchange","enterStoryVariable("+givenVariables+")");
+	nameBox.setAttribute("onchange","enterStoryVariable("+(ctr+1)+")");
 	cell.appendChild(nameBox);
 	row.appendChild(cell);
 	
@@ -190,9 +220,9 @@ function generateVariableTable(index){
 	relBox.setAttribute("id",prefix+"Rel");
 	delBt=createDeleteButton(prefix+"Delete");
 	
-	c1Box.setAttribute("onchange","modifyVariables("+givenVariables+",this,'Conc2')");
-	c2Box.setAttribute("onchange","modifyVariables("+givenVariables+",this,'Conc1')");
-	delBt.setAttribute("onclick","deleteVariable("+(givenVariables-1)+")");
+	c1Box.setAttribute("onchange","modifyVariables("+(ctr+1)+",this,'Conc2')");
+	c2Box.setAttribute("onchange","modifyVariables("+(ctr+1)+",this,'Conc1')");
+	delBt.setAttribute("onclick","deleteVariable("+ctr+")");
 	
 	cell=document.createElement('td');
 	cell.appendChild(c1Box);
@@ -347,7 +377,6 @@ function generateRelationTemplatePreview(){
 	}/*End of Loop*/
 }
 
-
 function resetOtherConceptBoxIndex(currentBox,otherBoxID){
 	var elem=document.getElementById(otherBoxID);
 	
@@ -355,7 +384,10 @@ function resetOtherConceptBoxIndex(currentBox,otherBoxID){
 		elem.selectedIndex=0;
 }
 
-
+/**
+ * Generates what the variable declaration
+ of the template will look like
+ */
 function getVariableValuePreview(given){
 	var val="(";
 	
@@ -370,6 +402,9 @@ function getVariableValuePreview(given){
 	return val.concat(")");
 }
 
+/**
+ * Shows the variables of the to be generated template
+ */
 function previewVariablesToTemplate(previewPanel){
 	var code="";
 	text=document.createElement('p');
@@ -386,9 +421,36 @@ function previewStoryTemplate(){
 	previewVariablesToTemplate(pane);
 }
 
+/**
+ * Deletes a relation
+ and reflect the changes in the user interface
+ */
 function deleteRelation(index){
 	storyRelations.splice(index,1);
 	generateRelationTemplatePreview();
+}
+
+
+function createTemplateElementContainer(headerText,elem){
+	var tbl=document.createElement('table'),row=document.createElement('tr');
+	var hdr=document.createElement('th'),cell=document.createElement('td');
+	
+	hdr.innerHTML=headerText;
+	row.appendChild(hdr);
+	tbl.appendChild(row);
+	
+	row=document.createElement('tr');
+	cell.appendChild(elem);
+	row.appendChild(cell);
+	tbl.appendChild(row);
+	return tbl;
+}
+
+function addTemplateText(){
+	var workSpace=document.getElementById(<% wEncoder.writeJsElementReference(storyTemplateWorkSpaceID); %>);
+	var tbl=createTemplateElementContainer("text",document.createElement('input'));
+	
+	workSpace.appendChild(tbl);
 }
 
 /**

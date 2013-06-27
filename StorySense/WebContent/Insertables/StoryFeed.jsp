@@ -6,31 +6,36 @@
 {
 border: 2px solid black;
 border-radius: 4px;
-margin-left: 2%;
+margin-left: 15%;
 margin-top: 2%;
 margin-right: 2%;
-width: 96%;
+width: 75%;
+
 }
 
 #tableBorderfeed2
 {
 border: 2px solid black;
 border-radius: 4px;
-margin-left: 2%;
+margin-left: 15%;
 margin-right: 2%;
-width: 96%;
+width: 75%;
 height: 525;
 }
 #fontStylefeed{
-font-family: Segoe UI; font-size: 20pt;
+font-family: Segoe UI; font-size: 12pt;
 } 
+#titleFont{
+
+font-family: Segoe UI; font-size: 15pt;
+}
 </style>
 
 <div id="center" class="column">
 
 <table width="100%">
  <tr><td>
-<table id="tableBorderfeed" bgcolor = "orange" width="90%" onload="">
+<table id="tableBorderfeed" bgcolor = "orange" onload="">
 		<tr id="fontStylefeed" ><th colspan = 3>Story Feed</th></tr>
 	</table>	
 	 </td></tr>
@@ -40,4 +45,3 @@ font-family: Segoe UI; font-size: 20pt;
 
 
 </div>
-
