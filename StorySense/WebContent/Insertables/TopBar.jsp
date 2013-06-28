@@ -10,10 +10,10 @@
 {
 border: 2px solid black;
 border-radius: 4px;
+border-collapse: collapse;
 }
 #fontStyleTopbar{
 font-family: Segoe UI; font-size: 20pt;
-border-right-style: dotted;
 }
 #fontStyleTopbar2{
 font-family: Segoe UI; font-size: 20pt;
@@ -49,17 +49,17 @@ font-family: Segoe UI; font-size: 20pt;
 	if(u!=null){
 		if(User.Roles.learner.isLearner(u.getRole())) {%>
 		
-	<div style="width:80%; margin:0 auto;">
+	<div style="max-width:75%; margin:0 auto;">
 	
-	<table bgcolor="white" align="center" id = "tableBorderTopBar">
+	<table id = "tableBorderTopBar" bgcolor="white" align="center"> <!--   -->
 	<tr>
-	<td id="fontStyleTopbar"><img src="images/storysenselogo3.png" border="0" width="130"/></td>
-	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/LearnerHomeSample2.jsp"><img src="images/HomeButtons/home.png" onmouseover="this.src='images/HomeButtons/homeB.png'" onmouseout="this.src='images/HomeButtons/home.png'"  border="0" width="100"/></a> </td>
-	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/templateDisplay.jsp"><img src="images/HomeButtons/Create Stories.png" onmouseover="this.src='images/HomeButtons/Create StoriesB.png'" onmouseout="this.src='images/HomeButtons/Create Stories.png'"  border="0" width="100"/></a></td>
-	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/LearnerHomeSample.jsp"><img src="images/HomeButtons/My Stories.png" onmouseover="this.src='images/HomeButtons/My StoriesB.png'" onmouseout="this.src='images/HomeButtons/My Stories.png'"  border="0" width="100"/></a></td>
-	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/View_LearnerProfile.jsp"><img src="images/HomeButtons/Profile.png" onmouseover="this.src='images/HomeButtons/ProfileB.png'" onmouseout="this.src='images/HomeButtons/Profile.png'"  border="0" width="100"/></a></td>
-	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/Help.jsp"><img src="images/HomeButtons/Help.png" onmouseover="this.src='images/HomeButtons/HelpB.png'" onmouseout="this.src='images/HomeButtons/Help.png'"  border="0" width="100"/></a></td>
-	<td id="fontStyleTopbar2" width="15%" align="center"><a href="Logout"><img src="images/HomeButtons/Logout.png" onmouseover="this.src='images/HomeButtons/LogoutB.png'" onmouseout="this.src='images/HomeButtons/Logout.png'"  border="0" width="100" /></a></td>
+	<td id="fontStyleTopbar"><img src="images/storysenselogo4.png" border="0" width="160"/></td>
+	<td id="fontStyleTopbar" width="15%"><a href="../StorySense/LearnerHomeSample2.jsp"><img src="images/HomeButtons2/home.png" onmouseover="this.src='images/HomeButtons2/homeB.png'" onmouseout="this.src='images/HomeButtons2/home.png'" width="150"/></a> </td>
+	<td id="fontStyleTopbar" width="15%" ><a href="../StorySense/templateDisplay.jsp"><img src="images/HomeButtons2/Create Stories.png" onmouseover="this.src='images/HomeButtons2/Create StoriesB.png'" onmouseout="this.src='images/HomeButtons2/Create Stories.png'" width="150"/></a></td>
+	<td id="fontStyleTopbar" width="15%"><a href="../StorySense/LearnerHomeSample.jsp"><img src="images/HomeButtons2/My Stories.png" onmouseover="this.src='images/HomeButtons2/My StoriesB.png'" onmouseout="this.src='images/HomeButtons2/My Stories.png'"  width="150"/></a></td>
+	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/View_LearnerProfile.jsp"><img src="images/HomeButtons2/Profile.png" onmouseover="this.src='images/HomeButtons2/ProfileB.png'" onmouseout="this.src='images/HomeButtons2/Profile.png'"  width="150"/></a></td>
+	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/Help.jsp"><img src="images/HomeButtons2/Help.png" onmouseover="this.src='images/HomeButtons2/HelpB.png'" onmouseout="this.src='images/HomeButtons2/Help.png'" width="150"/></a></td>
+	<td id="fontStyleTopbar2" width="15%" align="center"><a href="Logout"><img src="images/HomeButtons2/Logout.png" onmouseover="this.src='images/HomeButtons2/LogoutB.png'" onmouseout="this.src='images/HomeButtons2/Logout.png'"  width="150" /></a></td>
 	</tr>
 	</table>
 	

@@ -36,7 +36,8 @@ width: 100%;
 font-family: Segoe UI; font-size: 13pt;
 }
   
-	
+
+
   
   </style>
 
@@ -48,7 +49,7 @@ font-family: Segoe UI; font-size: 13pt;
 <%@ include file="Insertables/accountbar.jsp" %>
 <div>
 	
-<table width="80%" align="right" id="<%out.write(attributeProvider.getLearnerSummaryID()); %>">
+<table width="64%" align="center" style="margin-left:35%" id="<%out.write(attributeProvider.getLearnerSummaryID()); %>">
 	
 	<tr align="center"><td>
 		<table id="tableBorder3" class="tableBorder3" bgcolor = "#7DFB9D">

@@ -27,11 +27,11 @@
 .tableStyleProfile{
 	background: #FEDFDF;
 	border: 5px solid maroon;
-	
+	margin-left: 20%;
 	}
 
 #profileDiv{
-	max-width:60%;
+	max-width:83%;
 	margin-top: 3%;
 	margin-left: 2%;
 	}

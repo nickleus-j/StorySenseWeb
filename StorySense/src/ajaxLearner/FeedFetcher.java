@@ -71,10 +71,10 @@ public class FeedFetcher extends BaseServlet {
 			
 			/*loop that displays the stories*/
 			for(int ctr=0;ctr<Stories.size();ctr++){
-				out.write("<tr class=\"storyHead\">");
+				out.write("<tr id=\"titleFont\" class=\"storyHead\">");
 				myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
-				out.write("<th>Title:</th><td> "+Stories.get(ctr).getName()+"</td> <th>Made by </th>" +
-						"<td>"+linkEncoer.createLinkToUser(myUser)+"</td></tr>");
+				out.write("<td colspan=\"2\">\"" +Stories.get(ctr).getName()+"\"</td></tr><tr>"+
+						"<td colspan=\"2\">"+ "&nbsp;&nbsp;&nbsp; By: "+myUser.getName()+"</td>");
 				
 				if(SessionUser!=null)
 					out.write(sLoader.generateLikeRow(Stories.get(ctr)));

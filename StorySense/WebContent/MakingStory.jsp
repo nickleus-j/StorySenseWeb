@@ -16,7 +16,7 @@
 
 	<div id="container">
 	<div id="center" class="column">
-	<table style="margin: auto;">
+	<table style="margin: auto;" >
 	<tr><td>
 	
 	<tr><td>

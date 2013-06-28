@@ -17,19 +17,18 @@
 border: 5px solid green;
 border-radius: 0px;
 font-family: Segoe UI; font-size: 13pt;
-width: 20%;
+width: 15%;
 }
 
 
 
 #fontStyle2{
-font-family: Segoe UI; font-size: 20pt;
+font-family: Segoe UI; font-size: 12pt;
 }
 
   
 </style>
 
-<div width="25%">
 <% User myUser=(User)request.getAttribute("viewedUser");
 	if(myUser==null)
 		myUser=(User)session.getAttribute("user");
@@ -37,7 +36,7 @@ font-family: Segoe UI; font-size: 20pt;
 	learnerInfoEncoder liEncoder=new learnerInfoEncoder();
 %>
 <br/>
-	<table bgcolor = "#7DFB9D" id="tableBorder6" align="left">
+	<table bgcolor = "#7DFB9D" id="tableBorder6" align="left" style="margin-left:10%">
 	<tr><th  align="center" id="fontStyle2">&nbsp;</th></tr>
 	<tr><th  align="center"> <% out.print(webEncoder.enterUserImageTag(myUser)); %> </th></tr>
 	<% if(myUser==(User)session.getAttribute("user")){ %>
@@ -54,5 +53,4 @@ font-family: Segoe UI; font-size: 20pt;
 	<tr><th  align="center" id="fontStyle2">&nbsp;</th></tr>
 	</table>
 	
-</div>
 

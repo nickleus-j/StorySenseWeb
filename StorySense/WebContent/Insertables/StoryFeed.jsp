@@ -27,7 +27,10 @@ font-family: Segoe UI; font-size: 12pt;
 } 
 #titleFont{
 
-font-family: Segoe UI; font-size: 15pt;
+font-family: Segoe UI; font-size: 20pt;
+font-weight: bold;
+text-align: left;
+padding-left: 5dp;
 }
 </style>
 

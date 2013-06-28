@@ -75,7 +75,8 @@ public class CompleteStoryLoader {
 			oi.close();
 			return previewStory(storyFile);
 		} catch(IOException ioEx){
-			return "File path problems D:";
+			System.out.println("Exception stroy: " + ioEx.toString());
+			return "File path problems";
 		}
 		catch(Exception ex){
 			//out.println("Error in getting the story\n"+ex.getMessage());
@@ -107,7 +108,7 @@ public class CompleteStoryLoader {
 			for(int ctr=0;ctr<Stories.size();ctr++){
 				out.write("<tr class=\"storyHead\">");
 				myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
-				out.write("<th>Title:</th><td> "+Stories.get(ctr).getName()+"</td> <th>Made by </th>" +
+				out.write("<th></th><td style=\"font-size: 5px\"> \""+Stories.get(ctr).getName()+"\"</td> <th> </th>" +
 						"<td>"+myUser.getName()+"</td></tr>");
 				
 				if(SessionUser!=null)
@@ -129,7 +130,7 @@ public class CompleteStoryLoader {
 			/*loop that displays the stories*/
 			for(int ctr=0;ctr<Stories.size();ctr++){
 				out.write("<tr class=\"storyHead\">");
-				out.write("<th>Title:</th><td> "+Stories.get(ctr).getName()+"</td> <th>Made by </th>" +
+				out.write("<th></th><td style=\"font-size: 5px\"> \""+Stories.get(ctr).getName()+"\"</td> <th> </th>" +
 						"<td>"+myUser.getName()+"</td></tr>");
 				
 				if(SessionUser!=null)
@@ -166,7 +167,7 @@ public class CompleteStoryLoader {
 		LikedStoryDAO myLikeDAO=myDAOFactory.createLikeDAO();
 		
 		String storyID="story"+myStory.getID();
-		String val="<tr><th>Likes</th><td id=\""+storyID+"\"" +
+		String val="<td style=\"align: right;\" id=\""+storyID+"\"" +
 				">"+myLikeDAO.countStoryLikes(myStory.getID())+"</td>";
 		
 		val=val.concat("<td>"+generateLikeButtonHTML(storyID, myStory)+"</td>");
@@ -219,7 +220,7 @@ public class CompleteStoryLoader {
 			
 			/*Loop that shows the story Links*/
 			for(int ctr=0;ctr<Stories.size();ctr++){
-				out.write("<tr>");
+				out.write("<tr align=\"center\">");
 				out.write("<td>"+Stories.get(ctr).getName()+"</td>");
 				out.write("<td>"+Stories.get(ctr).getFinishTime()+"</td>");
 				out.write("<td>"+createStoryLink(Stories.get(ctr).getID(), "storyStage")+"</td>");
