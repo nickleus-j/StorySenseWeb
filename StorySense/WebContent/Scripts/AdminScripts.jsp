@@ -74,7 +74,8 @@ function setupConceptList(elemId){
 		option=document.createElement('option');
 		option.innerHTML="$"+storyVariables[ctr].name;
 		conceptSelectBox.appendChild(option);
-	}/*End of loop that adds the variables*/
+	} /*End of loop that adds the variables */
+	
 	addConcepts(elemId);
 }
 
@@ -142,26 +143,6 @@ function deleteVariable(index){
 	addVarRow();
 }
 
-function createChooseVariableElement(){
-	var opt,choices=document.createElement('select');
-	
-	for(var ctr=0;ctr<storyVariables.length;ctr++){
-		opt=document.createElement('option');
-		opt.innerHTML=storyVariables[ctr].name;
-		choices.appendChild(choices);
-	}/*End of loop*/
-	return choices;
-}
-
-function refreshVariableList(){
-	var current;
-	for(var ctr=0;ctr<sTmplVarBoxes.length;ctr++){
-		current=sTmplVarBoxes[ctr].selectedIndex;
-		//addVarConcept(sTmplVarBoxes[ctr].id);
-		sTmplVarBoxes[ctr]=createChooseVariableElement();
-		sTmplVarBoxes[ctr].selectedIndex=current;
-	}/*End of Loop*/
-}
 
 /**
  * Returns an array that contains the selected indexes of the remaining rows that
@@ -189,7 +170,7 @@ function createVarTblHdr(){
 }
 
 /**
- * 
+ * Generates a table containing the variables of the template
  */
 function generateVariableTable(index){
 	var varTbl=document.getElementById(<% wEncoder.writeJsElementReference(variablesTbl); %>);
@@ -272,9 +253,9 @@ function enterStoryVariable(index){
 	else if(name.length>0&&((c1.length==0&&c2.length>0)||(c2.length==0&&c1.length>0))){
 		index--;
 		storyVariables[index].name=name;
-		storyVariables[index].c1=c1;
-		storyVariables[index].c2=c2;
-		storyVariables[index].rel=rel;
+		storyVariables[index].concept1=c1;
+		storyVariables[index].concept2=c2;
+		storyVariables[index].relation=rel;
 
 		setupConceptList(<% wEncoder.writeJsElementReference(showConceptsBox1); %>);
 		setupConceptList(<% wEncoder.writeJsElementReference(showConceptsBox2); %>);
@@ -283,10 +264,13 @@ function enterStoryVariable(index){
 	//addNewVariable(nameBox.value,c1Box.value,relBox.value,c2Box.value);
 }
 
-
+/**
+ * Modify the properties of a variable in the story template
+ */
 function modifyVariables(index,curentConceptBox,couterConceptBoxSuffix){
 	enterStoryVariable(index);
 	resetOtherConceptBoxIndex(curentConceptBox,"var"+index+couterConceptBoxSuffix);
+	refreshVariableList();
 }
 
 function createRelation(c1,rel,c2){return {"concept1":c1,"relation":rel,"concept2":c2};}
@@ -315,6 +299,9 @@ function displayRelationTemplate(){
 	//generateRelationTemplatePreview();
 }/*End of Function*/
 
+/**
+ * Set up a row of combo boxes to preview the relation template
+ */
 function setUpRelationBoxesForTmplt(c1Box,c2Box,relBox,index){
 	var prefix="rBox"+index;
 	
@@ -336,6 +323,10 @@ function createDeleteButton(ID){
 	return bt;
 }
 
+/**
+ * Previews the relations to be filled
+ in comboboxes
+ */
 function generateRelationTemplatePreview(){
 	var cell=document.getElementById(<% wEncoder.writeJsElementReference(rTemplateCell); %>);
 	var list=document.createElement('ol');
@@ -430,7 +421,10 @@ function deleteRelation(index){
 	generateRelationTemplatePreview();
 }
 
-
+/**
+ * Creates a container for the element to represent a part of the 
+ to be generated story template
+ */
 function createTemplateElementContainer(headerText,elem){
 	var tbl=document.createElement('table'),row=document.createElement('tr');
 	var hdr=document.createElement('th'),cell=document.createElement('td');
@@ -443,6 +437,7 @@ function createTemplateElementContainer(headerText,elem){
 	cell.appendChild(elem);
 	row.appendChild(cell);
 	tbl.appendChild(row);
+	sTmplElems.push(elem);
 	return tbl;
 }
 
@@ -454,13 +449,60 @@ function addTemplateText(){
 }
 
 /**
+ * Create a select box that contains the variable names
+ */
+function createChooseVariableElement(){
+	var choices=document.createElement('select');
+	
+	refreshVariableChoices(choices);
+	return choices;
+}
+
+/**
+ * Updates the select boxes that contains the
+ list of variable names
+ */
+function refreshVariableList(){
+	var current;
+	for(var ctr=0;ctr<sTmplVarBoxes.length;ctr++){
+		current=sTmplVarBoxes[ctr].selectedIndex;
+		//addVarConcept(sTmplVarBoxes[ctr].id);
+		refreshVariableChoices(sTmplVarBoxes[ctr]);
+		sTmplVarBoxes[ctr].selectedIndex=current;
+	}/*End of Loop*/
+}
+
+/**
+ * Makes a select box contain the names of
+ the variables of the story template
+ */
+function refreshVariableChoices(vBox){
+	vBox.innerHTML="";
+	
+	for(var ctr=0;ctr<storyVariables.length;ctr++){
+		opt=document.createElement('option');
+		opt.innerHTML="$"+storyVariables[ctr].name;
+		vBox.appendChild(opt);
+	}/*End of loop*/
+}
+
+/**
+ * Adds a selectbox that contains the variable names in the workspace
+ */
+function addTemplateVariable(){
+	var workSpace=document.getElementById(<% wEncoder.writeJsElementReference(storyTemplateWorkSpaceID); %>);
+	var elem=createChooseVariableElement(),tbl=createTemplateElementContainer("Variable",elem);
+	sTmplVarBoxes.push(elem);
+	workSpace.appendChild(tbl);
+}
+
+/**
 Add a Relation based on the content of the Relation adding Panel
 */
 function addRelation(){
 	var relBox=document.getElementById(<% wEncoder.writeJsElementReference(showRelationsBox); %>);
 	var c1Box=document.getElementById(<% wEncoder.writeJsElementReference(showConceptsBox1); %>);
 	var c2Box=document.getElementById(<% wEncoder.writeJsElementReference(showConceptsBox2); %>);
-	var cell=document.getElementById(<% wEncoder.writeJsElementReference(rTemplateCell); %>);
 	
 	var c1=c1Box.selectedIndex;
 	var c2=c2Box.selectedIndex;

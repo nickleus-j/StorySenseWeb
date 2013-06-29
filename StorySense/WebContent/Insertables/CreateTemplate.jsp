@@ -159,6 +159,7 @@ margin: 2%;
 <tr><th>Workspace</th></tr>
 <tr>
 <td><input type="button" value="Add text" onclick="addTemplateText()"/>
+<input type="button" value="Add Variable" onclick="addTemplateVariable()"/>
 </td></tr>
 <tr>
 <td id=<% wEncoder.writeJsElementReference(storyTemplateWorkSpaceID); %>>
