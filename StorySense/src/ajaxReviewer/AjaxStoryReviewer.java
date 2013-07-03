@@ -1,12 +1,12 @@
 /*******************************************************************************
- *Copyright (c) 2013 IBM Corporation and others.
+ *Copyright (c) 2013 StorySense
  *All rights reserved. This program and the accompanying materials
  *are made available under the terms of the Eclipse Public License v1.0
  *which accompanies this distribution, and is available at
  *http://www.eclipse.org/legal/epl-v10.html
  *
  *Contributors:
- *    IBM Corporation - initial API and implementation
+ *    Nickleus Jimenez
  *******************************************************************************/
 package ajaxReviewer;
 
@@ -65,7 +65,6 @@ public class AjaxStoryReviewer extends BaseServlet {
 		try {
 			PrintWriter out=response.getWriter();
 			out.write(ratingHtml.enterAssertionsTableCode(theStory));
-			//out.write(ratingHtml.generateQuestionTblHtml(theStory));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -62,7 +62,7 @@ public class StoryWriter extends BaseServlet {
 			out = response.getWriter();
 			Story myStory=(Story)session.getAttribute("Story");
 			
-			templateID=Integer.parseInt((String) session.getAttribute(StoryEncoder.TEMPLATEID));
+			templateID=Integer.valueOf(session.getAttribute(StoryEncoder.TEMPLATEID).toString());
 			out.println("The story");
 			
 			if(myStory!=null){
@@ -72,7 +72,8 @@ public class StoryWriter extends BaseServlet {
 			}
 			else out.println("Not forwarded");
 		}catch(Exception ex){
-			out.println("Error in getting the story");
+			out.println("Error in getting the story "+ex.getMessage());
+			ex.printStackTrace();
 		}
 	}
 	
@@ -171,7 +172,7 @@ public class StoryWriter extends BaseServlet {
 			myAcomDAO.addStoryAcomplishment(story);
 			
 			/*Update the score of the user after saving the story*/
-			updateUserScore(givenU, getTemplateFromDB(myDAOFactory));
+			//updateUserScore(givenU, getTemplateFromDB(myDAOFactory));
 		 }catch(IOException ioEx){
 			 
 		 }

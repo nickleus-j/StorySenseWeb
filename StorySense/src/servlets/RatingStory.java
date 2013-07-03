@@ -39,6 +39,7 @@ import dao.AcomplishmentDAO;
 import dao.DAOFactory;
 import dao.RatingDAO;
 import dao.RelationDAO;
+import dao.TemplateDAO;
 import dao.UserDAO;
 import entity.Acomplishment;
 import entity.Rating;
@@ -108,14 +109,14 @@ public class RatingStory extends BaseServlet {
 		
 	}
 	
-	private ArrayList<Integer> getAssertionScores(HttpServletRequest request) throws FileUploadException{
-		ArrayList<Integer> scores=new ArrayList<Integer>();
-		int value=0;
+	private ArrayList<Float> getAssertionScores(HttpServletRequest request) throws FileUploadException{
+		ArrayList<Float> scores=new ArrayList<Float>();
+		float value=0;
 		 Enumeration<String>paramNames = request.getParameterNames();
 		 while(paramNames.hasMoreElements()) {
 		      String paramName = (String)paramNames.nextElement();
 		      if(paramName.startsWith(RatingFormEncoder.Assert)){
-		    	  value=Integer.parseInt(request.getParameter(paramName));
+		    	  value=Float.parseFloat(request.getParameter(paramName));
 				  scores.add(value);
 		      }
 		 }
@@ -130,24 +131,28 @@ public class RatingStory extends BaseServlet {
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
 		Acomplishment ratedStory;
+		Template templateUsed;
+		TemplateDAO tdao=myDAOFactory.createTemplateDAO();
 		HttpSession theSession=request.getSession();
-		ArrayList<Integer> scores=getAssertionScores(request);
+		ArrayList<Float> scores=getAssertionScores(request);
 		ReviewerResource RRes=new ReviewerResource();
-		int sID=Integer.parseInt(request.getParameter(RRes.getStoryIDParameter())),score;
+		int sID=Integer.parseInt(request.getParameter(RRes.getStoryIDParameter()));
+		float score;
 		Story theStory;
 		AjaxStoryReviewer ajaxSReviewer=new AjaxStoryReviewer();
 		
 		
 		ratedStory=myAcomDAO.getStory(sID);
+		templateUsed=tdao.getTemplate(ratedStory.getTemplateID());
 		theStory=ajaxSReviewer.getStoryFile(ratedStory.getFileURL()).getMyStory();
 		updateRelationScores(scores, theStory.getAssertions());
 		
 		out.println("Story: "+ratedStory.getName()+"--");
 		
 		
-		score=calculateScore(scores, request.getParameter(RRes.getSatisfactionBoxId()));
-		saveRating(score, sID, theSession);
-		updateUserScore(ratedStory.getAccountID(),score);
+		score=calculateScore(scores, request.getParameter(RRes.getSatisfactionBoxId()),templateUsed.getLevelRequirement());
+		saveRating(Math.round(score), sID, theSession);
+		updateUserScore(ratedStory.getAccountID(),Math.round(score));
 	}
 	
     /**
@@ -177,8 +182,9 @@ public class RatingStory extends BaseServlet {
 		userDao.increaseUserPoints(givenUser, Additionalscore);
 	}
 	
-	private int calculateScore(ArrayList<Integer> scores,String qual){
-		int result=0,QualIndex=0;
+	private float calculateScore(ArrayList<Float> scores,String qual,int lvlReq){
+		float result=0.0f;
+		int QualIndex=0;
 		ReviewerResource RRes=new ReviewerResource();
 		String[] qualNames=RRes.getSatisfactionOptions();
 		
@@ -188,17 +194,23 @@ public class RatingStory extends BaseServlet {
 		if(QualIndex==qualNames.length)
 			QualIndex=0;
 		
-		for(int ctr=0;ctr<scores.size();ctr++){
+		/*for(int ctr=0;ctr<scores.size();ctr++){
 			result+=(scores.get(ctr)*10);
 		}
 		return result+(QualIndex+1)*5;
+		*/
+		for(int ctr=0;ctr<scores.size();ctr++){
+			result+=scores.get(ctr);
+		}
+		result/=scores.size();
+		return result*lvlReq*100;
 	}
 	
     /**
      * This updates the actual knwoledgebase based on the evaluations
      * of the reviewer.
      */ 
-	private void updateRelationScores(ArrayList<Integer> scores,ArrayList<ArrayList<Relation>> assertions){
+	private void updateRelationScores(ArrayList<Float> scores,ArrayList<ArrayList<Relation>> assertions){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		RelationDAO relationDAO=myDAOFactory.createRelationDAO();
 		ArrayList<Relation> relations;
@@ -207,7 +219,7 @@ public class RatingStory extends BaseServlet {
 			relations=assertions.get(ctr);
 			for(int i=0;i<relations.size();i++){
 				relationDAO.updateRelationScore(relations.get(i).getConcept1(), relations.get(i).getConcept2(),
-						relations.get(i).getRelationship(), scores.get(scoreIndex));
+						relations.get(i).getRelationship(), Math.round(scores.get(scoreIndex)));
 				scoreIndex++;
 			}/*End of relation Loop*/
 		}/*End of Assertion loop*/

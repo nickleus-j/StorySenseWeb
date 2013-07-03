@@ -32,7 +32,7 @@ function initializeAdminHome(){
 }
 
 function addNewVariable(name,c1,rel,c2){
-	if(name.length>00&&((c1.length==0&&c2.length>0)||(c2.length==0&&c1.length>0))){
+	if(name.length>0&&((c1.length==0&&c2.length>0)||(c2.length==0&&c1.length>0))){
 		storyVariables.push(createVariable(name,c1,rel,c2));
 		addVarRow();
 	}
@@ -41,6 +41,9 @@ function addNewVariable(name,c1,rel,c2){
 	setupConceptList(<% wEncoder.writeJsElementReference(showConceptsBox2); %>);
 }
 
+/**
+ * Add values that connect the concepts
+ */
 function addRelationships(elemId){
 	var relationSelectBox=document.getElementById(elemId);
 	var option;
@@ -375,6 +378,13 @@ function resetOtherConceptBoxIndex(currentBox,otherBoxID){
 		elem.selectedIndex=0;
 }
 
+
+function showTemplateElementValues(panel){
+	for(var ctr=0;ctr<sTmplElems.length;ctr++){
+		panel.innerHTML+=(sTmplElems[ctr].value+" ");
+	}/*End of loop*/
+}
+
 /**
  * Generates what the variable declaration
  of the template will look like
@@ -406,10 +416,14 @@ function previewVariablesToTemplate(previewPanel){
 	previewPanel.appendChild(text);
 }
 
+/**
+ * Displays what the story template will look like
+ */
 function previewStoryTemplate(){
 	var pane=document.getElementById(<% wEncoder.writeJsElementReference(sTemplateCell); %>);
 	pane.innerHTML="";
 	previewVariablesToTemplate(pane);
+	showTemplateElementValues(pane);
 }
 
 /**

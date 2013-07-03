@@ -58,9 +58,9 @@ public class RatingFormEncoder {
 	public String getasseriontValidationHtml(int id){
 		String formRow="<td>",assertID=Assert+id;
 		formRow=formRow.concat("<input type=\"radio\" name =\""+assertID+"\" value=\""+0+"\"></td>");
+		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+0.2+"\"></td>");
+		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+0.6+"\" checked=\"checked\"></td>");
 		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+1+"\"></td>");
-		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+3+"\" checked=\"checked\"></td>");
-		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+4+"\"></td>");
 		return formRow;
 	}
 	
