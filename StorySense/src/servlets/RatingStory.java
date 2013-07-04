@@ -178,7 +178,7 @@ public class RatingStory extends BaseServlet {
 		UserDAO userDao=myDAOFactory.createUserDAO();
 		
 		User givenUser=userDao.getUser(writeID);
-		givenUser.setPoints(givenUser.getPoints()+Additionalscore);
+		//givenUser.setPoints(givenUser.getPoints()+Additionalscore);
 		userDao.increaseUserPoints(givenUser, Additionalscore);
 	}
 	

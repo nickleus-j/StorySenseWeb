@@ -1,12 +1,12 @@
 /*******************************************************************************
- *Copyright (c) 2013 IBM Corporation and others.
+ *Copyright (c) 2013 StorySense
  *All rights reserved. This program and the accompanying materials
  *are made available under the terms of the Eclipse Public License v1.0
  *which accompanies this distribution, and is available at
  *http://www.eclipse.org/legal/epl-v10.html
  *
  *Contributors:
- *    IBM Corporation - initial API and implementation
+ *    Nickleus Jimenez
  *******************************************************************************/
 package mysqlDao;
 
@@ -490,7 +490,7 @@ public class UserMySQL extends UserDAO {
         	
         	
         	u.setLevel(getLevel(Addend+u.getPoints()));
-        	
+        	//u.setPoints(u.getPoints()+Addend);
 			ps = con.prepareStatement("update account SET Points = ? , Level = ? where accountID = ? ");
 			
 			ps.setInt(1, Addend+u.getPoints());
@@ -545,9 +545,9 @@ public class UserMySQL extends UserDAO {
 		int sum=0,limit=20;
 		
 		for(int ctr=1;ctr<=limit;ctr++){
-			sum+=ctr*100;
+			sum=ctr*300;
 			if(points<sum)
-				return ctr-1;
+				return ctr;
 		}
 		return 21;
 	}

@@ -196,7 +196,7 @@ public class StoryWriter extends BaseServlet {
 		return templateDao.getTemplate(templateKey);
 	}
 	
-	private void updateUserScore(User givenUser,Template givenTemplate){
+	public void updateUserScore(User givenUser,Template givenTemplate){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		UserDAO userDao=myDAOFactory.createUserDAO();
 		
