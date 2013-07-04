@@ -8,6 +8,7 @@ import javax.servlet.jsp.JspWriter;
 import dao.AchievementDAO;
 import dao.AcomplishmentDAO;
 import dao.DAOFactory;
+import dao.LikedStoryDAO;
 import dao.RatingDAO;
 import entity.Achievement;
 import entity.User;
@@ -105,5 +106,29 @@ public class learnerInfoEncoder {
 		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
 		RatingDAO scoreDao=daoFactory.createRatingDAO();
 		return scoreDao.getMinimumScore(givenUser.getAccountID());
+	}
+	
+	public int getLikesReceived(User givenUser){
+		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		LikedStoryDAO lDao=daoFactory.createLikeDAO();
+		return lDao.countLikesGiven(givenUser.getAccountID());
+	}
+	
+	public int getMaximumLikedStory(User givenUser){
+		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		AcomplishmentDAO acomDao=daoFactory.createAcomplishmentDAO();
+		return acomDao.getMaximumNumberLikesForStory(givenUser.getAccountID());
+	}
+	
+	public String getmostLikedStory(User givenUser){
+		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		AcomplishmentDAO acomDao=daoFactory.createAcomplishmentDAO();
+		return acomDao.getMostLikeStoryTitle(givenUser.getAccountID());
+	}
+	
+	public int getLikesGiven(User givenUser){
+		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		LikedStoryDAO lDao=daoFactory.createLikeDAO();
+		return lDao.countUserLikes(givenUser.getAccountID());
 	}
 }

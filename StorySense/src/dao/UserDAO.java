@@ -16,6 +16,7 @@ import entity.User;
 import entity.Profile;
 public abstract class UserDAO {
 
+	public final int MAX_Level=21;
 	public abstract void addUser(User U);
 	public abstract void addUser(User U,Profile P);
 	public abstract void changeActivation(User U,int active);

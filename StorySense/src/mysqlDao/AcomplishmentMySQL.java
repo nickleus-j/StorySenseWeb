@@ -670,4 +670,67 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
 		return null;
 	}
 
+	@Override
+	public String getMostLikeStoryTitle(int writerID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT Name, ID, count(storyAccomID) from likedstory,storyaccomplishment " +
+            		"WHERE storyAccomID=ID AND AccountID=? " +
+            		"GROUP BY storyAccomID " +
+            		"ORDER by count(storyAccomID) DESC, ID LIMIT 1");
+            ps.setInt(1, writerID);
+            rs = ps.executeQuery();
+            
+            String Story="";
+            
+            if(rs.first()){
+            	Story=rs.getString("Name");
+            }
+            
+            ps.close();
+			con.close();
+            return Story;
+		}catch(Exception ex){
+			Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return "";
+	}
+
+	@Override
+	public int getMaximumNumberLikesForStory(int writerID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT Name, ID, count(storyAccomID) from likedstory,storyaccomplishment " +
+            		"WHERE storyAccomID=ID AND AccountID=? " +
+            		"GROUP BY storyAccomID " +
+            		"ORDER by count(storyAccomID) DESC, ID LIMIT 1");
+            ps.setInt(1, writerID);
+            rs = ps.executeQuery();
+            rs = ps.executeQuery();
+            
+            int likes=0;
+            
+            if(rs.first()){
+            	likes=rs.getInt("count(storyAccomID)");
+            }
+            
+            ps.close();
+			con.close();
+            return likes;
+		}catch(Exception ex){
+			Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return 0;
+	}
+
 }

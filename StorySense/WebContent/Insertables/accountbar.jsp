@@ -12,7 +12,7 @@
   	background: skyblue;
   }
   
-#tableBorder6
+#tableBorder6, .accountBarTbl
 {
 border: 5px solid green;
 border-radius: 0px;
@@ -67,6 +67,29 @@ font-family: Segoe UI; font-size: 12pt;
 	</td></tr>
 	
 	<tr><th  align="center" id="fontStyle2">&nbsp;</th></tr>
+	<tr>
+	<td>
+	<table >
+	<tr>
+		<th>Likes given to stories:</th><td>
+		<% out.write(""+liEncoder.getLikesGiven(myUser)); %></td>
+	</tr>
+	<tr>
+		<th>Likes Received :</th><td>
+		<% out.write(""+liEncoder.getLikesReceived(myUser)); %></td>
+	</tr>
+	<tr>
+		<th>Highest likes obtained from Story:</th><td>
+		<% out.write(""+liEncoder.getMaximumLikedStory(myUser)); %></td>
+	</tr>
+	<tr>
+		<th>Most liked Story:</th><td>
+		<% out.write(""+liEncoder.getmostLikedStory(myUser)); %></td>
+	</tr>
 	</table>
+	</td>
+	</tr>
+	</table><br/>
+	
 	
 

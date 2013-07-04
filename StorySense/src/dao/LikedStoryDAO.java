@@ -24,4 +24,5 @@ public abstract class LikedStoryDAO {
 	public abstract int countUserLikes(int userID);
 	public abstract void disLike(int userID,int storyID);
 	public abstract boolean didUserLike(int userID,int storyID);
+	public abstract int countLikesGiven(int userID);
 }

@@ -543,14 +543,14 @@ public class UserMySQL extends UserDAO {
 
 	
 	private int getLevel(int points){
-		int sum=0,limit=20;
+		int sum=0;
 		
-		for(int ctr=1;ctr<=limit;ctr++){
+		for(int ctr=1;ctr<MAX_Level;ctr++){
 			sum=ctr*300;
 			if(points<sum)
 				return ctr;
 		}
-		return 21;
+		return MAX_Level;
 	}
 
 	@Override

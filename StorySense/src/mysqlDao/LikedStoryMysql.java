@@ -1,12 +1,12 @@
 /*******************************************************************************
- *Copyright (c) 2013 IBM Corporation and others.
+ *Copyright (c) 2013 StorySense
  *All rights reserved. This program and the accompanying materials
  *are made available under the terms of the Eclipse Public License v1.0
  *which accompanies this distribution, and is available at
  *http://www.eclipse.org/legal/epl-v10.html
  *
  *Contributors:
- *    IBM Corporation - initial API and implementation
+ *    Nickleus Jimenez
  *******************************************************************************/
 package mysqlDao;
 
@@ -284,6 +284,36 @@ public class LikedStoryMysql extends LikedStoryDAO {
             Logger.getLogger(LikedStoryMysql.class.getName()).log(Level.SEVERE, null, ex);
         }
 		return false;
+	}
+
+	@Override
+	public int countLikesGiven(int userID) {
+		int count=0;
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT count(*) FROM likedstory,storyaccomplishment " +
+            		"WHERE storyAccomID=ID AND AccountID=?");
+            ps.setInt(1, userID);
+            rs = ps.executeQuery();
+            
+            if(rs.first())
+            	count=rs.getInt("count(*)");
+            
+            rs.close();
+            ps.close();
+            con.close();
+            return count;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(LikedStoryMysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return 0;
 	}
 
 }

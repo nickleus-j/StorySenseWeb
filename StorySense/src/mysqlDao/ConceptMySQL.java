@@ -94,7 +94,9 @@ public class ConceptMySQL extends ConceptDAO {
                 Logger.getLogger(ConceptMySQL.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+		else{
+			updateFrequency(Word_Phrase, Integer.valueOf(getConcept(Word_Phrase).getFrequency())+1);
+		}
 	}
 
 	private List<Concept> getResults(ResultSet rs) throws SQLException{
@@ -183,7 +185,7 @@ public class ConceptMySQL extends ConceptDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
 
-            ps = con.prepareStatement("SELECT ConceptID FROM concept WHERE word_phrase = ?");
+            ps = con.prepareStatement("SELECT * FROM concept WHERE word_phrase = ?");
             ps.setString(1, concept);
             rs = ps.executeQuery();
 
@@ -215,7 +217,7 @@ public class ConceptMySQL extends ConceptDAO {
         	Connection con = myFactory.getConnection();
 			ps = con.prepareStatement("UPDATE concept SET Frequency=? WHERE Word_phrase=?");
 			
-			ps.setInt(1, freq);
+			ps.setString(1, freq+"");
 			ps.setString(2, concept);
 			ps.executeUpdate();
 			
