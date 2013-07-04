@@ -25,4 +25,6 @@ public abstract class RatingDAO {
 	public abstract int getTotalScore(int accomID);
 	public abstract void addRating(Rating r);
 	public abstract void updateRating(Rating r);
+	public abstract int getMaximumScore(int userID);
+	public abstract int getMinimumScore(int userID);
 }

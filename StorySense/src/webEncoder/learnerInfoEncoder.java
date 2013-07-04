@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import javax.servlet.jsp.JspWriter;
 
 import dao.AchievementDAO;
+import dao.AcomplishmentDAO;
 import dao.DAOFactory;
+import dao.RatingDAO;
 import entity.Achievement;
 import entity.User;
 
@@ -80,4 +82,28 @@ public class learnerInfoEncoder {
 			e.printStackTrace();
 		}
 	}/**/
+	
+	public int enterNumberStoriesMade(User givenUser){
+		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		AcomplishmentDAO acomDao=daoFactory.createAcomplishmentDAO();
+		return acomDao.getAllStoriesOfUser(givenUser.getAccountID()).size();
+	}
+	
+	public int enterNumberStoriesRated(User givenUser){
+		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		AcomplishmentDAO acomDao=daoFactory.createAcomplishmentDAO();
+		return acomDao.getStoriesOfWriterRated(givenUser.getAccountID()).size();
+	}
+	
+	public int getTopUserScore(User givenUser){
+		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		RatingDAO scoreDao=daoFactory.createRatingDAO();
+		return scoreDao.getMaximumScore(givenUser.getAccountID());
+	}
+	
+	public int getLowestUserScore(User givenUser){
+		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		RatingDAO scoreDao=daoFactory.createRatingDAO();
+		return scoreDao.getMinimumScore(givenUser.getAccountID());
+	}
 }

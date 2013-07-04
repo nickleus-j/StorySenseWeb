@@ -45,7 +45,23 @@ font-family: Segoe UI; font-size: 12pt;
 	<tr><th  align="center" id="fontStyle2"><% out.print(myUser.getName()); %></th></tr>
 	<% }%>
 	<tr><th  align="center" id="fontStyle2">Level <% out.print(myUser.getLevel()); %></th></tr>
-	
+	<tr><th  align="center" id="fontStyle2">Points <% out.print(myUser.getPoints()); %></th></tr>
+	<tr>
+		<th>Number of Stories Made:<% out.write(""+liEncoder.enterNumberStoriesMade(myUser)); %></th>
+</tr>
+
+<tr>
+		<th>Number of Stories Rated:<% out.write(""+liEncoder.enterNumberStoriesRated(myUser)); %></th>
+</tr>
+
+<tr>
+		<th>Highest Score:<% out.write(""+liEncoder.getTopUserScore(myUser)); %></th>
+</tr>
+
+
+<tr>
+		<th>Lowest Score:<% out.write(""+liEncoder.getLowestUserScore(myUser)); %></th>
+</tr>
 	<tr><td  align="center">
 	<% liEncoder.writeHtmlAchievements(out,myUser,50,50); %>
 	</td></tr>

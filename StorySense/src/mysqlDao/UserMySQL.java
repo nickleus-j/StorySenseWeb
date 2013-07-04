@@ -490,7 +490,7 @@ public class UserMySQL extends UserDAO {
         	
         	
         	u.setLevel(getLevel(Addend+u.getPoints()));
-        	//u.setPoints(u.getPoints()+Addend);
+        	
 			ps = con.prepareStatement("update account SET Points = ? , Level = ? where accountID = ? ");
 			
 			ps.setInt(1, Addend+u.getPoints());
@@ -502,6 +502,7 @@ public class UserMySQL extends UserDAO {
 			
 			ps.close();
 			con.close();
+			u.setPoints(u.getPoints()+Addend);
 		}catch(Exception ex){
 			Logger.getLogger(UserMySQL.class.getName()).log(Level.SEVERE, null, ex);
 		}

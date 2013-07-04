@@ -216,14 +216,21 @@ Statistics
 <tr>
 		<td> </td>
 		<td><h4>Number of Stories Made:</h4></td> 
-		<td>10</td>
+		<td><% out.write(""+liEncoder.enterNumberStoriesMade(sessionUser)); %></td>
+		<td></td>
+</tr>
+
+<tr>
+		<td> </td>
+		<td><h4>Number of Stories Rated:</h4></td> 
+		<td><% out.write(""+liEncoder.enterNumberStoriesRated(sessionUser)); %></td>
 		<td></td>
 </tr>
 
 <tr>
 		<td> </td>
 		<td><h4>Highest Score:</h4></td> 
-		<td>95%</td>
+		<td><% out.write(""+liEncoder.getTopUserScore(sessionUser)); %></td>
 		<td></td>
 </tr>
 
@@ -231,7 +238,7 @@ Statistics
 <tr>
 		<td> </td>
 		<td><h4>Lowest Score:</h4></td> 
-		<td>65%</td>
+		<td><% out.write(""+liEncoder.getLowestUserScore(sessionUser)); %></td>
 		<td></td>
 </tr>
 

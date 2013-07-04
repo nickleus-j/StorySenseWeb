@@ -52,6 +52,10 @@ public class StoryWriter extends BaseServlet {
         templateID=1;
     }
 
+    /**
+     * Processes the request then responds if story is writen successfully
+     * or otherwise
+     */
 	@Override
 	public void executeCustomCode(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -284,7 +288,7 @@ public class StoryWriter extends BaseServlet {
 			saveStory(answers, Story,request.getParameter("storyName"),user);
 			operateAchievements(user);
 		}
-	}
+	}/*End of function*/
 	
 
 }

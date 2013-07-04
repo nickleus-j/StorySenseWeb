@@ -396,4 +396,65 @@ public class RatingMySQL extends RatingDAO {
 		return null;
 	}
 
+	@Override
+	public int getMaximumScore(int userID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+            int total=0;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT  Max(Score) AS BestScore from rating,storyaccomplishment " +
+            		"WHERE accomplishmentID=ID AND AccountID=?");
+            ps.setInt(1, userID);
+            rs = ps.executeQuery();
+            
+            if(rs.first())
+            	total=rs.getInt("BestScore");
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return total;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(RatingMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return 0;
+		
+	}
+
+	@Override
+	public int getMinimumScore(int userID) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+            int total=0;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT  Min(Score) AS LeastScore from rating,storyaccomplishment " +
+            		"WHERE accomplishmentID=ID AND AccountID=?");
+            ps.setInt(1, userID);
+            rs = ps.executeQuery();
+            
+            if(rs.first())
+            	total=rs.getInt("LeastScore");
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return total;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(RatingMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return 0;
+	}
+
 }

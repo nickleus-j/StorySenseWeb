@@ -52,7 +52,7 @@ likedStories=<% out.write(sLoader.PreviewLikedStoriesJson(myUser));%>
 </script>
 <div>
 	
-<table width="80%" align="right">
+<table width="75%" align="right">
 	
 	<tr align="center"><td>
 		<table id="tableBorder3" class="tableBorder3" bgcolor = "#7DFB9D">
