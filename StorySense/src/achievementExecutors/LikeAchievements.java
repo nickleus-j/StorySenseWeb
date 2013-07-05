@@ -26,10 +26,10 @@ public class LikeAchievements {
 			medal.setAchievementID(aWatcher.getApprovalAchievement());
 			learnerBadgeDao.giveAchievement(medal);
 		}/*End of awarding condition*/
-		else if(wasApprovalGiven&&learnerBadgeDao.hasLearnerAchieved(userId, aWatcher.getPoppularAchievementId())){
+		else if(wasApprovalGiven&&learnerBadgeDao.hasLearnerAchieved(userId, aWatcher.getPopularAchievementId())){
 			AcomplishmentDAO acomDao=myDaoFactory.createAcomplishmentDAO();
 			if(acomDao.getAllStoriesOfUser(userId).contains(acomDao.getPopularStory())){
-				medal.setAchievementID(aWatcher.getPoppularAchievementId());
+				medal.setAchievementID(aWatcher.getPopularAchievementId());
 				learnerBadgeDao.giveAchievement(medal);
 			}/*End of popular story is made by curretn user condition*/
 		}/*End  was approval given condition */

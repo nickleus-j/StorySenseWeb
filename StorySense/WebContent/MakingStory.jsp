@@ -43,7 +43,7 @@
 	<table align="center" width="50%" bgcolor="skyblue">
 	<tr>
 	<td>Story Name<input type="text" id="storyName" name="storyName"/></td>
-	<td id="nameValidation"><input type="reset"/></td>
+	<td id="nameValidation" class="ErrorMessage"><input type="reset"/></td>
 	</tr>
 	
 	<tr>

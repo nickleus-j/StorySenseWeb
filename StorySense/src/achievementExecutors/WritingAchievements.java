@@ -20,4 +20,20 @@ public class WritingAchievements {
 			learnerBadgeDao.giveAchievement(medal);
 		}/*End of Condition*/
 	}
+	
+	public void AwardTenStoriesAchievement(int userId){
+		DAOFactory myDaoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		LearnerAcievementDAO learnerBadgeDao=myDaoFactory.createLearnerAcievementDAO();
+		Learnerachievement medal=new Learnerachievement();
+		AchievementWatcher aWatcher=new AchievementWatcher();
+		AcomplishmentDAO myAcomDao=myDaoFactory.createAcomplishmentDAO();
+		
+		if(!aWatcher.didUSerHaveAchievement(userId,aWatcher.getTenStoriesAchievemnetId())&&myAcomDao.getAllStoriesOfUser(userId).size()>=10){
+			medal.setAchievementID(aWatcher.getTenStoriesAchievemnetId());
+			medal.setLearnerID(userId);
+			learnerBadgeDao.giveAchievement(medal);
+		}/*End of Condition*/
+	}
+	
+	
 }

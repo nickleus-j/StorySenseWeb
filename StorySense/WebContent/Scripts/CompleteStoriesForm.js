@@ -37,14 +37,15 @@ function validateAnsers(){
 			valid=false;
 			errorCell.innerHTML="Complete all textboxes";
 			}
-		else errorCell.innerHTML="done ";
+		
 		ctr++;
 		ansName="answer"+ctr;
 		answer=document.getElementById(ansName);
 	}
 	
-	if(valid==true)
+	if(valid==true){
+		errorCell.innerHTML="done ";
 		submitRegistration();
-	
+	}
 	
 }

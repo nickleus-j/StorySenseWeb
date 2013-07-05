@@ -234,6 +234,23 @@ public class WebCodeMaker {
 		return Code.concat("</select>");
 	}
 	
+	
+	public String getChooseTemplateLevelHTML(User givenUser){
+		String Code="<select id=\"level\" >";
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
+		ArrayList<Template> templates=(ArrayList<Template>)templateDao.getGroupedtemplates();
+		
+		Code=Code.concat("<option></option>");
+		for(int ctr=0;ctr<templates.size();ctr++){
+			
+			Code=Code.concat("<option>"+templates.get(ctr).getLevelRequirement()+"</option>");
+		}
+		
+		return Code.concat("</select>");
+	}
+	
+	
 	/**
 	 * This function is used to generate a combo box when the learner needs to 
 	 * pick a level to upgrade

@@ -111,7 +111,7 @@ public class StoriesToBeReviewed extends BaseServlet {
 				out.write("<tr>");
 				out.write("<td class=\"clickable\" onclick=\"ReviewStoriesInUser(10,1,'"+myUser.getName()+"')\">"
 						+myUser.getName()+"</td>");
-				out.write("<td>"+sLoader.createStoryLink(Stories.get(ctr), ("storyPane"+ctr))+"</td>");
+				out.write("<td class=\"clickable\" >"+sLoader.createStoryLink(Stories.get(ctr), ("storyPane"+ctr))+"</td>");
 				out.write("<td><a>"+createReviewLink(Stories.get(ctr).getID(), stageID)+"</a></td>");
 
 				out.write("</tr><tr><td class=\"hiddenElem\" id=\""+

@@ -96,6 +96,12 @@ public class learnerInfoEncoder {
 		return acomDao.getStoriesOfWriterRated(givenUser.getAccountID()).size();
 	}
 	
+	public int getNumberOfRatingsReceived(User givenUser){
+		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		RatingDAO rdao=daoFactory.createRatingDAO();
+		return rdao.getRatingsOfWriter(givenUser.getAccountID()).size();
+	}
+	
 	public int getTopUserScore(User givenUser){
 		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
 		RatingDAO scoreDao=daoFactory.createRatingDAO();
@@ -131,4 +137,9 @@ public class learnerInfoEncoder {
 		LikedStoryDAO lDao=daoFactory.createLikeDAO();
 		return lDao.countUserLikes(givenUser.getAccountID());
 	}
+	
+	
+	
+	
+	
 }

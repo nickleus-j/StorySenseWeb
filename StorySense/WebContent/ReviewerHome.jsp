@@ -108,6 +108,9 @@
 		%>
 		</th>
 	
+	<th>
+	<button onclick="ReviewStoriesInUser(10,1,'')">Show all Stories to be reviewed</button>
+	</th>
 		<th>Pick Minimum Level
 		
 			<%

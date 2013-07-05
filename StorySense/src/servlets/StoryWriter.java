@@ -210,6 +210,7 @@ public class StoryWriter extends BaseServlet {
 	private void operateAchievements(User given){
 		WritingAchievements wAchievements=new WritingAchievements();
 		wAchievements.awardFirstStory(given.getAccountID());
+		wAchievements.AwardTenStoriesAchievement(given.getAccountID());
 	}
 	
 	/**

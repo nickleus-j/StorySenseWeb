@@ -16,7 +16,7 @@
 {
 border: 5px solid green;
 border-radius: 0px;
-font-family: Segoe UI; font-size: 13pt;
+font-family: Segoe UI; font-size: 12pt;
 width: 15%;
 }
 
@@ -70,6 +70,10 @@ font-family: Segoe UI; font-size: 12pt;
 	<tr>
 	<td>
 	<table >
+	<tr>
+		<th>Number of Scores Received:</th><td>
+		<% out.write(""+liEncoder.getNumberOfRatingsReceived(myUser)); %></td>
+	</tr>
 	<tr>
 		<th>Likes given to stories:</th><td>
 		<% out.write(""+liEncoder.getLikesGiven(myUser)); %></td>

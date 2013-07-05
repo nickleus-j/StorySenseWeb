@@ -13,8 +13,16 @@ public class AchievementWatcher {
 		return learnerBadgeDao.hasLearnerAchieved(userId, getFirstStoryAchId());
 	}
 	
+	public boolean didUSerHaveAchievement(int userID,int achId){
+		DAOFactory myDaoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		LearnerAcievementDAO learnerBadgeDao=myDaoFactory.createLearnerAcievementDAO();
+		
+		return learnerBadgeDao.hasLearnerAchieved(userID, achId);
+	}
 	
 	public int getFirstStoryAchId(){return 1;}
 	public int getApprovalAchievement(){return 2;}
-	public int getPoppularAchievementId(){return 3;}
+	public int getPopularAchievementId(){return 3;}
+	public int getTenStoriesAchievemnetId(){return 5;}
+	
 }

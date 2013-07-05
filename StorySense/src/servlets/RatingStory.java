@@ -219,7 +219,7 @@ public class RatingStory extends BaseServlet {
 			relations=assertions.get(ctr);
 			for(int i=0;i<relations.size();i++){
 				relationDAO.updateRelationScore(relations.get(i).getConcept1(), relations.get(i).getConcept2(),
-						relations.get(i).getRelationship(), Math.round(scores.get(scoreIndex)));
+						relations.get(i).getRelationship(), Math.round(scores.get(scoreIndex))*4);
 				scoreIndex++;
 			}/*End of relation Loop*/
 		}/*End of Assertion loop*/
