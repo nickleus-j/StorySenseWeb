@@ -1,5 +1,6 @@
 package achievementExecutors;
 
+
 import dao.AcomplishmentDAO;
 import dao.DAOFactory;
 import dao.LearnerAcievementDAO;
@@ -30,6 +31,25 @@ public class WritingAchievements {
 		
 		if(!aWatcher.didUSerHaveAchievement(userId,aWatcher.getTenStoriesAchievemnetId())&&myAcomDao.getAllStoriesOfUser(userId).size()>=10){
 			medal.setAchievementID(aWatcher.getTenStoriesAchievemnetId());
+			medal.setLearnerID(userId);
+			learnerBadgeDao.giveAchievement(medal);
+		}/*End of Condition*/
+		
+		/*Other Achievements*/
+		AwardEagerWriterAchievement(userId);
+	}
+	
+	public void AwardEagerWriterAchievement(int userId){
+		DAOFactory myDaoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		LearnerAcievementDAO learnerBadgeDao=myDaoFactory.createLearnerAcievementDAO();
+		Learnerachievement medal=new Learnerachievement();
+		AchievementWatcher aWatcher=new AchievementWatcher();
+		AcomplishmentDAO myAcomDao=myDaoFactory.createAcomplishmentDAO();
+		
+		
+		if(!aWatcher.didUSerHaveAchievement(userId,aWatcher.getEagerWriterAchievemnetId())
+				&&myAcomDao.getStoriesWrittenOn(userId,"now()").size()>=5){
+			medal.setAchievementID(aWatcher.getEagerWriterAchievemnetId());
 			medal.setLearnerID(userId);
 			learnerBadgeDao.giveAchievement(medal);
 		}/*End of Condition*/

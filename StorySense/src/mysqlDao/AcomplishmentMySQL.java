@@ -733,4 +733,41 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
 		return 0;
 	}
 
+	@Override
+	public List<Acomplishment> getStoriesWrittenOn(int userID, String date) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from storyaccomplishment " +
+            		"WHERE AccountID=? AND DATE(finishTime)=Date(?)" +
+            		" order by finishtime DESC");
+            ps.setInt(1, userID);
+            ps.setString(2, date);
+            rs = ps.executeQuery();
+            
+            ArrayList<Acomplishment> Stories=null;
+            
+            
+            	Stories=new ArrayList<Acomplishment>();
+            	
+            	addResultsToList(Stories, rs);
+            
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+              return Stories;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}/*End of method*/
+
 }

@@ -35,4 +35,5 @@ public abstract class AcomplishmentDAO {
 	public abstract Acomplishment getPopularStory();
 	public abstract String getMostLikeStoryTitle(int writerID);
 	public abstract int getMaximumNumberLikesForStory(int writerID);
+	public abstract List<Acomplishment> getStoriesWrittenOn(int userID,String date);
 }

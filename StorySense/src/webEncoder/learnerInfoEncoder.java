@@ -82,14 +82,24 @@ public class learnerInfoEncoder {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}/**/
+	}/*End of method*/
 	
+	/**
+	 * Returns the number of stories made by a given author
+	 * @param givenUser
+	 * @return
+	 */
 	public int enterNumberStoriesMade(User givenUser){
 		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
 		AcomplishmentDAO acomDao=daoFactory.createAcomplishmentDAO();
 		return acomDao.getAllStoriesOfUser(givenUser.getAccountID()).size();
 	}
 	
+	/**
+	 * Returns the number of a given user's stories rated 
+	 * @param givenUser
+	 * @return
+	 */
 	public int enterNumberStoriesRated(User givenUser){
 		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
 		AcomplishmentDAO acomDao=daoFactory.createAcomplishmentDAO();
@@ -102,12 +112,22 @@ public class learnerInfoEncoder {
 		return rdao.getRatingsOfWriter(givenUser.getAccountID()).size();
 	}
 	
+	/**
+	 * 
+	 * @param givenUser
+	 * @return Highest Score a given user got for his/her story
+	 */
 	public int getTopUserScore(User givenUser){
 		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
 		RatingDAO scoreDao=daoFactory.createRatingDAO();
 		return scoreDao.getMaximumScore(givenUser.getAccountID());
 	}
 	
+	/**
+	 * 
+	 * @param givenUser
+	 * @return Lowest Score a given user got for his/her story
+	 */
 	public int getLowestUserScore(User givenUser){
 		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
 		RatingDAO scoreDao=daoFactory.createRatingDAO();

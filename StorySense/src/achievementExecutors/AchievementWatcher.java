@@ -24,5 +24,7 @@ public class AchievementWatcher {
 	public int getApprovalAchievement(){return 2;}
 	public int getPopularAchievementId(){return 3;}
 	public int getTenStoriesAchievemnetId(){return 5;}
-	
+	public int getEagerWriterAchievemnetId(){return 7;}
+	public int getBigFanAchievementId(){return 8;}
+	public int getRisingUpAchievementId(){return 9;}
 }

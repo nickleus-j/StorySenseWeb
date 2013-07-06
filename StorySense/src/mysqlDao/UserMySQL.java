@@ -587,5 +587,56 @@ public class UserMySQL extends UserDAO {
         }
 		return null;
 	}
+
+	/**
+	 * Returns a name of a user who 
+	 * has given the most likes to the stories of a given author
+	 */
+	@Override
+	public String getBiggestFanName(User writer) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement(" SELECT account.Name,count(*) " +
+            		"from likedstory,storyaccomplishment,account " +
+            		"WHERE ID=storyAccomID AND account.accountID=userID " +
+            		"AND storyaccomplishment.accountID=? " +
+            		"GROUP by account.Name ORDER BY count(*) DESC LIMIT 1");
+            ps.setInt(1, writer.getAccountID());
+            rs = ps.executeQuery();
+            
+            String name="";
+            int count=0;
+            if(rs.first()){
+            	name=rs.getString("account.Name");
+            	count=rs.getInt("count(*)");
+            }
+
+            rs.close();
+            ps.close();
+            con.close();
+            
+            if(count>=5)
+            	return name;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(UserMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return "";
+	}
+
+	/**
+	 * Checks if a fan or a person who liked a story
+	 * has given the most likes to the stories of a given author
+	 */
+	@Override
+	public boolean isBiggestFan(User fan, User writer) {
+		return getBiggestFanName(writer).equalsIgnoreCase(fan.getName());
+	}
 	
 }

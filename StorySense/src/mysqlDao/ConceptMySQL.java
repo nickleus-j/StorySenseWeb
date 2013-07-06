@@ -269,4 +269,20 @@ public class ConceptMySQL extends ConceptDAO {
         }
 		return null;
 	}
+
+	@Override
+	public void resetFrequencies() {
+		PreparedStatement ps;
+		try{
+			DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+        	Connection con = myFactory.getConnection();
+			ps = con.prepareStatement("update concept set Frequency=0");
+			ps.executeUpdate();
+			ps.close();
+			con.close();
+		}catch(Exception ex){
+			Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		
+	}
 }
