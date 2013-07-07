@@ -102,7 +102,8 @@ public class NotificationTypeMySQL extends NotificationTypeDao {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
 
-            ps = con.prepareStatement("SELECT * from notificationType WHERE typeID=3");
+            ps = con.prepareStatement("SELECT * from notificationType WHERE typeID=?");
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             
             List<NotificationType> types=getResults(rs);
@@ -120,4 +121,31 @@ public class NotificationTypeMySQL extends NotificationTypeDao {
 		return null;
 	}
 
+	@Override
+	public NotificationType getNotificationType(String typeName){
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from notificationType WHERE typeName=?");
+            ps.setString(1, typeName);
+            rs = ps.executeQuery();
+            
+            List<NotificationType> types=getResults(rs);
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return types.get(0);
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(NotificationTypeMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
 }

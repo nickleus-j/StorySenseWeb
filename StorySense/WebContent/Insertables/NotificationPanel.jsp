@@ -39,9 +39,21 @@ function setUpNotifications(username){
 	
 }
 
+function changeToNotifPanel(elemID){
+	elem=document.getElementById(elemID);
+	elem.setAttribute("class","notifPane");
+}
 
+function changeToHidenElem(elemID){
+	elem=document.getElementById(elemID);
+	elem.setAttribute("class","hiddenElem");
+}
 </script>
-<div class="notifPane" id=<% out.write("\""+notifPaneId+"\""); %>>
+<button onmousedown="changeToNotifPanel(<% out.write("'"+notifPaneId+"'"); %>)">press</button>
+<div class="hiddenElem" id=<% out.write("\""+notifPaneId+"\""); %>
+	onmouseover="changeToNotifPanel(<% out.write("'"+notifPaneId+"'"); %>)"
+	onmouseout="changeToHidenElem(<% out.write("'"+notifPaneId+"'"); %>)">
+
 <h3>Notifications</h3><hr/>
 <ul id=<% out.write("\""+listId+"\""); %>>
 

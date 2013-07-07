@@ -28,12 +28,14 @@ font-family: Segoe UI; font-size: 20pt;
 color: black;
 }
 
-#tableBorder3 ,.headTbl
+#tableBorder3,.headTbl
 {
 border: 5px solid green;
 border-radius: 0px;
 width: 100%;
 font-family: Segoe UI; font-size: 13pt;
+max-height:100px;
+overflow:scroll;
 }
   
 
@@ -49,7 +51,7 @@ font-family: Segoe UI; font-size: 13pt;
 <%@ include file="Insertables/accountbar.jsp" %>
 <div>
 	
-<table width="64%" align="center" style="margin-left:35%" id="<%out.write(attributeProvider.getLearnerSummaryID()); %>">
+<table width="64%" align="center" style="margin-left:35%; margin-top:-1.6%; " id="<%out.write(attributeProvider.getLearnerSummaryID()); %>">
 	
 	<tr align="center"><td>
 		<table id="tableBorder3" class="tableBorder3" bgcolor = "#7DFB9D">
@@ -75,7 +77,6 @@ font-family: Segoe UI; font-size: 13pt;
 			%>
 			
 			<tr >
-		<td id="storyStage" colspan="5"></td>
 		</tr>
 			</table>
 		</td></tr>
@@ -97,8 +98,6 @@ font-family: Segoe UI; font-size: 13pt;
 			<table  id=<% wcm.writeJsElementReference(likeTable); %>  bgcolor = "white" class="headTbl">
 				
 			<tr >
-			<td id="storyStage" colspan="5">
-			
 			</td>
 			
 		</tr></table></td></tr>
@@ -137,11 +136,6 @@ font-family: Segoe UI; font-size: 13pt;
 
 </div>
 <%@ include file="Insertables/Footer.jsp" %>
-
-
-
-	
-	
 
 </body>
 </html>

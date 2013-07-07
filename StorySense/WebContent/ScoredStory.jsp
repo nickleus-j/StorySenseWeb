@@ -9,7 +9,7 @@
 <body>
 
 <%@ include file="Insertables/TopBar.jsp" %>
-<%@ include file="Insertables/LearnerNavBar.jsp" %>
+<%@ include file="Insertables/LeadearboardPanel.jsp" %>
 	<div class="container">
 	<h1>Story Finished</h1>
 	

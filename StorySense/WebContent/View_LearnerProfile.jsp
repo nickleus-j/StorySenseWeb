@@ -18,7 +18,7 @@
 <%@ include file="Insertables/Profile.jsp" %>
 </div>
 
-<%@ include file="Insertables/LearnerNavBar.jsp" %>
+<%@ include file="Insertables/LeadearboardPanel.jsp" %>
 <%@ include file="Insertables/FeaturedStory.jsp" %>
 </div>
 <%@ include file="Insertables/Footer.jsp" %>

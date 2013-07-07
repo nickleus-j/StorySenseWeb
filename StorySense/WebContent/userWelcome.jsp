@@ -12,7 +12,7 @@
 <body>
 	
 	<%@ include file="Insertables/TopBar.jsp" %>
-<%@ include file="Insertables/LearnerNavBar.jsp" %>
+<%@ include file="Insertables/LeadearboardPanel.jsp" %>
 	<div class="container">
 	<hr color="indigo">
 	<h1>Welcome to Story Sense</h1>

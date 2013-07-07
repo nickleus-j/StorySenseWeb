@@ -10,13 +10,14 @@
 {
 border: 2px solid black;
 border-radius: 4px;
-border-collapse: collapse;
 }
 #fontStyleTopbar{
 font-family: Segoe UI; font-size: 20pt;
+border: none;
 }
 #fontStyleTopbar2{
 font-family: Segoe UI; font-size: 20pt;
+border: none;
 }
 .divisionHeader {
    	width:30%;
@@ -39,27 +40,30 @@ font-family: Segoe UI; font-size: 20pt;
 		if(u!=null){
 			//<img src="images/storysenselogo3.png" ></img>
 			out.write(userEncoder.showUserHTMl(u));
-			%>
+			if(User.Roles.learner.isLearner(u.getRole())){%>
 		<script type="text/javascript">var userName=<% userEncoder.writeJsElementReference(u.getName());%></script>
-	<%  }
+		<%@ include file="NotificationPanel.jsp" %>
+	<% }/*End of learner condition*/ 
+	}/*End of null user condition*/
 		else {
 	%><%@ include file="LogInForm.jsp" %> <% } %>
+	
 	</div>
 	<% 
 	if(u!=null){
 		if(User.Roles.learner.isLearner(u.getRole())) {%>
 		
-	<div style="max-width:75%; margin:0 auto;">
+	<div style="max-width:82%; margin:0 auto;">
 	
-	<table id = "tableBorderTopBar" bgcolor="white" align="center"> <!--   -->
+	<table id = "tableBorderTopBar" bgcolor="white" cellspacing="0" cellpadding="0"> <!--   -->
 	<tr>
-	<td id="fontStyleTopbar"><img src="images/storysenselogo4.png" border="0" width="160"/></td>
-	<td id="fontStyleTopbar" width="15%"><a href="../StorySense/LearnerHomeSample2.jsp"><img src="images/HomeButtons2/home.png" onmouseover="this.src='images/HomeButtons2/homeB.png'" onmouseout="this.src='images/HomeButtons2/home.png'" width="150"/></a> </td>
-	<td id="fontStyleTopbar" width="15%" ><a href="../StorySense/templateDisplay.jsp"><img src="images/HomeButtons2/Create Stories.png" onmouseover="this.src='images/HomeButtons2/Create StoriesB.png'" onmouseout="this.src='images/HomeButtons2/Create Stories.png'" width="150"/></a></td>
-	<td id="fontStyleTopbar" width="15%"><a href="../StorySense/LearnerHomeSample.jsp"><img src="images/HomeButtons2/My Stories.png" onmouseover="this.src='images/HomeButtons2/My StoriesB.png'" onmouseout="this.src='images/HomeButtons2/My Stories.png'"  width="150"/></a></td>
-	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/View_LearnerProfile.jsp"><img src="images/HomeButtons2/Profile.png" onmouseover="this.src='images/HomeButtons2/ProfileB.png'" onmouseout="this.src='images/HomeButtons2/Profile.png'"  width="150"/></a></td>
-	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/Help.jsp"><img src="images/HomeButtons2/Help.png" onmouseover="this.src='images/HomeButtons2/HelpB.png'" onmouseout="this.src='images/HomeButtons2/Help.png'" width="150"/></a></td>
-	<td id="fontStyleTopbar2" width="15%" align="center"><a href="Logout"><img src="images/HomeButtons2/Logout.png" onmouseover="this.src='images/HomeButtons2/LogoutB.png'" onmouseout="this.src='images/HomeButtons2/Logout.png'"  width="150" /></a></td>
+	<td id="fontStyleTopbar"><img src="images/storysenselogo4.png" border="0" width="166"/></td>
+	<td id="fontStyleTopbar" width="15%"><a href="../StorySense/LearnerHomeSample2.jsp"><img src="images/HomeButtons2/home.png" onmouseover="this.src='images/HomeButtons2/homeB.png'" onmouseout="this.src='images/HomeButtons2/home.png'" width="155"/></a> </td>
+	<td id="fontStyleTopbar" width="15%" ><a href="../StorySense/templateDisplay.jsp"><img src="images/HomeButtons2/Create Stories.png" onmouseover="this.src='images/HomeButtons2/Create StoriesB.png'" onmouseout="this.src='images/HomeButtons2/Create Stories.png'" width="155"/></a></td>
+	<td id="fontStyleTopbar" width="15%"><a href="../StorySense/LearnerHomeSample.jsp"><img src="images/HomeButtons2/My Stories.png" onmouseover="this.src='images/HomeButtons2/My StoriesB.png'" onmouseout="this.src='images/HomeButtons2/My Stories.png'"  width="155"/></a></td>
+	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/View_LearnerProfile.jsp"><img src="images/HomeButtons2/Profile.png" onmouseover="this.src='images/HomeButtons2/ProfileB.png'" onmouseout="this.src='images/HomeButtons2/Profile.png'"  width="155"/></a></td>
+	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/Help.jsp"><img src="images/HomeButtons2/Help.png" onmouseover="this.src='images/HomeButtons2/HelpB.png'" onmouseout="this.src='images/HomeButtons2/Help.png'" width="155"/></a></td>
+	<td id="fontStyleTopbar2" width="15%" align="center"><a href="Logout"><img src="images/HomeButtons2/Logout.png" onmouseover="this.src='images/HomeButtons2/LogoutB.png'" onmouseout="this.src='images/HomeButtons2/Logout.png'"  width="155" /></a></td>
 	</tr>
 	</table>
 	

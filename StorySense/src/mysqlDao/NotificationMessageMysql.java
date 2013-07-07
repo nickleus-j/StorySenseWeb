@@ -24,8 +24,8 @@ public class NotificationMessageMysql extends NotificationMessageDao {
         	DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
         	Connection con = myFactory.getConnection();
         	
-        	ps = con.prepareStatement("INSERT INTO notifMessage (nType,NotifID,Message) VALUES " +
-        			"(?,?,?)");
+        	ps = con.prepareStatement("INSERT INTO notifMessage (nType,NotifID,Message,creationTime) VALUES " +
+        			"(?,?,?,now())");
         	ps.setInt(1, given.getnType());
         	ps.setInt(2, given.getNotifID());
         	ps.setString(3, given.getMessage());

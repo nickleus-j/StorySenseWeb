@@ -20,6 +20,7 @@ public abstract class LikedStoryDAO {
 	public abstract List<LikedStory> getAllLikes();
 	public abstract List<LikedStory> getAllLikesForUser(int userID);
 	public abstract List<LikedStory> getStoryLikes(int storyID);
+	public abstract LikedStory getLikeOfUser(int userID,int sID);
 	public abstract int countStoryLikes(int storyID);
 	public abstract int countUserLikes(int userID);
 	public abstract void disLike(int userID,int storyID);

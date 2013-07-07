@@ -13,8 +13,8 @@ package entity;
  */
 public class NotificationType {
 
-	int typeID;
-	String typeName;
+	private int typeID;
+	private String typeName;
 	
 	public int getTypeID() {return typeID;}
 	public void setTypeID(int typeID) {this.typeID = typeID;}

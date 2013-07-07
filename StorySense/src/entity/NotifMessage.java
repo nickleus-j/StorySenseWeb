@@ -1,5 +1,7 @@
 package entity;
 
+import java.sql.Timestamp;
+
 /*
  * +---------+---------+------+-----+---------+----------------+
 | Field   | Type    | Null | Key | Default | Extra          |
@@ -13,9 +15,9 @@ package entity;
  */
 public class NotifMessage {
 
-	int MsgID,nType,NotifID;
-	String Message;
-	
+	private int MsgID,nType,NotifID;
+	private String Message;
+	private Timestamp creationTime;
 	
 	public int getMsgID() {return MsgID;}
 	public void setMsgID(int msgID) {MsgID = msgID;}
@@ -25,5 +27,8 @@ public class NotifMessage {
 	public void setNotifID(int notifID) {NotifID = notifID;}
 	public String getMessage() {return Message;}
 	public void setMessage(String message) {Message = message;}
+	public Timestamp getCreationTime() {return creationTime;}
+	public void setCreationTime(Timestamp creationTime) {this.creationTime = creationTime;}
+	
 	
 }

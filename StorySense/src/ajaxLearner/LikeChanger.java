@@ -16,6 +16,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import notification.NotificationCreator;
+
 import achievementExecutors.LikeAchievements;
 
 import dao.*;
@@ -41,6 +43,7 @@ public class LikeChanger extends BaseServlet {
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		LikedStoryDAO LikeDAO=myDAOFactory.createLikeDAO();
 		String like;
+		NotificationCreator alerter=new NotificationCreator();
 		try {
 			int sID=Integer.parseInt(request.getParameter("q"));
 			
@@ -49,13 +52,16 @@ public class LikeChanger extends BaseServlet {
 			if(like.matches("like")){
 				LikeDAO.likeStory(myUser.getAccountID(), sID);
 				likeAchievementCheck(myDAOFactory,sID,myUser);
+				alerter.createLikeNotification(LikeDAO.getLikeOfUser(myUser.getAccountID(), sID), "");
 			}
 			else 
 				LikeDAO.disLike(myUser.getAccountID(), sID);
 			response.getWriter().write(""+LikeDAO.countStoryLikes(sID));
+			
 		} catch (IOException e) {
 			e.printStackTrace();
-		}  
+		} 
+		catch(NullPointerException ne){}
 	}
 
 	public void likeAchievementCheck(DAOFactory myDAOFactory,int sID,User myUser){

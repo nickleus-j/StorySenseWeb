@@ -17,14 +17,21 @@
 border: 5px solid green;
 border-radius: 0px;
 font-family: Segoe UI; font-size: 12pt;
-width: 15%;
+width:100;
 }
 
-
+.accountPane{
+overflow:scroll;
+max-height: 50%;
+width: 15%;
+margin-left:10%;
+float:left;
+}
 
 #fontStyle2{
 font-family: Segoe UI; font-size: 12pt;
 }
+
 
   
 </style>
@@ -36,7 +43,8 @@ font-family: Segoe UI; font-size: 12pt;
 	learnerInfoEncoder liEncoder=new learnerInfoEncoder();
 %>
 <br/>
-	<table bgcolor = "#7DFB9D" id="tableBorder6" align="left" style="margin-left:10%">
+	<div class="accountPane">
+	<table bgcolor = "#7DFB9D" id="tableBorder6" align="left" >
 	<tr><th  align="center" id="fontStyle2">&nbsp;</th></tr>
 	<tr><th  align="center"> <% out.print(webEncoder.enterUserImageTag(myUser)); %> </th></tr>
 	<% if(myUser==(User)session.getAttribute("user")){ %>
@@ -93,7 +101,7 @@ font-family: Segoe UI; font-size: 12pt;
 	</table>
 	</td>
 	</tr>
-	</table><br/>
+	</table></div><br/>
 	
 	
 

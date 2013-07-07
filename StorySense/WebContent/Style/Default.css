@@ -6,6 +6,7 @@ body {
 	margin: 0;
 	padding: 0;
 	color: #000;
+	z-index: 1;
 }
 
 .wrap {width: 960px; margin: 0 auto;}
@@ -154,6 +155,18 @@ ul.nav a , ul.navbar a { zoom: 1; }  /* the zoom property gives IE the hasLayout
 ul.footList, .navbar ul{
 	list-style: none;
 	float:right;
+}
+
+.notifPane{
+overflow:scroll;
+max-height: 40%;
+z-index:100;
+position:absolute;
+background: white;
+}
+.notifPane ul li,.notifPane ul {
+	list-style: square;
+	margin: 3%;
 }
 
 

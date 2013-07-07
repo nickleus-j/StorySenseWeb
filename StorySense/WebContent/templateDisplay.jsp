@@ -34,7 +34,7 @@ font-family: Segoe UI; font-size: 20pt;
 
 <%@ include file="Insertables/TopBar.jsp" %>
 <div width="100%">
-<table style="margin: auto;">
+<table align="center">
 	<tr><td>
 	<table id="tableBorder3" bgcolor = "Yellow">
 	<thead></br><tr id="fontStyle2" ><th colspan = 2>Choose a template</th></tr></thead>	
