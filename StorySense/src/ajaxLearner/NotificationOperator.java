@@ -36,6 +36,7 @@ public class NotificationOperator extends BaseServlet{
 			
 			json=json.concat("{");
 			json=json.concat("\"Type\":\""+Messages.get(ctr).getnType()+"\",");
+			json=json.concat("\"Created_On\":\""+Messages.get(ctr).getCreationTime()+"\",");
 			json=json.concat("\"Message\":\""+Messages.get(ctr).getMessage()+"\"");
 			if(ctr<Messages.size()-1)
 				json=json.concat("},");
@@ -56,6 +57,8 @@ public class NotificationOperator extends BaseServlet{
 			
 			json=json.concat("{");
 			json=json.concat("\"Type\":\""+Messages.get(ctr).getnType()+"\",");
+
+			json=json.concat("\"Created_On\":\""+Messages.get(ctr).getCreationTime()+"\",");
 			json=json.concat("\"Message\":\""+Messages.get(ctr).getMessage()+"\"");
 			if(ctr<Messages.size()-1)
 				json=json.concat("},");
@@ -75,6 +78,8 @@ public class NotificationOperator extends BaseServlet{
 		for(int ctr=0;ctr<notices.size();ctr++){
 			
 			json=json.concat("{\"Time\":\""+notices.get(ctr).getStartedOn()+"\",");
+			json=json.concat("\"Viewed\":\""+notices.get(ctr).isViewed()+"\",");
+			json=json.concat("\"nID\":"+notices.get(ctr).getNotificationId()+",");
 			json=json.concat("\"Notifications\":"+getNotifMsgs(notices.get(ctr).getNotificationId()));
 			//json=json.concat("{");
 			if(ctr<notices.size()-1)

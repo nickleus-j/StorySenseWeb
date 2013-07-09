@@ -4,7 +4,6 @@
 <%@page import="entity.User"%>
 <%@page import="dao.ProfileDAO"%><%@ page import="unclassified.DateProvider"%>
 <%@page import="entity.Profile"%><%@page import="dao.DAOFactory"%>
-<!DOCTYPE html>
 
 
   <link rel="stylesheet" href="Style/Default.css"> 
@@ -131,7 +130,7 @@ Information
 		<td> </td>
 		<td colspan="3">
 			<form name="chnageProfile" id="chnageProfile" action="UserUpdator" 
-		method="post" ENCTYPE="multipart/form-data" class="hiddenElem">
+		method="get" ENCTYPE="multipart/form-data" class="hiddenElem">
 		<table  align="center" >
 	
 		  <tr>

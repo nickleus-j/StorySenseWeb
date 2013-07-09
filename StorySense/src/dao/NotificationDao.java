@@ -7,6 +7,7 @@ public abstract class NotificationDao {
 
 	public abstract void insertNotification(Notification given);
 	public abstract void updateNotification(Notification given);
+	public abstract void updateNotificationView(int notificationID,String viewed);
 	public abstract List<Notification> getAllNotifications();
 	public abstract Notification getNotification(int id);
 	public abstract List<Notification> getUserNotifications(int userID);

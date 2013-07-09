@@ -69,7 +69,7 @@ public class ProfileMySQL extends ProfileDAO {
 		try{
 			DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
         	Connection con = myFactory.getConnection();
-			ps = con.prepareStatement("update profile  SET FirstName= ?, Surname = ?, Birthday = ?,  " +
+			ps = con.prepareStatement("UPDATE profile  SET FirstName= ?, Surname = ?, Birthday = ?,  " +
 					"picUrl = ? where Account = ?");
 			ps.setString(1, profile.getFirstName());
 			ps.setString(2, profile.getSurname());

@@ -39,7 +39,7 @@ font-family: Segoe UI; font-size: 13pt;
 }
   
   </style>
-  
+  <script src="Scripts/AJAXscirpts.js"></script>
 </head>
 <body onload="getStoryData(username)">
 <%@ include file="Insertables/TopBar.jsp" %>

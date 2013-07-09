@@ -9,6 +9,7 @@
 <title>Story Sense</title>
 
   <link rel="stylesheet" href="Style/Default.css"> 
+  <script src="Scripts/AJAXscirpts.js"></script>
   <script src="Scripts/ProfileManagement.js"></script>
 </head>
 <body bgcolor="CCFFFF">

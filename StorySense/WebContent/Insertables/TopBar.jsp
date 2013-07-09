@@ -43,6 +43,7 @@ border: none;
 			if(User.Roles.learner.isLearner(u.getRole())){%>
 		<script type="text/javascript">var userName=<% userEncoder.writeJsElementReference(u.getName());%></script>
 		<%@ include file="NotificationPanel.jsp" %>
+		<script type="text/javascript">setUpNotifications(<% userEncoder.writeJsElementReference(u.getName()); %>)</script>
 	<% }/*End of learner condition*/ 
 	}/*End of null user condition*/
 		else {

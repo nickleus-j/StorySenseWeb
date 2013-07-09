@@ -42,7 +42,7 @@ overflow:scroll;
 
   
   </style>
-
+<script src="Scripts/AJAXscirpts.js"></script>
 </head>
 
 <body bgcolor="CCFFFF" onload="getStoryData(userName)">

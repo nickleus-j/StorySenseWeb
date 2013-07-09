@@ -103,7 +103,7 @@ public class NotificationMySQL extends NotificationDao {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
 
-            ps = con.prepareStatement("SELECT * FROM Notification WHERE notifUser=?");
+            ps = con.prepareStatement("SELECT * FROM Notification WHERE notifUser=? ORDER BY StartedOn DESC");
             ps.setInt(1, userID);
             rs = ps.executeQuery();
             
@@ -212,6 +212,24 @@ public class NotificationMySQL extends NotificationDao {
             Logger.getLogger(NotificationMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
 		return result;
+	}
+
+	@Override
+	public void updateNotificationView(int notificationID, String viewed) {
+		PreparedStatement ps;
+		try{
+			DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+        	Connection con = myFactory.getConnection();
+			ps = con.prepareStatement("UPDATE Notification SET viewed=? WHERE NotificationId=?");
+			ps.setString(1,viewed);
+			ps.setInt(2, notificationID);
+			ps.executeUpdate();
+			
+			ps.close();
+			con.close();
+        }catch(Exception ex){
+        	Logger.getLogger(NotificationMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
 	}
 
 }

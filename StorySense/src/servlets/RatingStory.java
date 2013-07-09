@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Story;
+import notification.NotificationCreator;
 
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.FileItemFactory;
@@ -153,6 +154,7 @@ public class RatingStory extends BaseServlet {
 		score=calculateScore(scores, request.getParameter(RRes.getSatisfactionBoxId()),templateUsed.getLevelRequirement());
 		saveRating(Math.round(score), sID, theSession);
 		updateUserScore(ratedStory.getAccountID(),Math.round(score));
+		
 	}
 	
     /**
@@ -163,10 +165,13 @@ public class RatingStory extends BaseServlet {
 		RatingDAO myRatingDao=myDAOFactory.createRatingDAO();
 		User currentUser=(User) theSession.getAttribute("user");
 		Rating theRating=new Rating();
+		NotificationCreator notifier=new NotificationCreator();
 		theRating.setReaderID(currentUser.getAccountID());
 		theRating.setAccomplishmentID(sID);
 		theRating.setScore(score);
 		myRatingDao.addRating(theRating);
+		
+		notifier.createRatingNotification(theRating, "");
 	}
 	
     /**

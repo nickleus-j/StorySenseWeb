@@ -1,14 +1,16 @@
 /*******************************************************************************
- *Copyright (c) 2013 IBM Corporation and others.
+ *Copyright (c) 2013 StorySense
  *All rights reserved. This program and the accompanying materials
  *are made available under the terms of the Eclipse Public License v1.0
  *which accompanies this distribution, and is available at
  *http://www.eclipse.org/legal/epl-v10.html
  *
  *Contributors:
- *    IBM Corporation - initial API and implementation
+ *    Nickleus Jimenez
  *******************************************************************************/
 package servlets;
+
+import java.io.PrintWriter;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,12 +38,14 @@ public class PasswordChanger extends BaseServlet {
 	public void executeCustomCode(HttpServletRequest request,
 			HttpServletResponse response) {
 		User theUser;
+		PrintWriter out;
 		try{
+			out=response.getWriter();
 			theUser=(User) request.getSession().getAttribute("user");
 		if(request.getParameter("ConfirmPass")!=null)
 			updatUserPassword(theUser, request.getParameter("ConfirmPass"));
-		
-		response.sendRedirect("../StorySense/View_Profile.jsp");
+			//out.write(request.getParameter("ConfirmPass"));
+		response.sendRedirect("../StorySense/View_LearnerProfile.jsp");
 		}catch(Exception ex){}
 	}
 

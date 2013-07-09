@@ -28,7 +28,7 @@ font-family: Segoe UI; font-size: 20pt;
 
 
 </style>
-
+<script src="Scripts/AJAXscirpts.js"></script>
 </head>
 <body bgcolor="CCFFFF">
 
