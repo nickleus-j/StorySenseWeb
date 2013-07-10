@@ -44,7 +44,8 @@ public class NotificationCreator {
 		int type=1;/*The notification type ID*/
 		
 		createNotification(type, 
-				"You earned the "+achievement.getDescription()+" "+comments, 
+				"You earned the "+achievement.getTitle()+" achievement "+comments +"<img src='"+
+						achievement.getPicUrl()+"' width='30' height='30'/>", 
 				medal.getLearnerID());
 	}/*End of method*/
 	

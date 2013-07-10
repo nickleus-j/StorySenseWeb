@@ -24,7 +24,13 @@ public class AchievementWatcher {
 	public int getApprovalAchievement(){return 2;}
 	public int getPopularAchievementId(){return 3;}
 	public int getTenStoriesAchievemnetId(){return 5;}
+	public int getFeaturedAchievementId(){return 6;}
 	public int getEagerWriterAchievemnetId(){return 7;}
 	public int getBigFanAchievementId(){return 8;}
 	public int getRisingUpAchievementId(){return 9;}
+	public int getSoaringAchievementId(){return 10;}
+	public int get20StoriesAchievementId(){return 11;}
+	public int get50StoriesAchievementId(){return 12;}
+	public int getLeaderboardAchievementId(){return 13;}
+	public int get5LikesAchievementId(){return 14;}
 }

@@ -144,8 +144,6 @@ public class RatingMySQL extends RatingDAO {
             ps.close();
             con.close();
             
-            if(ratings.isEmpty())
-            	return null;
             return ratings;
 		}
         catch (Exception ex)
@@ -222,8 +220,6 @@ public class RatingMySQL extends RatingDAO {
             ps.close();
             con.close();
             
-            if(ratings.isEmpty())
-            	return null;
             return ratings;
 		}
         catch (Exception ex)
@@ -324,8 +320,6 @@ public class RatingMySQL extends RatingDAO {
         ps.close();
         con.close();
         
-        if(ratings.isEmpty())
-        	return null;
         return ratings;
         }catch (Exception ex){
         Logger.getLogger(RatingMySQL.class.getName()).log(Level.SEVERE, null, ex);
@@ -354,8 +348,6 @@ public class RatingMySQL extends RatingDAO {
         ps.close();
         con.close();
         
-        if(ratings.isEmpty())
-        	return null;
         return ratings;
         }catch (Exception ex){
         Logger.getLogger(RatingMySQL.class.getName()).log(Level.SEVERE, null, ex);
@@ -385,8 +377,6 @@ public class RatingMySQL extends RatingDAO {
             ps.close();
             con.close();
             
-            if(ratings.isEmpty())
-            	return null;
             return ratings;
 		}
         catch (Exception ex)

@@ -118,12 +118,6 @@ public class LikedStoryMysql extends LikedStoryDAO {
             	approval.setUserName(rs.getString("Name"));
             	approvals.add(approval);
             	
-            	
-            	/*medal=new Learnerachievement();
-            	medal.setAchievementID(rs.getInt("AchievementID"));
-            	medal.setLearnerID(myUser.getAccountID());
-            	Achievements.add(medal);
-            	*/
             }
             
             rs.close();
@@ -149,8 +143,8 @@ public class LikedStoryMysql extends LikedStoryDAO {
 
             ps = con.prepareStatement("SELECT account.Name,storyaccomplishment.Name AS storyName," +
             		"ID AS storyID,account.accountID,likedstory.key from account,storyaccomplishment,likedstory " +
-            		"WHERE account.accountID=storyaccomplishment.AccountID AND storyAccomID=ID AND" +
-            		"storyID= ? ");
+            		"WHERE account.accountID=storyaccomplishment.AccountID AND storyAccomID=ID AND " +
+            		"ID= ? ");
             ps.setInt(1, storyID);
             rs = ps.executeQuery();
             

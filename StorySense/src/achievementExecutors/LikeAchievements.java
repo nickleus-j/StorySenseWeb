@@ -2,11 +2,15 @@ package achievementExecutors;
 
 import java.util.List;
 
+import notification.NotificationCreator;
+
 import dao.AcomplishmentDAO;
 import dao.DAOFactory;
 import dao.LearnerAcievementDAO;
 import dao.LikedStoryDAO;
 import dao.UserDAO;
+import entity.Achievement;
+import entity.Acomplishment;
 import entity.Learnerachievement;
 import entity.LikedStory;
 import entity.User;
@@ -33,8 +37,10 @@ public class LikeAchievements {
 			if(acomDao.getAllStoriesOfUser(userId).contains(acomDao.getPopularStory())){
 				medal.setAchievementID(aWatcher.getPopularAchievementId());
 				learnerBadgeDao.giveAchievement(medal);
-			}/*End of popular story is made by curretn user condition*/
+			}/*End of popular story is made by current user condition*/
 		}/*End  was approval given condition */
+		
+		
 	}
 	
 	/**
@@ -57,4 +63,22 @@ public class LikeAchievements {
 		}/*End of condition for awarding*/
 	}
 	
+	
+	public void awardMultiLikedStory(Acomplishment story){
+		DAOFactory myDaoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+		LearnerAcievementDAO learnerBadgeDao=myDaoFactory.createLearnerAcievementDAO();
+		Learnerachievement medal=new Learnerachievement();
+		AchievementWatcher aWatcher=new AchievementWatcher();
+		LikedStoryDAO likeDao=myDaoFactory.createLikeDAO();
+		List<LikedStory> likesGiven=likeDao.getStoryLikes(story.getID());
+		NotificationCreator notifier=new NotificationCreator();
+		
+		 if(likesGiven!=null&&likesGiven.size()>=5
+					&&!learnerBadgeDao.hasLearnerAchieved(story.getAccountID(), aWatcher.get5LikesAchievementId())){
+				medal.setAchievementID(aWatcher.get5LikesAchievementId());
+				medal.setLearnerID(story.getAccountID());
+				learnerBadgeDao.giveAchievement(medal);
+				notifier.createAchievementNotification(medal, "");
+			}
+	}/*End of method*/
 }

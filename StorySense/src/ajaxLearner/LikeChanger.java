@@ -51,8 +51,8 @@ public class LikeChanger extends BaseServlet {
 			
 			if(like.matches("like")){
 				LikeDAO.likeStory(myUser.getAccountID(), sID);
-				likeAchievementCheck(myDAOFactory,sID,myUser);
 				alerter.createLikeNotification(LikeDAO.getLikeOfUser(myUser.getAccountID(), sID), "");
+				likeAchievementCheck(myDAOFactory,sID,myUser);
 			}
 			else 
 				LikeDAO.disLike(myUser.getAccountID(), sID);
@@ -61,7 +61,9 @@ public class LikeChanger extends BaseServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		catch(NullPointerException ne){}
+		catch(NullPointerException ne){
+			ne.printStackTrace();
+		}
 	}
 
 	public void likeAchievementCheck(DAOFactory myDAOFactory,int sID,User myUser){
@@ -72,5 +74,6 @@ public class LikeChanger extends BaseServlet {
 		LikeAchievements likeAchievement=new LikeAchievements();
 		likeAchievement.awardApprovalAchievement(storyMade.getAccountID());
 		likeAchievement.awardEgoBooster(myUser, Writer);
+		likeAchievement.awardMultiLikedStory(storyMade);
 	}
 }

@@ -42,7 +42,7 @@ public class AchievementMysql extends AchievementDAO {
         	Connection con = myFactory.getConnection();
         	
         	ps = con.prepareStatement("INSERT INTO achievement" +
-        			" (ID,Title,Description,picUrl) " +
+        			" (ID,Title,Decription,picUrl) " +
         			"VALUES (?,?,?)");
             ps.setInt(1, badge.getID());
             ps.setString(2, badge.getTitle());
@@ -155,6 +155,7 @@ public class AchievementMysql extends AchievementDAO {
             rs.close();
             ps.close();
             con.close();
+            return badge;
 		}
         catch (Exception ex)
         {

@@ -37,6 +37,19 @@ public class WritingAchievements {
 		
 		/*Other Achievements*/
 		AwardEagerWriterAchievement(userId);
+		
+
+		if(!aWatcher.didUSerHaveAchievement(userId,aWatcher.get20StoriesAchievementId())&&myAcomDao.getAllStoriesOfUser(userId).size()>=20){
+			medal.setAchievementID(aWatcher.get20StoriesAchievementId());
+			medal.setLearnerID(userId);
+			learnerBadgeDao.giveAchievement(medal);
+		}/*End of Condition*/
+		
+		if(!aWatcher.didUSerHaveAchievement(userId,aWatcher.get50StoriesAchievementId())&&myAcomDao.getAllStoriesOfUser(userId).size()>=50){
+			medal.setAchievementID(aWatcher.get50StoriesAchievementId());
+			medal.setLearnerID(userId);
+			learnerBadgeDao.giveAchievement(medal);
+		}/*End of Condition*/
 	}
 	
 	public void AwardEagerWriterAchievement(int userId){
@@ -54,6 +67,7 @@ public class WritingAchievements {
 			learnerBadgeDao.giveAchievement(medal);
 		}/*End of Condition*/
 	}
+	
 	
 	
 }

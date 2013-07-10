@@ -51,7 +51,7 @@ function viewNotice(){
 	//setUpNotifications(userName);
 	if (xmlhttp.readyState==4 && xmlhttp.status==200){
 		elem=document.getElementById("notificationButton" );
-		elem.innerHTML="  --  "
+		elem.innerHTML="  --  ";
 		};
   
   xmlhttp.open("GET","ViewNotification?noticeID="+lastNoticeID+"&viewStat=1",
