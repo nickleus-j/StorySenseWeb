@@ -32,6 +32,7 @@ import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import achievementExecutors.PointsAchievement;
 import ajaxReviewer.AjaxStoryReviewer;
 
 import webEncoder.RatingFormEncoder;
@@ -185,7 +186,14 @@ public class RatingStory extends BaseServlet {
 		User givenUser=userDao.getUser(writeID);
 		//givenUser.setPoints(givenUser.getPoints()+Additionalscore);
 		userDao.increaseUserPoints(givenUser, Additionalscore);
+		pointAchievementCheck(givenUser);
 	}
+	
+	private void pointAchievementCheck(User given){
+		PointsAchievement pAchieve=new PointsAchievement();
+		pAchieve.awardLevelAchievement(given);
+	}
+	
 	
 	private float calculateScore(ArrayList<Float> scores,String qual,int lvlReq){
 		float result=0.0f;
