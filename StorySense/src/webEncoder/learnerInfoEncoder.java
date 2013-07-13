@@ -43,26 +43,43 @@ public class learnerInfoEncoder {
 	}
 	
 	public String writeHtmlAchievements(User givenUser,int imgWidth,int imgHeight){
-		String code="<table><tr>";
+		String code="<table>";
 		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
 		AchievementDAO medalDao=daoFactory.createAchievementDAO();
 		ArrayList<Achievement> medals=(ArrayList<Achievement>)medalDao.getUserAchievements(givenUser.getAccountID());
-		
+		int colLimit=3,backUpIndex=0;
 		if(medals==null||medals.isEmpty()||givenUser.getRole()!=User.Roles.learner.getValue()){
-			code=code.concat("<th> No Badges</th>");
+			code=code.concat("<tr><th> No Badges</th></tr>");
 			return code.concat("</table>");
 		}
 		
 		for(int ctr=0;ctr<medals.size();ctr++){
+			code=code.concat("<tr>");
+			backUpIndex=ctr;
+			
+			/*Enter the pictures of the achievements*/
+			for(int col=0;col<colLimit&&ctr<medals.size();col++,ctr++){
 			String imgCode="<td><img width=\""+(imgWidth)+"\" height=\""+(imgHeight)+"\" " +
 					" src=\""+medals.get(ctr).getPicUrl()+"\"></td>";
 			code=code.concat(imgCode);
-		}
-		code=code.concat("</tr><tr>");
+			
+			
+			}
+			code=code.concat("</tr>");
+			ctr=backUpIndex;
+			/*Enter the titles of the achievements*/
+			for(int col=0;col<colLimit&&ctr<medals.size();col++,ctr++){
+				code=code.concat("<td>"+medals.get(ctr).getTitle()+"</td>");
+				}
+			code=code.concat("</tr>");
+			
+		}/*End of code generation loop*/
+		/*code=code.concat("</tr><tr>");
 		for(int ctr=0;ctr<medals.size();ctr++){
 			code=code.concat("<td>"+medals.get(ctr).getTitle()+"</td>");
 		}
 		code=code.concat("</tr>");
+		*/
 		return code.concat("</table>");
 	}
 	

@@ -21,9 +21,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.AcomplishmentDAO;
 import dao.DAOFactory;
+import dao.ProfileDAO;
 import dao.UserDAO;
 
 import entity.Acomplishment;
+import entity.Profile;
 import entity.User;
 
 import servlets.BaseServlet;
@@ -46,12 +48,11 @@ public class FeedFetcher extends BaseServlet {
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
 		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStories(limit);
-		
 		try{
 			limit=Integer.parseInt(request.getParameter("limit"));
 			Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStories(limit);
-			encodeStoriesInHTML(response.getWriter(), Stories, 
-				myDAOFactory.createUserDAO(), (User)request.getSession().getAttribute("user"));
+			encodeStoriesInHTML(response.getWriter(), Stories, myDAOFactory.createUserDAO(),
+				(User)request.getSession().getAttribute("user"),myDAOFactory.createProfileDAO());
 		}catch(IOException ioEX){}
 	}
 
@@ -63,18 +64,21 @@ public class FeedFetcher extends BaseServlet {
 	 * @param myUserDao : the gets the ID of the writer
 	 * @param SessionUser : The user Logged In.
 	 */
-	public void encodeStoriesInHTML(PrintWriter out,ArrayList<Acomplishment> Stories,UserDAO myUserDao,User SessionUser){
+	public void encodeStoriesInHTML(PrintWriter out,ArrayList<Acomplishment> Stories,UserDAO myUserDao,
+			User SessionUser,ProfileDAO profDao){
 		CompleteStoryLoader sLoader=new CompleteStoryLoader(SessionUser);
 		User myUser;
 		HtmlLinkEncoder linkEncoer=new HtmlLinkEncoder();
-		
+		Profile theProfile;
 			
 			/*loop that displays the stories*/
 			for(int ctr=0;ctr<Stories.size();ctr++){
 				out.write("<tr id=\"titleFont\" class=\"storyHead\">");
 				myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
+				theProfile=profDao.getProfile(myUser);
 				out.write("<td colspan=\"2\">\"" +Stories.get(ctr).getName()+"\"</td></tr><tr>"+
-						"<td colspan=\"2\">"+ "&nbsp;&nbsp;&nbsp; By: "+myUser.getName()+"</td>");
+						"<td colspan=\"2\">"+ "&nbsp;&nbsp;&nbsp; <img src='"+theProfile.getImageURL()+"'" +
+								"width='50' height='50'/> By: "+myUser.getName()+"</td>");
 				
 				if(SessionUser!=null)
 					out.write(sLoader.generateLikeRow(Stories.get(ctr)));

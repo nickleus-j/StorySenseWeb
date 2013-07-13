@@ -13,7 +13,7 @@ package infoResource;
 public class ReviewerResource {
 
 	public String[] getSatisfactionOptions(){
-		String[] options={"Unsatisfactory","Almost Satisfactory","Satisfactory",
+		String[] options={"Unsatisfactory","Almost Satisfactory","Just Satisfactory",
 				"Above Satisfactory","Excellent"};
 		
 		return options;

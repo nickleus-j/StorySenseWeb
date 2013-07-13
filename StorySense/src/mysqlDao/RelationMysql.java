@@ -551,7 +551,7 @@ public class RelationMysql extends RelationDAO {
             ps.setString(1, Concept1);
             ps.setString(2, Concept2);
             ps.setString(3, Relationship);
-            ps.setInt(4, 100);
+            ps.setInt(4, 50);
             ps.setInt(5, 4);
             ps.setInt(6, 1);
             ps.setInt(7, 1);

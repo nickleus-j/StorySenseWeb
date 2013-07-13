@@ -60,8 +60,6 @@ public class AjaxStoryReviewer extends BaseServlet {
 		sfa=getStoryFile(ratedStory.getFileURL());
 		theStory=sfa.getMyStory();
 		
-		
-		
 		try {
 			PrintWriter out=response.getWriter();
 			out.write(ratingHtml.enterAssertionsTableCode(theStory));

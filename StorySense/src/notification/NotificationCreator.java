@@ -44,7 +44,7 @@ public class NotificationCreator {
 		int type=1;/*The notification type ID*/
 		
 		createNotification(type, 
-				"You earned the "+achievement.getTitle()+" achievement "+comments +"<img src='"+
+				"You earned the "+achievement.getTitle()+" achievement "+comments +" <img src='"+
 						achievement.getPicUrl()+"' width='30' height='30'/>", 
 				medal.getLearnerID());
 	}/*End of method*/
@@ -73,5 +73,15 @@ public class NotificationCreator {
 		createNotification(type, 
 				reader.getName()+" Gave a score of "+score.getScore()+" for "+story.getName()+"  "+Comments, 
 				story.getAccountID());
+	}
+	
+	/**
+	 * Notify learner of his/her current level
+	 * @param learner
+	 * @param Comments
+	 */
+	public void createLevelUpNotification(User learner,String Comments){
+		int type=5;
+		createNotification(type,"You are now level "+learner.getLevel()+Comments,learner.getAccountID());
 	}
 }/*End of class*/

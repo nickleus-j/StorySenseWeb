@@ -60,7 +60,7 @@ border: none;
 	<tr>
 	<td id="fontStyleTopbar"><img src="images/storysenselogo4.png" border="0" width="166"/></td>
 	<td id="fontStyleTopbar" width="15%"><a href="../StorySense/LearnerHomeSample2.jsp"><img src="images/HomeButtons2/home.png" onmouseover="this.src='images/HomeButtons2/homeB.png'" onmouseout="this.src='images/HomeButtons2/home.png'" width="155"/></a> </td>
-	<td id="fontStyleTopbar" width="15%" ><a href="../StorySense/templateDisplay.jsp"><img src="images/HomeButtons2/Create Stories.png" onmouseover="this.src='images/HomeButtons2/Create StoriesB.png'" onmouseout="this.src='images/HomeButtons2/Create Stories.png'" width="155"/></a></td>
+	<td id="fontStyleTopbar" width="15%" ><a href="../StorySense/MakingStory.jsp"><img src="images/HomeButtons2/Create Stories.png" onmouseover="this.src='images/HomeButtons2/Create StoriesB.png'" onmouseout="this.src='images/HomeButtons2/Create Stories.png'" width="155"/></a></td>
 	<td id="fontStyleTopbar" width="15%"><a href="../StorySense/LearnerHomeSample.jsp"><img src="images/HomeButtons2/My Stories.png" onmouseover="this.src='images/HomeButtons2/My StoriesB.png'" onmouseout="this.src='images/HomeButtons2/My Stories.png'"  width="155"/></a></td>
 	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/View_LearnerProfile.jsp"><img src="images/HomeButtons2/Profile.png" onmouseover="this.src='images/HomeButtons2/ProfileB.png'" onmouseout="this.src='images/HomeButtons2/Profile.png'"  width="155"/></a></td>
 	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/Help.jsp"><img src="images/HomeButtons2/Help.png" onmouseover="this.src='images/HomeButtons2/HelpB.png'" onmouseout="this.src='images/HomeButtons2/Help.png'" width="155"/></a></td>

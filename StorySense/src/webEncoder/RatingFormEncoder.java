@@ -29,14 +29,12 @@ import entity.Relation;
  */
 public class RatingFormEncoder {
 
-	private String SA,A, D,SD,LD,LA,N;
+	private String SA,A, D,SD,N;
 	public static final String  Assert="assert_";
 	public RatingFormEncoder(){
 		SA="Strongly Agree";
 		A="Agree";
-		LA="Slightly Agree";
 		N="Neutral";
-		LD="Slightly Disagree";
 		D="Disagree";
 		SD=" Strongly Disagree";
 	}
@@ -61,11 +59,9 @@ public class RatingFormEncoder {
 	public String getasseriontValidationHtml(int id){
 		String formRow="<td>",assertID=Assert+id;
 		formRow=formRow.concat("<input type=\"radio\" name =\""+assertID+"\" value=\""+0+"\"></td>");
-		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+0.2+"\"></td>");
-		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+0.4+"\"></td>");
-		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+0.5+"\"></td>");
-		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+0.6+"\"></td>");
-		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+0.8+"\" checked=\"checked\"></td>");
+		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+0.25+"\"></td>");
+		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+0.5+"\" checked=\"checked\"></td>");
+		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+0.8+"\" ></td>");
 		formRow=formRow.concat("<td><input type=\"radio\" name =\""+assertID+"\" value=\""+1+"\"></td>");
 		return formRow;
 	}
@@ -82,8 +78,7 @@ public class RatingFormEncoder {
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		RelationshipDAO relationDao=myDAOFactory.createRelationshipDAO();
 		String tblHeaders="<th>Knowledge</th><th>"+SD+"</th><th>"+D+"</th>" +
-				"<th>"+LD+"</th><th>"+N+"</th><th>"+LA+"</th>"+
-				"<th>"+A+"</th><th>"+SA+"</th>";
+				"<th>"+N+"</th><th>"+A+"</th><th>"+SA+"</th>";
 		
 		
 		RateFormHtml=RateFormHtml.concat("<table align=\"center\">"+tblHeaders);

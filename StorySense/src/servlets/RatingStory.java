@@ -182,11 +182,22 @@ public class RatingStory extends BaseServlet {
 	public void updateUserScore(int writeID,int Additionalscore){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		UserDAO userDao=myDAOFactory.createUserDAO();
+		int oldLevel=0;
 		
 		User givenUser=userDao.getUser(writeID);
+		oldLevel=givenUser.getLevel();
 		//givenUser.setPoints(givenUser.getPoints()+Additionalscore);
 		userDao.increaseUserPoints(givenUser, Additionalscore);
+		givenUser=userDao.getUser(writeID);
+		notifyLevelUp(oldLevel, givenUser);
 		pointAchievementCheck(givenUser);
+	}
+	
+	private void notifyLevelUp(int oldLevel,User learner){
+		if(oldLevel!=learner.getLevel()){
+			NotificationCreator alerter=new NotificationCreator();
+			alerter.createLevelUpNotification(learner, "");
+		}/*End method*/
 	}
 	
 	private void pointAchievementCheck(User given){
@@ -232,7 +243,7 @@ public class RatingStory extends BaseServlet {
 			relations=assertions.get(ctr);
 			for(int i=0;i<relations.size();i++){
 				relationDAO.updateRelationScore(relations.get(i).getConcept1(), relations.get(i).getConcept2(),
-						relations.get(i).getRelationship(), Math.round(scores.get(scoreIndex))*4);
+						relations.get(i).getRelationship(), Math.round(scores.get(scoreIndex)*4));
 				scoreIndex++;
 			}/*End of relation Loop*/
 		}/*End of Assertion loop*/

@@ -82,7 +82,10 @@
 	text-align: center;
 	border-width: .1em;
 	}
-
+.spacedRow{
+	padding: 5%;
+	margin:3%;
+}
 
 </style>
 <script src="Scripts/AJAXscirpts.js"></script>
@@ -154,14 +157,13 @@
 		</td>
 	</tr>
 	
-	<tr>
-		<th>Quality</th><td>
+	<tr class="spacedRow" >
+		<th  class="spacedRow" >Quality of the story</th><td>
 		<% RatingFormEncoder rfe=new RatingFormEncoder();
 			out.write(rfe.createSatisfactionSelectHtml());
 		%>
 		</td>
 	</tr>
-	
 	<tr>
 		<td class="subheader" colspan="2">
 		<a href=<% encoder.writeJsElementReference(validatedStoriesTableID);%>>

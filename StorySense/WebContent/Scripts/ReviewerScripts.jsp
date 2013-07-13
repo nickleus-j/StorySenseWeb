@@ -61,7 +61,7 @@ function createRelationPaneHtml(storyID){
 	xmlhttp.onreadystatechange=function(){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200&&stage!=null){
 			generateDescription(storyID);
-			putRatingStoryToCell(storyID);
+			putRatingStoryToCell(storyID);/*Show the story*/
 			stage.innerHTML=xmlhttp.responseText;
 		}
 	  };
