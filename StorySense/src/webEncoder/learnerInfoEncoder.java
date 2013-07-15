@@ -92,7 +92,7 @@ public class learnerInfoEncoder {
 	
 	public void writeHtmlAchievements(JspWriter out,User givenUser,int imgWidth,int imgHeight){
 		try {
-			out.write("<h2><a href='LearnerAchievements.jsp?uID="+givenUser.getAccountID()+"'>Achievements</a></h2>");
+			out.write("<h2><a href='viewAchivements?uID="+givenUser.getAccountID()+"'>Achievements</a></h2>");
 			out.write(writeHtmlAchievements(givenUser,imgWidth,imgHeight));
 		} catch (IOException e) {
 			e.printStackTrace();

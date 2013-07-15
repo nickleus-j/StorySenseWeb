@@ -18,11 +18,12 @@ public class AchievementHtmlEncoder {
 		
 		if(medals==null||medals.isEmpty()||givenUser.getRole()!=User.Roles.learner.getValue()){
 			code=code.concat("<tr><th> No Badges</th></tr>");
-			return code.concat("</table>");
+			return code.concat(getHTML_AchievementTable(medalDao.getUnAttainedAchievements(givenUser.getAccountID()),"To Earn")+
+					"</table>");
 		}
 		
-		return code.concat(getHTML_AchievementTable(medals,"Obtained Achievements")+"<hr/>"+
-				getHTML_AchievementTable(medalDao.getUnAttainedAchievements(givenUser.getAccountID()),"To be obtained"));
+		return code.concat(getHTML_AchievementTable(medals,"Earned Achievements")+"<hr/>"+
+				getHTML_AchievementTable(medalDao.getUnAttainedAchievements(givenUser.getAccountID()),"To Earn"));
 	}/**/
 	
 	public String getHTML_AchievementTable(List<Achievement> medals){
@@ -37,9 +38,9 @@ public class AchievementHtmlEncoder {
 	}
 	
 	public String getHTML_AchievementTable(List<Achievement> medals,String caption){
-		String code="<table align='right'><caption>"+caption+"</caption>";
+		String code="<table align='center' width='60%'><caption>"+caption+"</caption>";
 		for(int ctr=0;ctr<medals.size();ctr++){
-			code=code.concat("<tr><th>"+getImageHTML(medals.get(ctr).getPicUrl(),50,50)+
+			code=code.concat("<tr align='left'><th>"+getImageHTML(medals.get(ctr).getPicUrl(),50,50)+"<br/>"+
 					medals.get(ctr).getTitle()+"</th>");
 			code=code.concat("<td>"+medals.get(ctr).getDescription()+"</td></tr>");
 		}

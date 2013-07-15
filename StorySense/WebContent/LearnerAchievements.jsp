@@ -12,12 +12,16 @@
    
 </head>
 <body>
-<%! AchievementHtmlEncoder aEncoder=new AchievementHtmlEncoder(); %>
+<% AchievementHtmlEncoder aEncoder=new AchievementHtmlEncoder();
+	User myUser=(User)request.getAttribute("viewedUser");
+	if(myUser==null)
+		myUser=(User)session.getAttribute("user");%>
+
 <%@ include file="Insertables/TopBar.jsp" %>
 <div id="container">
 <div id="center" class="column">
 
-<% out.write(aEncoder.writeHtmlUserAchievements(u)); %>
+<% out.write(aEncoder.writeHtmlUserAchievements(myUser)); %>
 
 </div>
 
