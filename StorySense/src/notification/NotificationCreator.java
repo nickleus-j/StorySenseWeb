@@ -67,12 +67,13 @@ public class NotificationCreator {
 		UserDAO uDao=myDAOFactory.createUserDAO();
 		AcomplishmentDAO acomDao=myDAOFactory.createAcomplishmentDAO();
 		Acomplishment story=acomDao.getStory(score.getAccomplishmentID());
-		User reader=uDao.getUser(score.getReaderID());
+		User reader=uDao.getUser(score.getReaderID()),author=uDao.getUser(story.getAccountID());
 		int type=3;/*The notification type ID*/
 		
 		createNotification(type, 
-				reader.getName()+" Gave a score of "+score.getScore()+" for "+story.getName()+"  "+Comments, 
-				story.getAccountID());
+				reader.getName()+" Gave a score of "+score.getScore()+" for "+story.getName()+" Your total score is "+
+						author.getPoints()+". Your are "+uDao.getRankInLeaderBoard(author.getAccountID())+
+						" in the Leader board "+Comments, story.getAccountID());
 	}
 	
 	/**

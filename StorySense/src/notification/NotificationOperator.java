@@ -1,4 +1,4 @@
-package ajaxLearner;
+package notification;
 
 import dao.DAOFactory;
 import dao.NotificationDao;

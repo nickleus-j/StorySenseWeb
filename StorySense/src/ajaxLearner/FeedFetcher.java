@@ -60,7 +60,7 @@ public class FeedFetcher extends BaseServlet {
 	 * Put in HTML the stories from the server
 	 * assume the response will be put in an HTML table element
 	 * @param out : Writers to HTMl client
-	 * @param Stories : The stories aquired from the server
+	 * @param Stories : The stories acquired from the server
 	 * @param myUserDao : the gets the ID of the writer
 	 * @param SessionUser : The user Logged In.
 	 */
@@ -78,7 +78,7 @@ public class FeedFetcher extends BaseServlet {
 				theProfile=profDao.getProfile(myUser);
 				out.write("<td colspan=\"2\">\"" +Stories.get(ctr).getName()+"\"</td></tr><tr>"+
 						"<td colspan=\"2\">"+ "&nbsp;&nbsp;&nbsp; <img src='"+theProfile.getImageURL()+"'" +
-								"width='50' height='50'/> By: "+myUser.getName()+"</td>");
+								"width='50' height='50'/> By: "+linkEncoer.createLinkToUser(myUser)+"</td>");
 				
 				if(SessionUser!=null)
 					out.write(sLoader.generateLikeRow(Stories.get(ctr)));

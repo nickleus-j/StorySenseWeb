@@ -638,5 +638,40 @@ public class UserMySQL extends UserDAO {
 	public boolean isBiggestFan(User fan, User writer) {
 		return getBiggestFanName(writer).equalsIgnoreCase(fan.getName());
 	}
+
+	@Override
+	public int getRankInLeaderBoard(int LearnerID) {
+		int ctr=0;
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            
+            ps = con.prepareStatement("SELECT * from account WHERE role=1 ORDER BY  Points DESC ");
+            rs = ps.executeQuery();
+            
+          
+            ArrayList<User> Users=new ArrayList<User>();
+            addResultsIntoList(Users,rs);
+            
+           while(ctr<Users.size()&&LearnerID!=Users.get(ctr).getAccountID()){
+        	   ctr++;
+           }
+
+            rs.close();
+            ps.close();
+            con.close();
+            
+           return ctr+1;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(UserMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return ctr;
+	}
 	
 }

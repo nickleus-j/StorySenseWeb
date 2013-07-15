@@ -62,14 +62,12 @@ public class learnerInfoEncoder {
 			String imgCode="<td><img width=\""+(imgWidth)+"\" height=\""+(imgHeight)+"\" " +
 					" src=\""+medals.get(ctr).getPicUrl()+"\"></td>";
 			code=code.concat(imgCode);
-			
-			
 			}
-			code=code.concat("</tr>");
-			ctr=backUpIndex;
+			code=code.concat("</tr><tr>");
+			ctr--;
 			/*Enter the titles of the achievements*/
-			for(int col=0;col<colLimit&&ctr<medals.size();col++,ctr++){
-				code=code.concat("<td>"+medals.get(ctr).getTitle()+"</td>");
+			for(int col=0;col<colLimit&&backUpIndex<medals.size();col++,backUpIndex++){
+				code=code.concat("<td>"+medals.get(backUpIndex).getTitle()+"</td>");
 				}
 			code=code.concat("</tr>");
 			
@@ -94,7 +92,7 @@ public class learnerInfoEncoder {
 	
 	public void writeHtmlAchievements(JspWriter out,User givenUser,int imgWidth,int imgHeight){
 		try {
-			out.write("<h2>Achievemnts</h2>");
+			out.write("<h2><a href='LearnerAchievements.jsp?uID="+givenUser.getAccountID()+"'>Achievements</a></h2>");
 			out.write(writeHtmlAchievements(givenUser,imgWidth,imgHeight));
 		} catch (IOException e) {
 			e.printStackTrace();

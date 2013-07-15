@@ -28,4 +28,5 @@ public abstract class AchievementDAO {
 	public abstract Achievement getAchievementById(int id);
 	public abstract List<Achievement> getUserAchievements(int userId);
 	public abstract List<Achievement> getUnAttainedAchievements();
+	public abstract List<Achievement> getUnAttainedAchievements(int userId);
 }

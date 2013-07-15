@@ -230,4 +230,35 @@ public class AchievementMysql extends AchievementDAO {
 		return null;
 	}
 
+	@Override
+	public List<Achievement> getUnAttainedAchievements(int userId) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from achievement WHERE ID NOT IN" +
+            		"(SELECT AchievementID from learnerachievement WHERE learnerID=?)");
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            
+            //Achievement badge;
+            ArrayList<Achievement> Achievements=listResult(rs);
+            rs.close();
+            ps.close();
+            con.close();
+            
+            if(Achievements.isEmpty())
+            	return null;
+            return Achievements;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(AchievementMysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
 }

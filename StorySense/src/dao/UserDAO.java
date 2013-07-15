@@ -34,4 +34,5 @@ public abstract class UserDAO {
 	public abstract void increaseUserPoints(User u,int score);
 	public abstract String getBiggestFanName(User writer);
 	public abstract boolean isBiggestFan(User fan,User writer);
+	public abstract int getRankInLeaderBoard(int LearnerID);
 }
