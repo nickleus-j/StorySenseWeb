@@ -50,7 +50,7 @@ public class FeedFetcher extends BaseServlet {
 		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStories(limit);
 		try{
 			limit=Integer.parseInt(request.getParameter("limit"));
-			Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStories(limit);
+			Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoriesRatedWithConfidence(0.5f,limit);
 			encodeStoriesInHTML(response.getWriter(), Stories, myDAOFactory.createUserDAO(),
 				(User)request.getSession().getAttribute("user"),myDAOFactory.createProfileDAO());
 		}catch(IOException ioEX){}

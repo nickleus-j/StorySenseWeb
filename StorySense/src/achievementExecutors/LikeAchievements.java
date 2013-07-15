@@ -25,7 +25,7 @@ public class LikeAchievements {
 		LikedStoryDAO likeDao=myDaoFactory.createLikeDAO();
 		List<LikedStory> likesGiven=likeDao.getAllLikesForUser(userId);
 		boolean wasApprovalGiven=learnerBadgeDao.hasLearnerAchieved(userId, aWatcher.getApprovalAchievement());
-		
+		NotificationCreator alerter=new NotificationCreator();
 		medal.setLearnerID(userId);
 		if(likesGiven!=null&&!likesGiven.isEmpty()
 				&&!wasApprovalGiven){
@@ -37,6 +37,7 @@ public class LikeAchievements {
 			if(acomDao.getAllStoriesOfUser(userId).contains(acomDao.getPopularStory())){
 				medal.setAchievementID(aWatcher.getPopularAchievementId());
 				learnerBadgeDao.giveAchievement(medal);
+				alerter.createAchievementNotification(medal, "");
 			}/*End of popular story is made by current user condition*/
 		}/*End  was approval given condition */
 		

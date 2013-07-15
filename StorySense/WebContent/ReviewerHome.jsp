@@ -158,7 +158,7 @@
 	</tr>
 	
 	<tr class="spacedRow" >
-		<th  class="spacedRow" >Quality of the story</th><td>
+		<th  class="spacedRow" >Quality of the story</th><td class="spacedRow">
 		<% RatingFormEncoder rfe=new RatingFormEncoder();
 			out.write(rfe.createSatisfactionSelectHtml());
 		%>

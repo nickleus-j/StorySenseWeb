@@ -15,12 +15,23 @@
 <% AchievementHtmlEncoder aEncoder=new AchievementHtmlEncoder();
 	User myUser=(User)request.getAttribute("viewedUser");
 	if(myUser==null)
-		myUser=(User)session.getAttribute("user");%>
+		myUser=(User)session.getAttribute("user");
+		
+	WebCodeMaker webEncoder=new WebCodeMaker(out);	
+		%>
 
 <%@ include file="Insertables/TopBar.jsp" %>
 <div id="container">
 <div id="center" class="column">
-
+<table align="center" bgcolor="dodgerblue">
+	<tr>
+	<td rowspan="2"><% out.print(webEncoder.enterUserImageTag(myUser)); %></td>
+	<td><% out.print(myUser.getName()); %></td>
+	</tr>
+	<tr>
+	<td><% out.print("Level "+myUser.getLevel()); %></td>
+	</tr>
+</table>
 <% out.write(aEncoder.writeHtmlUserAchievements(myUser)); %>
 
 </div>

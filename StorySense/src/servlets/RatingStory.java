@@ -152,16 +152,17 @@ public class RatingStory extends BaseServlet {
 		out.println("Story: "+ratedStory.getName()+"--");
 		
 		
-		score=calculateScore(scores, request.getParameter(RRes.getSatisfactionBoxId()),templateUsed.getLevelRequirement());
-		saveRating(Math.round(score), sID, theSession);
+		score=calculateScore(scores, request.getParameter(RRes.getSatisfactionBoxId()),templateUsed.getPlusScore());
+		//saveRating(Math.round(score), sID, theSession,scores);
+		saveRating(Math.round(score), sID, theSession,getConfidence(scores));
 		updateUserScore(ratedStory.getAccountID(),Math.round(score));
 		
 	}
 	
-    /**
+    /*
      * Places the score in the database
-     **/ 
-	private void saveRating(int score,int sID,HttpSession theSession){
+     
+	private void saveRating(int score,int sID,HttpSession theSession,ArrayList<Float> scores){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		RatingDAO myRatingDao=myDAOFactory.createRatingDAO();
 		User currentUser=(User) theSession.getAttribute("user");
@@ -170,6 +171,25 @@ public class RatingStory extends BaseServlet {
 		theRating.setReaderID(currentUser.getAccountID());
 		theRating.setAccomplishmentID(sID);
 		theRating.setScore(score);
+		theRating.setConfidence(getConfidence(scores));
+		myRatingDao.addRating(theRating);
+		
+		notifier.createRatingNotification(theRating, "");
+	}
+	
+	/**
+     * Places the score in the database
+     **/ 
+	private void saveRating(int score,int sID,HttpSession theSession,float confidence){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		RatingDAO myRatingDao=myDAOFactory.createRatingDAO();
+		User currentUser=(User) theSession.getAttribute("user");
+		Rating theRating=new Rating();
+		NotificationCreator notifier=new NotificationCreator();
+		theRating.setReaderID(currentUser.getAccountID());
+		theRating.setAccomplishmentID(sID);
+		theRating.setScore(score);
+		theRating.setConfidence(confidence);
 		myRatingDao.addRating(theRating);
 		
 		notifier.createRatingNotification(theRating, "");
@@ -218,16 +238,23 @@ public class RatingStory extends BaseServlet {
 		if(QualIndex==qualNames.length)
 			QualIndex=0;
 		
-		/*for(int ctr=0;ctr<scores.size();ctr++){
-			result+=(scores.get(ctr)*10);
-		}
-		return result+(QualIndex+1)*5;
-		*/
+		/*
+		
 		for(int ctr=0;ctr<scores.size();ctr++){
 			result+=scores.get(ctr);
 		}
 		result/=scores.size();
-		return result*lvlReq*100;
+		*/
+		result=getConfidence(scores);
+		return result*lvlReq*100+QualIndex;
+	}
+	
+	private float getConfidence(ArrayList<Float> scores){
+		float result=0.0f;
+		for(int ctr=0;ctr<scores.size();ctr++){
+			result+=scores.get(ctr);
+		}
+		return result/scores.size();
 	}
 	
     /**

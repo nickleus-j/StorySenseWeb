@@ -23,6 +23,7 @@ public class AchievementWatcher {
 	public int getFirstStoryAchId(){return 1;}
 	public int getApprovalAchievement(){return 2;}
 	public int getPopularAchievementId(){return 3;}
+	public int getStepForwardAchievementId(){return 4;}
 	public int getTenStoriesAchievemnetId(){return 5;}
 	public int getFeaturedAchievementId(){return 6;}
 	public int getEagerWriterAchievemnetId(){return 7;}

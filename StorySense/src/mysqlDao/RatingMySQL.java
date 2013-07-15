@@ -54,6 +54,7 @@ public class RatingMySQL extends RatingDAO {
             	Score.setAccomplishmentID(rs.getInt("accomplishmentID"));
             	Score.setReaderID(rs.getInt("readerID"));
             	Score.setScore(rs.getInt("Score"));
+            	Score.setConfidence(rs.getFloat("Confidence"));
             	ratings.add(Score);
             }
             
@@ -79,6 +80,7 @@ public class RatingMySQL extends RatingDAO {
         	Score.setAccomplishmentID(rs.getInt("accomplishmentID"));
         	Score.setReaderID(rs.getInt("readerID"));
         	Score.setScore(rs.getInt("Score"));
+        	Score.setConfidence(rs.getFloat("Confidence"));
         	ratings.add(Score);
         }
 	}
@@ -160,11 +162,12 @@ public class RatingMySQL extends RatingDAO {
         	DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
         	Connection con = myFactory.getConnection();
         	
-        	ps = con.prepareStatement("INSERT INTO rating (accomplishmentID,readerID,Score) " +
-        			"VALUES (?,?,?)");
+        	ps = con.prepareStatement("INSERT INTO rating (accomplishmentID,readerID,Score,Confidence) " +
+        			"VALUES (?,?,?,?)");
             ps.setInt(1, r.getAccomplishmentID());
             ps.setInt(2, r.getReaderID());
             ps.setInt(3,r.getScore());
+            ps.setFloat(4, r.getConfidence());
             ps.execute();
             ps.close();
             
@@ -253,7 +256,7 @@ public class RatingMySQL extends RatingDAO {
             	Score.setAccomplishmentID(rs.getInt("accomplishmentID"));
             	Score.setReaderID(rs.getInt("readerID"));
             	Score.setScore(rs.getInt("Score"));
-            	
+            	Score.setConfidence(rs.getFloat("Confidence"));
             }
             
             rs.close();

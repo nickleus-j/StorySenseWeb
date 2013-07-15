@@ -34,6 +34,15 @@ public class PointsAchievement {
 		LearnerAcievementDAO learnerBadgeDao=myDaoFactory.createLearnerAcievementDAO();
 		AchievementWatcher watcher=new AchievementWatcher();
 		NotificationCreator alerter=new NotificationCreator();
+		
+		if(!watcher.didUSerHaveAchievement(awardee.getAccountID(), watcher.getStepForwardAchievementId())&&
+				awardee.getLevel()>=2){
+			medal.setAchievementID(watcher.getStepForwardAchievementId());
+			medal.setLearnerID(awardee.getAccountID());
+			learnerBadgeDao.giveAchievement(medal);
+			alerter.createAchievementNotification(medal, " You have progressed");
+		}/*End of level 10 condition*/
+		
 		/*Level 10*/
 		if(!watcher.didUSerHaveAchievement(awardee.getAccountID(), watcher.getRisingUpAchievementId())&&
 				awardee.getLevel()>=10){

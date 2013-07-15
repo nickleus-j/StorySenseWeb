@@ -21,6 +21,7 @@ package entity;
 public class Rating {
 
 	private int accomplishmentID,readerID,Score;
+	private float confidence;
 
 	public int getAccomplishmentID() {
 		return accomplishmentID;
@@ -44,6 +45,14 @@ public class Rating {
 
 	public void setScore(int score) {
 		Score = score;
+	}
+
+	public float getConfidence() {
+		return confidence;
+	}
+
+	public void setConfidence(float confidence) {
+		this.confidence = confidence;
 	}
 	
 	

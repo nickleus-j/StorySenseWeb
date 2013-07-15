@@ -90,7 +90,7 @@ border: none;
 		<img src="images/evalStories.png" width="160"/>
 		</a>
 		</td>
-	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/Help.jsp"><img src="images/HomeButtons/Help.png" onmouseover="this.src='images/HomeButtons/HelpB.png'" onmouseout="this.src='images/HomeButtons/Help.png'"  border="0" width="160"/></a></td>	
+	<td id="fontStyleTopbar" width="15%" align="center"><a href="../StorySense/ReviewerHelp.jsp"><img src="images/HomeButtons/Help.png" onmouseover="this.src='images/HomeButtons/HelpB.png'" onmouseout="this.src='images/HomeButtons/Help.png'"  border="0" width="160"/></a></td>	
 	<td id="fontStyleTopbar2" width="15%" align="center">
 	<a href="Logout">
 	<img src="images/HomeButtons/Logout.png" onmouseover="this.src='images/HomeButtons/LogoutB.png'" onmouseout="this.src='images/HomeButtons/Logout.png'"  border="0" width="160" />
