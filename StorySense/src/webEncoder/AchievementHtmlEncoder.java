@@ -23,7 +23,7 @@ public class AchievementHtmlEncoder {
 		}
 		
 		return code.concat(getHTML_AchievementTable(medals,"Earned Achievements")+"<hr/>"+
-				getHTML_AchievementTable(medalDao.getUnAttainedAchievements(givenUser.getAccountID()),"To Earn"));
+				getHTML_AchievementTable(medalDao.getUnAttainedAchievements(givenUser.getAccountID()),"Achievements To Earn"));
 	}/**/
 	
 	public String getHTML_AchievementTable(List<Achievement> medals){
