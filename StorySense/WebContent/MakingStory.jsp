@@ -16,25 +16,7 @@
 
 	<div id="container">
 	<div id="center" class="column">
-	<table style="margin: auto;" >
-	<tr><td>
 	
-	<tr><td>
-	<table colspan="3" id="tableBorder3" class="templateContainer" CELLPADDING="10" CELLSPACING="4">
-	<tr>
-	<th align="center">
-	Level
-		<% 
-		out.write(userEncoder.getChooseTemplateLevelHTML("generateStory('storyRow',this.value)")); 
-		%>
-		
-		
-	</th>
-	<tr ><td>
-	<button onClick="window.location.href='MakingStory.jsp'">Go</button></td></tr>
-	</table>
-	</td></tr>
-	</table>
 	
 	
 	<h1>Come on let us write a story! Help me finish the story by putting words into the blanks</h1>
