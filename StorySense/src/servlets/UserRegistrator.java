@@ -60,6 +60,7 @@ public class UserRegistrator extends BaseServlet {
 		try{
 			HttpSession theSession=request.getSession();
 			out = response.getWriter();
+			out.write("Path "+request.getContextPath());
 			
 			User myUser=createUser(request,out);
 			
@@ -68,6 +69,7 @@ public class UserRegistrator extends BaseServlet {
 			
 			 
 			redirectUser(myUser, request, response);
+			
 		}
 		catch(IOException IOe){
 			out.print("IO problem");
@@ -158,7 +160,7 @@ public class UserRegistrator extends BaseServlet {
 		//"uploadedFiles/ || /home/nickleus/Pictures/upload/";'
 		init(getServletConfig());
 		  out.println("Token: "+getServletConfig().getInitParameter("token"));
-		String pathPrefix="/home/nickleus/git/StorySense/StorySense/WebContent/upPics/";
+		String pathPrefix="/home/nickleus/git/StorySenseWeb/StorySense/WebContent/upPics/";
 		
 				String itemName = item.getName();
 				Random generator = new Random();

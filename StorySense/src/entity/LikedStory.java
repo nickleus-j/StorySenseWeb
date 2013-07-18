@@ -10,10 +10,13 @@
  *******************************************************************************/
 package entity;
 
+import java.sql.Timestamp;
+
 public class LikedStory {
 
 	private int key,storyID,userID;
 	private String userName,storyName;
+	private Timestamp LikeTime;
 	public int getKey() {
 		return key;
 	}
@@ -43,6 +46,12 @@ public class LikedStory {
 	}
 	public void setStoryName(String storyName) {
 		this.storyName = storyName;
+	}
+	public Timestamp getLikeTime() {
+		return LikeTime;
+	}
+	public void setLikeTime(Timestamp likeTime) {
+		LikeTime = likeTime;
 	}
 	
 	

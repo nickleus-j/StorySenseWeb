@@ -15,7 +15,10 @@ import java.util.ArrayList;
 
 import javax.servlet.jsp.JspWriter;
 
+import mysqlDao.MysqlDAOFactory;
 
+
+import dao.AchievementDAO;
 import dao.DAOFactory;
 import dao.ProfileDAO;
 import dao.TemplateDAO;
@@ -85,6 +88,8 @@ public class WebCodeMaker {
 			return tableCode;
 	}
 	
+	
+	
 	/**
 	 * Generates a string that will be used in HTML documents
 	 * to show an image
@@ -148,11 +153,26 @@ public class WebCodeMaker {
 		String code="Hello ";
 		if(u!=null){
 			code="</td><td>"+code.concat(u.getName());
-			code="<td rowspan=\"2\">"+enterUserImageTag(u,50,50).concat(code)+
-					"!</td></tr><tr> <td>Welcome to Story Sense!</td>";
+			code="<td rowspan=\"3\">"+enterUserImageTag(u,50,50).concat(code)+
+					"!</td></tr><tr> <td>Welcome to Story Sense!</td></tr>"+getLearnerInfo(u);
 			code="<table ><tr>".concat(code)+"</tr></table>";
 		}
 		return code;
+	}
+	
+	private String getLearnerInfo(User user){
+		String code="<tr><td>";
+		DAOFactory myDaoFactory=MysqlDAOFactory.getInstance(MysqlDAOFactory.MYSQL);
+		AchievementDAO aDao=myDaoFactory.createAchievementDAO();
+		if(user.getRole()==User.Roles.learner.getValue()){
+			code+=("Level "+user.getLevel()+"</td>" +
+					"<td>"+createAchievementLink(user)+aDao.getUserAchievements(user.getAccountID()).size());
+		}
+		return code.concat("</td></tr>");
+	}
+	
+	private String createAchievementLink(User user){
+		return "<a href='viewAchivements?uID="+user.getAccountID()+"'>Achivements: </a>";
 	}
 	
 	/**

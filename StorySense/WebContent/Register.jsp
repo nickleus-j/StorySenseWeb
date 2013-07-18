@@ -128,7 +128,7 @@ width: 100%;
 		<button>More pictures</button>
 		 -->
 		 
-		 <input type="file" name="profPic" id="profPic"/>
+		 <input type="file" name="profPic" id="profPic" />
 		 
 		</td>
 		<td class="ErrorMessage" id="pictureError"></td>

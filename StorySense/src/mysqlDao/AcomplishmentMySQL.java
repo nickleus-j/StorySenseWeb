@@ -619,9 +619,7 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
 
-            ps = con.prepareStatement("SELECT Name, ID, count(storyAccomID) from likedstory,storyaccomplishment " +
-            		"WHERE storyAccomID=ID GROUP BY storyAccomID " +
-            		"ORDER by count(storyAccomID) DESC, ID");
+            ps = con.prepareStatement("SELECT Name, ID, count(storyAccomID) AS likeNum from likedstory,storyaccomplishment WHERE storyAccomID=ID AND Date(LikeTime)=Date(now()) GROUP BY storyAccomID  ORDER by likeNum DESC, ID");
             rs = ps.executeQuery();
             
             Acomplishment Story=null;
@@ -631,6 +629,9 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             }
             
             ps.close();
+			
+			if(Story==null)
+				getPopularStory(1, con, ps, rs);
 			con.close();
             return Story;
 		}catch(Exception ex){
@@ -639,6 +640,65 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
 		return null;
 	}
 
+	private Acomplishment getPopularStory(int dateOffset,Connection con,PreparedStatement ps,ResultSet rs){
+		try {
+            /*PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+            Date(Date(now()-?)
+            */
+
+            ps = con.prepareStatement("SELECT Name, ID, count(storyAccomID) AS likeNum " +
+            		"from likedstory,storyaccomplishment " +
+            		"WHERE storyAccomID=ID AND Date(LikeTime)=Date(Date(now()-?) " +
+            		"GROUP BY storyAccomID  ORDER by likeNum DESC, ID");
+            ps.setInt(1, dateOffset);
+            rs = ps.executeQuery();
+            
+            Acomplishment Story=null;
+            
+            if(rs.first()){
+            	Story=getStory(rs.getInt("ID"));
+            }
+            
+            
+            ps.close();
+			
+			
+			if(Story==null&&dateOffset<10)
+				getPopularStory(dateOffset-1, con, ps, rs);
+			else if(dateOffset>=10){
+				getPopularStory(con, ps, rs);
+			}
+			con.close();
+            return Story;
+		}catch(Exception ex){
+			Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+	
+	private Acomplishment getPopularStory(Connection con,PreparedStatement ps,ResultSet rs) throws SQLException{
+		ps = con.prepareStatement("SELECT Name, ID, count(storyAccomID) AS likeNum " +
+				"from likedstory,storyaccomplishment " +
+				"WHERE storyAccomID=ID " +
+				"GROUP BY storyAccomID  ORDER by likeNum DESC, ID");
+        rs = ps.executeQuery();
+        
+        Acomplishment Story=null;
+        
+        if(rs.first()){
+        	Story=getStory(rs.getInt("ID"));
+        }
+        
+        
+        ps.close();
+		con.close();
+		return Story;
+	}
+	
 	@Override
 	public List<Acomplishment> getStoriesOfWriterRated(int writerID) {
 		try {

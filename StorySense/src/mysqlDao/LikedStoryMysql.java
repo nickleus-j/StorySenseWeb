@@ -34,8 +34,8 @@ public class LikedStoryMysql extends LikedStoryDAO {
         	Connection con = myFactory.getConnection();
         	
         	ps = con.prepareStatement("INSERT INTO likedstory" +
-        			" (userID,storyAccomID) " +
-        			"VALUES (?,?)");
+        			" (userID,storyAccomID,LikeTime) " +
+        			"VALUES (?,?,now())");
             ps.setInt(1,userID);
             ps.setInt(2,storyID);
             ps.execute();
@@ -335,6 +335,7 @@ public class LikedStoryMysql extends LikedStoryDAO {
             	approval.setKey(rs.getInt("key"));
             	approval.setStoryID(rs.getInt("storyAccomID"));
             	approval.setUserID(rs.getInt("userID"));
+            	approval.setLikeTime(rs.getTimestamp("LikeTime"));
             }
             
             rs.close();

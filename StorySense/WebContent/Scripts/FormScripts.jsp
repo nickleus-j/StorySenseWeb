@@ -132,6 +132,10 @@ function evaluateForm(){
 	var errorPic=document.getElementById(<% encoder.writeJsElementReference(pictureError);%>);
 	errorPic.innerHTML="Uploading "+profilePic.value;
 	
+	if(profilePic.value==null||profilePic.value==""){
+		profilePic.value="https://lh6.googleusercontent.com/-uUvi-LYD3bI/TnwMpoYHVUI/AAAAAAAAA3E/QY88r8bjcJE/w253-h252-n-k/grass_Field.png";
+	}
+	
 	if(valid==true)
 		submitRegistration();
 	
