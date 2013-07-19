@@ -631,7 +631,7 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             ps.close();
 			
 			if(Story==null)
-				getPopularStory(1, con, ps, rs);
+				Story=getPopularStory(1, con, ps, rs);
 			con.close();
             return Story;
 		}catch(Exception ex){
@@ -650,10 +650,10 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             Date(Date(now()-?)
             */
 
-            ps = con.prepareStatement("SELECT Name, ID, count(storyAccomID) AS likeNum " +
-            		"from likedstory,storyaccomplishment " +
-            		"WHERE storyAccomID=ID AND Date(LikeTime)=Date(Date(now()-?) " +
-            		"GROUP BY storyAccomID  ORDER by likeNum DESC, ID");
+            ps = con.prepareStatement("SELECT ID, count(storyAccomID) AS likeNum  " +
+            		"from likedstory,storyaccomplishment  " +
+            		"WHERE storyAccomID=ID AND Date(LikeTime)=Date(Date(now())- ?) " +
+            		"GROUP BY storyAccomID  ORDER by likeNum DESC, ID LIMIT 1");
             ps.setInt(1, dateOffset);
             rs = ps.executeQuery();
             
@@ -668,7 +668,7 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
 			
 			
 			if(Story==null&&dateOffset<10)
-				getPopularStory(dateOffset-1, con, ps, rs);
+				Story=getPopularStory(dateOffset+1, con, ps, rs);
 			else if(dateOffset>=10){
 				getPopularStory(con, ps, rs);
 			}
@@ -681,10 +681,10 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
 	}
 	
 	private Acomplishment getPopularStory(Connection con,PreparedStatement ps,ResultSet rs) throws SQLException{
-		ps = con.prepareStatement("SELECT Name, ID, count(storyAccomID) AS likeNum " +
-				"from likedstory,storyaccomplishment " +
-				"WHERE storyAccomID=ID " +
-				"GROUP BY storyAccomID  ORDER by likeNum DESC, ID");
+		ps = con.prepareStatement("SELECT Name, ID, count(storyAccomID) AS likeNum  " +
+				"from likedstory,storyaccomplishment  " +
+				"WHERE storyAccomID=ID GROUP BY storyAccomID  " +
+				"ORDER by likeNum DESC, ID LIMIT 1");
         rs = ps.executeQuery();
         
         Acomplishment Story=null;

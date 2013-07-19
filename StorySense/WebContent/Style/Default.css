@@ -182,6 +182,12 @@ footlist{
 	float: right;	
 }
 
+.spacedPanel{
+	margin:3%;
+	background:"dodgerblue";
+	border:thin;
+}
+
 
 /* ~~ miscellaneous float/clear classes ~~ */
 .fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */

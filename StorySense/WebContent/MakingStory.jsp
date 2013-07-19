@@ -9,6 +9,21 @@
 <script src="Scripts/AJAXscirpts.js"></script>
 <script src="Scripts/CompleteStoriesForm.js"></script>
 </head>
+<style>
+#fontStylefeed{
+font-family: Segoe UI; font-size: 12pt;
+} 
+#tableBorderfeed
+{
+border: 2px solid black;
+border-radius: 4px;
+margin-left: 15%;
+margin-top: 2%;
+margin-right: 2%;
+margin-bottom: -2%;
+width: 75%;
+}
+</style>
 <body bgcolor="CCFFFF">
 
 
@@ -17,12 +32,13 @@
 	<div id="container">
 	<div id="center" class="column">
 	
-	
-	
+	<table width="60%" align="center" bgcolor="white"><tr><td>
 	<h1>Come on let us write a story! Help me finish the story by putting words into the blanks</h1>
-	
+	</td></tr></table>
+
 	<form name="Answers" id="Answers" action="StoryWriter">
-	<table align="center" width="50%" bgcolor="skyblue">
+	<table id="tableBorderfeed" align="center" width="50%" bgcolor="skyblue">
+	
 	<tr>
 	<td>Story Name<input type="text" id="storyName" name="storyName"/></td>
 	<td id="nameValidation" class="ErrorMessage"><input type="reset"/></td>

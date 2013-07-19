@@ -55,13 +55,14 @@ overflow:scroll;
 	
 	<tr align="center"><td>
 		<table id="tableBorder3" class="tableBorder3" bgcolor = "#7DFB9D">
-		<thead><tr><th  id="fontStyle2">My Stories</th></tr></thead>
+		<thead><tr><th colspan="2"  id="fontStyle2">My Stories</th></tr></thead>
 		<tr><td>
 		<input type="radio" name=<% wcm.writeJsElementReference(orderTypreMyStories); %> 
 			Value=<% wcm.writeJsElementReference(AscVal);%> checked/>Ascending
 		<input type="radio" name=<% wcm.writeJsElementReference(orderTypreMyStories); %>
 			Value=<% wcm.writeJsElementReference(DesVal); %>/>Descending
 		</td>
+		<td><a href="MakingStory.jsp">Create more stories</a></td>
 		</tr>		
 		</table>
 	</td></tr>

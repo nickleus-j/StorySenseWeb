@@ -102,7 +102,7 @@ public class WebCodeMaker {
 		String imgCode="";
 		
 		Profile profile=profileDAO.getProfile(u);
-		imgCode=imgCode.concat("<img width=\"100\" height=\"100\" src='"+profile.getImageURL()+"'/>");
+		imgCode=imgCode.concat("<img width=\"50\" height=\"50\" src='"+profile.getImageURL()+"'/>");
 		
 		return imgCode;
 		

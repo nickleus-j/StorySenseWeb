@@ -56,7 +56,7 @@ likedStories=<% out.write(sLoader.PreviewLikedStoriesJson(myUser));%>
 	
 	<tr align="center"><td>
 		<table id="tableBorder3" class="tableBorder3" bgcolor = "#7DFB9D">
-		<thead><tr><th  id="fontStyle2">Stories of
+		<thead><tr><th  colspan="2" id="fontStyle2">Stories of
 			<% out.print(myUser.getName()); %></th></tr></thead>
 			<tr><td>
 		<input type="radio" name=<% wcm.writeJsElementReference(orderTypreMyStories); %> 
@@ -64,6 +64,7 @@ likedStories=<% out.write(sLoader.PreviewLikedStoriesJson(myUser));%>
 		<input type="radio" name=<% wcm.writeJsElementReference(orderTypreMyStories); %>
 			Value=<% wcm.writeJsElementReference(DesVal); %>/>Descending
 		</td>
+		<td><a href="MakingStory.jsp">Create more stories</a></td>
 		</tr>			
 		</table>
 	</td></tr>
