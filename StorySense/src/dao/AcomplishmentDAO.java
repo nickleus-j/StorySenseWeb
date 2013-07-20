@@ -33,6 +33,8 @@ public abstract class AcomplishmentDAO {
 	public abstract List<Acomplishment> getStoryWithAtLeastLevel(int readerID,int level);
 	public abstract List<Acomplishment> getUserStoryWithAtLeastLevel(int level,int writerID,int readerID);
 	public abstract Acomplishment getPopularStory();
+	public abstract Acomplishment getHighestAverageScoredStory();
+	public abstract String getHighestAverageScoredStoryJson();
 	public abstract String getMostLikeStoryTitle(int writerID);
 	public abstract int getMaximumNumberLikesForStory(int writerID);
 	public abstract List<Acomplishment> getStoriesWrittenOn(int userID,String date);

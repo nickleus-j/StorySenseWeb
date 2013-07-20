@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspWriter;
 
 import dao.AcomplishmentDAO;
 import dao.DAOFactory;
@@ -116,6 +117,32 @@ public class StoryScoreLoader extends BaseServlet {
 				/*Generate HTML code*/
 				out.write("<tr>");
 				out.write("<td>"+myUser.getName()+"</td>");
+				out.write("<td>"+ratings.get(ctr).getScore()+"</td>");
+				
+				out.write("</tr>");
+				}/*End of loop*/
+			else out.write("<tr><th colspan=\"3\">No scores yet</th></tr>");
+		out.write("</table>");
+	}
+	
+	public void generateScoreHtmlTbl(JspWriter out,int storyID) throws IOException{
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		UserDAO myUserDao=myDAOFactory.createUserDAO();
+		AcomplishmentDAO acomDao=myDAOFactory.createAcomplishmentDAO();
+		Acomplishment myAcom=acomDao.getStory(storyID);
+		RatingDAO myRatingDao=myDAOFactory.createRatingDAO();
+		ArrayList<Rating> ratings=(ArrayList<Rating>) myRatingDao.getRatingsOfAccomplishment(myAcom.getID());
+		User myUser;
+		
+		out.write("<table  bgcolor = \"white\" width=\"100%\">");
+		out.write("<tr><th>Reviewer</th><th>Story Title</th><th>Score</th></tr>");
+		if(ratings!=null)
+			for(int ctr=0;ctr<ratings.size();ctr++){
+				myUser=myUserDao.getUser(ratings.get(ctr).getReaderID());
+				/*Generate HTML code*/
+				out.write("<tr>");
+				out.write("<td>"+myUser.getName()+"</td>");
+				out.write("<td>"+myAcom.getName()+"</td>");
 				out.write("<td>"+ratings.get(ctr).getScore()+"</td>");
 				
 				out.write("</tr>");

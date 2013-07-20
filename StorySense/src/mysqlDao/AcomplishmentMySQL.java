@@ -619,7 +619,10 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
 
-            ps = con.prepareStatement("SELECT Name, ID, count(storyAccomID) AS likeNum from likedstory,storyaccomplishment WHERE storyAccomID=ID AND Date(LikeTime)=Date(now()) GROUP BY storyAccomID  ORDER by likeNum DESC, ID");
+            ps = con.prepareStatement("SELECT Name, ID, count(storyAccomID) AS likeNum " +
+            		"from likedstory,storyaccomplishment " +
+            		"WHERE storyAccomID=ID AND Date(LikeTime)=Date(now()) " +
+            		"GROUP BY storyAccomID  ORDER by likeNum DESC, ID");
             rs = ps.executeQuery();
             
             Acomplishment Story=null;
@@ -872,4 +875,75 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
 		return null;
 	}
 
+	@Override
+	public String getHighestAverageScoredStoryJson() {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+            float avg=0f;
+            String authorName="";
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT accomplishmentID,storyaccomplishment.Name,account.Name AS author " +
+            		",AVG(Score) AS AveScore from rating,storyaccomplishment,account " +
+            		"WHERE ID=accomplishmentID AND storyaccomplishment.AccountID=account.accountID  " +
+            		"group BY ID ORDER BY AveScore DESC LIMIT 1");
+            rs = ps.executeQuery();
+            
+            Acomplishment Story=null;
+            
+            if(rs.first()){
+            	Story=getStory(rs.getInt("accomplishmentID"));
+            	avg=rs.getFloat("AveScore");
+            	authorName=rs.getString("author");
+            }
+            
+            ps.close();
+			
+			if(Story==null)
+				Story=getPopularStory(1, con, ps, rs);
+			con.close();
+			
+            return "{\"StoryName\":\""+Story.getName()+"\",\"Avg\":"+avg+",\"userID\":"+
+				Story.getAccountID()+",\"storyID\":"+Story.getID()+",\"Author\":\""+authorName+"\"}";
+				
+		}catch(Exception ex){
+			Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+
+	@Override
+	public Acomplishment getHighestAverageScoredStory() {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT ID,Name,AVG(Score) AS AveScore " +
+            		"from rating,storyaccomplishment " +
+            		"WHERE ID=accomplishmentID  group BY ID ORDER BY AveScore DESC LIMIT 1");
+            rs = ps.executeQuery();
+            
+            Acomplishment Story=null;
+            
+            if(rs.first()){
+            	Story=getStory(rs.getInt("ID"));
+            }
+            
+            ps.close();
+			
+			if(Story==null)
+				Story=getPopularStory(1, con, ps, rs);
+			con.close();
+            return Story;
+		}catch(Exception ex){
+			Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
 }

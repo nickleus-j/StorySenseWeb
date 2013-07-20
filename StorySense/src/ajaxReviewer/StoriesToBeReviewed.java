@@ -101,7 +101,7 @@ public class StoriesToBeReviewed extends BaseServlet {
 		String tblIni="<tr><th colspan=6 id=\"validatedStoriesHeader\" class=\"clickable\" " +
 				"onclick=\"ReviewStoriesInUser(10,1,'')\">" +
 				"Stories from other learners</th></tr>" +
-				"<tr><th>Author</th><th>Story Title</th><th>Show Story</th></tr>";
+				"<tr><th>Author</th><th>Story Title</th><th>Rate Story</th></tr>";
 			
 		out.write(tblIni);
 			/*Loop that shows the story Links*/

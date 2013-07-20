@@ -80,6 +80,21 @@ public class LikeAchievements {
 				medal.setLearnerID(story.getAccountID());
 				learnerBadgeDao.giveAchievement(medal);
 				notifier.createAchievementNotification(medal, "");
+				awardPopularity(myDaoFactory,story,medal,notifier,aWatcher);
 			}
 	}/*End of method*/
+	
+	private void awardPopularity(DAOFactory myDaoFactory,Acomplishment story,Learnerachievement medal,
+			NotificationCreator notifier,AchievementWatcher aWatcher){
+		AcomplishmentDAO acomDao=myDaoFactory.createAcomplishmentDAO();
+		LearnerAcievementDAO learnerBadgeDao=myDaoFactory.createLearnerAcievementDAO();
+		if(story.getID()==acomDao.getPopularStory().getID()&&
+				!learnerBadgeDao.hasLearnerAchieved(story.getAccountID(), aWatcher.getPopularAchievementId())){
+			medal.setAchievementID(aWatcher.getPopularAchievementId());
+			medal.setLearnerID(story.getAccountID());
+			learnerBadgeDao.giveAchievement(medal);
+			notifier.createAchievementNotification(medal, "Your story is the most liked today");
+		}/**/
+	}
+	
 }

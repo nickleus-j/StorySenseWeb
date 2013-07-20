@@ -144,6 +144,17 @@ public class CompleteStoryLoader {
 			}catch(IOException ie){}
 	}
 	
+	public void encodeStory(int storyID,JspWriter out){
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
+		Acomplishment story=myAcomDAO.getStory(storyID);
+		String code="<h1>"+story.getName()+"</h1><hr/>";
+		
+		try{
+			out.write(code+generateLikeStoryBtHTML(story)+"<br/>"+loadStory(story.getFileURL()));
+		}catch(IOException ie){}
+	}
+	
 	/**
 	 * Shows the stories requires the AjaxScripts
 	 * @param out
@@ -154,6 +165,7 @@ public class CompleteStoryLoader {
 		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStories(limit);
 		
 		encodeStoriesInHTML(out,Stories,myDAOFactory.createUserDAO());
+		
 	}
 	
 	/**This generates an HTML code to be 
@@ -175,6 +187,23 @@ public class CompleteStoryLoader {
 		return val.concat("</tr>");
 	}
 	
+	private String generateLikeButtonHTML(String storyID,Acomplishment myStory){
+		String btElemName="btStory" +storyID,btIDElemName="id=\""+btElemName+"\"";
+		String btCode="";
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		LikedStoryDAO myLikeDAO=myDAOFactory.createLikeDAO();
+		
+		if(myLikeDAO.didUserLike(SessionUser.getAccountID(), myStory.getID())){
+			btCode=btCode.concat("<button "+btIDElemName+" " +
+					"onclick=\"showNumberOfLikes('"+storyID+"'," +myStory.getID()+",'--','"+btElemName+"')\">" +"Unlike");
+		}
+		else btCode=btCode.concat("<button "+btIDElemName+
+				" onclick=\"showNumberOfLikes('"+storyID+"'," +myStory.getID()+","+"'like','"+btElemName+"')\">" +
+				"Like");
+		
+		return btCode.concat("</button>");
+	}
+	
 	
 	/**
 	 * Generates HTML syntax for a button that will like/unlike a
@@ -183,12 +212,14 @@ public class CompleteStoryLoader {
 	 * @param myStory
 	 * @return
 	 */
-	private String generateLikeButtonHTML(String storyID,Acomplishment myStory){
+	private String generateLikeStoryBtHTML(Acomplishment myStory){
+		int storyID=myStory.getID();
 		String btElemName="btStory" +storyID,btIDElemName="id=\""+btElemName+"\"";
 		String btCode="";
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		LikedStoryDAO myLikeDAO=myDAOFactory.createLikeDAO();
 		
+		btCode+=myLikeDAO.countStoryLikes(storyID);
 		if(myLikeDAO.didUserLike(SessionUser.getAccountID(), myStory.getID())){
 			btCode=btCode.concat("<button "+btIDElemName+" " +
 					"onclick=\"showNumberOfLikes('"+storyID+"'," +myStory.getID()+",'--','"+btElemName+"')\">" +"Unlike");
