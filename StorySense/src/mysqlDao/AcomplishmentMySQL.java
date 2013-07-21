@@ -937,8 +937,6 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             
             ps.close();
 			
-			if(Story==null)
-				Story=getPopularStory(1, con, ps, rs);
 			con.close();
             return Story;
 		}catch(Exception ex){

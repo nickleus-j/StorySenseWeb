@@ -17,15 +17,15 @@ font-family: Segoe UI; font-size: 11pt;
 <script>
 var popularStory;
 	function writeHighScoredStory(elem){
-		elem.innerHTML=writeStoryLink()+"<br/>"+writePopularStoryAuthorLink();
+		elem.innerHTML=writeStoryLink()+"<br/>"+writePopularStoryAuthorLink()+"Average Score: "+popularStory.Avg;
 	}
 
 	
 	function writeStoryLink(){
-		return"<a href='StoryDisplay.jsp?aID="+popularStory.storyID+"''>"+popularStory.StoryName+"</a>";
+		return"<a href='StoryDisplay.jsp?aID="+popularStory.storyID+"'>"+popularStory.StoryName+"</a>";
 	}
 	function writePopularStoryAuthorLink(){
-		return"<a href='viewAUser?uID="+popularStory.userID+"'> By"+popularStory.Author+"</a>";
+		return"<a href='viewAUser?uID="+popularStory.userID+"'> By "+popularStory.Author+"</a><br>";
 	}
 </script>
  <div id="right" class="column">

@@ -26,13 +26,13 @@
 .tableStyleProfile{
 	background: #FEDFDF;
 	border: 5px solid maroon;
-	margin-left: 20%;
 	}
 
 #profileDiv{
-	max-width:83%;
+	max-width:70%;
 	margin-top: 3%;
-	margin-left: 2%;
+	margin-left: 15%;
+	float: left;
 	}
 
 h4{
@@ -163,19 +163,19 @@ Information
 		<td class="ErrorMessage" id="surnameError"></td>
 		</tr>
 		
-		<!-- No need to modify birthday -->
+		<!-- No need to modify birthday
 		
 		<tr>
 		<th>Profile Picture</th>
 		<td>
          Click to change<br/>
-		 <% out.write(profileEncoder.enterUserImageTag(sessionUser)); %>
-		 <input type="file" name="profPic" id="profPic" value="<% out.write(theProfile.getImageURL());%>"/>
+		 <% //out.write(profileEncoder.enterUserImageTag(sessionUser)); %>
+		 <input type="file" name="profPic" id="profPic" value="<% //out.write(theProfile.getImageURL());%>"/>
 		 
 		</td>
 		<td class="ErrorMessage" id="pictureError"></td>
 		</tr>
-	
+	 -->
 		
 		<tr>
 		<th><input type="reset" value="Reset form">
@@ -199,7 +199,7 @@ Information
 <tr>
 <td></td>
 <td> <% learnerInfoEncoder liEncoder=new learnerInfoEncoder();
-		liEncoder.writeHtmlAchievements(out, sessionUser);
+		liEncoder.writeHtmlAchievements(out, sessionUser,100,100);
 		%>
 
  </td>

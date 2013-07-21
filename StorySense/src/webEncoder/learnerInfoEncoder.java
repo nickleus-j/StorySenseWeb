@@ -83,7 +83,7 @@ public class learnerInfoEncoder {
 	
 	public void writeHtmlAchievements(JspWriter out,User givenUser){
 		try {
-			out.write("<h2>Achievemnts</h2>");
+			out.write("<h2>Achievements</h2>");
 			out.write(writeHtmlAchievements(givenUser));
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -4,6 +4,7 @@ import java.util.List;
 
 import notification.NotificationCreator;
 
+import dao.AcomplishmentDAO;
 import dao.DAOFactory;
 import dao.LearnerAcievementDAO;
 import dao.UserDAO;
@@ -64,5 +65,20 @@ public class PointsAchievement {
 		
 		/*Other achievement*/
 		awardLeaderBoardAchievement(awardee);
+		awardTopScorer(awardee,watcher,alerter,medal,learnerBadgeDao,myDaoFactory);
 	}
+	
+	public void awardTopScorer(User awardee,AchievementWatcher watcher,NotificationCreator alerter,
+			Learnerachievement medal,LearnerAcievementDAO learnerBadgeDao,DAOFactory myDaoFactory){
+		AcomplishmentDAO acomDao=myDaoFactory.createAcomplishmentDAO();
+		
+		if(!watcher.didUSerHaveAchievement(awardee.getAccountID(), watcher.getTopScorerAchievementId())&&
+				acomDao.getHighestAverageScoredStory().getAccountID()==awardee.getAccountID()){
+			medal.setAchievementID(watcher.getTopScorerAchievementId());
+			medal.setLearnerID(awardee.getAccountID());
+			learnerBadgeDao.giveAchievement(medal);
+			alerter.createAchievementNotification(medal, "");
+		}
+	}/**/
+	
 }

@@ -34,4 +34,5 @@ public class AchievementWatcher {
 	public int get50StoriesAchievementId(){return 12;}
 	public int getLeaderboardAchievementId(){return 13;}
 	public int get5LikesAchievementId(){return 14;}
+	public int getTopScorerAchievementId(){return 15;}
 }
