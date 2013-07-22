@@ -1,0 +1,9 @@
+? | Is-A | "weather"
+? | Is-A | "dinosaur"
+? | PropertyOf | "teeth"
+? | PropertyOf | "tail"
+? | Is-A | "feeling"
+"dinosaur" | Does | ?
+"painting" | MadeOf | ?
+? | Is-A | "painting"
+"person" | CanBe | ?

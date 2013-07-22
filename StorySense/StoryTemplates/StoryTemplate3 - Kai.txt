@@ -1,0 +1,5 @@
+<$insect = (?, "Is-A", "insect")>
+<$name1 = (?, "Is-A", "name")>
+<$name2 = (?, "Is-A", "name")>
+
+It was a [1] afternoon and %$name1% is looking for food. %$name1% is a beautiful %$insect% and %$name1% size is [2,7] as compared to other %$insect%. %$name1%'s gender is [12]. Its body is color [3,8] and its texture is [4,9]. %insect% are usually found in [5,9,10,11]. While roaming around, %$name1% saw food from a couple of meters away, near a river. As %$name1% went near it, %$name1% saw %$name2%. %$name2% was stuck in a [6]. Without thinking twice, %$name1% saved %$name2% even if %$name1% found food was consumed by another %$insect%.

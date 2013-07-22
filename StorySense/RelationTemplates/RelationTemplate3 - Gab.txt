@@ -1,0 +1,5 @@
+$object | LocatedAt | ?
+? | is-A | “location”
+$object | LocatedNear | ?
+? | is-A | “person”
+? | is-A | “emotion”

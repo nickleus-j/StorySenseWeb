@@ -1,0 +1,4 @@
+<$person = (?, Is-A, "person")>	
+<$object = (?, Is-A, "object")>
+
+Yesterday, I went to %$person%'s house which is near the [1]. %$person% is a [2] and %$person%'s gender is [3]. %$person likes to [4,5]. %$person% showed me how to do it and I felt really [6]. %$person% gave me a/an %$object% for visiting. Before I left, %$person% told me that I should [7] so I can be a [8,9] in the future. 

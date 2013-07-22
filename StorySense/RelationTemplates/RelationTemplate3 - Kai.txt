@@ -1,0 +1,12 @@
+? | Is-A | "weather"
+? | Is-A | "size"
+? | Is-A | "color"
+? | Is-A | "texture"
+? | Is-A | "location"
+? | Is-A | "object"
+? | SizeOf | $insect
+? | ColorOf | $insect
+? | TextureOf | $insect
+? | LocatedNear | "river"
+$insect | LocatedAt | ?
+? | GenderOf | $name1

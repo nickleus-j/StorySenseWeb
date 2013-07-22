@@ -1,0 +1,11 @@
+? | ColorOf | $object
+$object | MadeOf | ?
+? | TextureOf | $object
+? | Is-A | "weather"
+? | Is-A | "feeling"
+? | Is-A | "action"
+? | Is-A | "color"
+? | Is-A | "location"
+? | Is-A | "material"
+$object | LocatedAt | ?
+$object | RecievesAction | ?

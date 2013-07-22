@@ -1,0 +1,21 @@
+<$person = (?,Is-A,"person")>	
+<$job = (?,Is-A,"job")>	
+
+#if("boy",GenderOf,$person)
+{
+<$pronoun = "he">
+<$possessive_pronoun = "his">
+<$action_pronoun = "him">
+}
+#else
+{
+<$pronoun = "she">
+<$possessive_pronoun = "her">
+<$action_pronoun = "her">
+}
+
+Today during lunch time, I felt very [1] so my friend and I just talked instead. %$possessive_pronoun% name is %&person% and %$pronoun% said that I can be a [2,3] someday. 
+I told %$possessive_pronoun% that she can be a [2,3] because she is smart. 
+Another friend of mine came and she said that she wants to be a %$job%. 
+A %$job% is someone who does [4]. We went back to class afterwards as it was already time.
+THE END

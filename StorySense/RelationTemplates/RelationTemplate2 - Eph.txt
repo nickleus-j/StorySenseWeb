@@ -1,0 +1,9 @@
+$location | LocatedNear | ?
+$person | CanBe | ?
+? | GenderOf | $person
+$person | Does | ?
+? | Is-A | "action"
+? | Is-A | "emotion"
+"person" | Does | ?
+? | Is-A | "profession"
+"person" | CanBe | ?

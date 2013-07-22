@@ -1,0 +1,8 @@
+? | GenderOf | $teacher1
+? | Is-A | "gender"
+? | Is-A | "action"
+? | Is-A | "subject"
+? | Is-A | "profession"
+"person" | CanBe | ?
+$profession | Does | ?
+"student" | Does | ?

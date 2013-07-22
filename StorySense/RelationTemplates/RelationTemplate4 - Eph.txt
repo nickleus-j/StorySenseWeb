@@ -1,0 +1,7 @@
+? | Is-A | "weather"
+? | Is-A | "object"
+? | ReceivesAction | "deliver"
+? | LocatedNear | "house"
+$animal | Does | ?
+? | Is-A | "emotion"
+"mailman" | Does | ?

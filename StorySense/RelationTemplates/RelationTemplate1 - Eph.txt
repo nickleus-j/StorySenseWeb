@@ -1,0 +1,8 @@
+? | Is-A | "weather"
+? | Is-A | "location"
+? | ColorOf | $object
+? | ShapeOf | $object
+$object | UsedFor | ?
+$object | ReceivesAction | ?
+? | Is-A | "action"
+? | Is-A | "emotion"

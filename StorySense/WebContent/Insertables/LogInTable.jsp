@@ -1,11 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html><!-- TrythisServlet -->
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Log in</title>
 
+    <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    import="entity.*"
+    %>
+<!DOCTYPE html>
 <style>
 .tableLogin {
 
@@ -39,8 +37,20 @@ color: white;
 }
 </style>
 
-</head>
-<body>
+<%	//Load user from the session
+	User myUser=(User)session.getAttribute("user");
+
+	if(myUser!=null)
+	{
+		if(User.Roles.learner.isLearner(myUser.getRole()))
+        	response.sendRedirect("../StorySense/LearnerHomeSample2.jsp");
+        else if(User.Roles.learner.isReviwer(myUser.getRole()))
+        	response.sendRedirect("../StorySense/ReviewerHome.jsp");
+        else if(User.Roles.learner.isAdmin(myUser.getRole()))
+        	response.sendRedirect("../StorySense/AdminHome.jsp");
+	}
+%>
+
 <form id="logInForm" action="LogIn" method="post">
 <table align="center">
 <tr><td align="center">
@@ -84,6 +94,3 @@ Log in
 
 </form>
 
-
-</body>
-</html>

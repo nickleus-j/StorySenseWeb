@@ -1,0 +1,4 @@
+? | is-A | “feeling”
+? | is-A | “job”
+$person | CanBe | ?
+$job | Does | ?

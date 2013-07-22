@@ -1,0 +1,9 @@
+? | GenderOf | $person
+? | SizeOf | "alarm clock"
+? | ColorOf | "alarm clock"
+? | Is-A | "object"
+"alarm clock" | LocatedAt | ?
+? | Is-A | "location"
+"sleep" | DoneAt | ?
+? | Is-A | "food"
+"food" | ReceivesAction | eat 

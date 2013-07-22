@@ -1,0 +1,25 @@
+<$char1 = (? | Is-A | "name")>
+<$char2 = (? | Is-A | "name")>
+
+One [1] day, %$char1% and %$char2% went to the museum.
+
+#if(*){
+
+	They saw different fossils of dinosaurs. %$char1%'s favorite dinosaur is the [2]. It had [3] teeth and [4] tail.
+	
+	#if("boy" | GenderOf | $char1)
+	{
+		He felt [5] because he knew that his favorite dinosaur roamed the earth too.
+	}
+	else
+	{
+		She imitated her favoirte dinosaur's [6] in front of %$char2%. %$char2% [5] at %$char1%'s not so good imitation.
+	}
+}
+
+
+else {
+	They saw different paintings. Some were easy to understand while some are not. %$char1% knew that paintings were made 	using [7]. %$char1% saw the famous [8] painting. %$char1% and %$char2% appreciated the painting's beauty.
+}
+
+%$char1% and %$char2% [5] the museum so they decided to tell their [9] so that they can go with %$char1% and %$char2% next time.

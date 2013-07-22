@@ -1,0 +1,4 @@
+? | Is-A | "action"
+? | Is-A | "emotion"
+"plant" | RecievesAction | ?
+? | SizeOf | "plant"

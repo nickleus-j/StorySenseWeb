@@ -1,0 +1,20 @@
+<$object = (?, Is-A, "object")>
+<$day = (?, Is-A, "day">
+<$char1 = (?, Is-A, "name")>
+<$char2 = (?, Is-A, "name")>
+<$sport = (?, Is-A, "sport")>
+
+
+Today is %$day%. It is a [4] day.
+
+#if(*){
+%$char1% wants to play %$sport% today in the [8,10]. \n
+}
+#else{
+Today, %$char1% wants to play %$sport% in the [8,10]. \n
+}
+
+%$sport% is played using a/an %$object%. %$char1% liked its color which is [1,7] and %$char1% knew that it was made of [2,9]. %$char1% tried to [11,6] the %$object% and it felt [3]. %$char2% saw %$char1% and %$char2% wanted to play %$sport% too. %$char1% wanted to play alone but %$char1%'s teacher told %$char1% that playing with other people is more [5] than playing alone. So %$char1% allowed %$char2% to play. They played and played until they felt [5]. %$char1% realized that playing with %$char2% was fun and they became best friends ever since.
+
+
+

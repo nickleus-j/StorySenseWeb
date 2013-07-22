@@ -1,0 +1,5 @@
+<$rabbit1 = (? | Is-A | "name")>
+<$rabbit2 = (? | Is-A | "name")>
+
+Once there were two rabbits, %$rabbit1% and %$rabbit2%. They planted a carrot in preparation for the incoming famine. Everyday, %$rabbit1% waters the carrot and %$rabbit1% makes sure that his plant gets enough []. %$rabbit2% also [1] his own plant. After some time, the leaves of %$rabbit2%'s plant grew very tall. In fact, taller than %$rabbit1%'s! %$rabbit2% became [2] as he showed it to %$rabbit1%. Eventually, %$rabbit2% stopped taking care of his plant because he knew that %$rabbit1% would not be able to catch up. However, %$rabbit1% contined to [1] his plant. When they [3] their plants, they were shocked at each other's outcome. %$rabbit1%'s carrot was [4] than %$rabiit2%'s!
+

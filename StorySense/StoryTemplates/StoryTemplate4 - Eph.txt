@@ -1,0 +1,12 @@
+<%$object% = (?, Is-A, "object")>
+<%$animal% = (?, Is-A, "animal")>
+
+#if
+{
+It was a [1] afternoon.
+}
+#else
+It was a [1] night.
+}
+
+A mailman was out to deliver a [2,3]. He went to the [4] near a house. He heard the %$animal% [5]. Because of the %$animal%, the mailman became [6] so he left immediately. And then, he went to the next house to [7] the other %$object%.

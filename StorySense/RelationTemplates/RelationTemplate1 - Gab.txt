@@ -1,0 +1,6 @@
+? | Is-A | "location"
+$person | LocatedAt | ?
+? | SizeOf | $object
+? | ColorOf | $object
+$object | UsedFor | ?
+? | Is-A | “emotion”

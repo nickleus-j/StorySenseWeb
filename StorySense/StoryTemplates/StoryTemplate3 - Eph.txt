@@ -1,0 +1,3 @@
+<%name = (?, Is-A, "name")>
+
+%$name% is my pet [1,2]. %$name% looked sick so I took him to the vet. The vet's clinic is located at [3]. We rode the [4] to go to the clinic. We arrived at the clinic and met the vet. The vet gave my pet a [5]. At the end, my pet became healthy and [6] again.

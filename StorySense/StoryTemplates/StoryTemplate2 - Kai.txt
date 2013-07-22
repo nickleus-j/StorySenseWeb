@@ -1,0 +1,5 @@
+<$profession = (?, Is-A, "profession")>
+<$student1 = (?, Is-A, "name")>
+<$teacher1 = (?, Is-A, "name")>
+
+Hi, I am %$student1%. I am currently in Teacher %$teacher1%'s class. Teacher %$teacher1%'s gender is [1,2]. I really like it when Teacher %$teacher1% [3,7] about butterflies. I really [3] butterflies. My favorite subject is [4] because I want to be a [5,6]. Teacher %$teacher1% told us that we need to [8] to become successful in reaching our dream.

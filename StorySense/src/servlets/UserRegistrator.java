@@ -211,15 +211,15 @@ public class UserRegistrator extends BaseServlet {
 	}
 	
 	
-	private void redirectUser(User myUser,HttpServletRequest request,HttpServletResponse response){
+	public void redirectUser(User myUser,HttpServletRequest request,HttpServletResponse response){
 		try{
 			if(myUser==null)
 				response.sendRedirect("LogInFail.jsp");
 			
 			if(User.Roles.learner.isLearner(myUser.getRole()))
-				response.sendRedirect("../StorySense/LearnerHomeSample.jsp");
+				response.sendRedirect("../StorySense/LearnerHomeSample2.jsp");
 			else if(User.Roles.learner.isReviwer(myUser.getRole()))
-				response.sendRedirect("../StorySense/ValidatedStories.jsp");
+				response.sendRedirect("../StorySense/ReviewerHome.jsp");
 			
 		}catch(IOException IOEx){
 			

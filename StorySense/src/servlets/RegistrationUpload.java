@@ -29,7 +29,7 @@ public class RegistrationUpload extends BaseServlet {
 	public void executeCustomCode(HttpServletRequest request,
 			HttpServletResponse response) {
 		String contentType = request.getContentType();
-		String pathPrefix="uploadedFiles/";
+		String pathPrefix="/uploadedFiles/";
 		
 		
 		PrintWriter out=null;

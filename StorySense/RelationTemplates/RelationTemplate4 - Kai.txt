@@ -1,0 +1,10 @@
+? | Is-A | "day"
+? | Is-A | "name"
+? | Is-A | "action"
+? | Is-A | "appliance"
+? | Is-A | "emotion"
+? | Is-A | "feeling"
+"woman" | GenderOf | ?
+? | PurposeOf | "staying clean"
+? | LeadsTo | "food"
+

@@ -1,0 +1,6 @@
+? | Is-A | "animal"
+? | Is-A | "pet"
+? | LocatedAt | "location"
+? | Is-A | "vehicle"
+? | Is-A | "object"
+? | Is-A | "trait"
