@@ -213,6 +213,11 @@ footlist{
 	padding: 1.2em;
 }
 
+.storyHead:HOVER{
+	background: navy;
+	color:orange;
+}
+
 body {
   min-width: 600px;      /* 2x LC width + RC width */
 }

@@ -31,6 +31,7 @@
 	CompleteStoryLoader cLoader=new CompleteStoryLoader(u);
 		if(storyID!=0)
 	cLoader.encodeStory(storyID, out);
+		cLoader.showUsersWhoLikedStory(storyID, out);
 		out.write("<h2>Scores given</h2>");
 		scoreLoader.generateScoreHtmlTbl(out, storyID);
 	%>

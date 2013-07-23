@@ -73,7 +73,8 @@ public class FeedFetcher extends BaseServlet {
 			
 			/*loop that displays the stories*/
 			for(int ctr=0;ctr<Stories.size();ctr++){
-				out.write("<tr id=\"titleFont\" class=\"storyHead\">");
+				out.write("<tr id=\"titleFont\" class=\"storyHead\"" +
+						" onClick=\"window.location.href='StoryDisplay.jsp?aID="+Stories.get(ctr).getID()+"'\">");
 				myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
 				theProfile=profDao.getProfile(myUser);
 				out.write("<td colspan=\"2\">\"" +Stories.get(ctr).getName()+"\"</td></tr><tr>"+

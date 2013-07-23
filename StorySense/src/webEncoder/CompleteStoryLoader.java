@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.jsp.JspWriter;
 
@@ -106,7 +107,7 @@ public class CompleteStoryLoader {
 			out.write("<tr><td id='1st'></td></tr>");
 			/*loop that displays the stories*/
 			for(int ctr=0;ctr<Stories.size();ctr++){
-				out.write("<tr class=\"storyHead\">");
+				out.write("<tr class=\"storyHead\" onClick=\"window.location.href='StoryDisplay.jsp?aID="+Stories.get(ctr).getID()+"'\">");
 				myUser=myUserDao.getUser(Stories.get(ctr).getAccountID());
 				out.write("<th></th><td style=\"font-size: 5px\"> \""+Stories.get(ctr).getName()+"\"</td> <th> </th>" +
 						"<td>"+myUser.getName()+"</td></tr>");
@@ -123,13 +124,17 @@ public class CompleteStoryLoader {
 	}
 	
 	public void encodeStoriesInHTML(JspWriter out,ArrayList<Acomplishment> Stories,User myUser){
-		
+		/*
+		 * <td style=\"font-size: 5px\" " +
+						"onClick=\"window.location.href='StoryDisplay.jsp?aID="+Stories.get(ctr).getID()+"'\"> 
+		 */
 		try{
 			out.write("<table id=\"tableBorderfeed2\" bgcolor=\"white\">");
 			out.write("<tr><td id='1st'></td></tr>");
 			/*loop that displays the stories*/
 			for(int ctr=0;ctr<Stories.size();ctr++){
-				out.write("<tr class=\"storyHead\">");
+				out.write("<tr class=\"storyHead\" " +
+						"onClick=\"window.location.href='StoryDisplay.jsp?aID="+Stories.get(ctr).getID()+"'\">");
 				out.write("<th></th><td style=\"font-size: 5px\"> \""+Stories.get(ctr).getName()+"\"</td> <th> </th>" +
 						"<td>"+myUser.getName()+"</td></tr>");
 				
@@ -374,6 +379,26 @@ public class CompleteStoryLoader {
 		
 		return json.concat("],\"user\":\""+myUser.getName()+"\"}");
 	}
+	
+	
+	public void showUsersWhoLikedStory(int storyID,JspWriter out) throws IOException{
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		UserDAO myUserDAO=myDAOFactory.createUserDAO();
+		List<User> users=myUserDAO.getUserWhoLiked(storyID);
+		HtmlLinkEncoder linker=new HtmlLinkEncoder();
+		out.write("<hr/><table  align=\"center\" ><h2>Users who liked the story</h2>");
+		
+		if(users.size()==0){
+			out.write("<tr><th>Nobody liked your story yet</th></tr>");
+		}
+		else {
+			for(int ctr=0;ctr<users.size();ctr++)
+				out.write("<tr><td>"+linker.createLinkToUser(users.get(ctr))+"</td></tr>");
+		}
+		
+		out.write("</table><hr/>");
+	}
+	
 	
 	/**
 	 * Creates a HTML element to Asynchronously get the Story from the server
