@@ -1,4 +1,4 @@
-$location | LocatedNear | ?
+$person | LocatedNear | ?
 $person | CanBe | ?
 ? | GenderOf | $person
 $person | Does | ?

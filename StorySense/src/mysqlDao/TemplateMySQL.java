@@ -185,7 +185,7 @@ public class TemplateMySQL extends TemplateDAO {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
             Connection con = myFactory.getConnection();
 
-            ps = con.prepareStatement("SELECT * FROM template WHERE LevelReq >= ?");
+            ps = con.prepareStatement("SELECT * FROM template WHERE LevelReq <= ?");
             ps.setInt(1, minimumLevel);
             rs = ps.executeQuery();
            

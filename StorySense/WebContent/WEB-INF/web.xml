@@ -8,6 +8,17 @@
     <session-timeout>50</session-timeout>
   </session-config>
   <servlet>
+    <description>Logout Servlet</description>
+    <display-name>Logout</display-name>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>servlets.Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+  <!-- 
+  <servlet>
     <description>A trial Servlet</description>
     <display-name>TrythisServlet</display-name>
     <servlet-name>TrythisServlet</servlet-name>
@@ -27,16 +38,7 @@
     <servlet-name>LogIn</servlet-name>
     <url-pattern>/LogIn</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description>Logout Servlet</description>
-    <display-name>Logout</display-name>
-    <servlet-name>Logout</servlet-name>
-    <servlet-class>servlets.Logout</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Logout</servlet-name>
-    <url-pattern>/Logout</url-pattern>
-  </servlet-mapping>
+  
   <servlet>
     <description>Registration Servlet for user accounts</description>
     <display-name>UserRegistration</display-name>
@@ -74,5 +76,5 @@
   <servlet-mapping>
     <servlet-name>StoryLoader</servlet-name>
     <url-pattern>/StoryLoader</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
 </web-app>

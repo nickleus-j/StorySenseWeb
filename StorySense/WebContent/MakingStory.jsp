@@ -20,9 +20,10 @@ border-radius: 4px;
 margin-left: 15%;
 margin-top: 2%;
 margin-right: 2%;
-margin-bottom: -2%;
+margin-bottom: 2%;
 width: 75%;
 }
+
 </style>
 <body bgcolor="CCFFFF">
 
@@ -32,7 +33,7 @@ width: 75%;
 	<div id="container">
 	<div id="center" class="column">
 	
-	<table width="60%" align="center" bgcolor="white"><tr><td>
+	<table id="tableBorderfeed" bgcolor="pink" width="60%" align="center"><tr><td>
 	<h1>Come on let us write a story! Help me finish the story by putting words into the blanks</h1>
 	</td></tr></table>
 
@@ -51,7 +52,7 @@ width: 75%;
 		
 		<%		/*LearnerStoryFininshedSample.jsp*/
 		StoryEncoder TheEncoder=new StoryEncoder(request,out);
-			TheEncoder.encodeStory();
+			out.write(TheEncoder.encodeStory(u.getLevel()));
 		%>
 	<hr>
 	</td></tr>

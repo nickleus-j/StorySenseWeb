@@ -52,7 +52,7 @@ public abstract class DBConnectionFactory {
                
                //The URL of the database to be used
                url  = "jdbc:mysql://localhost:3306/ontology";
-               
+               //url  = "jdbc:mysql://127.6.230.130:3306/ontology";
               // The username and password for the account in the MySQL server
                username  = "myUser";
                password = "hello";
