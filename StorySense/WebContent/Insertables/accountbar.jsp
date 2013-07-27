@@ -17,14 +17,14 @@
 border: 5px solid green;
 border-radius: 0px;
 font-family: Segoe UI; font-size: 12pt;
-width:100;
+width:100%;
 }
 
 .accountPane{
 overflow:scroll;
 max-height: 50%;
-width: 15%;
-margin-left:10%;
+width: 18%;
+margin-left:9%;
 float:left;
 }
 

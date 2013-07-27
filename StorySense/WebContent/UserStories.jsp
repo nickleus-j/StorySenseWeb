@@ -41,7 +41,7 @@ font-family: Segoe UI; font-size: 13pt;
   </style>
   <script src="Scripts/AJAXscirpts.js"></script>
 </head>
-<body onload="getStoryData(username)">
+<body bgcolor="CCFFFF" onload="getStoryData(username)">
 <%@ include file="Insertables/TopBar.jsp" %>
 <%@ include file="Insertables/accountbar.jsp" %>
 <% CompleteStoryLoader sLoader=new CompleteStoryLoader(u);
@@ -52,7 +52,7 @@ likedStories=<% out.write(sLoader.PreviewLikedStoriesJson(myUser));%>
 </script>
 <div>
 	
-<table width="65%" align="right">
+<table width="65%" align="center" style="margin-left:35%; margin-top:-1.6%; ">
 	
 	<tr align="center"><td>
 		<table id="tableBorder3" class="tableBorder3" bgcolor = "#7DFB9D">

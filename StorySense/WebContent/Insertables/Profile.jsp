@@ -30,8 +30,8 @@
 
 #profileDiv{
 	max-width:70%;
-	margin-top: 3%;
-	margin-left: 15%;
+	margin-top: 2.5%;
+	margin-left: 17%;
 	float: left;
 	}
 

@@ -2,7 +2,20 @@
 <%@page import="webEncoder.CompleteStoryLoader"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   
 <!DOCTYPE html>
+<style>
+   #tableBorderfeed2
+{
+border: 2px solid black;
+border-radius: 4px;
+margin-left: 15%;
+margin-right: 2%;
+margin-top: 2%;
+width: 75%;
+height: 525;
+}
+   </style>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -22,11 +35,11 @@
 	   %>
    
 </head>
-<body>
+<body bgcolor="CCFFFF">
 <%@ include file="Insertables/TopBar.jsp" %>
 <div id="container">
 <div id="center" class="column">
-<table width="65%" align="center"><tr><td>
+<table id="tableBorderfeed2" bgcolor="pink" align="center"><tr><td>
 	<% 
 	CompleteStoryLoader cLoader=new CompleteStoryLoader(u);
 		if(storyID!=0)
