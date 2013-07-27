@@ -38,7 +38,7 @@ public class AchievementHtmlEncoder {
 	}
 	
 	public String getHTML_AchievementTable(List<Achievement> medals,String caption){
-		String code="<table align='center' width='60%'><caption>"+caption+"</caption>";
+		String code="<table id='tableBorderfeed2' bgcolor='white' align='center' width='60%'><caption>"+caption+"</caption>";
 		for(int ctr=0;ctr<medals.size();ctr++){
 			code=code.concat("<tr align='left'><th>"+getImageHTML(medals.get(ctr).getPicUrl(),50,50)+"<br/>"+
 					medals.get(ctr).getTitle()+"</th>");
