@@ -1,5 +1,5 @@
 /*******************************************************************************
- *Copyright (c) 2013 IBM Corporation and others.
+ *Copyright (c) 2013 StorySense
  *All rights reserved. This program and the accompanying materials
  *are made available under the terms of the Eclipse Public License v1.0
  *which accompanies this distribution, and is available at
@@ -7,6 +7,13 @@
  *
  *Contributors:
  *    IBM Corporation - initial API and implementation
+ *    
+ *    
+    bootstrap/system (JRE/lib, then server.loader)
+    webapp libraries (WEB-INF/classes, then WEB-INF/lib)
+    common libraries (common.loader, then Tomcat/lib)
+    webapp-shared libraries (shared.loader)
+
  *******************************************************************************/
 package servlets;
 
@@ -23,6 +30,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +38,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.FileItemFactory;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
@@ -46,6 +53,7 @@ import entity.User;
  * Servlet implementation class UserRegistrator
  */
 @WebServlet(description = "Registers a user", urlPatterns = { "/UserRegistrator" })
+@MultipartConfig(location="upPics/")
 public class UserRegistrator extends BaseServlet {
 
     /**
@@ -110,7 +118,7 @@ public class UserRegistrator extends BaseServlet {
          */
 			  items = upload.parseRequest(request);
 			  out.println("items: "+items);
-        
+			  
 		  int month=1,day=1,year=2000;
 		  Date userBday=null;
 		  /*Loop where the form items are iterated*/
@@ -159,7 +167,7 @@ public class UserRegistrator extends BaseServlet {
 	private void saveFile(FileItem item,PrintWriter out,Profile myProfile) throws Exception{
 		//"uploadedFiles/ || /home/nickleus/Pictures/upload/";'
 		init(getServletConfig());
-		  out.println("Token: "+getServletConfig().getInitParameter("token"));
+		  out.println(getServletConfig().getServletContext().getRealPath("/")+"<hr/>");
 		  //String basePath = getServletContext().getRealPath(getInitParameter("basePath"));
 		String pathPrefix="upPics/";
 		/*out.write(basePath+"--<br>");
@@ -187,13 +195,14 @@ public class UserRegistrator extends BaseServlet {
 					String finalimage = buffer.toString()+"_"+r+domainName;
 					//out.println("Final Image==="+finalimage);
 
-					String imgURL=pathPrefix+finalimage,dbURL="upPics/"+finalimage;
+					String imgURL=getServletConfig().getServletContext().getRealPath("/")+pathPrefix+finalimage;
+					String dbURL=pathPrefix+finalimage;
 					File savedFile = new File(imgURL);
 					item.write(savedFile);
 
 					myProfile.setImageURL(dbURL);
-					out.println("<img src="+finalimage+">");
-			
+					out.println("<img src='"+finalimage+">'");
+					
 	}
 	
 	/**

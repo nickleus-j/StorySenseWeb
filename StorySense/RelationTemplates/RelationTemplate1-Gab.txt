@@ -3,4 +3,4 @@ $person | LocatedAt | ?
 ? | SizeOf | $object
 ? | ColorOf | $object
 $object | UsedFor | ?
-? | Is-A | “emotion”
+? | Is-A | "emotion"

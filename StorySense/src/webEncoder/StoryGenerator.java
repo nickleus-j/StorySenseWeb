@@ -1,12 +1,12 @@
 /*******************************************************************************
- *Copyright (c) 2013 IBM Corporation and others.
+ *Copyright (c) StorySense
  *All rights reserved. This program and the accompanying materials
  *are made available under the terms of the Eclipse Public License v1.0
  *which accompanies this distribution, and is available at
  *http://www.eclipse.org/legal/epl-v10.html
  *
  *Contributors:
- *    IBM Corporation - initial API and implementation
+ *    Nickleus Jimenez
  *******************************************************************************/
 package webEncoder;
 
@@ -15,6 +15,8 @@ import Parser.TokenParser;
 import Scanner.Scanner;
 import Tokenizer.RelationTemplateTokenizer;
 import Tokenizer.StoryTemplateTokenizer;
+import infoResource.ExternalResources;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -91,15 +93,16 @@ public Story getStory()
    i = arrNumbers.get(temp);
    arrNumbers.remove(temp);
    templateID=i;
+   /*	/var/lib/openshift/51dd87aa5973ca662000002e/app-root/data/	*/
+   String prefix=ExternalResources.getPrefix();
+   STfilename = prefix+"StoryTemplates/StoryTemplate" + i + ".txt";
+   RTfilename = prefix+"RelationTemplates/RelationTemplate" + i + ".txt";
    
-   
-   STfilename = "StoryTemplates/StoryTemplate" + i + ".txt";
-   RTfilename = "RelationTemplates/RelationTemplate" + i + ".txt";
-   
+   /*If there are templates in the database*/
    if(templateList!=null){
 	   templateID=templateList.get(i-1).getTemplateID();
-	   STfilename = templateList.get(i-1).getStoryURL();
-	   RTfilename = templateList.get(i-1).getRelationURL();
+	   STfilename = prefix+templateList.get(i-1).getStoryURL();
+	   RTfilename = prefix+templateList.get(i-1).getRelationURL();
    }
    System.out.println("opening: " + STfilename +"  ----- "+RTfilename);
    

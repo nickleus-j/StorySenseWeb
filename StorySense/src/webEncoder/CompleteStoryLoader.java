@@ -10,6 +10,8 @@
  *******************************************************************************/
 package webEncoder;
 
+import infoResource.ExternalResources;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -65,11 +67,13 @@ public class CompleteStoryLoader {
 	
 	/**
 	 * Loads a story given the file entered
+	 * /var/lib/openshift/51dd87aa5973ca662000002e/app-root/repo/diy/tomcat/webapps/StorySense/
 	 */
 	public String loadStory(String fileUrl){
 		FileInputStream fileIn;
+		String prefix=ExternalResources.getPrefix();
 		try {
-			fileIn = new FileInputStream(fileUrl);
+			fileIn = new FileInputStream(prefix+fileUrl);
 			ObjectInputStream oi = new ObjectInputStream(fileIn);
 			StoryFileAccess storyFile=(StoryFileAccess)oi.readObject();
 			fileIn.close();

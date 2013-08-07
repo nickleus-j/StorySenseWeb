@@ -1,0 +1,16 @@
+<$object = (?,Is-A,"object")>
+<$location = (?,Is-A,"location")>
+
+
+#if(*)
+{
+One sunny day, I lost my %$object% in the [1].
+}
+#else
+{
+One rainy day, I lost my %$object% in the [1].
+}
+
+I went to the [1] because usually it's found at the [1,2] and near the [2,3] but it's not there. Then I went to [2] and I still can't find it there. I asked some people around if they found it and a person named [4] said it was in the %$location%. I felt [5] that I found it.
+
+THE END

@@ -1,0 +1,18 @@
+<$location = (?,Is-A,"location")>
+<$person = (?,Is-A,"person")>
+<$object = (?,Is-A,"object")>
+
+I am in the [1,2] with  %$person%. 
+
+#if(*)
+{
+We saw a %$object% lying around. It was [3] (Size) and it had a color of [4]. 
+}
+#else
+{
+It was a bright sunny day and while we were walking, we saw a [3] (Size) %$object% lying around with a color of [4]. 
+}
+
+I think that this is normally used for [5].  We then went to my friend's house near the %$location% to show her the %$object% we found but on our way we saw a poor man begging for food. I felt [6] so we gave him some. We then went ahead to show my friend the %$object%. Me and %$person% went home afterwards. 
+
+THE END

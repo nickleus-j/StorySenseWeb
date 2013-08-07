@@ -655,7 +655,7 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
 
             ps = con.prepareStatement("SELECT ID, count(storyAccomID) AS likeNum  " +
             		"from likedstory,storyaccomplishment  " +
-            		"WHERE storyAccomID=ID AND Date(LikeTime)=Date(Date(now())- ?) " +
+            		"WHERE storyAccomID=ID AND Date(LikeTime)=Date(Date(now())-?) " +
             		"GROUP BY storyAccomID  ORDER by likeNum DESC, ID LIMIT 1");
             ps.setInt(1, dateOffset);
             rs = ps.executeQuery();
@@ -666,15 +666,17 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
             	Story=getStory(rs.getInt("ID"));
             }
             
-            
+            ;
             ps.close();
 			
 			
-			if(Story==null&&dateOffset<10)
-				Story=getPopularStory(dateOffset+1, con, ps, rs);
+			if(Story==null)
+				Story=getPopularStory(con, ps, rs);
+				/*Story=getPopularStory(dateOffset+1, con, ps, rs);
 			else if(dateOffset>=10){
-				getPopularStory(con, ps, rs);
-			}
+				Story=getPopularStory(con, ps, rs);
+			}*/
+			
 			con.close();
             return Story;
 		}catch(Exception ex){

@@ -1,0 +1,16 @@
+<$person = (?, Is-A, "person")>
+<$object = (?, Is-A, "object")>
+
+In one [1] day, I went to the [2] and I saw my friend %$person% there. Something we see is a %$object%. 
+
+#if(*)
+{
+[3] is its color and [4] is its shape. 
+}
+#else
+{
+[4] is its shape and [3] is its color.
+
+It is usually used for [5,7]. %$person% and I [6] with the %$object%. After that, we went home and we both felt [8].
+}
+

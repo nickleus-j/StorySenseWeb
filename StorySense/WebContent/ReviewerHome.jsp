@@ -134,6 +134,9 @@
 	<tr>
 	<th>Author</th><th>Story Title</th><th>Show Story</th>
 	</tr>
+	<tr>
+	<th colspan="4">Loading...</th>
+	</tr>
 	</table>
 	</div>
 	
@@ -176,6 +179,7 @@
 		<td><input type="reset" value="undo everything"/></td>
 		<td><input type="submit" value="Done" /></td>
 	</tr>
+	
 	</table></form>
 	
 	</div>

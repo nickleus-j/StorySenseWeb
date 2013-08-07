@@ -1,0 +1,3 @@
+<$food = (? | Is-A | "food")>
+
+Today is my favorite day, [1]. My mom, [2,7], told me that we will be [3] %$food% today. I really [5] %$food%. Mom told me to [8] first before handling the ingredients to prevent germs from spreading which can make me sick. We [3,9] the ingredients together and then we placed the %$food% inside the hot [4]. After about 10 minutes, we removed the %$food% and placed it inside the [10] for it to chill. I was very [6] with the outcome.

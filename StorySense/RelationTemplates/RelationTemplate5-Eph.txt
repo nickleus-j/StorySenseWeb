@@ -6,4 +6,4 @@
 ? | Is-A | "location"
 "sleep" | DoneAt | ?
 ? | Is-A | "food"
-"food" | ReceivesAction | eat 
+? | ReceivesAction | "ate"

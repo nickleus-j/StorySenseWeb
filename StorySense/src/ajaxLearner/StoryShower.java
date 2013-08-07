@@ -33,7 +33,8 @@ public class StoryShower extends BaseServlet {
 	@Override
 	public void executeCustomCode(HttpServletRequest request,
 			HttpServletResponse response) {
-		response.setContentType("text/html"); 
+		response.setContentType("text/html"); /*/home/nickleus/git/StorySenseWeb/StorySense*/
+		
 		int sID=Integer.parseInt(request.getParameter("q"));
 		CompleteStoryLoader sLoader=new CompleteStoryLoader();
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);

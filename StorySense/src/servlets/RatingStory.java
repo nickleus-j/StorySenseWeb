@@ -10,6 +10,7 @@
  *******************************************************************************/
 package servlets;
 
+import infoResource.ExternalResources;
 import infoResource.ReviewerResource;
 
 import java.io.IOException;
@@ -142,11 +143,13 @@ public class RatingStory extends BaseServlet {
 		float score;
 		Story theStory;
 		AjaxStoryReviewer ajaxSReviewer=new AjaxStoryReviewer();
+		//String prefix="/var/lib/openshift/51dd87aa5973ca662000002e/app-root/repo/diy/tomcat/webapps/StorySense/";
+		String prefix=ExternalResources.getPrefix();
 		
 		
 		ratedStory=myAcomDAO.getStory(sID);
 		templateUsed=tdao.getTemplate(ratedStory.getTemplateID());
-		theStory=ajaxSReviewer.getStoryFile(ratedStory.getFileURL()).getMyStory();
+		theStory=ajaxSReviewer.getStoryFile(prefix+ratedStory.getFileURL()).getMyStory();
 		updateRelationScores(scores, theStory.getAssertions());
 		
 		out.println("Story: "+ratedStory.getName()+"--");

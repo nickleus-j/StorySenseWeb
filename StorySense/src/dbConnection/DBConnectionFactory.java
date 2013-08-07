@@ -14,6 +14,8 @@
  */
 package dbConnection;
 
+import infoResource.ExternalResources;
+
 import java.sql.Connection;
 
 import dao.DAOFactory;
@@ -45,16 +47,19 @@ public abstract class DBConnectionFactory {
     	 * 	CREATE USER 'myUser'@'localhost' IDENTIFIED BY 'hello';
 		*	GRANT SELECT,INSERT,UPDATE,DELETE ON *.* TO 'myUser'@'localhost';
     	 */
+    	ExternalResources xResources=new ExternalResources();
         switch (dataSource){
             case DAOFactory.MYSQL: 
             	//Constant that gets the name of the driver in the mysql library
                driverName  = "com.mysql.jdbc.Driver";
                
                //The URL of the database to be used
-               url  = "jdbc:mysql://localhost:3306/ontology";
+               //url  = "jdbc:mysql://localhost:3306/ontology";
+               url=xResources.getMysqlURL();
                //url  = "jdbc:mysql://127.6.230.130:3306/ontology";
               // The username and password for the account in the MySQL server
                username  = "myUser";
+               //username  = "myRemote";
                password = "hello";
             break;
         }

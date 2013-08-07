@@ -10,6 +10,8 @@
  *******************************************************************************/
 package ajaxReviewer;
 
+import infoResource.ExternalResources;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -54,10 +56,11 @@ public class AjaxStoryReviewer extends BaseServlet {
 		Story theStory;
 		RatingFormEncoder ratingHtml=new RatingFormEncoder();
 		StoryFileAccess sfa;
+		String prefix=ExternalResources.getPrefix();
 		int sID=Integer.parseInt(request.getParameter("q"));
 		
 		ratedStory=myAcomDAO.getStory(sID);
-		sfa=getStoryFile(ratedStory.getFileURL());
+		sfa=getStoryFile(prefix+ratedStory.getFileURL());
 		theStory=sfa.getMyStory();
 		
 		try {

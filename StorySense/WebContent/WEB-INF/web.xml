@@ -5,7 +5,7 @@
     <welcome-file>Home.jsp</welcome-file>
   </welcome-file-list>
   <session-config>
-    <session-timeout>50</session-timeout>
+    <session-timeout>30</session-timeout>
   </session-config>
   <servlet>
     <description>Logout Servlet</description>

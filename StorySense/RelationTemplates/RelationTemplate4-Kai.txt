@@ -7,4 +7,4 @@
 "woman" | GenderOf | ?
 ? | PurposeOf | "staying clean"
 ? | LeadsTo | "food"
-
+? | Is-A | "object"

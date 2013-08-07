@@ -5,7 +5,7 @@ There was a child. The child's name is %$person%. %$person%'s gender is [1]. %$p
 #if{
 The size of the alarm clock is [2]. 
 }
-#else
+#else{
 The color of the alarm clock is [3].
-
-The clock was placed in a [4.5]. %$person% went to the [6,7] to sleep. The alarm clock rang. %$person% woke up and ate [8,9].
+}
+The clock was placed in a [4,5]. %$person% went to the [6,7] to sleep. The alarm clock rang. %$person% woke up and ate [8,9].

@@ -42,9 +42,13 @@ padding-left: 5dp;
 		<tr id="fontStylefeed" ><th colspan = 3>Story Feed</th></tr>
 	</table>	
 	 </td></tr>
+	
 	 </table>
 
-<table id="tableBorderfeed2" bgcolor="white" ></table>
+<table id="tableBorderfeed2" bgcolor="white" >
+ <tr>
+	 <th>Loading...</th>
+	 </tr></table>
 
 
 </div>

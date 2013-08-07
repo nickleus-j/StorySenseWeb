@@ -546,7 +546,7 @@ public class UserMySQL extends UserDAO {
 		int sum=0;
 		
 		for(int ctr=1;ctr<MAX_Level;ctr++){
-			sum=ctr*300;
+			sum+=ctr*300;
 			if(points<sum)
 				return ctr;
 		}

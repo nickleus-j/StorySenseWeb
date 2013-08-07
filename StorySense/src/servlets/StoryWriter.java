@@ -12,6 +12,8 @@ package servlets;
 import serializableObjects.StoryFileAccess;
 import webEncoder.StoryEncoder;
 
+import infoResource.ExternalResources;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -90,13 +92,15 @@ public class StoryWriter extends BaseServlet {
 		/*
 		 * Where to save the file
 		 * What path shall we take
+		 * /var/lib/openshift/51dd87aa5973ca662000002e/app-root/repo/diy/tomcat/webapps/StorySense/
 		 */
 		 StoryFileAccess savedStory=new StoryFileAccess(myStory, Answers);
+		 String prefix=ExternalResources.getPrefix();
 		Random generator = new Random();
 		int r = Math.abs(generator.nextInt());
 		
 		 try{
-			 FileOutputStream fo = new FileOutputStream("uploadedFiles/"+storyName+r+"Story.story");
+			 FileOutputStream fo = new FileOutputStream(prefix+"uploadedFiles/"+storyName+r+"Story.story");
 			 ObjectOutputStream oo = new ObjectOutputStream(fo);
 			 oo.writeObject(savedStory);
 			 fo.close();
@@ -117,15 +121,16 @@ public class StoryWriter extends BaseServlet {
 		/*
 		 * Where to save the file
 		 * What path shall we take
+		 * /var/lib/openshift/51dd87aa5973ca662000002e/app-root/repo/diy/tomcat/webapps/StorySense/
 		 */
 		 StoryFileAccess savedStory=new StoryFileAccess(myStory, Answers);
 		Random generator = new Random();
 		int r = Math.abs(generator.nextInt());
-		
+		String prefix=ExternalResources.getPrefix();
 		 try{
 			 //Save the file
 			 String fName="uploadedFiles/"+storyName+r+userName+".story";
-			 FileOutputStream fo = new FileOutputStream(fName);
+			 FileOutputStream fo = new FileOutputStream(prefix+fName);
 			 ObjectOutputStream oo = new ObjectOutputStream(fo);
 			 oo.writeObject(savedStory);
 			 fo.close();
@@ -151,15 +156,16 @@ public class StoryWriter extends BaseServlet {
 		/*
 		 * Where to save the file
 		 * What path shall we take
+		 * /var/lib/openshift/51dd87aa5973ca662000002e/app-root/repo/diy/tomcat/webapps/StorySense/
 		 */
 		 StoryFileAccess savedStory=new StoryFileAccess(myStory, Answers);
 		Random generator = new Random();
 		int r = Math.abs(generator.nextInt());
-		
+		String prefix=ExternalResources.getPrefix();
 		 try{
 			 //Save the file
 			 String fName="uploadedFiles/"+storyName+r+givenU.getName()+".story";
-			 FileOutputStream fo = new FileOutputStream(fName);
+			 FileOutputStream fo = new FileOutputStream(prefix+fName);
 			 ObjectOutputStream oo = new ObjectOutputStream(fo);
 			 oo.writeObject(savedStory);
 			 fo.close();
