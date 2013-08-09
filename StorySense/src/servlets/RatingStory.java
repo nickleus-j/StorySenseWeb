@@ -157,8 +157,9 @@ public class RatingStory extends BaseServlet {
 		
 		score=calculateScore(scores, request.getParameter(RRes.getSatisfactionBoxId()),templateUsed.getPlusScore());
 		//saveRating(Math.round(score), sID, theSession,scores);
-		saveRating(Math.round(score), sID, theSession,getConfidence(scores));
 		updateUserScore(ratedStory.getAccountID(),Math.round(score));
+		saveRating(Math.round(score), sID, theSession,getConfidence(scores));
+		
 		
 	}
 	

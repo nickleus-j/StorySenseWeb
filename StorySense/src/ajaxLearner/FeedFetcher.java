@@ -1,12 +1,12 @@
 /*******************************************************************************
- *Copyright (c) 2013 IBM Corporation and others.
+ *Copyright (c) 2013 StorySense
  *All rights reserved. This program and the accompanying materials
  *are made available under the terms of the Eclipse Public License v1.0
  *which accompanies this distribution, and is available at
  *http://www.eclipse.org/legal/epl-v10.html
  *
  *Contributors:
- *    IBM Corporation - initial API and implementation
+ *   Nickleus Jimenez
  *******************************************************************************/
 package ajaxLearner;
 
@@ -50,7 +50,7 @@ public class FeedFetcher extends BaseServlet {
 		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStories(limit);
 		try{
 			limit=Integer.parseInt(request.getParameter("limit"));
-			Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoriesRatedWithConfidence(0.5f,limit);
+			Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoriesRatedWithConfidence(0.6f,limit);
 			encodeStoriesInHTML(response.getWriter(), Stories, myDAOFactory.createUserDAO(),
 				(User)request.getSession().getAttribute("user"),myDAOFactory.createProfileDAO());
 		}catch(IOException ioEX){}

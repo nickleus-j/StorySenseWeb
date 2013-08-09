@@ -1,12 +1,12 @@
 /*******************************************************************************
- *Copyright (c) 2013 IBM Corporation and others.
+ *Copyright (c) 2013 StorySense
  *All rights reserved. This program and the accompanying materials
  *are made available under the terms of the Eclipse Public License v1.0
  *which accompanies this distribution, and is available at
  *http://www.eclipse.org/legal/epl-v10.html
  *
  *Contributors:
- *    IBM Corporation - initial API and implementation
+ *    Nickleus Jimenez
  *******************************************************************************/
 package mysqlDao;
 
@@ -564,6 +564,42 @@ public class RelationMysql extends RelationDAO {
         catch (Exception ex) {
             Logger.getLogger(RelationMysql.class.getName()).log(Level.SEVERE, null, ex);
         }
+	}
+
+	@Override
+	public ArrayList<String> getRelationsOfConcept(String concept) {
+		float minimumConfidence=70.0f;
+		try{
+			PreparedStatement ps;
+			ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+            
+            ps=con.prepareStatement("SELECT Concept1,Sentence_pattern,Concept2 from Relation,relationship  " +
+            		"WHERE concept1=? AND  Relation.relationship=relationship.relationship " +
+            		"AND Confidence_percentage >=?");
+            ps.setString(1, concept);
+            ps.setFloat(2, minimumConfidence);
+            rs=ps.executeQuery();
+            
+            ArrayList<String> relationSentences=new ArrayList<String>();
+            String sentence;
+            
+            while(rs.next()){
+            	sentence=rs.getString("Concept1")+" "+rs.getString("Sentence_pattern")+" "+rs.getString("Concept2");
+            	relationSentences.add(sentence);
+            }
+            
+            rs.close();
+            ps.close();
+            con.close();
+            return relationSentences;
+		}catch(Exception ex) {
+            Logger.getLogger(RelationMysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		
+		return null;
 	}
 
 }
