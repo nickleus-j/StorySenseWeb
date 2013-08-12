@@ -77,7 +77,7 @@ overflow:scroll;
 			/* (User)request.getSession().getAttribute("user")*/
 			%>
 			
-			<tr >
+			<tr ><th>Loading</th>
 		</tr>
 			</table>
 		</td></tr>
@@ -98,8 +98,8 @@ overflow:scroll;
 	<script type="text/javascript">likedStories=<% out.write(sLoader.PreviewLikedStoriesJson(myUser));%></script>
 			<table  id=<% wcm.writeJsElementReference(likeTable); %>  bgcolor = "white" class="headTbl">
 				
-			<tr >
-			</td>
+			<tr>
+			<td>Loading</td>
 			
 		</tr></table></td></tr>
 	<tr align="center"><td>
@@ -122,7 +122,7 @@ overflow:scroll;
 		StoriesRated ratedS=new StoriesRated();
 		//ratedS.encodeScoresInHTML(out, u, sLoader,"<table id=\"scoreTbl\"  bgcolor = \"white\" class=\"headTbl\">");
 		%>
-		<table id="scoreTbl"  bgcolor = "white" class="headTbl"></table>
+		<table id="scoreTbl"  bgcolor = "white" class="headTbl"><tr><td>Loading</td></tr></table>
 		<script>
 		storyScores=<% out.write(ratedS.encodeScoresJson(myUser));%>;
 		currentScoreList=storyScores.scores;

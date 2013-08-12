@@ -1,12 +1,12 @@
 /*******************************************************************************
- *Copyright (c) 2013 IBM Corporation and others.
+ *Copyright (c) 2013 StorySense
  *All rights reserved. This program and the accompanying materials
  *are made available under the terms of the Eclipse Public License v1.0
  *which accompanies this distribution, and is available at
  *http://www.eclipse.org/legal/epl-v10.html
  *
  *Contributors:
- *    IBM Corporation - initial API and implementation
+ *    Nickleus Jimenez
  *******************************************************************************/
 
 package Parser;
@@ -108,7 +108,7 @@ public class TokenParser {
                         number += cArray[i];
                         i++;
                     }
-                    System.out.println("Blank spotted: " + number);
+                    ////System.out.println("Blank spotted: " + number);
                     arrInt.add(Integer.parseInt(number)-1); //minus one so that rule number starts from 1
                 }
                 perBlankRuleArray.add(arrInt);
@@ -196,13 +196,13 @@ public class TokenParser {
                 /*
                 for(int y=0; y<arrToProcess.size(); y++)
                 {
-                    System.out.println("getfunc: " + arrToProcess.get(y));
+                    //System.out.println("getfunc: " + arrToProcess.get(y));
                 }
                 */
                 
                 ValueReturned = executeAssignmentOrGetFromOntology(arrToProcess);
                 
-                System.out.println("pulled from ontology: " + ValueReturned);
+                //System.out.println("pulled from ontology: " + ValueReturned);
                 
                 if(ValueReturned.equals("%backtrack%"))
                 {
@@ -237,7 +237,7 @@ public class TokenParser {
                 
                 for(int y=0; y<arrToEval.size(); y++)
                 {
-                    System.out.println("condition tokens: " + arrToEval.get(y));                        
+                    //System.out.println("condition tokens: " + arrToEval.get(y));                        
                 }
                 
                 if(arrToEval.get(1).equals("*")) // for randoms
@@ -271,7 +271,7 @@ public class TokenParser {
                     }
                 }
                 
-                System.out.println("condition is: " + condition);
+                //System.out.println("condition is: " + condition);
 
                 if(condition)
                 {
@@ -340,7 +340,7 @@ public class TokenParser {
 
                     for(int y=0; y<arrToEval.size(); y++)
                     {
-                        System.out.println("condition tokens: " + arrToEval.get(y));                        
+                        //System.out.println("condition tokens: " + arrToEval.get(y));                        
                     }
 
                     if(arrToEval.get(1).equals("*")) // for randoms
@@ -372,7 +372,7 @@ public class TokenParser {
                             condition = true;
                         }
                     }
-                    System.out.println("condition is: " + condition);
+                    //System.out.println("condition is: " + condition);
                     if(condition)
                     {
                         ArrayList<String> arrIfContents = new ArrayList<String>();
@@ -493,7 +493,7 @@ public class TokenParser {
         }
 
         loop_count++;
-        System.out.println("loop count: " + loop_count);
+        //System.out.println("loop count: " + loop_count);
         
         }while(backtrack && (loop_count<101));
         Story.setsStory(sStory);
@@ -501,7 +501,7 @@ public class TokenParser {
         Story.setRelationRules(parseRR(arrRTemplate));
         
         //for(int x=0; x<Story.getRelationRules().size();x++)
-          //  System.out.println("Rel Rule: " + Story.getRelationRules().get(x).getConcept1() + "," + Story.getRelationRules().get(x).getRelationship() + ", " + Story.getRelationRules().get(x).getConcept2());
+          //  //System.out.println("Rel Rule: " + Story.getRelationRules().get(x).getConcept1() + "," + Story.getRelationRules().get(x).getRelationship() + ", " + Story.getRelationRules().get(x).getConcept2());
         
         ArrayList<Relation> arrRel;
         for(int i=0; i<perBlankRuleArray.size(); i++)
@@ -510,10 +510,10 @@ public class TokenParser {
             Assertions.add(arrRel);
             
             ArrayList<Integer> temp = perBlankRuleArray.get(i);
-            System.out.println("blank " + i);
+            //System.out.println("blank " + i);
             for(int j=0; j<temp.size(); j++)
             {
-                System.out.println("value: "+temp.get(j));
+                //System.out.println("value: "+temp.get(j));
                 Relation newRelation = new Relation();
                 newRelation.setConcept1(Story.getRelationRules().get(temp.get(j)).getConcept1());
                 newRelation.setConcept2(Story.getRelationRules().get(temp.get(j)).getConcept2());
@@ -528,10 +528,10 @@ public class TokenParser {
         
       for(int i=0; i<Assertions.size(); i++)
         {
-            //System.out.print("NEXT BLANK");
+            ////System.out.print("NEXT BLANK");
             for(int j = 0;j<Assertions.get(i).size(); j++)
             {
-                System.out.println(Assertions.get(i).get(j).getConcept1() + ", " + Assertions.get(i).get(j).getRelationship() + ", " + Assertions.get(i).get(j).getConcept2());
+                //System.out.println(Assertions.get(i).get(j).getConcept1() + ", " + Assertions.get(i).get(j).getRelationship() + ", " + Assertions.get(i).get(j).getConcept2());
             }
         }
         
@@ -541,10 +541,10 @@ public class TokenParser {
     public void executeST(ArrayList<String> arrSTemplate)
     {
         /*
-        System.out.println("execute ST tokens received: ");
+        //System.out.println("execute ST tokens received: ");
                 for(int i=0; i<arrSTemplate.size(); i++)
                 {
-                    System.out.println("executeST token " + i + ". " + arrSTemplate.get(i));
+                    //System.out.println("executeST token " + i + ". " + arrSTemplate.get(i));
                 }
         */
         
@@ -665,13 +665,13 @@ public class TokenParser {
                 
                 for(int y=0; y<arrToProcess.size(); y++)
                 {
-                    System.out.println("getfunc: " + arrToProcess.get(y));
+                    //System.out.println("getfunc: " + arrToProcess.get(y));
                 }
                 
                 
                 ValueReturned = executeAssignmentOrGetFromOntology(arrToProcess);
                 
-                //System.out.println("pulled from ontology: " + pulledFromOntology);
+                ////System.out.println("pulled from ontology: " + pulledFromOntology);
                 
                 if(ValueReturned.equals("%backtrack%"))
                 {
@@ -708,7 +708,7 @@ public class TokenParser {
                 /*
                 for(int y=0; y<arrToEval.size(); y++)
                 {
-                    System.out.println("condition tokens: " + arrToEval.get(y));                        
+                    //System.out.println("condition tokens: " + arrToEval.get(y));                        
                 }
                 */
                 if(arrToEval.get(1).equals("*")) // for randoms
@@ -742,7 +742,7 @@ public class TokenParser {
                     }
                 }
                 
-                System.out.println("condition is: " + condition);
+                //System.out.println("condition is: " + condition);
                 if(condition)
                 {
                     ArrayList<String> arrIfContents = new ArrayList<String>();
@@ -812,7 +812,7 @@ public class TokenParser {
                     /*
                     for(int y=0; y<arrToEval.size(); y++)
                     {
-                        System.out.println("condition tokens: " + arrToEval.get(y));                        
+                        //System.out.println("condition tokens: " + arrToEval.get(y));                        
                     }
                     */
                     if(arrToEval.get(1).equals("*")) // for randoms
@@ -846,7 +846,7 @@ public class TokenParser {
                     }
                 }
                     
-                    System.out.println("condition is: " + condition);
+                    //System.out.println("condition is: " + condition);
                     if(condition)
                     {
                         ArrayList<String> arrIfContents = new ArrayList<String>();
@@ -964,7 +964,7 @@ public class TokenParser {
             else
             {
                 sStory = sStory + append;
-                //System.out.println("appended from inside if: " + append);
+                ////System.out.println("appended from inside if: " + append);
             }
             
         local_iterator++;
@@ -1025,7 +1025,7 @@ public class TokenParser {
             }
             if(j==2)
             {
-            //System.out.println(oneAssertion.getConcept1() + " and " + oneAssertion.getConcept2() + " and " + oneAssertion.getRelationship());
+            ////System.out.println(oneAssertion.getConcept1() + " and " + oneAssertion.getConcept2() + " and " + oneAssertion.getRelationship());
             RelationRules.add(oneAssertion);
             oneAssertion = new Relation();
             j=-1;
@@ -1081,7 +1081,7 @@ public class TokenParser {
                     }
                     /*for(int q=0; q<arrQuery1.size(); q++)
                     {
-                        System.out.println("arr1: " + q + " : " + arrQuery1.get(q));
+                        //System.out.println("arr1: " + q + " : " + arrQuery1.get(q));
                     }*/
                 }
                 else if(tokens.get(i+2).equals("?")) // second concept is blank
@@ -1109,7 +1109,7 @@ public class TokenParser {
                     
                     /*for(int q=0; q<arrQuery1.size(); q++)
                     {
-                        System.out.println("arr1: " + q + " : " + arrQuery1.get(q));
+                        //System.out.println("arr1: " + q + " : " + arrQuery1.get(q));
                     }*/
                 }
                 else // exact relation query
@@ -1223,7 +1223,7 @@ public class TokenParser {
                         
                         /*for(int q=0; q<arrQuery1.size(); q++)
                         {
-                            System.out.println("arr1: " + q + " : " + arrQuery1.get(q));
+                            //System.out.println("arr1: " + q + " : " + arrQuery1.get(q));
                         }*/
                     }
                     else // second concept is blank
@@ -1265,7 +1265,7 @@ public class TokenParser {
                         
                         /*for(int q=0; q<arrQuery1.size(); q++)
                         {
-                            System.out.println("arr1: " + q + " : " + arrQuery1.get(q));
+                            //System.out.println("arr1: " + q + " : " + arrQuery1.get(q));
                         }*/
                     }
                 }
@@ -1288,12 +1288,12 @@ public class TokenParser {
                                 }
                             i++;
                             temp = temp + "?" + rel + con2;
-                            //System.out.println("temp: " + temp);
+                            ////System.out.println("temp: " + temp);
                             
                             arrQuery2 = new MysqlDAOFactory().createRelationDAO().getConcept1ByRelationship(con2, rel, CONFIDENCE_THRESHOLD);
                         /* for(int q=0; q<arrQuery2.size(); q++)
                         {
-                            System.out.println("arr2: " + q + " : " + arrQuery2.get(q));
+                            //System.out.println("arr2: " + q + " : " + arrQuery2.get(q));
                         }*/
                         }
                         else // second concept is blank
@@ -1313,12 +1313,12 @@ public class TokenParser {
 
                             i+=2;
                             temp = temp + con1 + rel + "?";
-                            //System.out.println("temp: " + temp);
+                            ////System.out.println("temp: " + temp);
                             RelationDAO rDao=new MysqlDAOFactory().createRelationDAO();
                             arrQuery2 = rDao.getConcept2ByRelationship(con1, rel, CONFIDENCE_THRESHOLD);
                         /* for(int q=0; q<arrQuery2.size(); q++)
                         {
-                            System.out.println("arr2: " + q + " : " + arrQuery2.get(q));
+                            //System.out.println("arr2: " + q + " : " + arrQuery2.get(q));
                         }*/
                         }
 
@@ -1326,7 +1326,7 @@ public class TokenParser {
                         {
                             if(Query_Memory.get(c).getQuery().equals(temp))
                             {
-                                System.out.println("temp: " + temp);
+                                //System.out.println("temp: " + temp);
                                 exists2 = true;
                                 arrFiltered = Query_Memory.get(c).getArrValues();
                             }
@@ -1341,7 +1341,7 @@ public class TokenParser {
                                     if(arrQuery1.get(h).equals(arrQuery2.get(j)))
                                     {
                                         arrFiltered.add(arrQuery1.get(h));
-                                        //System.out.println("intersection: " + arrQuery1.get(h));
+                                        ////System.out.println("intersection: " + arrQuery1.get(h));
                                     }
                                 }
                             }
@@ -1384,7 +1384,7 @@ public class TokenParser {
                         if(is_var)
                         {
                             Variable_Memory.put(var_name, value);
-                            //System.out.println("memory: " + var_name + " has " + value);
+                            ////System.out.println("memory: " + var_name + " has " + value);
                         }
                 }
                 else // only 1 condition

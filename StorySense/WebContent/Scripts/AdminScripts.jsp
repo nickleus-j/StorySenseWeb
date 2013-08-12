@@ -16,6 +16,7 @@
     	String variablesTbl="varTbl";
     	String storyTemplateWorkSpaceID="storyTemplateWorkSpace";
     	String rTemplateCell="relationTemplateCell",sTemplateCell="storyTemplateCell";
+    	String wrkSpaceTxtAreaID="workSpaceTextArea";
     %>
 <script>
 var relations=<% out.write(adminEnc.getRelationshipsJs());%>;
@@ -390,17 +391,18 @@ function showTemplateElementValues(panel){
  of the template will look like
  */
 function getVariableValuePreview(given){
-	var val="(";
+	//var val="(";
+	var val="&lt$"+given.name+" = (";
 	
 	if(given.concept1!="")
-		val=val.concat(given.concept1+", "+given.relation+", ");
+		val=val.concat("\""+given.concept1+"\", "+given.relation+", ");
 	else val=val.concat("?, "+given.relation+", ");
 	
 	if(given.concept2!="")
-		val=val.concat(given.concept2);
+		val=val.concat("\""+given.concept2+"\"");
 	else val=val.concat("?");
 	
-	return val.concat(")");
+	return val.concat(")&gt");
 }
 
 /**
@@ -410,7 +412,8 @@ function previewVariablesToTemplate(previewPanel){
 	var code="";
 	text=document.createElement('p');
 	for(var ctr=0;ctr<storyVariables.length;ctr++){
-		code+=("$"+storyVariables[ctr].name+" = "+getVariableValuePreview(storyVariables[ctr])+"<br/>");
+		//code+=("$"+storyVariables[ctr].name+" = "+getVariableValuePreview(storyVariables[ctr])+"<br/>");
+		code+=(getVariableValuePreview(storyVariables[ctr])+"<br/>");
 	}/*End of loop*/
 	text.innerHTML=code;
 	previewPanel.appendChild(text);
@@ -421,9 +424,11 @@ function previewVariablesToTemplate(previewPanel){
  */
 function previewStoryTemplate(){
 	var pane=document.getElementById(<% wEncoder.writeJsElementReference(sTemplateCell); %>);
+	var storyBox=document.getElementById(<% wEncoder.writeJsElementReference(wrkSpaceTxtAreaID); %>);
 	pane.innerHTML="";
 	previewVariablesToTemplate(pane);
-	showTemplateElementValues(pane);
+	<% /*showTemplateElementValues(pane);*/ %>
+	pane.innerHTML+=storyBox.value;
 }
 
 /**
@@ -442,18 +447,30 @@ function deleteRelation(index){
 function createTemplateElementContainer(headerText,elem){
 	var tbl=document.createElement('table'),row=document.createElement('tr');
 	var hdr=document.createElement('th'),cell=document.createElement('td');
+	var appendBT=document.createElement("button");
 	
 	hdr.innerHTML=headerText;
 	row.appendChild(hdr);
 	tbl.appendChild(row);
+	tbl.setAttribute("ID","storyContainer");
+	
+	appendBT.setAttribute("ID","appendingBt");
+	appendBT.innerHTML="Add to story";
+	
+	appendBT.setAttribute("onclick",
+	"appendVariableToStoryTemplate('appendingVarBox','appendingBt','storyContainer')");
 	
 	row=document.createElement('tr');
 	cell.appendChild(elem);
+	cell.appendChild(appendBT);
 	row.appendChild(cell);
 	tbl.appendChild(row);
 	sTmplElems.push(elem);
 	return tbl;
 }
+
+<% /**<input type="button" value="Add text" onclick="addTemplateText()"/>**/%>
+
 
 function addTemplateText(){
 	var workSpace=document.getElementById(<% wEncoder.writeJsElementReference(storyTemplateWorkSpaceID); %>);
@@ -506,8 +523,23 @@ function refreshVariableChoices(vBox){
 function addTemplateVariable(){
 	var workSpace=document.getElementById(<% wEncoder.writeJsElementReference(storyTemplateWorkSpaceID); %>);
 	var elem=createChooseVariableElement(),tbl=createTemplateElementContainer("Variable",elem);
+	
 	sTmplVarBoxes.push(elem);
 	workSpace.appendChild(tbl);
+	
+	elem.setAttribute("ID","appendingVarBox");
+	
+	
+}
+
+function appendVariableToStoryTemplate(varBoxID,eventSourceID,containerID){
+	var workSpace=document.getElementById(<% wEncoder.writeJsElementReference(storyTemplateWorkSpaceID); %>);
+	var storyBox=document.getElementById(<% wEncoder.writeJsElementReference(wrkSpaceTxtAreaID); %>);
+	var varBox=document.getElementById(varBoxID);
+	
+	//workSpace.removeChild(document.getElementById(eventSourceID));
+	storyBox.value+=(" %"+varBox.value+"% ");
+	workSpace.removeChild(document.getElementById(containerID));
 }
 
 /**

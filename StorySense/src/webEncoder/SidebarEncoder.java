@@ -36,7 +36,7 @@ public class SidebarEncoder {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}/*End of Meyhod*/
+	}/*End of Method*/
 	
 	private String generateStoryLink(Acomplishment story){
 		return "<a href='StoryDisplay.jsp?aID="+story.getID()+"'>"+story.getName()+"</a></br>";

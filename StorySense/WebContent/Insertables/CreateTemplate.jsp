@@ -17,11 +17,11 @@ border-radius: 4px;
 margin-right: 2%;
 width: 96%;
 }
-#tableBorderfeed3
+#tableBorderfeed3, .borderedTable
 {
 border: 4px solid #660000;
 border-radius: 4px;
-width: 75%;
+/*width: 75%;*/
 }
 #fontStylefeed{
 font-family: Segoe UI; font-size: 12pt;
@@ -54,7 +54,7 @@ margin: 2%;
 
 <table id=<% out.write(wEncoder.giveJsStringParam(variablesTbl));%>>
 <tr>
-<th colspan="4" class="templateProperties">Variables</th>
+<th colspan="4" class="templateProperties">Query Variables</th>
 </tr>
 <tr>
 <th>Name</th><th>Concept 1</th><th>relationship</th><th>Concept 2</th>
@@ -99,80 +99,35 @@ margin: 2%;
 	  		<tr><td><input type="Submit" value="Delete" style="width:100px; margin-bottom:10%"/></td></tr>
 	  	</table>
 	  </td>
-	  <td>
-		<table id="tableBorderfeed2">
-			<tr id="fontStylefeed2"><th>Concept A</th><th>Relation</th><th>Concept B</th></tr>
-			<tr id="fontStylefeed" ><th>Location</th><th>is where I</th><th>Action</th></tr>
-			<tr id="fontStylefeed" ><th>Object</th><th>is</th><th>Texture</th></tr>
-		</table>	
-	 </td>
+	  <td id=<% wEncoder.writeJsElementReference(rTemplateCell); %>></td>
  </tr>
  </table>
  
  <br/><br/>
  
- <table id="tableBorderfeed3">
-   <tr><th id="fontStylefeed2" colspan="2">Stories</th></tr>
- 	<tr><td>
- 		<table>
- 			<tr><td align="center">
-		 		<table id="tableBorderfeed">
-		 			<tr id="fontStylefeed2"><th>Templates</th></tr>
-					<tr id="fontStylefeed" ><th>Location</th></tr>
-					<tr id="fontStylefeed" ><th>Object</th></tr>
-		 		</table>
-	 		</td></tr>	
-	 		<tr><td>
-	 			<table>
-		  			<tr>
-		  				<td><input type="Submit" value="Edit" style="width:100px; margin-bottom:10%;"/></td>
-						<td><input type="Submit" value="Delete" style="width:100px; margin-bottom:10%;"/></td>
-					</tr>
-		 		</table>
-	 		</td></tr>
- 		</table>
- 	 </td>
- 	 
- 	 <td>
- 		<table>
- 			<tr><td>
-		 		<table id="tableBorderfeed">
-		 			<tr id="fontStylefeed2"><th>Add/Edit Panel</th></tr>
-					<tr id="fontStylefeed" ><th>Location</th></tr>
-					<tr id="fontStylefeed" ><th>Object</th></tr>
-		 		</table>
-	 		</td></tr>
-	 		<tr><td>	
-	 			<table>
-		  			<tr>
-		  				<td><input type="Submit" value="Add Story Template" style="width:100px; margin-bottom:10%;"/></td>
-					</tr>
-		 		</table>
-		 	</td></tr>
- 		</table>
- 	 </td>
- 	 </tr>
- 	 
-</table>
+ 
 
-<table >
-<tr><th>Workspace</th></tr>
+<table class="borderedTable">
+<tr><th colspan="3" class="templateProperties">Story Workspace</th></tr>
 <tr>
-<td><input type="button" value="Add text" onclick="addTemplateText()"/>
-<input type="button" value="Add Variable" onclick="addTemplateVariable()"/>
+<td>
+<input type="button" value="Add Query Variable" onclick="addTemplateVariable()"/>
+<button onclick="previewStoryTemplate()">Preview</button>
 </td></tr>
 <tr>
 <td id=<% wEncoder.writeJsElementReference(storyTemplateWorkSpaceID); %>>
-</td>
+<textarea rows="20" cols="35" id=<%wEncoder.writeJsElementReference(wrkSpaceTxtAreaID); %> 
+placeholder="Write story template here"></textarea>
+</td><td id=<% wEncoder.writeJsElementReference(sTemplateCell); %>></td>
 </tr></table>
 
 <table>
 <tr><th>Relational Template</th>
-<th>Story Template </th><td><button onclick="previewStoryTemplate()">Preview</button></td>
+<th>Story Template </th>
 </tr>
  	 <tr bgcolor="white">
- 	 <td id=<% wEncoder.writeJsElementReference(rTemplateCell); %>></td>
- 	 <td id=<% wEncoder.writeJsElementReference(sTemplateCell); %>></td>
+ 	 
+ 	 
  	 </tr>
 </table>
 </div>
