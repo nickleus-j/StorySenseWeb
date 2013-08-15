@@ -10,7 +10,9 @@ body {
 }
 
 .wrap {width: 960px; margin: 0 auto;}
-
+.scrollFit{
+	overflow: scroll;
+}
 h1,h2{
 	font-face: Times New Roman;
 	text-align: center;

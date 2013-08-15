@@ -17,6 +17,9 @@ border-radius: 4px;
 margin-right: 2%;
 width: 96%;
 }
+.limitedTbl{
+max-width: 50%;
+}
 #tableBorderfeed3, .borderedTable
 {
 border: 4px solid #660000;
@@ -28,7 +31,7 @@ font-family: Segoe UI; font-size: 12pt;
 } 
 
 #fontStylefeed2, .templateProperties{
-font-family: Segoe UI; font-size: 12pt;
+font-family: Segoe UI; 
 background-color: #660000; 
 color: white;
 }
@@ -88,17 +91,12 @@ margin: 2%;
 	  				onChange="resetOtherConceptBoxIndex(this,'<% out.print(showConceptsBox1); %>')">
 	  				<option value=""></option>
 	  				</select>
+	  				<input type="Submit" value="Add" onclick="addRelation()" />
 	  			</td></tr>
 	  		
 	  	</table>
 	  </td>
-	  <td>
-	  	<table id="marginTemplate">
-	  		<tr><td><input type="Submit" value="Add" onclick="addRelation()" /></td></tr>
-	  		<tr><td><input type="Submit" value="Edit" style="width:100px; margin-bottom:10%"/></td></tr>
-	  		<tr><td><input type="Submit" value="Delete" style="width:100px; margin-bottom:10%"/></td></tr>
-	  	</table>
-	  </td>
+	  
 	  <td id=<% wEncoder.writeJsElementReference(rTemplateCell); %>></td>
  </tr>
  </table>
@@ -121,13 +119,35 @@ placeholder="Write story template here"></textarea>
 </td><td id=<% wEncoder.writeJsElementReference(sTemplateCell); %>></td>
 </tr></table>
 
-<table>
-<tr><th>Relational Template</th>
-<th>Story Template </th>
+<table class="limitedTbl">
+<tr>
+<th>Story Template Sample </th>
 </tr>
  	 <tr bgcolor="white">
+ 	 <td><pre class="scrollFit">
  	 
- 	 
+&lt$person = (?,Is-A,"person")&gt 	
+&lt$job = (?,Is-A,"job")&gt 	
+
+#if("boy",GenderOf,$person)
+{
+&lt$pronoun = "he"&gt 
+&lt$possessive_pronoun = "his"&gt 
+&lt$action_pronoun = "him"&gt 
+}
+#else
+{
+&lt$pronoun = "she"&gt 
+&lt$possessive_pronoun = "her"&gt 
+&lt$action_pronoun = "her"&gt 
+}
+
+Today during lunch time, I felt very [1] so my friend and I just talked instead. %$possessive_pronoun% name is %&person% and %$pronoun% said that I can be a [2,3] someday. 
+I told %$possessive_pronoun% that she can be a [2,3] because she is smart. 
+Another friend of mine came and she said that she wants to be a %$job%. 
+A %$job% is someone who does [4]. We went back to class afterwards as it was already time.
+THE END
+ 	</pre> </td>
  	 </tr>
 </table>
 </div>

@@ -17,6 +17,8 @@
     	String storyTemplateWorkSpaceID="storyTemplateWorkSpace";
     	String rTemplateCell="relationTemplateCell",sTemplateCell="storyTemplateCell";
     	String wrkSpaceTxtAreaID="workSpaceTextArea";
+    	
+    	String addRelationshipNameID="addRelBox",addRelationshipSentenceID="addSenetenceBox",addStatus="addStatusCell";
     %>
 <script>
 var relations=<% out.write(adminEnc.getRelationshipsJs());%>;
@@ -431,6 +433,7 @@ function previewStoryTemplate(){
 	pane.innerHTML+=storyBox.value;
 }
 
+
 /**
  * Deletes a relation
  and reflect the changes in the user interface
@@ -564,5 +567,87 @@ function addRelation(){
 	}
 	
 }/*End of Function*/
+
+function submitStory(){
+	var code="";
+	var storyBox=document.getElementById(<% wEncoder.writeJsElementReference(wrkSpaceTxtAreaID); %>);
+	text=document.createElement('p');
+	for(var ctr=0;ctr<storyVariables.length;ctr++){
+		//code+=("$"+storyVariables[ctr].name+" = "+getVariableValuePreview(storyVariables[ctr])+"<br/>");
+		code+=(getVariableValuePreview(storyVariables[ctr])+"\n");
+	}/*End of loop*/
+	code+=storyBox.value;
+}
+
+/*
+ * 
+ The following funtions are for the admin relationship page where the admin can manage the relationship supported
+ for story Sense
+ */
+ 
+ /**
+ This function verifies if the entries in the new relationship textboxes have non empty valid values
+ */
+ 
+ var RelationshipsSupported;
+ function verifyAddedSupportedRelationship(){
+	 var relBox=document.getElementById(<% wEncoder.writeJsElementReference(addRelationshipNameID); %>);
+	 var sentenceBox=document.getElementById(<% wEncoder.writeJsElementReference(addRelationshipSentenceID); %>);
+	 
+	 if(relBox.value!=""&&sentenceBox.value!=""){
+		 addSupportedRelationship(relBox.value,sentenceBox.value);
+	 }
+	 else{
+		 var statusBox=document.getElementById(<% wEncoder.writeJsElementReference(addStatus); %>);
+		 statusBox.innerHTML="Please check your values. No empty values";
+	 }
+ }
+
+
+function addSupportedRelationship(relationship,meaning){
+	var xmlhttp=getAJAXRequest();
+	var statusBox=document.getElementById(<% wEncoder.writeJsElementReference(addStatus); %>);
+	
+	xmlhttp.onreadystatechange=function(){
+		statusBox.innerHTML="Connecting to Server";
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			statusBox.innerHTML=xmlhttp.responseText;
+			RelationshipsSupported=<% out.write(adminEnc.getRelationshipsWithMeaningJSON());%>;
+			showSupportedRelationshipsTable();
+		}
+	  };
+
+	  /*Send a request to the server*/
+	xmlhttp.open("GET","RelationshipSupporter?rl="+relationship+"&sntc="+meaning,true);
+	xmlhttp.send();
+}
+
+function showSupportedRelationshipsTable(){
+	var table=document.getElementById(<% wEncoder.writeJsElementReference(adminEnc.getSupportedRelationshipsTableId()); %>);;
+	var row,RelationshipCell,SentenceCell,sentenceBox;
+	/*Check if supported table is already on the page*/
+	if(table!=null){
+		table.innerHTML="<tr><th>Relationship name</th><th>Relationship Meaning</th></tr>";
+		
+		for(var ctr=0;ctr<RelationshipsSupported.length;ctr++){
+			row=document.createElement("tr");
+			RelationshipCell=document.createElement("td");
+			SentenceCell=document.createElement("td");
+			sentenceBox=document.createElement("input");
+			
+			RelationshipCell.innerHTML=RelationshipsSupported[ctr].Relationship;
+			sentenceBox.value=RelationshipsSupported[ctr].Meaning;
+			
+			SentenceCell.appendChild(sentenceBox);
+			row.appendChild(RelationshipCell);
+			row.appendChild(SentenceCell);
+			table.appendChild(row);
+			table.innerHTML+="<tr><td><input type=\"button\" value='Save'/></td>";
+		}/*End of loop*/
+		
+	}/*End of If condition*/
+	
+}
+
 
 </script>
