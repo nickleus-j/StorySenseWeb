@@ -42,19 +42,20 @@ margin: 2%;
 </style>
 <%@ include file="../Scripts/AdminScripts.jsp" %>
 <div id="center" class="column" align="left">
+<form method="post" id=<% out.write(wEncoder.giveJsStringParam(storyFormID));%>>
 <table>
 	<tr>
 	<th>Template Name</th>
-	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(templateNameBox));%> /></td>
+	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(templateNameBox));%> name="nameField"/></td>
 	
 	<th>Level Required</th>
-	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(levelBox));%>/></td>
+	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(levelBox));%> name="lvlField"/></td>
 	
-	<th>Points Required</th>
-	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(pointBox));%>/></td>
+	<th>Points to Give</th>
+	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(pointBox));%> name="ptField"/></td>
 	</tr>
 </table>
-
+</form>
 <table id=<% out.write(wEncoder.giveJsStringParam(variablesTbl));%>>
 <tr>
 <th colspan="4" class="templateProperties">Query Variables</th>
@@ -118,7 +119,7 @@ margin: 2%;
 placeholder="Write story template here"></textarea>
 </td><td id=<% wEncoder.writeJsElementReference(sTemplateCell); %>></td>
 </tr></table>
-
+<button onclick="submitStory()">Save Story</button>
 <table class="limitedTbl">
 <tr>
 <th>Story Template Sample </th>

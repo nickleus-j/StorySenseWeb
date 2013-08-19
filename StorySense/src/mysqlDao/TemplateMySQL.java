@@ -50,14 +50,14 @@ public class TemplateMySQL extends TemplateDAO {
         	DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
         	Connection con = myFactory.getConnection();
         	
-        	ps = con.prepareStatement("INSERT INTO template(TemplateID,StoryURL,RelationURL,LevelReq,plusScore,Name) " +
-        			"VALUES (?,?,?,?,?,?");
-            ps.setInt(1, giventemplate.getTemplateID());
-            ps.setString(2, giventemplate.getStoryURL());
-            ps.setString(3, giventemplate.getRelationURL());
-            ps.setInt(4, giventemplate.getLevelRequirement());
-            ps.setInt(5, giventemplate.getPlusScore());
-            ps.setString(6, giventemplate.getName());
+        	ps = con.prepareStatement("INSERT INTO template(StoryURL,RelationURL,LevelReq,plusScore,Name,authorID) " +
+        			"VALUES (?,?,?,?,?,?)");
+            ps.setString(1, giventemplate.getStoryURL());
+            ps.setString(2, giventemplate.getRelationURL());
+            ps.setInt(3, giventemplate.getLevelRequirement());
+            ps.setInt(4, giventemplate.getPlusScore());
+            ps.setString(5, giventemplate.getName());
+            ps.setInt(6, giventemplate.getAuthorID());
             ps.execute();
             ps.close();
 

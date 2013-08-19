@@ -12,7 +12,7 @@ package entity;
 
 public class Template {
 
-	private int TemplateID,levelRequirement,plusScore;
+	private int TemplateID,levelRequirement,plusScore,authorID;
 	private String StoryURL,RelationURL,Name;
 	
 	
@@ -51,6 +51,12 @@ public class Template {
 	}
 	public void setName(String name) {
 		Name = name;
+	}
+	public int getAuthorID() {
+		return authorID;
+	}
+	public void setAuthorID(int authorID) {
+		this.authorID = authorID;
 	}
 	
 	

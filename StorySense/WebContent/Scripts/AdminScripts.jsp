@@ -17,7 +17,7 @@
     	String storyTemplateWorkSpaceID="storyTemplateWorkSpace";
     	String rTemplateCell="relationTemplateCell",sTemplateCell="storyTemplateCell";
     	String wrkSpaceTxtAreaID="workSpaceTextArea";
-    	
+    	String storyFormID="StoryTemplateForm";
     	String addRelationshipNameID="addRelBox",addRelationshipSentenceID="addSenetenceBox",addStatus="addStatusCell";
     %>
 <script>
@@ -119,6 +119,7 @@ function addVarRow(){
 	
 	c1Box.setAttribute("onchange","modifyVariables("+givenVariables+",this,'Conc2')");
 	c2Box.setAttribute("onchange","modifyVariables("+givenVariables+",this,'Conc1')");//deleteVariable
+	relBox.setAttribute("onchange","modifyVariables("+givenVariables+",this,'')");
 	delBt.setAttribute("onclick","deleteVariable("+(givenVariables-1)+")");
 	
 	cell=document.createElement('td');
@@ -209,6 +210,7 @@ function generateVariableTable(index){
 	
 	c1Box.setAttribute("onchange","modifyVariables("+(ctr+1)+",this,'Conc2')");
 	c2Box.setAttribute("onchange","modifyVariables("+(ctr+1)+",this,'Conc1')");
+	relBox.setAttribute("onchange","modifyVariables("+(ctr+1)+",this,'')");
 	delBt.setAttribute("onclick","deleteVariable("+ctr+")");
 	
 	cell=document.createElement('td');
@@ -275,7 +277,10 @@ function enterStoryVariable(index){
  */
 function modifyVariables(index,curentConceptBox,couterConceptBoxSuffix){
 	enterStoryVariable(index);
-	resetOtherConceptBoxIndex(curentConceptBox,"var"+index+couterConceptBoxSuffix);
+	
+	if(couterConceptBoxSuffix!='')
+		resetOtherConceptBoxIndex(curentConceptBox,"var"+index+couterConceptBoxSuffix);
+	
 	refreshVariableList();
 }
 
@@ -314,8 +319,9 @@ function setUpRelationBoxesForTmplt(c1Box,c2Box,relBox,index){
 	c1Box.setAttribute("id",prefix+"C1");
 	c2Box.setAttribute("id",prefix+"C2");
 	relBox.setAttribute("id",prefix+"Rel");
-	c1Box.setAttribute("onchange","resetOtherConceptBoxIndex(this,'"+prefix+"C2')");
-	c2Box.setAttribute("onchange","resetOtherConceptBoxIndex(this,'"+prefix+"C1')");
+	c1Box.setAttribute("onchange","saveRelationModification("+index+",this,'"+prefix+"C2')");
+	c2Box.setAttribute("onchange","saveRelationModification(this,'"+prefix+"C1')");
+	relBox.setAttribute("onchange","saveRelationChange("+index+")");
 	addRelationships(prefix+"Rel");
 	setupConceptList(prefix+"C1");
 	setupConceptList(prefix+"C2");
@@ -329,7 +335,7 @@ function createDeleteButton(ID){
 	return bt;
 }
 
-/**
+/** 
  * Previews the relations to be filled
  in comboboxes
  */
@@ -381,7 +387,25 @@ function resetOtherConceptBoxIndex(currentBox,otherBoxID){
 		elem.selectedIndex=0;
 }
 
-
+function saveRelationModification(index,currentBox,otherBoxID){
+	
+	
+	resetOtherConceptBoxIndex(currentBox,otherBoxID);
+	saveRelationChange(index);
+	
+}
+function saveRelationChange(index){
+	var prefix="rBox"+index,c1Box,relBox,c2Box;
+	c1Box=document.getElementById(prefix+"C1");
+	relBox=document.getElementById(prefix+"Rel");
+	c2Box=document.getElementById(prefix+"C2");
+	
+	
+	storyRelations[index].relation=relBox.selectedIndex;
+	storyRelations[index].concept1=c1Box.selectedIndex;
+	storyRelations[index].concept2=c2Box.selectedIndex;
+	
+}
 function showTemplateElementValues(panel){
 	for(var ctr=0;ctr<sTmplElems.length;ctr++){
 		panel.innerHTML+=(sTmplElems[ctr].value+" ");
@@ -394,7 +418,7 @@ function showTemplateElementValues(panel){
  */
 function getVariableValuePreview(given){
 	//var val="(";
-	var val="&lt$"+given.name+" = (";
+	var val="<$"+given.name+" = (";
 	
 	if(given.concept1!="")
 		val=val.concat("\""+given.concept1+"\", "+given.relation+", ");
@@ -404,7 +428,7 @@ function getVariableValuePreview(given){
 		val=val.concat("\""+given.concept2+"\"");
 	else val=val.concat("?");
 	
-	return val.concat(")&gt");
+	return val.concat(")>\n");
 }
 
 /**
@@ -500,7 +524,6 @@ function refreshVariableList(){
 	var current;
 	for(var ctr=0;ctr<sTmplVarBoxes.length;ctr++){
 		current=sTmplVarBoxes[ctr].selectedIndex;
-		//addVarConcept(sTmplVarBoxes[ctr].id);
 		refreshVariableChoices(sTmplVarBoxes[ctr]);
 		sTmplVarBoxes[ctr].selectedIndex=current;
 	}/*End of Loop*/
@@ -568,16 +591,100 @@ function addRelation(){
 	
 }/*End of Function*/
 
+function getValueofRelationIndex(index){
+	var relBox=document.getElementById(<% wEncoder.writeJsElementReference(showRelationsBox); %>);
+	var RelValue,oldVal=relBox.selectedIndex;
+	relBox.selectedIndex=index;
+	RelValue= relBox.value;
+	relBox.selectedIndex=oldVal;
+	return RelValue;
+}
+
+function getValueFromRelationConcept(index){
+	var c1Box=document.getElementById(<% wEncoder.writeJsElementReference(showConceptsBox1); %>);
+	var cValue,oldVal=c1Box.selectedIndex;
+	
+	c1Box.selectedIndex=index;
+	cValue= c1Box.value;
+	c1Box.selectedIndex=oldVal;
+	return cValue;
+}
+
+function converRelationsToString(){
+	/*	| "+storyRelations[ctr].relation+" | "+storyRelations[ctr].concept2	*/
+	var text="";
+	for(var ctr=0;ctr<storyRelations.length;ctr++){
+		if(storyRelations[ctr].concept1!=0)
+			text+=(getValueFromRelationConcept(storyRelations[ctr].concept1)+" | ");
+		else text+="? | ";
+		
+		//text+=(storyRelations[ctr].relation+" | "); 
+		text+=(getValueofRelationIndex(storyRelations[ctr].relation)+" | ");
+		if(storyRelations[ctr].concept2!=0)
+			text+=(getValueFromRelationConcept(storyRelations[ctr].concept2)+" \n");
+		else text+="? \n";
+	}/*End of loop*/
+	return text;
+}
+
+function verifyTemplateProperties(name,level,points){
+	
+	/*there must be a name.
+	Level and points must be at least 1
+	the level and points have to be integer values
+	*/
+	if(name==""||level<1||points<1||Math.floor(level)!=level||Math.floor(points)!=points)
+		return false;
+	
+	return true;
+}
+
+
+function sendToTemplatesServer(relations,storyText){
+	var storyForm=document.getElementById(<% wEncoder.writeJsElementReference(storyFormID); %>);
+	var relationField=document.createElement("textarea"),storyTextField=document.createElement("textarea");
+	
+	relationField.value=relations;
+	storyTextField.value=storyText;
+	
+	relationField.setAttribute("name","relT");
+	storyTextField.setAttribute("name","storyT");
+	/* Set Attributes to the form*/
+	storyForm.setAttribute("action","TemplateWriter");
+	storyForm.appendChild(storyTextField);
+	storyForm.appendChild(relationField);
+	storyForm.submit();
+}
+
 function submitStory(){
 	var code="";
 	var storyBox=document.getElementById(<% wEncoder.writeJsElementReference(wrkSpaceTxtAreaID); %>);
+	var storyCell=document.getElementById(<% wEncoder.writeJsElementReference(sTemplateCell); %>);
+	var nameBox=document.getElementById(<% wEncoder.writeJsElementReference(templateNameBox); %>);
+	var levelBox=document.getElementById(<% wEncoder.writeJsElementReference(levelBox); %>);
+	var pointBox=document.getElementById(<% wEncoder.writeJsElementReference(pointBox); %>);
 	text=document.createElement('p');
+	
+	storyCell.innerHTML="";
+	
 	for(var ctr=0;ctr<storyVariables.length;ctr++){
-		//code+=("$"+storyVariables[ctr].name+" = "+getVariableValuePreview(storyVariables[ctr])+"<br/>");
 		code+=(getVariableValuePreview(storyVariables[ctr])+"\n");
 	}/*End of loop*/
 	code+=storyBox.value;
-}
+	
+	
+	text.innerHTML=code;
+	storyCell.appendChild(text);
+	if(verifyTemplateProperties(nameBox.value,levelBox.value,pointBox.value)){
+		storyCell.innerHTML+=" Parameters Okay"
+		sendToTemplatesServer(converRelationsToString(),code);
+	}
+	else storyCell.innerHTML+=" Error in properties";
+	
+	/*window.location.href="TemplateWriter?name="+nameBox.value+"&lvl="+levelBox.value+
+			"&relT="+converRelationsToString()+"&storyT="+code;
+	*/
+}/*End of function*/
 
 /*
  * 
@@ -612,8 +719,8 @@ function addSupportedRelationship(relationship,meaning){
 		statusBox.innerHTML="Connecting to Server";
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			statusBox.innerHTML=xmlhttp.responseText;
-			RelationshipsSupported=<% out.write(adminEnc.getRelationshipsWithMeaningJSON());%>;
-			showSupportedRelationshipsTable();
+			window.location.href='RelationshipPage.jsp';
+			//showSupportedRelationshipsTable();
 		}
 	  };
 
@@ -626,6 +733,7 @@ function showSupportedRelationshipsTable(){
 	var table=document.getElementById(<% wEncoder.writeJsElementReference(adminEnc.getSupportedRelationshipsTableId()); %>);;
 	var row,RelationshipCell,SentenceCell,sentenceBox;
 	/*Check if supported table is already on the page*/
+	RelationshipsSupported=<% out.write(adminEnc.getRelationshipsWithMeaningJSON());%>;
 	if(table!=null){
 		table.innerHTML="<tr><th>Relationship name</th><th>Relationship Meaning</th></tr>";
 		
@@ -636,15 +744,15 @@ function showSupportedRelationshipsTable(){
 			sentenceBox=document.createElement("input");
 			
 			RelationshipCell.innerHTML=RelationshipsSupported[ctr].Relationship;
-			sentenceBox.value=RelationshipsSupported[ctr].Meaning;
-			
+			//sentenceBox.value=RelationshipsSupported[ctr].Meaning;
+			sentenceBox.setAttribute("value",RelationshipsSupported[ctr].Meaning);
 			SentenceCell.appendChild(sentenceBox);
 			row.appendChild(RelationshipCell);
 			row.appendChild(SentenceCell);
 			table.appendChild(row);
-			table.innerHTML+="<tr><td><input type=\"button\" value='Save'/></td>";
+			
 		}/*End of loop*/
-		
+		table.innerHTML+="<tr><td><input type=\"button\" value='Save'/></td></tr>";
 	}/*End of If condition*/
 	
 }
