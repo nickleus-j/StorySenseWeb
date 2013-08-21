@@ -474,7 +474,7 @@ function deleteRelation(index){
 function createTemplateElementContainer(headerText,elem){
 	var tbl=document.createElement('table'),row=document.createElement('tr');
 	var hdr=document.createElement('th'),cell=document.createElement('td');
-	var appendBT=document.createElement("button");
+	var appendBT=document.createElement("button"),cancelBT=document.createElement("button");
 	
 	hdr.innerHTML=headerText;
 	row.appendChild(hdr);
@@ -487,12 +487,21 @@ function createTemplateElementContainer(headerText,elem){
 	appendBT.setAttribute("onclick",
 	"appendVariableToStoryTemplate('appendingVarBox','appendingBt','storyContainer')");
 	
+	/*cancel button*/
+	cancelBT.setAttribute("ID","cancelBt");
+	cancelBT.innerHTML="X";
+	cancelBT.setAttribute("onclick","removeVriableAppenders('storyContainer')");
+	
 	row=document.createElement('tr');
 	cell.appendChild(elem);
 	cell.appendChild(appendBT);
+	cell.appendChild(cancelBT);
 	row.appendChild(cell);
 	tbl.appendChild(row);
 	sTmplElems.push(elem);
+	
+	
+	
 	return tbl;
 }
 
@@ -543,13 +552,21 @@ function refreshVariableChoices(vBox){
 	}/*End of loop*/
 }
 
+
+var readOnlyElem;
+function changeElementEditability(elem,classGiven){
+	readOnlyElem=elem
+	elem.setAttribute("class",classGiven);
+}
+
 /**
  * Adds a selectbox that contains the variable names in the workspace
  */
-function addTemplateVariable(){
+function addTemplateVariable(source){
 	var workSpace=document.getElementById(<% wEncoder.writeJsElementReference(storyTemplateWorkSpaceID); %>);
 	var elem=createChooseVariableElement(),tbl=createTemplateElementContainer("Variable",elem);
 	
+	changeElementEditability(source,"hiddenElem");
 	sTmplVarBoxes.push(elem);
 	workSpace.appendChild(tbl);
 	
@@ -559,13 +576,20 @@ function addTemplateVariable(){
 }
 
 function appendVariableToStoryTemplate(varBoxID,eventSourceID,containerID){
-	var workSpace=document.getElementById(<% wEncoder.writeJsElementReference(storyTemplateWorkSpaceID); %>);
 	var storyBox=document.getElementById(<% wEncoder.writeJsElementReference(wrkSpaceTxtAreaID); %>);
 	var varBox=document.getElementById(varBoxID);
 	
 	//workSpace.removeChild(document.getElementById(eventSourceID));
 	storyBox.value+=(" %"+varBox.value+"% ");
+	removeVriableAppenders(containerID);
+}
+
+function removeVriableAppenders(containerID){
+	var workSpace=document.getElementById(<% wEncoder.writeJsElementReference(storyTemplateWorkSpaceID); %>);
 	workSpace.removeChild(document.getElementById(containerID));
+	
+	/*Enable add var button*/
+	changeElementEditability(readOnlyElem,"");
 }
 
 /**
@@ -668,7 +692,7 @@ function submitStory(){
 	storyCell.innerHTML="";
 	
 	for(var ctr=0;ctr<storyVariables.length;ctr++){
-		code+=(getVariableValuePreview(storyVariables[ctr])+"\n");
+		code+=(getVariableValuePreview(storyVariables[ctr]));
 	}/*End of loop*/
 	code+=storyBox.value;
 	

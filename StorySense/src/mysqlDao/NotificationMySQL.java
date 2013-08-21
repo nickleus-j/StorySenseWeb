@@ -232,4 +232,35 @@ public class NotificationMySQL extends NotificationDao {
         }
 	}
 
+	@Override
+	public List<Notification> getUserNotifications(int userID,
+			int maximumNotifAge) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from Notification WHERE notifUser=? AND " +
+            		"(viewed=0 OR DATEDIFF(Date(now()),StartedOn)< ?) ORDER BY StartedOn DESC");
+            ps.setInt(1, userID);
+            ps.setInt(2, maximumNotifAge);
+            rs = ps.executeQuery();
+            
+            List<Notification> notifs=getResults(rs);
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return notifs;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(NotificationMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
 }

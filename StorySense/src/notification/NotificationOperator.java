@@ -20,7 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import servlets.BaseServlet;
 
 /**
- * A servelt the 
+ * A servelt that returns the notification messages
+ * To be used as an Ajax servlet
  * 
  */
 @WebServlet(description = "Notification messages Fetcher for learner", urlPatterns = { "/learnerNotif" })
@@ -29,7 +30,7 @@ public class NotificationOperator extends BaseServlet{
 	public String getNotifMsgs(User givenUser){/* MsgID */
 		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
 		NotificationMessageDao nDao=daoFactory.createNotificationMessageDao();
-		List<NotifMessage> Messages=nDao.getUserMessages(givenUser.getAccountID());
+		List<NotifMessage> Messages=nDao.getUserMessages(givenUser.getAccountID(),15);
 		String json="[";
 		
 		for(int ctr=0;ctr<Messages.size();ctr++){
@@ -72,7 +73,7 @@ public class NotificationOperator extends BaseServlet{
 	public String getUserNotifMsgs(User givenUser){/* MsgID */
 		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
 		NotificationDao noticeDao=daoFactory.createNotificationDao();
-		List<Notification> notices=noticeDao.getUserNotifications(givenUser.getAccountID());
+		List<Notification> notices=noticeDao.getUserNotifications(givenUser.getAccountID(),15);
 		String json="[";
 		
 		for(int ctr=0;ctr<notices.size();ctr++){

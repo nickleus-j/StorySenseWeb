@@ -187,4 +187,35 @@ public class NotificationMessageMysql extends NotificationMessageDao {
 		return null;
 	}
 
+	@Override
+	public List<NotifMessage> getUserMessages(int userID, int maximumMessageAge) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from notifMessage WHERE NotifID IN " +
+            		"(SELECT NotificationId from Notification WHERE notifUser=? AND " +
+            		"viewed=0 OR DATEDIFF(Date(now()),StartedOn)< ?) ORDER by MsgID DESC");
+            ps.setInt(1, userID);
+            ps.setInt(2, maximumMessageAge);
+            rs = ps.executeQuery();
+            
+            List<NotifMessage> notifs=getResults(rs);
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            return notifs;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(NotificationMessageMysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
+
 }

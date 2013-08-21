@@ -11,6 +11,7 @@ public abstract class NotificationDao {
 	public abstract List<Notification> getAllNotifications();
 	public abstract Notification getNotification(int id);
 	public abstract List<Notification> getUserNotifications(int userID);
+	public abstract List<Notification> getUserNotifications(int userID,int maximumNotifAge);
 	public abstract boolean doesUserHaveUnviwedNotifications(int userID);
 	public abstract Notification getLatestNotification(int userID);
 }

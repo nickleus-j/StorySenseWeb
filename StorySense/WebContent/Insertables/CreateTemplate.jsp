@@ -51,7 +51,7 @@ margin: 2%;
 	<th>Level Required</th>
 	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(levelBox));%> name="lvlField"/></td>
 	
-	<th>Points to Give</th>
+	<th>Bonus points Factor</th>
 	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(pointBox));%> name="ptField"/></td>
 	</tr>
 </table>
@@ -110,7 +110,7 @@ margin: 2%;
 <tr><th colspan="3" class="templateProperties">Story Workspace</th></tr>
 <tr>
 <td>
-<input type="button" value="Add Query Variable" onclick="addTemplateVariable()"/>
+<input type="button" value="Add Query Variable" onclick="addTemplateVariable(this)"/>
 <button onclick="previewStoryTemplate()">Preview</button>
 </td></tr>
 <tr>
