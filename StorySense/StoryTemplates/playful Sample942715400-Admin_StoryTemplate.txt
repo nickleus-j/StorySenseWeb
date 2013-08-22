@@ -1,0 +1,4 @@
+<$playPlace = ("Playing", DoneAt, ?)>
+<$nextPlace = (?, Is-a, "location")>
+
+We were playing in  %$playPlace% where we stayed then we went to  %$nextPlace% near [2,3]

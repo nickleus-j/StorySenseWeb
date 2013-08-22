@@ -1,0 +1,3 @@
+? | DoneAt | $nextPlace 
+$nextPlace | LocatedNear | ? 
+? | Is-a | location 
