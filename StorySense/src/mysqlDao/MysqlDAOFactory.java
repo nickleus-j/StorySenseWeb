@@ -13,6 +13,7 @@ package mysqlDao;
 import dao.AchievementDAO;
 import dao.AcomplishmentDAO;
 import dao.ConceptDAO;
+import dao.ConfigValuesDAO;
 import dao.DAOFactory;
 import dao.LearnerAcievementDAO;
 import dao.LikedStoryDAO;
@@ -78,6 +79,11 @@ public class MysqlDAOFactory extends DAOFactory{
 
 	@Override
 	public NotificationMessageDao createNotificationMessageDao() {return new NotificationMessageMysql();}
+
+	@Override
+	public ConfigValuesDAO createConfigValuesDAO() {
+		return new ConfigValuesMySQL();
+	}
 
 	
 }

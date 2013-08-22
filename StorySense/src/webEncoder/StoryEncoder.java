@@ -19,8 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspWriter;
 
 
+import dao.ConfigValuesDAO;
 import dao.DAOFactory;
 import dao.TemplateDAO;
+import entity.ConfigValues;
 import entity.Template;
 
 
@@ -106,6 +108,12 @@ public class StoryEncoder {
 	}
 	
 	public String getStoryAttributeName(){return "Story";}
-	public int getConfidence(){ return 60;}
+	//public int getConfidence(){ return 60;}
+	public int getConfidence(){ 
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		ConfigValuesDAO myConfigDao=myDAOFactory.createConfigValuesDAO();
+		ConfigValues configuration=new ConfigValues();
+		return myConfigDao.getIntValue(configuration.getConfidenceSettingName());
+	}
 	public static final String  TEMPLATEID="templateID";
 }

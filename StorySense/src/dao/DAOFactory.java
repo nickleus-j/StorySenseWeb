@@ -51,4 +51,5 @@ public abstract class DAOFactory {
 	    public abstract NotificationTypeDao createNotificationTypeDao();
 	    public abstract NotificationDao createNotificationDao();
 	    public abstract NotificationMessageDao createNotificationMessageDao();
+	    public abstract ConfigValuesDAO createConfigValuesDAO();
 }

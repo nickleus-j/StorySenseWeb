@@ -24,4 +24,5 @@ public class ConfigValues {
 		Value = value;
 	}
 	
+	public String getConfidenceSettingName(){return "Confidence_THRESHOLD";}
 }
