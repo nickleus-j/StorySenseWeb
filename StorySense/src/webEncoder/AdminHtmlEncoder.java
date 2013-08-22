@@ -47,7 +47,7 @@ public class AdminHtmlEncoder {
 	
 	
 	public String getRelationshipsWithMeaningHtmlTable(){
-		String code="<table id='"+getSupportedRelationshipsTableId()+"'><caption>Relationships Available</caption>";
+		String code="<table bgcolor=\"white\"style=\"border: 4px solid #660000; border-radius: 4px;\" id='"+getSupportedRelationshipsTableId()+"'><tr><th colspan=\"2\" style=\"font-family: Segoe UI; background-color: #660000; color: white;\">Relationships Available</tr></th>";
 		/*DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		RelationshipDAO relaDao=myDAOFactory.createRelationshipDAO();
 		List<Relationship> relationships=relaDao.getRelationships();

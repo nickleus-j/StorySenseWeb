@@ -20,6 +20,18 @@ width: 40%;
 float: right;
 margin:5%;
 }
+#fontStylefeed2{
+font-family: Segoe UI; 
+background-color: #660000; 
+color: white;
+}
+#tableBorderfeed3
+{
+border: 4px solid #660000;
+border-radius: 4px;
+/*width: 75%;*/
+}
+
 </style>
 <script>
 
@@ -30,15 +42,16 @@ RelationshipsSupported=<% out.write(adminEnc.getRelationshipsWithMeaningJSON());
 
 </head>
 
-<body bgcolor="white" onload="initializeAdminHome()">
+<body bgcolor="CCFFFF" onload="initializeAdminHome()">
 <%@ include file="Insertables/AdminNavBar.jsp" %>
 <div id="container">
 <div class="leftPanel">
 <% out.write(adminEnc.getRelationshipsWithMeaningHtmlTable()); %>
 </div>
 <div class="rightPanel">
-<h3>Add Relationship</h3>
-<table>
+
+<table id="tableBorderfeed3" bgcolor="white">
+	<tr><th colspan="2" id="fontStylefeed2">Add Relationship</th></tr>
 	<tr><th>Relationship Name</th><th>Relationship Meaning</th></tr>
 	<tr>
 	<td>	
@@ -48,9 +61,11 @@ RelationshipsSupported=<% out.write(adminEnc.getRelationshipsWithMeaningJSON());
 	</tr>
 
 	<tr>
-	<td>
+	<td align="center" colspan="2">
 	<button onclick="verifyAddedSupportedRelationship()">Add relationship</button>
 	</td>
+	</tr>
+	<tr>
 	<td id=<% wEncoder.writeJsElementReference(addStatus); %>></td>
 	</tr>
 

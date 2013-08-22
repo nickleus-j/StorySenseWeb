@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="Style/Default.css"> 
 
 </head>
-<body bgcolor="white">
+<body bgcolor="CCFFFF">
 <%@ include file="Insertables/AdminNavBar.jsp" %>
 <div id="container">
 <div id="center" class="column">

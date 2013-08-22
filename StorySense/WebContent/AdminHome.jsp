@@ -9,7 +9,7 @@
 <script src="Scripts/AJAXscirpts.js"></script>
 </head>
 
-<body bgcolor="white" onload="initializeAdminHome()">
+<body bgcolor="CCFFFF" onload="initializeAdminHome()">
 <%@ include file="Insertables/AdminNavBar.jsp" %>
 <div id="container">
 <%@ include file="Insertables/CreateTemplate.jsp" %>
