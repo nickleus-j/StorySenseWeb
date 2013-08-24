@@ -39,4 +39,5 @@ public abstract class AcomplishmentDAO {
 	public abstract int getMaximumNumberLikesForStory(int writerID);
 	public abstract List<Acomplishment> getStoriesWrittenOn(int userID,String date);
 	public abstract List<Acomplishment> getStoriesRatedWithConfidence(float minimumConfidence,int limit);
+	public abstract List<Acomplishment> getStoriesRatedWithConfidence(float minimumConfidence,int limit,int ratingsNeeded);
 }

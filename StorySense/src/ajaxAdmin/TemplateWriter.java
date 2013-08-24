@@ -103,4 +103,6 @@ public class TemplateWriter extends BaseServlet {
 		giventemplate.setAuthorID(sessionUser.getAccountID());
 		saveToDb(giventemplate);
 	}
+	
+	
 }

@@ -70,6 +70,7 @@ public class NotificationMessageMysql extends NotificationMessageDao {
 			msg.setnType(rs.getInt("nType"));
 			msg.setNotifID(rs.getInt("NotifID"));
 			msg.setMessage(rs.getString("Message"));
+			msg.setCreationTime(rs.getTimestamp("creationTime"));
 			list.add(msg);
 		}
 		

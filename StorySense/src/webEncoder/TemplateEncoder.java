@@ -53,7 +53,8 @@ public class TemplateEncoder {
 		else{
 			for(int ctr=0;ctr<templates.size();ctr++){
 				code=code.concat("<tr><th>"+templates.get(ctr).getName()+"</th>" +
-						"<td><button>View Template</button></td></tr>");
+						"<td><button onclick=\"viewTemplateMade("+templates.get(ctr).getTemplateID()
+						+")\">View Template</button></td></tr>");
 			}
 		}
 		

@@ -20,11 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import dao.AcomplishmentDAO;
+import dao.ConfigValuesDAO;
 import dao.DAOFactory;
 import dao.ProfileDAO;
 import dao.UserDAO;
 
 import entity.Acomplishment;
+import entity.ConfigValues;
 import entity.Profile;
 import entity.User;
 
@@ -47,15 +49,25 @@ public class FeedFetcher extends BaseServlet {
 		
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		AcomplishmentDAO myAcomDAO=myDAOFactory.createAcomplishmentDAO();
-		ArrayList<Acomplishment> Stories=(ArrayList<Acomplishment>)myAcomDAO.getAllStories(limit);
+		ArrayList<Acomplishment> Stories;
 		try{
 			limit=Integer.parseInt(request.getParameter("limit"));
-			Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoriesRatedWithConfidence(0.6f,limit);
+			//Stories=(ArrayList<Acomplishment>)myAcomDAO.getStoriesRatedWithConfidence(0.6f,limit);
+			Stories=getFeedStories(limit,myDAOFactory,myAcomDAO);
 			encodeStoriesInHTML(response.getWriter(), Stories, myDAOFactory.createUserDAO(),
 				(User)request.getSession().getAttribute("user"),myDAOFactory.createProfileDAO());
 		}catch(IOException ioEX){}
 	}
 
+	public ArrayList<Acomplishment> getFeedStories(int limit,DAOFactory myDAOFactory,AcomplishmentDAO myAcomDAO){
+		ArrayList<Acomplishment> Stories;
+		ConfigValues cValues=new ConfigValues();
+		ConfigValuesDAO cValuesDao=myDAOFactory.createConfigValuesDAO();
+		
+		Stories=(ArrayList<Acomplishment>) myAcomDAO.getStoriesRatedWithConfidence(Float.parseFloat(cValuesDao.getStringValue(cValues.getMinStoryConfidenceSettingName())
+				),limit,cValuesDao.getIntValue(cValues.getRatingsNeededToBeInTheFeedSettingName()));
+		return Stories;
+	}
 	/**
 	 * Put in HTML the stories from the server
 	 * assume the response will be put in an HTML table element

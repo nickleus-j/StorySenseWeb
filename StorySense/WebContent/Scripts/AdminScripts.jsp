@@ -781,5 +781,25 @@ function showSupportedRelationshipsTable(){
 	
 }
 
+/*
+ *Scripts for the templates made 
+ */
 
+ function viewTemplateMade(tID){
+	 /*var xmlhttp=getAJAXRequest();
+	 
+	 xmlhttp.onreadystatechange=function(){
+			
+			if (xmlhttp.readyState==4 && xmlhttp.status==200){
+				//statusBox.innerHTML=xmlhttp.responseText;
+				
+			}
+		  };
+
+		  
+		xmlhttp.open("GET","TemplateEditLoader?t="+tID,true);
+		xmlhttp.send(); */
+		window.location.href="TemplateEditLoader?t="+tID;
+ }
+ 
 </script>

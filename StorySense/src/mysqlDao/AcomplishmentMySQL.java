@@ -946,4 +946,47 @@ public class AcomplishmentMySQL extends AcomplishmentDAO {
 		}
 		return null;
 	}
+
+	@Override
+	public List<Acomplishment> getStoriesRatedWithConfidence(
+			float minimumConfidence, int limit, int ratingsNeeded) {
+		try {
+            PreparedStatement ps;
+            ResultSet rs;
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+            Connection con = myFactory.getConnection();
+
+            ps = con.prepareStatement("SELECT * from storyaccomplishment," +
+            		"(SELECT accomplishmentID AS aID,count(accomplishmentID)AS ratings,AVG(Confidence) AS Reliability " +
+            		"from rating GROUP BY accomplishmentID) AS ratingCount " +
+            		"WHERE ID = aID AND ratings >=? AND Reliability>=? " +
+            		"order by finishtime DESC LIMIT ?");
+            ps.setInt(1, ratingsNeeded);
+            ps.setFloat(2, minimumConfidence);
+            ps.setInt(3, limit);
+            rs = ps.executeQuery();
+            
+            ArrayList<Acomplishment> Stories=null;
+            
+            
+            	Stories=new ArrayList<Acomplishment>();
+            	
+            	addResultsToList(Stories, rs);
+            
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+            if(!Stories.isEmpty())
+              return Stories;
+            return null;
+		}
+        catch (Exception ex)
+        {
+            Logger.getLogger(AcomplishmentMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return null;
+	}
 }

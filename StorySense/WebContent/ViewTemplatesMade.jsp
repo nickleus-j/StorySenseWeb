@@ -7,10 +7,11 @@
 <title>Story Sense</title>
 
   <link rel="stylesheet" href="Style/Default.css"> 
-
+<script src="Scripts/AJAXscirpts.js"></script>
 </head>
 <body bgcolor="CCFFFF">
 <%@ include file="Insertables/AdminNavBar.jsp" %>
+<%@ include file="../Scripts/AdminScripts.jsp" %>
 <div id="container">
 <div id="center" class="column">
 	<% TemplateEncoder tEncoder=new TemplateEncoder();

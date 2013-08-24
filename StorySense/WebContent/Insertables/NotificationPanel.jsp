@@ -8,10 +8,12 @@ String notifBtID="notificationButton";
 var Notifications,lastNoticeID=0;
 
 function showMessages(Messages,stage){
-	var item;
+	var item,subscript=document.createElement("sub");
 	for(var ctr=0;ctr<Messages.length;ctr++){
 		item=document.createElement("li");
 		item.innerHTML=Messages[ctr].Message;
+		subscript.innerHTML=Messages[ctr].Created_On;
+		item.appendChild(subscript);
 		stage.appendChild(item);
 	}/*End of loop*/
 }
