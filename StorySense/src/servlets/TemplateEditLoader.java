@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,17 +42,30 @@ public class TemplateEditLoader extends BaseServlet {
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		TemplateDAO tDao=myDAOFactory.createTemplateDAO();
 		Template currentTemplate;
+		String json="{";
 		try{
 			out = response.getWriter();
 			currentTemplate=tDao.getTemplate(Integer.parseInt(request.getParameter("t")));
 			
 			if(currentTemplate!=null){
-				showRelations(currentTemplate,out);
-				out.write(getQuerieVariablesJSON(currentTemplate));
+				//showRelations(currentTemplate,out);getStoryTemplateContent
+				json=json.concat("\"Relations\":"+getRelationsInJson(getRelations(currentTemplate))+",");
+				json=json.concat("\"storyVar\":"+getQuerieVariablesJSON(currentTemplate));
+				json=json.concat(",\"RelationContent\":["+getRelationTemplateContent(currentTemplate)+"]");
+				json=json.concat(",\"storyContent\":["+getStoryTemplateContent(currentTemplate)+"]");
+				out.write(",\"storyContent\":["+getStoryTemplateContent(currentTemplate)+"]");
+				json+="}";
+				request.setAttribute("elms", json);
+				RequestDispatcher dispatcher =request.getRequestDispatcher("EditTemplate.jsp");
+				dispatcher.forward(request, response); 
+				
 			}
 			else out.write("Invalid Entry");
 			
-		}catch(IOException ioEx){}
+		}catch(IOException ioEx){ioEx.printStackTrace();}
+		catch (ServletException e) {
+			e.printStackTrace();
+		} 
 	}/*End of method*/
 
 	public void showRelations(Template template,PrintWriter out)throws IOException{
@@ -60,6 +75,56 @@ public class TemplateEditLoader extends BaseServlet {
 			current=relations.get(ctr);
 			out.write(current.getConcept1()+" | "+current.getRelationship()+" | "+current.getConcept2()+" \n");
 		}
+		
+	}
+	
+	public String getRelationsInJson(List<Relation> relations){
+		String json="[";
+		
+		for(int ctr=0;ctr<relations.size();ctr++){
+			Relation currentRelation=relations.get(ctr);
+			json+=("{\"concept1\":\""+currentRelation.getConcept1()+"\",");
+			json+=("\"relation\":\""+currentRelation.getRelationship()+"\",");
+			json+=("\"concept2\":\""+currentRelation.getConcept2()+"\"}");
+			
+			if(ctr<relations.size()-1)
+				json+=",";
+		}
+		
+		return json.concat("]");
+	}
+	
+	public String getRelationTemplateContent(Template template) throws FileNotFoundException{
+		String code="";
+		File relationTemplate=new File(ExternalResources.getPrefix()+template.getRelationURL());
+		//FileReader fReader=new FileReader(relationTemplate);
+		Scanner scanner=new Scanner(relationTemplate);
+
+		while(scanner.hasNext()){
+			if(code=="")
+				code+=("{'line':\""+scanner.nextLine()+"\"}");
+			else code+=(",{'line':\""+scanner.nextLine()+"\"}");
+			
+		}
+		
+		scanner.close();
+		return code;
+	}
+	public String getStoryTemplateContent(Template template) throws FileNotFoundException{
+		String code="";
+		File sTemplate=new File(ExternalResources.getPrefix()+template.getStoryURL());
+		//FileReader fReader=new FileReader(relationTemplate);
+		Scanner scanner=new Scanner(sTemplate);
+
+		while(scanner.hasNext()){
+			if(code=="")
+				code+=("{'line':'"+scanner.nextLine()+"'}");
+			else code+=(",{'line':'"+scanner.nextLine()+"'}");
+			
+		}
+		
+		scanner.close();
+		return code;
 	}
 	
 	public String getRealtionParameter(String scanned,Scanner scn){
@@ -71,6 +136,13 @@ public class TemplateEditLoader extends BaseServlet {
 		if(!next.equalsIgnoreCase("|")){
 			return getRealtionParameter(scanned+next,scn);
 		}
+		return scanned.replace('"',' ');
+	}
+	
+	private String getSecondConcept(String scanned,Scanner scn){
+		
+		if(scanned=="?"||scanned.charAt(0)=='?'||scanned.charAt(scanned.length()-1)=='?')
+			return "";
 		return scanned;
 	}
 	
@@ -90,7 +162,7 @@ public class TemplateEditLoader extends BaseServlet {
 			scanned=scanner.next();
 			relationMade.setRelationship(getRealtionParameter(scanned,scanner));
 			
-			relationMade.setConcept2(scanner.nextLine());
+			relationMade.setConcept2(getSecondConcept(scanner.nextLine().replace('"',' '),scanner));
 			
 			relations.add(relationMade);
 		}
@@ -98,23 +170,6 @@ public class TemplateEditLoader extends BaseServlet {
 		scanner.close();
 		
 		return relations;
-	}
-	
-	public List<Relation> getQuerieVariables(Template template) throws FileNotFoundException{
-		List<Relation> variables=new ArrayList<Relation>();
-		File storyTemplate=new File(ExternalResources.getPrefix()+template.getStoryURL());
-		Scanner scanner=new Scanner(storyTemplate);
-		String scanned;
-		
-		while(scanner.hasNext()){
-			Relation relationMade=new Relation();
-			
-			/*	1st concept */
-			scanned=scanner.next();
-			relationMade.setConcept1(getRealtionParameter(scanned,scanner));
-		}
-		scanner.close();
-		return variables;
 	}
 	
 	
@@ -166,12 +221,16 @@ public class TemplateEditLoader extends BaseServlet {
 			return getStrinUntilComma(scanned, scn,lastC);
 		return "";
 	}
-	
+	/*
+	private String getVariableresults(String scanned,Scanner scn){
+		scanned.in
+	}
+	*/
 	private String scanTherest(String scanned,Scanner scn){
-		String text="";
+		String text=scanned;
 		while(scn.hasNextLine())
 			text+=scn.nextLine();
-		return text;
+		return text.replaceAll("\"", "\\\"");
 	}
 	
 	/**
@@ -198,11 +257,13 @@ public class TemplateEditLoader extends BaseServlet {
 				//entry+=scanned.substring(2);;getStrinUntilComma
 				entry+="\"";
 			
-				/*Concept1*/
+				/*Concept1
 				entry+=(",\"concept1\":\""+getVariableConcept(scanner.next(),scanner,',')+"\"");
 				entry+=(",\"relation\":\""+getVaraibleRelation(scanner.next(),scanner)+"\"");
 				entry+=(",\"concept2\":\""+getVariableConcept(scanner.next(),scanner,'>')+"\"");
 				//entry+=(",\"concept2\":\""+scanner.next()+"\"");
+				 * 
+				 */
 				entry+="}";
 				scanner.nextLine();
 				json+=entry;
@@ -214,4 +275,5 @@ public class TemplateEditLoader extends BaseServlet {
 		scanner.close();
 		return json;
 	}
+	
 }

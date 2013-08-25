@@ -639,13 +639,17 @@ function converRelationsToString(){
 	var text="";
 	for(var ctr=0;ctr<storyRelations.length;ctr++){
 		if(storyRelations[ctr].concept1!=0)
+			text+=("\""+getValueFromRelationConcept(storyRelations[ctr].concept1)+"\" | ");
+		else if(storyRelations[ctr].concept1<storyVariables.length)
 			text+=(getValueFromRelationConcept(storyRelations[ctr].concept1)+" | ");
 		else text+="? | ";
 		
 		//text+=(storyRelations[ctr].relation+" | "); 
 		text+=(getValueofRelationIndex(storyRelations[ctr].relation)+" | ");
 		if(storyRelations[ctr].concept2!=0)
-			text+=(getValueFromRelationConcept(storyRelations[ctr].concept2)+" \n");
+			text+=("\""+getValueFromRelationConcept(storyRelations[ctr].concept2)+"\" \n");
+		else if(storyRelations[ctr].concept2<storyVariables.length)
+			text+=(getValueFromRelationConcept(storyRelations[ctr].concept2)+" | ");
 		else text+="? \n";
 	}/*End of loop*/
 	return text;
@@ -781,25 +785,6 @@ function showSupportedRelationshipsTable(){
 	
 }
 
-/*
- *Scripts for the templates made 
- */
 
- function viewTemplateMade(tID){
-	 /*var xmlhttp=getAJAXRequest();
-	 
-	 xmlhttp.onreadystatechange=function(){
-			
-			if (xmlhttp.readyState==4 && xmlhttp.status==200){
-				//statusBox.innerHTML=xmlhttp.responseText;
-				
-			}
-		  };
-
-		  
-		xmlhttp.open("GET","TemplateEditLoader?t="+tID,true);
-		xmlhttp.send(); */
-		window.location.href="TemplateEditLoader?t="+tID;
- }
  
 </script>
