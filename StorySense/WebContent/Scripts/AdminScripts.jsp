@@ -757,6 +757,8 @@ function addSupportedRelationship(relationship,meaning){
 	xmlhttp.send();
 }
 
+
+
 function showSupportedRelationshipsTable(){
 	var table=document.getElementById(<% wEncoder.writeJsElementReference(adminEnc.getSupportedRelationshipsTableId()); %>);;
 	var row,RelationshipCell,SentenceCell,sentenceBox;

@@ -48,14 +48,16 @@ public class TemplateEditLoader extends BaseServlet {
 			currentTemplate=tDao.getTemplate(Integer.parseInt(request.getParameter("t")));
 			
 			if(currentTemplate!=null){
-				//showRelations(currentTemplate,out);getStoryTemplateContent
-				json=json.concat("\"Relations\":"+getRelationsInJson(getRelations(currentTemplate))+",");
-				json=json.concat("\"storyVar\":"+getQuerieVariablesJSON(currentTemplate));
+				//showRelations(currentTemplate,out);nameField
+				/*json=json.concat("\"Relations\":"+getRelationsInJson(getRelations(currentTemplate))+",");
+				json=json.concat("\"storyVar\":"+getQuerieVariablesJSON(currentTemplate));*/
+				json=json.concat("\"tID\":'"+currentTemplate.getTemplateID()+"'");
 				json=json.concat(",\"RelationContent\":["+getRelationTemplateContent(currentTemplate)+"]");
 				json=json.concat(",\"storyContent\":["+getStoryTemplateContent(currentTemplate)+"]");
-				out.write(",\"storyContent\":["+getStoryTemplateContent(currentTemplate)+"]");
+				json=json.concat(",\"nameField\":\""+currentTemplate.getName()+"\"");
 				json+="}";
 				request.setAttribute("elms", json);
+				request.setAttribute("tID", ""+currentTemplate.getTemplateID());
 				RequestDispatcher dispatcher =request.getRequestDispatcher("EditTemplate.jsp");
 				dispatcher.forward(request, response); 
 				
@@ -102,8 +104,8 @@ public class TemplateEditLoader extends BaseServlet {
 
 		while(scanner.hasNext()){
 			if(code=="")
-				code+=("{'line':\""+scanner.nextLine()+"\"}");
-			else code+=(",{'line':\""+scanner.nextLine()+"\"}");
+				code+=("{'line':'"+scanner.nextLine()+"'}");
+			else code+=(",{'line':'"+scanner.nextLine()+"'}");
 			
 		}
 		

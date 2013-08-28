@@ -8,6 +8,13 @@
 
   <link rel="stylesheet" href="Style/Default.css"> 
 <script src="Scripts/AJAXscirpts.js"></script>
+
+<script>
+function viewTemplateMade(id){
+	window.location.href="TemplateEditLoader?t="+id;
+}
+</script>
+
 </head>
 <body bgcolor="CCFFFF">
 <%@ include file="Insertables/AdminNavBar.jsp" %>

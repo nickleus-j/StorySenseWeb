@@ -9,8 +9,9 @@
 <script src="Scripts/AJAXscirpts.js"></script>
 <%@ include file="../Scripts/AdminScripts.jsp" %>
 <script>
+var templateElements=<% out.write(request.getAttribute("elms")+"");%>;
 function loadTemplateForEditing(){
-	var templateElements=<% out.write(request.getAttribute("elms")+"");%>
+	var templateIDIn=document.getElementById("templateKeeper");
 	var relText=document.getElementById("relText");
 	var sText=document.getElementById("storyText");
 	storyRelations=templateElements.Relations;
@@ -19,6 +20,8 @@ function loadTemplateForEditing(){
 	//relText.setAttribute("value",templateElements.RelationContent);
 	relText.value=getLines(templateElements.RelationContent);
 	sText.value=getLines(templateElements.storyContent);
+	
+	templateIDIn.setAttribute("value",""+templateElements.tID);
 }
 
 function getLines(content){
@@ -32,6 +35,12 @@ function getLines(content){
 function addStoryVariobles(templateElements){
 	storyVariables=templateElements.storyVar;
 }
+
+function resetElement(ID,origText){
+	elem=document.getElementById(ID);
+	elem.value=origText;
+}
+
 </script>
 </head>
 <body onload="loadTemplateForEditing()">
@@ -41,24 +50,39 @@ function addStoryVariobles(templateElements){
 
 
 <div id="container">
-
+<form method="post" action="TemplateEditor">
+<input type="hidden" name="tID" id="templateKeeper"/>
 <table width="100%">
 <tr>
 <th>Relation Template</th><th>Story Template</th>
 </tr>
 <tr>
 <td id=<% wEncoder.writeJsElementReference(rTemplateCell); %>>
-<textarea rows="20" cols="35" id="relText"></textarea>
+<textarea rows="20" name="relT" cols="35" id="relText"></textarea>
+
 </td>
 <td id=<% wEncoder.writeJsElementReference(sTemplateCell); %>>
-<textarea rows="20" cols="35" id="storyText"></textarea>
+<textarea rows="20" name="storyT" cols="35" id="storyText"></textarea>
+
 </td>
 </tr>
+
 <tr>
-<td></td>
+<td>
+<input type="button" value="Reset RelationBox" onclick="resetElement('relText',getLines(templateElements.RelationContent))"/>
+</td>
+<td>
+<input type="button" value="Reset StoryBox" onclick="resetElement('storyText',getLines(templateElements.storyContent))"/>
+</td>
+</tr>
+
+<tr>
+<td id="statusCell"></td>
 </tr>
 </table>
-
+<input type="submit" />
+	
+	</form>
 </div>
 <%@ include file="Insertables/Footer.jsp" %>
 </body>

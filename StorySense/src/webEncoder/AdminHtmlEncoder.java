@@ -3,9 +3,11 @@ package webEncoder;
 import java.util.List;
 
 import dao.ConceptDAO;
+import dao.ConfigValuesDAO;
 import dao.DAOFactory;
 import dao.RelationshipDAO;
 import entity.Concept;
+import entity.ConfigValues;
 import entity.Relationship;
 
 /**
@@ -48,22 +50,7 @@ public class AdminHtmlEncoder {
 	
 	public String getRelationshipsWithMeaningHtmlTable(){
 		String code="<table bgcolor=\"white\"style=\"border: 4px solid #660000; border-radius: 4px;\" id='"+getSupportedRelationshipsTableId()+"'><tr><th colspan=\"2\" style=\"font-family: Segoe UI; background-color: #660000; color: white;\">Relationships Available</tr></th>";
-		/*DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
-		RelationshipDAO relaDao=myDAOFactory.createRelationshipDAO();
-		List<Relationship> relationships=relaDao.getRelationships();
 		
-		code=code.concat("<tr><th>Relationship name</th><th>Relationship Meaning</th></tr>");
-		
-		for(int ctr=0;ctr<relationships.size();ctr++){
-			code=code.concat("<tr><td>"+relationships.get(ctr).getRelationship()+"</td>");
-			code=code.concat("<td><input value='"+relationships.get(ctr).getSentence_pattern()+"'/></td></tr>");
-			
-		}
-		
-		code=code.concat("<tr><td><input type=\"button\" value='Save'/></td>");
-		
-		return code.concat("</table>");
-		*/
 		return code.concat(getRelationshipsWithMeaningHtmlTableContents()+"</table>");
 	}
 	
@@ -85,6 +72,28 @@ public class AdminHtmlEncoder {
 		code=code.concat("<tr><td><input type=\"button\" value='Save'/></td>");
 		
 		return code;
+	}
+	
+	/**
+	 * Returns HTMl string that will generate a table where the settings can change
+	 * @return
+	 */
+	public String getSettingsHTML(){
+		String code="<table><caption>Settings</caption>";
+		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
+		ConfigValuesDAO configDao=myDAOFactory.createConfigValuesDAO();
+		List<ConfigValues> configurationSettings=configDao.getConfigurationSettings();
+		
+		for(int ctr=0;ctr<configurationSettings.size();ctr++){
+			code+=("<tr><td>"+configurationSettings.get(ctr).getSettingName()+"<td>");
+			code+=("<td><input id=\"setting"+ctr+"\" " +
+					"value=\""+configurationSettings.get(ctr).getValue()+"\"/></td>");
+			code+=("<td><input type='button' value='save' onclick=\"changeSetting(" +configurationSettings.get(ctr).getValueID()+
+					",'setting"+ctr+"')\"/></td>");
+		}
+		
+		
+		return code.concat("</table>");
 	}
 	
 	public String getConceptTextsJs(){
