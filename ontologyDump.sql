@@ -36,7 +36,7 @@ CREATE TABLE `ConfigValues` (
 
 LOCK TABLES `ConfigValues` WRITE;
 /*!40000 ALTER TABLE `ConfigValues` DISABLE KEYS */;
-INSERT INTO `ConfigValues` VALUES (1,'Confidence_THRESHOLD','60'),(2,'maximumNoticeAgeInDays','15'),(3,'minimumStoryConfidence','0.6'),(4,'RatingsNeededToBeInTheFeed','1');
+INSERT INTO `ConfigValues` VALUES (1,'Confidence_THRESHOLD','60'),(2,'maximumNoticeAgeInDays','15'),(3,'minimumStoryConfidence','0.60'),(4,'RatingsNeededToBeInTheFeed','1');
 /*!40000 ALTER TABLE `ConfigValues` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -446,4 +446,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-08-25  3:49:11
+-- Dump completed on 2013-08-29 13:29:38

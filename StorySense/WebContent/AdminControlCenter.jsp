@@ -29,6 +29,20 @@ function changeSetting(ID,valueSource){
 	xmlhttp.send();
 }
 </script>
+
+<style>
+
+/*Change style of setting table from here*/
+.settingTbl{
+
+}
+/*Style for status notice*/
+#statusP{
+	font-size: 150%;
+}
+
+</style>
+
 </head>
 <body>
 <%@ include file="Insertables/AdminNavBar.jsp" %>

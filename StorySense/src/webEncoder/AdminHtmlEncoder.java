@@ -79,7 +79,7 @@ public class AdminHtmlEncoder {
 	 * @return
 	 */
 	public String getSettingsHTML(){
-		String code="<table><caption>Settings</caption>";
+		String code="<table align='center' class='settingTbl'><caption>Settings</caption>";
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		ConfigValuesDAO configDao=myDAOFactory.createConfigValuesDAO();
 		List<ConfigValues> configurationSettings=configDao.getConfigurationSettings();
