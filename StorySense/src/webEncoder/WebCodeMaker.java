@@ -172,7 +172,7 @@ public class WebCodeMaker {
 	}
 	
 	private String createAchievementLink(User user){
-		return "<a href='viewAchivements?uID="+user.getAccountID()+"'>Achivements: </a>";
+		return "<a href='viewAchivements?uID="+user.getAccountID()+"'>Achievements: </a>";
 	}
 	
 	/**
