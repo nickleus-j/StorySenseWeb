@@ -70,7 +70,10 @@ function showResults(arr){
 $(function() {
 	
 	$( <%wEncoder.writeJsElementReference(searchBoxJqID); %> ).autocomplete({
-	      source: concepts,
+	      source: concepts,select:function( event, ui ) {
+	    	  document.getElementById(<%wEncoder.writeJsElementReference(searchBoxID); %>).value=ui.item.value;
+	    	  searchRelations()
+	      }
 	    });
 });
 </script>
@@ -82,7 +85,7 @@ $(function() {
 <label>Search Concept</label><input id=<%wEncoder.writeJsElementReference(searchBoxID); %>
 	onkeypress="readySearch(event)">
 <button onclick="searchRelations()">Search</button>
-<table id=<%wEncoder.writeJsElementReference(relTableID); %>>
+<table id=<%wEncoder.writeJsElementReference(relTableID); %> align="center">
 <tr id="headerRow">
 <th>Concept 1</th><th>Relationship</th><th>Concept 2</th>
 <th>Confidence</th>

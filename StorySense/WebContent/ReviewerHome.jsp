@@ -2,6 +2,9 @@
 <%@page import="webEncoder.WebCodeMaker"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+String wrtrBoxID="jsdfdsjn1010",searchBoxJqID="#"+wrtrBoxID;
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -87,9 +90,36 @@
 	margin:3%;
 }
 
+.ui-autocomplete {
+    max-height: 35%;
+    overflow-y: auto;
+   }
 </style>
 <script src="Scripts/AJAXscirpts.js"></script>
   <script src="Scripts/StoryFeedScript.js"></script>
+<link rel="stylesheet" href="Style/jquery-ui.css"> 
+  <script src="Scripts/jquery.js"></script>
+<script src="Scripts/jquery-ui.js"></script>
+  <script>
+  var writers=<% out.write(encoder.getUsersToBeRatedJSON());%>
+  
+  function readySearch(e){
+		if (e.keyCode == 13) {
+			ReviewStoriesInUser(20,1,
+					document.getElementById(<%encoder.writeJsElementReference(wrtrBoxID); %>).value);
+	    }
+	}
+  
+  $(function() {
+		
+		$( <%encoder.writeJsElementReference(searchBoxJqID); %> ).autocomplete({
+		      source: writers,
+		      select:function( event, ui ) {
+		    	  ReviewStoriesInUser(20,1,ui.item.value);
+		      }
+		    });
+	});
+  </script>
 </head>
 <body onload="loadStoriesToReview(10)" bgcolor="CCFFFF">
 
@@ -101,14 +131,10 @@
 	<table align="center" width="100%" >
 	<tr>
 	
-		<th>Filter Users
-		<% /*The webcodemaker known as encoder
-			is already declared in an included jsp file
-			//WebCodeMaker encoder=new WebCodeMaker(out); 
-			*/
-			
-			out.write(encoder.getUsersToBeRated());
-		%>
+		<th>
+		<label>Search Author and press Enter</label>
+		<input id=<%encoder.writeJsElementReference(wrtrBoxID); %>
+	onkeypress="readySearch(event)">
 		</th>
 	
 	<th>

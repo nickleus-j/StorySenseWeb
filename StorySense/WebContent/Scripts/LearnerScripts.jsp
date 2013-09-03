@@ -184,6 +184,7 @@ function generateStoryPreviweTable(table){
 	}/*End of loop that writes rows of information*/
 }
 
+
 function createLinkToUser(userID,text){
 	var anchor=document.createElement("a");
 	anchor.setAttribute("href","viewAUser?uID="+userID);
@@ -317,7 +318,7 @@ function getStoryData(userName){
 function sortUserStories(stories,category){
 	var stage=document.getElementById(<% wcm.writeJsElementReference(storyPrevID); %> );
 	var orderTypreMyStories=document.getElementsByName(<% wcm.writeJsElementReference(orderTypreMyStories); %>);
-	var value;
+	var value="";
 	
 	for (var i = 0;i < orderTypreMyStories.length; i++) {
 	    if (orderTypreMyStories[i].checked)
