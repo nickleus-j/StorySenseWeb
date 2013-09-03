@@ -4,15 +4,27 @@
 <%
 WebCodeMaker wEncoder=new WebCodeMaker(out); 
 AdminHtmlEncoder adminEnc=new AdminHtmlEncoder();
-String searchBoxID="srchBox1010",relTableID="relationsTable4574778Ajsdfjs";
+String searchBoxID="srchBox1010",relTableID="relationsTable4574778Ajsdfjs",searchBoxJqID="#"+searchBoxID;
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <title>Relations</title>
-<script src="Scripts/AJAXscirpts.js"></script>
+<link rel="stylesheet" href="Style/Default.css"> 
+<link rel="stylesheet" href="Style/jquery-ui.css"> 
 
+<style>
+
+.ui-autocomplete {
+    max-height: 25%;
+    overflow-y: auto;
+   }
+</style>
+
+<script src="Scripts/AJAXscirpts.js"></script>
+<script src="Scripts/jquery.js"></script>
+<script src="Scripts/jquery-ui.js"></script>
 <script type="text/javascript">
 
 var concepts=<% out.write(adminEnc.getConceptTextsJs());%>;
@@ -47,12 +59,20 @@ function showResults(arr){
 				arr[ctr].relationship+"</td><td>"+
 				arr[ctr].c2+"</td><td>"+arr[ctr].confidence+"</td></tr>");
 		
-		/*elem.innerHTML+=("<td>"+arr[ctr].relationship+"</td>");
-		elem.innerHTML+=("<td>"+arr[ctr].c2+"</td>");
-		elem.innerHTML+=("<td>"+arr[ctr].confidence+"</td>");
-		elem.innerHTML+="</tr>";*/
+		
 	}/*End of loop*/
+	
+	if(arr.length<1)
+		elem.innerHTML+=("<tr><td colspan=\"4\">No results from concept</td></tr>");
+	
 }
+
+$(function() {
+	
+	$( <%wEncoder.writeJsElementReference(searchBoxJqID); %> ).autocomplete({
+	      source: concepts,
+	    });
+});
 </script>
 
 </head>
@@ -61,7 +81,7 @@ function showResults(arr){
 <div id="container">
 <label>Search Concept</label><input id=<%wEncoder.writeJsElementReference(searchBoxID); %>
 	onkeypress="readySearch(event)">
-<button onclick="searchRelations()">press</button>
+<button onclick="searchRelations()">Search</button>
 <table id=<%wEncoder.writeJsElementReference(relTableID); %>>
 <tr id="headerRow">
 <th>Concept 1</th><th>Relationship</th><th>Concept 2</th>

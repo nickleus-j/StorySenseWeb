@@ -612,7 +612,7 @@ public class RelationMysql extends RelationDAO {
 	            Connection con = myFactory.getConnection();
 
 	            ps = con.prepareStatement("SELECT * from Relation WHERE " +
-	            		"concept1 LIKE ? OR concept2 LIKE ?");
+	            		"concept1 LIKE CONCAT('%',?,'%') OR concept2 LIKE CONCAT('%',?,'%')");
 	            ps.setString(1, searchKey);
 	            ps.setString(2, searchKey);
 

@@ -9,6 +9,7 @@
 <script src="Scripts/AJAXscirpts.js"></script>
 
 <script>
+<link rel="stylesheet" href="Style/Default.css"> 
 function changeSetting(ID,valueSource){
 	var xmlhttp=getAJAXRequest();
 	var value=document.getElementById(valueSource).value;
