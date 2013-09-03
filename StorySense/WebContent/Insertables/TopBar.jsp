@@ -21,6 +21,8 @@ border: none;
 }
 .divisionHeader {
    	width:30%;
+   	border: 2px solid black;
+border-radius: 4px;
    /* 	height:55px;   Height of the footer */
 	background-color: #159cdb;
 	margin-bottom: 1%;

@@ -42,7 +42,7 @@ public class TemplateEncoder {
 	public String showTemplateList(int author){
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		TemplateDAO templateDao=myDAOFactory.createTemplateDAO();
-		String code="<table border=\"2\"><caption>Templates</caption>";
+		String code="<table bgcolor=\"white\" align=\"center\" border=\"2\" style=\" width: 50%; margin-top: 2%;border-collapse: collapse; padding: 10x;\"><tr><th colspan=\"2\" bgcolor=\"#660000\" style=\"color: white;\">Templates</th></tr>";
 		ArrayList<Template> templates=null;
 		
 		templates=(ArrayList<Template>)templateDao.getAlltemplates();
@@ -53,7 +53,7 @@ public class TemplateEncoder {
 		else{
 			for(int ctr=0;ctr<templates.size();ctr++){
 				code=code.concat("<tr><th>"+templates.get(ctr).getName()+"</th>" +
-						"<td><button onclick=\"viewTemplateMade("+templates.get(ctr).getTemplateID()
+						"<td align=\"center\"><button onclick=\"viewTemplateMade("+templates.get(ctr).getTemplateID()
 						+")\">View Template</button></td></tr>");
 			}
 		}

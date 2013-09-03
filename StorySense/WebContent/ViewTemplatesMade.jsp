@@ -5,7 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Story Sense</title>
-
+<style>
+.tablebox{
+ align: center; 
+ border: 2; 
+ border-spacing: 0px;
+}
+</style>
   <link rel="stylesheet" href="Style/Default.css"> 
 <script src="Scripts/AJAXscirpts.js"></script>
 
