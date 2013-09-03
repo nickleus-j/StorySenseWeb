@@ -29,6 +29,11 @@ import entity.User;
 public abstract class BaseServlet extends HttpServlet {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8139548935870398458L;
+
+	/**
      * Processes requests for both HTTP
      * <code>GET</code> and
      * <code>POST</code> methods.

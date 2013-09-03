@@ -27,6 +27,8 @@ public class ConfigValues {
 	public String getConfidenceSettingName(){return "Confidence_THRESHOLD";}
 	public String getMinStoryConfidenceSettingName(){return "minimumStoryConfidence";}
 	public String getRatingsNeededToBeInTheFeedSettingName(){return "RatingsNeededToBeInTheFeed";}
+	public String getmaximumNoticeAgeInDaysID(){return "maximumNoticeAgeInDays";}
 	public int getMinStoryConfidenceSettingID(){return 3;}
 	public int RatingsNeededToBeInTheFeedID(){return 4;}
+	public int getNotifExpiryDateID(){return 2;}
 }

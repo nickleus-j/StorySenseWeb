@@ -19,9 +19,10 @@ function changeSetting(ID,valueSource){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200){
 			statusElem.innerHTML="Save Complete";
 		}
-		else{
+		else if (xmlhttp.status==500){
 			statusElem.innerHTML="Save Failed. Value: "+value+" was rejected";
 		}
+		else statusElem.innerHTML="Please wait. Value: "+value+" is being processed";
 	  };
 
 	  /*Send a request to the server*/

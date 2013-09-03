@@ -12,7 +12,7 @@ import entity.Relationship;
 
 /**
  * Generates HTML Code involving the pages
- * used by the Administrators
+ * used  in Administrator pages
  */ 
 public class AdminHtmlEncoder {
 
@@ -47,13 +47,22 @@ public class AdminHtmlEncoder {
 		return js.concat("]");
 	}
 	
-	
+	/**
+	 * Generates HTML table code containing
+	 * the relationships supported by the ontology
+	 * @return relationshipsHtmlTable
+	 */
 	public String getRelationshipsWithMeaningHtmlTable(){
 		String code="<table bgcolor=\"white\"style=\"border: 4px solid #660000; border-radius: 4px;\" id='"+getSupportedRelationshipsTableId()+"'><tr><th colspan=\"2\" style=\"font-family: Segoe UI; background-color: #660000; color: white;\">Relationships Available</tr></th>";
 		
 		return code.concat(getRelationshipsWithMeaningHtmlTableContents()+"</table>");
 	}
 	
+	/**
+	 * Returns in HTML rows the relationships supported by the ontology
+	 * The text booxes allow saving of any possible changes
+	 * @return
+	 */
 	public String getRelationshipsWithMeaningHtmlTableContents(){
 		String code="";
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
@@ -65,8 +74,7 @@ public class AdminHtmlEncoder {
 		for(int ctr=0;ctr<relationships.size();ctr++){
 			code=code.concat("<tr><td>"+relationships.get(ctr).getRelationship()+"</td>");
 			code=code.concat("<td><input value='"+relationships.get(ctr).getSentence_pattern()+"'/></td></tr>");
-			/*if(ctr<relationships.size()-1)
-				code=code.concat(",");*/
+			
 		}
 		
 		code=code.concat("<tr><td><input type=\"button\" value='Save'/></td>");
@@ -96,6 +104,10 @@ public class AdminHtmlEncoder {
 		return code.concat("</table>");
 	}
 	
+	/**
+	 * represents in JSON format the concepts stored in the database
+	 * @return JSON code representing the Concept
+	 */
 	public String getConceptTextsJs(){
 		String js="[";
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);

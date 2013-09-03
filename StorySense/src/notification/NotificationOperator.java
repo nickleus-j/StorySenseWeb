@@ -1,9 +1,11 @@
 package notification;
 
+import dao.ConfigValuesDAO;
 import dao.DAOFactory;
 import dao.NotificationDao;
 import dao.NotificationMessageDao;
 import dao.UserDAO;
+import entity.ConfigValues;
 import entity.NotifMessage;
 import entity.Notification;
 import entity.User;
@@ -26,6 +28,14 @@ import servlets.BaseServlet;
  */
 @WebServlet(description = "Notification messages Fetcher for learner", urlPatterns = { "/learnerNotif" })
 public class NotificationOperator extends BaseServlet{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2010841458366428920L;
+
+
+
 
 	public String getNotifMsgs(User givenUser){/* MsgID */
 		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
@@ -69,11 +79,20 @@ public class NotificationOperator extends BaseServlet{
 		return json.concat("]");
 	}
 	
+	private int getOldestNotificationAllwed(ConfigValuesDAO configDao){
+		int value=30;
+		ConfigValues cv=new ConfigValues();
+		try{
+		value=configDao.getIntValue(cv.getmaximumNoticeAgeInDaysID());
+		}catch(NumberFormatException ne){}
+		return value;
+	}
 	
 	public String getUserNotifMsgs(User givenUser){/* MsgID */
 		DAOFactory daoFactory=DAOFactory.getInstance(DAOFactory.MYSQL);
 		NotificationDao noticeDao=daoFactory.createNotificationDao();
-		List<Notification> notices=noticeDao.getUserNotifications(givenUser.getAccountID(),15);
+		List<Notification> notices=noticeDao.getUserNotifications(givenUser.getAccountID(),
+				getOldestNotificationAllwed(daoFactory.createConfigValuesDAO()));
 		String json="[";
 		
 		for(int ctr=0;ctr<notices.size();ctr++){

@@ -40,6 +40,7 @@ public class RelationshipSupporter extends BaseServlet {
 			*/
 			relaDao.addRelationship(request.getParameter("rl"), request.getParameter("sntc"));
 			out.write("Relationship Added");
+			out.flush();
 		}catch(Exception ioEX){}
 	}
 

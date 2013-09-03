@@ -20,9 +20,7 @@ import servlets.BaseServlet;
 public class SettingChanger extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
+    
     public SettingChanger() { }
 
 	@Override
@@ -38,6 +36,7 @@ public class SettingChanger extends BaseServlet {
 			setting.setValue(request.getParameter("value"));
 			configDao.updateSetting(setting);
 			out.write("Save complete");
+			out.flush();
 		}catch(IOException ioex){}
 		
 	}

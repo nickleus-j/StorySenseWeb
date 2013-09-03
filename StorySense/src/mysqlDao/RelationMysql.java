@@ -13,10 +13,12 @@ package mysqlDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import dao.ConfigValuesDAO;
 import dao.DAOFactory;
 import dao.RelationDAO;
 import dbConnection.DBConnectionFactory;
@@ -285,19 +287,7 @@ public class RelationMysql extends RelationDAO {
 	            Connection con = myFactory.getConnection();
 
 	            ps = con.prepareStatement("SELECT * FROM Relation");
-	            rs = ps.executeQuery();
-
-	            while(rs.next())
-	            {
-	            Relation oneRelation = new Relation();
-	                oneRelation.setConcept1(rs.getString("Concept1"));
-	                oneRelation.setConcept2(rs.getString("Concept2"));
-	                oneRelation.setRelationship(rs.getString("Relationship"));
-	                oneRelation.setConfidence_percentage(rs.getInt("confidence_percentage"));
-	                oneRelation.setTimes_validated(rs.getInt("times_validated"));
-	                oneRelation.setTotal_score(rs.getInt("total_score"));
-	            arrRelations.add(oneRelation);
-	            }
+	            arrRelations=getRelationsResult(ps.executeQuery(),arrRelations);
 	            
 	            ps.close();
 	            con.close();
@@ -566,9 +556,18 @@ public class RelationMysql extends RelationDAO {
         }
 	}
 
+	private float getConfidenceNeeded(){
+		DAOFactory daofactory=DAOFactory.getInstance(DAOFactory.MYSQL);
+        ConfigValuesDAO configDao=daofactory.createConfigValuesDAO();
+        return configDao.getIntValue("Confidence_THRESHOLD")+0.0f;
+	}
+	
+	/**
+	 * Returns the relation knowledge 
+	 */
 	@Override
 	public ArrayList<String> getRelationsOfConcept(String concept) {
-		float minimumConfidence=70.0f;
+		float minimumConfidence=getConfidenceNeeded();
 		try{
 			PreparedStatement ps;
 			ResultSet rs;
@@ -602,4 +601,58 @@ public class RelationMysql extends RelationDAO {
 		return null;
 	}
 
+	@Override
+	public ArrayList<Relation> getRelationsOfConceptSearch(String searchKey) {
+		 ArrayList<Relation> arrRelations = new ArrayList<Relation>();
+
+	        try {
+	            PreparedStatement ps;
+
+	            DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
+	            Connection con = myFactory.getConnection();
+
+	            ps = con.prepareStatement("SELECT * from Relation WHERE " +
+	            		"concept1 LIKE ? OR concept2 LIKE ?");
+	            ps.setString(1, searchKey);
+	            ps.setString(2, searchKey);
+
+	            arrRelations=getRelationsResult(ps.executeQuery(),arrRelations);
+	            
+	            
+	            ps.close();
+	            con.close();
+
+	        }
+	        catch (Exception ex)
+	        {
+	            Logger.getLogger(DAOFactory.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+	            return arrRelations;
+	}
+
+	/**
+	 * Returns a List of relations that represent the knowledge learned
+	 * The list includes the results from the query made
+	 * @param rs - a result set from the executed query
+	 * @param arrRelations - List of relations that represent the knowledge learned
+	 * @return
+	 * @throws SQLException
+	 */
+	private ArrayList<Relation> getRelationsResult(ResultSet rs,ArrayList<Relation> arrRelations) throws SQLException{
+		if(arrRelations==null)
+			arrRelations = new ArrayList<Relation>();
+		while(rs.next())
+        {
+        Relation oneRelation = new Relation();
+            oneRelation.setConcept1(rs.getString("Concept1"));
+            oneRelation.setConcept2(rs.getString("Concept2"));
+            oneRelation.setRelationship(rs.getString("Relationship"));
+            oneRelation.setConfidence_percentage(rs.getInt("Confidence_percentage"));
+            oneRelation.setTimes_validated(rs.getInt("Times_validated"));
+            oneRelation.setTotal_score(rs.getInt("Total_score"));
+        arrRelations.add(oneRelation);
+        }
+		rs.close();
+		return arrRelations;
+	}
 }

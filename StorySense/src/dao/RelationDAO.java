@@ -32,4 +32,5 @@ public abstract class RelationDAO {
 	public abstract void deleteIfMeaningless(String concept1, String concept2, String relationship, int meaningless_count);
 	public abstract void AddRelation(String Concept1, String Concept2, String Relationship);
 	public abstract ArrayList<String> getRelationsOfConcept(String concept);
+	public abstract ArrayList<Relation> getRelationsOfConceptSearch(String searchKey);
 }
