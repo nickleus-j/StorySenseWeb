@@ -7,9 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Settings</title>
 <script src="Scripts/AJAXscirpts.js"></script>
-
-<script>
 <link rel="stylesheet" href="Style/Default.css"> 
+<script>
+
 function changeSetting(ID,valueSource){
 	var xmlhttp=getAJAXRequest();
 	var value=document.getElementById(valueSource).value;

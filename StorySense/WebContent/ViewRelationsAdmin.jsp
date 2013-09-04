@@ -117,7 +117,7 @@ function addRelation(){
 	onkeypress="readySearch(event)">
 <button onclick="searchRelations()">Search</button>
 
-<table border="2" style="margin-top: 2%; border-collapse: collapse;"<%wEncoder.writeJsElementReference(relTableID); %> align="center">
+<table border="2" style="margin-top: 2%; border-collapse: collapse;" id=<%wEncoder.writeJsElementReference(relTableID); %> align="center">
 <tr id="headerRow">
 <th>Concept 1</th><th>Relationship</th><th>Concept 2</th>
 <th>Confidence</th>
