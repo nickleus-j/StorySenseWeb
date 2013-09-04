@@ -88,7 +88,7 @@ public class AdminHtmlEncoder {
 	 * @return
 	 */
 	public String getSettingsHTML(){
-		String code="<table align='center' class='settingTbl'><caption>Settings</caption>";
+		String code="<table align='center' cellpadding=\"5\" style=\"margin-top: 2%; border-collapse: collapse;\" bgcolor='white' border='2' class='settingTbl'><tr><font color='white'><td color='red' colspan='4' align='center' bgcolor='green'>Settings</td></font></tr>";
 		DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
 		ConfigValuesDAO configDao=myDAOFactory.createConfigValuesDAO();
 		List<ConfigValues> configurationSettings=configDao.getConfigurationSettings();

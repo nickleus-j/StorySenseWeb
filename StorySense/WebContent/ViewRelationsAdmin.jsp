@@ -109,20 +109,22 @@ function addRelation(){
 </script>
 
 </head>
-<body>
+<body bgcolor="CCFFFF">
 <%@ include file="Insertables/AdminNavBar.jsp" %>
 <div id="container">
+<br>
 <label>Search Concept</label><input id=<%wEncoder.writeJsElementReference(searchBoxID); %>
 	onkeypress="readySearch(event)">
 <button onclick="searchRelations()">Search</button>
-<table id=<%wEncoder.writeJsElementReference(relTableID); %> align="center">
+
+<table border="2" style="margin-top: 2%; border-collapse: collapse;"<%wEncoder.writeJsElementReference(relTableID); %> align="center">
 <tr id="headerRow">
 <th>Concept 1</th><th>Relationship</th><th>Concept 2</th>
 <th>Confidence</th>
 </tr>
 </table>
 <div id="part">
-<table align="center">
+<table align="center" style="margin-top: 2%;">
 <tr>
 <th>Concept 1</th><th>Relationship</th><th>Concept2</th>
 </tr>

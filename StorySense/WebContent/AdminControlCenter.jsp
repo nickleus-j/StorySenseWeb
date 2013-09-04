@@ -46,7 +46,7 @@ function changeSetting(ID,valueSource){
 </style>
 
 </head>
-<body>
+<body bgcolor="CCFFFF"	>
 <%@ include file="Insertables/AdminNavBar.jsp" %>
 <div id="container">
 
