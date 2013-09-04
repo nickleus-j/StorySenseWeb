@@ -17,4 +17,16 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/Error500.html</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/Error404.html</location>
+  </error-page>
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/Error500.html</location>
+  </error-page>
 </web-app>

@@ -41,7 +41,7 @@ public class PointsAchievement {
 			medal.setAchievementID(watcher.getStepForwardAchievementId());
 			medal.setLearnerID(awardee.getAccountID());
 			learnerBadgeDao.giveAchievement(medal);
-			alerter.createAchievementNotification(medal, " You have progressed");
+			alerter.createAchievementNotification(medal, ". You have progressed.");
 		}/*End of level 10 condition*/
 		
 		/*Level 10*/
@@ -50,7 +50,7 @@ public class PointsAchievement {
 			medal.setAchievementID(watcher.getRisingUpAchievementId());
 			medal.setLearnerID(awardee.getAccountID());
 			learnerBadgeDao.giveAchievement(medal);
-			alerter.createAchievementNotification(medal, " Keep it up");
+			alerter.createAchievementNotification(medal, ". Keep it up");
 		}/*End of level 10 condition*/
 		
 		

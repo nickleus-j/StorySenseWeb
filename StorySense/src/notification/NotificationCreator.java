@@ -58,7 +58,7 @@ public class NotificationCreator {
 		int type=2;/*The notification type ID*/
 		
 		createNotification(type, 
-				liker.getName()+" Liked your story "+story.getName()+" "+Comments, 
+				liker.getName()+" liked your story "+story.getName()+". "+Comments, 
 				story.getAccountID());
 	}
 	
@@ -71,9 +71,9 @@ public class NotificationCreator {
 		int type=3;/*The notification type ID*/
 		
 		createNotification(type, 
-				reader.getName()+" Gave a score of "+score.getScore()+" for "+story.getName()+" Your total score is "+
-						author.getPoints()+". Your are "+uDao.getRankInLeaderBoard(author.getAccountID())+
-						" in the Leader board "+Comments, story.getAccountID());
+				reader.getName()+" gave a score of "+score.getScore()+" for "+story.getName()+". Your total score is "+
+						author.getPoints()+". You are ranked "+uDao.getRankInLeaderBoard(author.getAccountID())+
+						" in the leaderboard "+Comments, story.getAccountID());
 	}
 	
 	/**

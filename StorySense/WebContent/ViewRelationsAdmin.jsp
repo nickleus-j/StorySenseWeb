@@ -5,6 +5,7 @@
 WebCodeMaker wEncoder=new WebCodeMaker(out); 
 AdminHtmlEncoder adminEnc=new AdminHtmlEncoder();
 String searchBoxID="srchBox1010",relTableID="relationsTable4574778Ajsdfjs",searchBoxJqID="#"+searchBoxID;
+String c1Box="cBuz1_dsfj",relBox="relBuz_dsnfhs",c2Box="cBuz2_dsfjs";
 %>
 
 <!DOCTYPE html>
@@ -28,6 +29,7 @@ String searchBoxID="srchBox1010",relTableID="relationsTable4574778Ajsdfjs",searc
 <script type="text/javascript">
 
 var concepts=<% out.write(adminEnc.getConceptTextsJs());%>;
+var relations=<% out.write(adminEnc.getRelationshipsJs());%>;
 
 function readySearch(e){
 	if (e.keyCode == 13) {
@@ -72,10 +74,38 @@ $(function() {
 	$( <%wEncoder.writeJsElementReference(searchBoxJqID); %> ).autocomplete({
 	      source: concepts,select:function( event, ui ) {
 	    	  document.getElementById(<%wEncoder.writeJsElementReference(searchBoxID); %>).value=ui.item.value;
-	    	  searchRelations()
+	    	  searchRelations();
 	      }
 	    });
+	
+	$( <%wEncoder.writeJsElementReference("#"+c1Box); %> ).autocomplete({
+		source: concepts
+	});
+	$( <%wEncoder.writeJsElementReference("#"+c2Box); %> ).autocomplete({
+		source: concepts
+	});
+	$( <%wEncoder.writeJsElementReference("#"+relBox); %> ).autocomplete({
+		source: relations
+	});
 });
+
+function addRelation(){
+	var c1=document.getElementById(<%wEncoder.writeJsElementReference(c1Box); %>).value;
+	var c2=document.getElementById(<%wEncoder.writeJsElementReference(c2Box); %>).value;
+	var rel=document.getElementById(<%wEncoder.writeJsElementReference(relBox); %>).value;
+	var status=document.getElementById("status");
+	var xmlhttp=getAJAXRequest();
+	
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			status.innerHTML=xmlhttp.responseText;
+			
+		}
+	};
+	/*Send a request to the server*/
+	xmlhttp.open("GET","addKnwoledge?c1="+c1+"&c2="+c2+"&rel="+rel,true);
+	xmlhttp.send();
+}
 </script>
 
 </head>
@@ -92,7 +122,24 @@ $(function() {
 </tr>
 </table>
 <div id="part">
+<table align="center">
+<tr>
+<th>Concept 1</th><th>Relationship</th><th>Concept2</th>
+</tr>
 
+<tr>
+<td>	<input id=<%wEncoder.writeJsElementReference(c1Box); %>/>	</td>
+<td>	<input id=<%wEncoder.writeJsElementReference(relBox); %>/>	</td>
+<td>	<input id=<%wEncoder.writeJsElementReference(c2Box); %>/>	</td>
+<td>	<button onclick="addRelation()">Add</button></td>
+</tr>
+
+<tr>
+<th id="status" colspan="4">
+
+</th>
+</tr>
+</table>
 </div>
 </div><%@ include file="Insertables/Footer.jsp" %>
 </body>

@@ -73,11 +73,12 @@ public class AdminHtmlEncoder {
 		
 		for(int ctr=0;ctr<relationships.size();ctr++){
 			code=code.concat("<tr><td>"+relationships.get(ctr).getRelationship()+"</td>");
-			code=code.concat("<td><input value='"+relationships.get(ctr).getSentence_pattern()+"'/></td></tr>");
+			//code=code.concat("<td><input value='"+relationships.get(ctr).getSentence_pattern()+"'/></td></tr>");
+			code=code.concat("<td>"+relationships.get(ctr).getSentence_pattern()+"</td></tr>");
 			
 		}
 		
-		code=code.concat("<tr><td><input type=\"button\" value='Save'/></td>");
+		//code=code.concat("<tr><td><input type=\"button\" value='Save'/></td>");
 		
 		return code;
 	}
