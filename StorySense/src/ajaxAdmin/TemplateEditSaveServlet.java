@@ -37,11 +37,27 @@ public class TemplateEditSaveServlet extends BaseServlet {
 		Template createdTemplate=tdao.getTemplate(templteID);
 		String RelationContents=request.getParameter("relT"),StoryContents=request.getParameter("storyT");
 		PrintWriter out;
+		
+		try{
+			createdTemplate.setName(request.getParameter("nameField"));
+			createdTemplate.setLevelRequirement(Integer.parseInt(request.getParameter("lvlField")));
+			createdTemplate.setPlusScore(Integer.parseInt(request.getParameter("ptField")));
+			tdao.updateTemplate(createdTemplate);
+		}catch(NumberFormatException ne){
+			ne.printStackTrace();
+		}
+		
+		
 		try {
 			out=response.getWriter();
 			mofifyFile(ExternalResources.getPrefix()+createdTemplate.getRelationURL(),RelationContents);
 			mofifyFile(ExternalResources.getPrefix()+createdTemplate.getStoryURL(),StoryContents);
+			
+			out.write(createdTemplate.getName());
+			
 			out.write("File Saved");
+			
+			response.sendRedirect("ViewTemplatesMade.jsp");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

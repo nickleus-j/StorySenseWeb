@@ -14,6 +14,10 @@ function loadTemplateForEditing(){
 	var templateIDIn=document.getElementById("templateKeeper");
 	var relText=document.getElementById("relText");
 	var sText=document.getElementById("storyText");
+	var nameBox=document.getElementById(<% out.write(wEncoder.giveJsStringParam(templateNameBox));%>);
+	var levelBox=document.getElementById(<% out.write(wEncoder.giveJsStringParam(levelBox));%>);
+	var pointBox=document.getElementById(<% out.write(wEncoder.giveJsStringParam(pointBox));%>);
+	
 	storyRelations=templateElements.Relations;
 	storyVariables=templateElements.storyVar;
 	//generateRelationTemplatePreview();
@@ -22,6 +26,9 @@ function loadTemplateForEditing(){
 	sText.value=getLines(templateElements.storyContent);
 	
 	templateIDIn.setAttribute("value",""+templateElements.tID);
+	nameBox.setAttribute("value",""+templateElements.nameField);
+	levelBox.setAttribute("value",""+templateElements.levelrequired);
+	pointBox.setAttribute("value",""+templateElements.bonusFactor);
 }
 
 function getLines(content){
@@ -52,6 +59,25 @@ function resetElement(ID,origText){
 <div id="container">
 <form method="post" action="TemplateEditor">
 <input type="hidden" name="tID" id="templateKeeper"/>
+
+<table bgcolor=white id="tableBorderfeed3" style="margin-top:2%; width: 100%; ">
+	<tr><th id="fontStylefeed2" colspan="6" >Template Details</th></tr>
+	<tr>
+	<th>Template Name</th>
+	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(templateNameBox));%> name="nameField" /></td>
+	
+	<th>Level Required</th>
+	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(levelBox));%> name="lvlField"/></td>
+	
+	<th>Bonus points Factor</th>
+	<td><input type="text" id=<% out.write(wEncoder.giveJsStringParam(pointBox));%> name="ptField"/></td>
+	</tr>
+	
+	<tr>
+	<td colspan="3" id="dbStatus"></td>
+	</tr>
+</table>
+<hr/>
 <table width="100%">
 <tr>
 <th>Relation Template</th><th>Story Template</th>

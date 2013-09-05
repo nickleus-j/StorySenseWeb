@@ -638,18 +638,20 @@ function converRelationsToString(){
 	/*	| "+storyRelations[ctr].relation+" | "+storyRelations[ctr].concept2	*/
 	var text="";
 	for(var ctr=0;ctr<storyRelations.length;ctr++){
-		if(storyRelations[ctr].concept1!=0)
-			text+=("\""+getValueFromRelationConcept(storyRelations[ctr].concept1)+"\" | ");
-		else if(storyRelations[ctr].concept1<storyVariables.length)
+		
+		if(storyRelations[ctr].concept1<storyVariables.length&&storyRelations[ctr].concept1!=0)
 			text+=(getValueFromRelationConcept(storyRelations[ctr].concept1)+" | ");
+		else if(storyRelations[ctr].concept1!=0)
+			text+=("\""+getValueFromRelationConcept(storyRelations[ctr].concept1)+"\" | ");
 		else text+="? | ";
 		
 		//text+=(storyRelations[ctr].relation+" | "); 
 		text+=(getValueofRelationIndex(storyRelations[ctr].relation)+" | ");
-		if(storyRelations[ctr].concept2!=0)
+		
+		if(storyRelations[ctr].concept2<storyVariables.length&&storyRelations[ctr].concept2!=0)
+			text+=(getValueFromRelationConcept(storyRelations[ctr].concept2)+" \n");
+		else if(storyRelations[ctr].concept2!=0)
 			text+=("\""+getValueFromRelationConcept(storyRelations[ctr].concept2)+"\" \n");
-		else if(storyRelations[ctr].concept2<storyVariables.length)
-			text+=(getValueFromRelationConcept(storyRelations[ctr].concept2)+" | ");
 		else text+="? \n";
 	}/*End of loop*/
 	return text;

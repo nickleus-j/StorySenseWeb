@@ -55,6 +55,8 @@ public class TemplateEditLoader extends BaseServlet {
 				json=json.concat(",\"RelationContent\":["+getRelationTemplateContent(currentTemplate)+"]");
 				json=json.concat(",\"storyContent\":["+getStoryTemplateContent(currentTemplate)+"]");
 				json=json.concat(",\"nameField\":\""+currentTemplate.getName()+"\"");
+				json=json.concat(",\"levelrequired\":\""+currentTemplate.getLevelRequirement()+"\"");
+				json=json.concat(",\"bonusFactor\":\""+currentTemplate.getPlusScore()+"\"");
 				json+="}";
 				request.setAttribute("elms", json);
 				request.setAttribute("tID", ""+currentTemplate.getTemplateID());

@@ -78,7 +78,7 @@ public class TemplateMySQL extends TemplateDAO {
 			DBConnectionFactory myFactory = DBConnectionFactory.getInstance(DAOFactory.MYSQL);
         	Connection con = myFactory.getConnection();
         	
-        	ps=con.prepareStatement("update * from template  SET Name= ?, StoryURL = ?, RelationURL = ?,LevelReq = ?," +
+        	ps=con.prepareStatement("update  template  SET Name= ?, StoryURL = ?, RelationURL = ?,LevelReq = ?," +
         			" plusScore = ? where TemplateID = ?");
         	
         	ps.setString(1, giventemplate.getName());
@@ -87,6 +87,7 @@ public class TemplateMySQL extends TemplateDAO {
         	ps.setInt(4, giventemplate.getLevelRequirement());
         	ps.setInt(5, giventemplate.getPlusScore());
         	ps.setInt(6, giventemplate.getTemplateID());
+        	ps.executeUpdate();
         	
 			ps.close();
 			con.close();
