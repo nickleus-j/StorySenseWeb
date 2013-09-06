@@ -31,10 +31,16 @@ import entity.Template;
   `Name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`TemplateID`)
 
+Implements the template entity database operations
+
  * @author nickleus
  *
  */
 
+/**
+ * @author nickleus
+ *
+ */
 public class TemplateMySQL extends TemplateDAO {
 
 	/**
@@ -176,6 +182,7 @@ public class TemplateMySQL extends TemplateDAO {
 	
 	/**
 	 * gets the templates with a minimum level
+	 * @return List of templates that are at least for the level asked for
 	 */
 	@Override
 	public List<Template> getTemplatebyLevel(int minimumLevel) {
@@ -219,6 +226,8 @@ public class TemplateMySQL extends TemplateDAO {
 
 	/**
 	 * get templates that give at least a given amount of points
+	 * 
+	 * @return List of templates that yield equal to or higher to the points asked
 	 */
 	@Override
 	public List<Template> getTemplatebyScore(int minimumPoints) {
@@ -262,6 +271,8 @@ public class TemplateMySQL extends TemplateDAO {
 
 	/**
 	 * Get templates with a name related to a given query from the user
+	 * 
+	 * @return Templates with the name matching the search query
 	 */
 	@Override
 	public List<Template> getTemplatebyName(String Name) {
@@ -304,7 +315,7 @@ public class TemplateMySQL extends TemplateDAO {
 	}
 
 	/**
-	 * Return all templates from the datbase
+	 * @return Return all templates from the database
 	 */
 	@Override
 	public List<Template> getAlltemplates() {
@@ -345,6 +356,11 @@ public class TemplateMySQL extends TemplateDAO {
 		return null;
 	}
 
+	/**
+	 * Manifests the template entity with the given ID
+	 * 
+	 * @return Template with the ID queried
+	 */
 	@Override
 	public Template getTemplate(int id) {
 		try {
@@ -426,6 +442,9 @@ public class TemplateMySQL extends TemplateDAO {
 		return null;
 	}
 
+	/**
+	 * Returns the templates of an author's ID matching the author ID attribute in the template
+	 */
 	@Override
 	public List<Template> getAlltemplatesOfAuthor(int authorId) {
 		try {
