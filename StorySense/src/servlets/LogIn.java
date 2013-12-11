@@ -26,6 +26,9 @@ import entity.User;
 
 /**
  * Servlet implementation class LogIn
+ * Allows users to log in the system.
+ * Many transactions will requiure a current user
+ * for the sake of records.
  */
 @WebServlet(description = "handles the logIn operation", urlPatterns = { "/LogIn" })
 public class LogIn extends BaseServlet {
@@ -36,13 +39,16 @@ public class LogIn extends BaseServlet {
      */
     public LogIn() {}
 
+/**
+ * Executes the code that will log in the user to the databse if
+ * the username and password matches an entry in the datasbe.
+ * Maker sure that the username is unique.
+ */ 
 	@Override
 	public void executeCustomCode(HttpServletRequest request,
 			HttpServletResponse response) {
 		PrintWriter out=null;
 		try{
-			//HttpSession session = request.getSession();
-			//session.get
 			out = response.getWriter();
 			
 			DAOFactory myDAOFactory = DAOFactory.getInstance(DAOFactory.MYSQL);
@@ -65,13 +71,6 @@ public class LogIn extends BaseServlet {
             }
 			
 			
-			
-			/*
-			 * response.sendRedirect("../StorySense/Home.jsp");
-			 * request.getParameter(arg0);
-			RequestDispatcher dispatcher =request.getRequestDispatcher("/User_profile.jsp");
-			dispatcher.forward(request, response); 
-			*/
             
 		}catch (Exception ex){}
 		finally {

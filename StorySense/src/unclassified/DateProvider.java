@@ -40,6 +40,12 @@ public class DateProvider {
 		
 	}
 	
+	/**
+	 *Returns in string format the month corresponding to the 
+	 * number entered.
+	 * Negative numbers are are turned positive numbers and
+	 * the higernumbers are modulated to 12
+	 */ 
 	public String getMonth(int n){
 		try{
 			return Months[n];

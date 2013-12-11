@@ -78,7 +78,7 @@ public class AdminHtmlEncoder {
 			
 		}
 		
-		//code=code.concat("<tr><td><input type=\"button\" value='Save'/></td>");
+		
 		
 		return code;
 	}
